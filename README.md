@@ -1,81 +1,127 @@
-# Verdant Oath — Fantasy RPG Prototype 0.2
+# Verdant Oath — The Bell Beneath the Woods
 
-An original, small 3D fantasy RPG made with Godot 4 and GDScript. All art is generated from colored primitive meshes; no external assets, services, or plugins are required.
+**Adventure milestone 0.3 · Godot 4.6+ · GDScript · Original assets**
 
-## New in 0.2: Willowbrook and Sunstream
+A short, complete story arc: meet Mira in Willowbrook, gather Moonleaf along the woodland trail, cross Sunstream, descend into the Rootbound Sanctuary, and free the Hollow Warden. Fully turn-based battles share one deterministic simulator with the original goblin Auto-Battle system.
 
-A colorful woodland village replaces the empty clearing. Explore cottages, a campfire, a winding trail, Sunstream bridge, and the ancient Verdant Shrine. Mira the herbalist asks for three purple Moonleaf plants; collect them with E, then return for 60 gold and three potions. Each plant also gives one potion. Discovering the shrine awards 30 gold once. Quest, gathering and discovery progress are saved; existing 0.1 saves receive default exploration progress automatically.
+This is the first story milestone toward a polished 15-minute RPG demo. The quest has an ending, but the project is still a development build. Play length has not been measured with new players. Character models and animation are procedural, and the synthesized soundtrack is a demo score.
 
-Characters now have rounded stylized silhouettes, faces, hair, armor, boots and weapon details. The wolf has ears, eyes and a muzzle. Layered tree canopies, flowers, distant hills, a sky gradient, warm sunlight, shadows and framed menus establish the setting. Battles take place in a forest arena, with characters facing one another and camera shots following actions.
+![Dialogue with Mira in Willowbrook](docs/screenshots/dialogue.png)
 
-Goblins roam their encounter areas; victories clear them for 45 seconds. Battle returns preserve your exploration position for the current session. Shift sprints; houses, tree trunks, map edges and the stream block movement. Cross the stream using the bridge. These are lightweight movement checks, not a full physics/navigation implementation. Nearby context prompts and a persistent objective panel guide exploration.
+![The Hollow Warden battle in the sanctuary](docs/screenshots/warden.png)
 
-The project retains its original internal application name so existing local saves stay in the same user-data folder. Version 0.2 is still original procedural placeholder art, not production character assets.
+## Download and play on Windows
 
-## Launch
+1. On GitHub choose **Code → Download ZIP**.
+2. Right-click the ZIP in Downloads and choose **Extract All**. Use a new folder for this version.
+3. In Godot's Project Manager choose **Import**, select the extracted `project.godot`, and choose **Import & Edit**.
+4. Press **F5**, then choose **New adventure** to experience the story from the beginning.
 
-Open `project.godot` in Godot 4.6 or newer and press **F6** on `scenes/world.tscn`, or **F5** to run the project. Godot 4.6.3 was used for validation.
+New adventure backs up your previous save to `user://hero.backup.json` before resetting. **Continue adventure** uses your current save, including older versions. The project's internal application name intentionally remains unchanged to retain the old user-data directory. No paid assets, external services or plugins are needed.
+
+## Controls
+
+| Control | Action |
+|---|---|
+| WASD | Move relative to the camera |
+| Shift | Sprint |
+| Hold right mouse and move | Orbit camera |
+| E | Talk, gather, examine, enter/leave the dungeon, or challenge a nearby enemy |
+| E / Space / Enter during dialogue | Advance dialogue |
+| Mouse | Select dialogue, battle and management buttons |
+| Q in the forest | Goblin Auto-Battle, after ten normal goblin victories |
+| Escape | Management/menu; resume by closing it |
+| I in the forest | Equipment and class trees |
+| R near the village campfire | Restore HP and MP |
+| F5 | Save while exploring |
+| F9 in the forest | Load |
+
+Audio can be toggled from the title, forest management menu or dungeon pause menu. The setting persists separately from character saves. Closing the game window stops audio and exits.
+
+## First adventure
+
+- Talk to **Mira**, left of the village trail. Purple Moonleaf grows west of the trail, near the river, and beyond the bridge.
+- Gather all three and return to Mira. She gives supplies, restores the party and prepares the charm that opens the shrine.
+- Cross the bridge eastward. Examine the shrine to enter the sanctuary.
+- Explore both side chambers. Defeat the Mosslings, then examine each **Root Seal** to cleanse it. Defeated guardians stay defeated in saved games.
+- A pilgrim's cache on the northern corridor restores HP/MP and gives three potions, once.
+- Face the guardian in the northern chamber. **When its branches coil, choose Defend next round.** Healing, potions and wolf behavior help manage the fight.
+- After victory, speak to the guardian, leave the sanctuary at its southern entrance, and return to Mira for the ending. You can keep exploring afterward.
+
+If defeated, retreat to Willowbrook and press R at the campfire. Defeat never completes a quest or awards victory rewards. Herbs, caches, discoveries and story rewards cannot be collected twice.
+
+## What changed in 0.3
+
+- Start screen with Continue, New adventure, save backup and persistent audio setting.
+- Data-defined story conversations, original portrait illustrations and dialogue that pauses player movement.
+- Quest journal with objectives through the final conversation and adventure-complete panel.
+- Separate stone dungeon with side chambers, persistent guardians, two root seals, a supply cache and an exit to the forest.
+- Three enemy definitions: Forest Goblin, Briar Mossling and the Hollow Warden.
+- Boss charge/telegraph mechanic, dedicated sanctuary battle arena, enemy-specific XP/gold/drop tables, and a Sunsteel Sword reward.
+- Six original surface textures, water ripples, canopy wind, readable labels and corrected lighting.
+- Procedural limb movement, idle breathing, attack lunges, hit/healing effects, action camera shots, health bars and victory animations.
+- Three original synthesized music themes and five sound cues. No voice acting.
+- Saved region and fractional exploration position, plus migration defaults for 0.1/0.2 saves.
+
+## Existing RPG systems
+
+Paladin primary with Ranger and Druid secondary classes; all six starting skills; HP/MP, XP, gold, levels, skill points and independent three-rank class trees. Each level grants three skill points. Class investments affect stats and rank three unlocks that class's mythic. Secondary mythic investments persist, but their abilities remain unavailable until the class becomes primary.
+
+Eight independent equipment slots affect stats. Sword, shield and chest changes are visible. Equipment selection is still a free development toggle, not a finished inventory or shop. Wolf Attack, Support and Defend behaviors are automated each round. Six future companion roster slots and a separate postgame slot remain reserved; only the wolf is implemented. Wolf HP resets per encounter.
+
+Ten **normal goblin victories** unlock goblin Auto-Battle. It never instantiates the 3D battle scene, uses the same combat rules and current stats/gear/companion, spends real HP/MP, can lose and rolls normal rewards. Its policy heals below half health, otherwise uses Sacred Strike if affordable, otherwise Attack. Auto wins and victories over other species do not advance normal goblin mastery. Auto-Battle is not available for the dungeon guardians or boss.
+
+## Project layout
+
+| Path | Responsibility |
+|---|---|
+| `scenes/title.tscn`, `scripts/title.gd` | Start screen and new-game confirmation |
+| `scenes/world.tscn`, `scripts/world.gd` | Forest exploration, interactions, quests and management |
+| `scripts/forest.gd` | Village, paths, river, bridge and movement boundaries |
+| `scenes/dungeon.tscn`, `scripts/dungeon.gd` | Dungeon layout, guardians, seals, cache and boss gate |
+| `scenes/battle.tscn`, `scripts/battle.gd` | Battle presentation, menus, animation and rewards |
+| `scripts/combat.gd` | Deterministic, seeded, presentation-independent combat rules |
+| `scripts/state.gd` | Hero state, derived stats, rewards, migration and saving |
+| `scripts/dialogue.gd`, `data/dialogue.json` | Portrait dialogue and original story |
+| `data/classes.json`, `data/enemies.json` | Modular class and enemy definitions |
+| `scripts/art.gd`, `scripts/ui.gd` | Procedural models, shared materials and themed controls |
+| `scripts/sound.gd`, `assets/` | Music, sound cues, portraits, textures and shaders |
+| `tools/generate_assets.py` | Reproducible original asset generation |
+| `tests/run.tscn` | Combat, persistence and full-story integration checks |
+
+Assets and their provenance are described in [assets/README.md](assets/README.md). Changing class/enemy data can add definitions, but new effects, models or behavior still need corresponding implementations.
+
+## Development and validation
 
 ```sh
 godot --path . --editor
-godot --path .
+godot --headless --path . --editor --import --quit
+godot --headless --path . --quit-after 90
+# Use a separate data directory: these tests intentionally create and replace saves.
+XDG_DATA_HOME=/tmp/verdant-oath-tests godot --headless --path . res://tests/run.tscn
 ```
 
-In this cloud sandbox the default home directory is read-only. Use writable XDG directories:
+All **54 checks passed with Godot 4.6.3**, covering seeded Auto/normal parity, possible defeat, MP legality, mythic restrictions, equipment stats, mastery, leveling, old-save defaults, fractional position persistence, reachable forest objectives, dialogue, unique rewards, actual dungeon/battle scene transitions, both guardians, seals, boss telegraph/defense, boss victory, return to Mira, ending persistence and defeat recovery. Tests accelerate game time and do not measure real play length. Audio playback is intentionally skipped in headless mode.
+
+Rendered OpenGL captures were also generated and inspected for the title, village, dialogue, dungeon and boss battle. Reproduce them with a display available:
+
+```sh
+XDG_DATA_HOME=/tmp/verdant-capture godot --path . --audio-driver Dummy res://tools/capture.tscn -- /tmp/verdant-captures
+```
+
+This capture runner creates a temporary new character and visits scenes to take screenshots; keep its user-data directory separate from your normal save. Captures exercise rendering; Dummy audio does not validate speaker output. Music files were generated as valid PCM WAV, but listening and Windows input/performance playtesting remain user checks.
+
+The cloud sandbox requires writable XDG directories:
 
 ```sh
 mkdir -p /workspace/.runtime/{data,config,cache}
 XDG_DATA_HOME=/workspace/.runtime/data XDG_CONFIG_HOME=/workspace/.runtime/config XDG_CACHE_HOME=/workspace/.runtime/cache godot --path /workspace/VID-GAME
 ```
 
-This task already has an isolated checkout. Use the existing checkout; no additional Git worktree is needed.
+Use the existing isolated checkout; an additional Git worktree is unnecessary.
 
-## Controls and play loop
+## Current limits and next production work
 
-- **WASD:** move relative to the orbit camera. **Shift:** sprint.
-- **Hold right mouse and move:** orbit camera. Mouse remains available for menus.
-- **E:** talk, gather, discover the shrine, or start combat near a visible goblin.
-- **Q:** Auto-Battle a nearby goblin after ten normal victories.
-- **I:** scrollable equipment and class-tree menu. Gear changes are free prototype toggles.
-- **R:** restore HP and MP within three meters of the starting clearing.
-- **F5 / F9:** save / load. Actions, management changes, and completed battles also save automatically.
+The story is playable through its ending, but this is not the finished high-fidelity demo. Models are assembled from simple meshes with procedural animation; no production character rigs, facial animation, lip-sync, cutscene cinematography or professional voice acting are included. The original vector portraits and surface textures are modest placeholder-quality assets. There is one forest zone and one compact dungeon, with no village interiors. Explorable ground is flat; distant hills are scenery. Movement uses lightweight boundaries rather than full physics/navigation, and the camera can clip through scenery. The wolf can cut corners while following. Menus target a 1280×720 desktop layout. Only one save slot is supported, with a backup on new game; manually damaged saves are not fully recoverable.
 
-Approach the goblin directly ahead, press E, and select actions with the mouse. Every action resolves a full speed-ordered round; the wolf acts automatically. Companion opens a behavior menu without spending the hero's turn. Spells have a separate submenu, display their MP cost, and are disabled when unaffordable. Return to camp after defeat to recover. Defeated goblins return after 45 seconds.
-
-## Implemented systems
-
-- Primary Paladin with Ranger and Druid secondary classes, visible sword, shield, chest armor, HP, MP, XP, gold, leveling, three skill points per level, and independent class investment tracks.
-- Each data-defined class has a three-node linear tree. Each point advances one node; Paladin and Ranger ranks add attack, Druid ranks add maximum MP. Rank three also unlocks that class's mythic. Investments survive class changes, but only the primary class's mythic appears and is legal in combat.
-- Sword Slash, Shield Bash (damage and defense), Sacred Strike, Hunter's Mark (extra damage), Thornbind (skips enemy turns), Regrowth (healing), three mythics, potions, and Defend.
-- Speed-ordered, fully turn-based rounds with deterministic seeded enemy choices. No real-time combat timer. Attack lunges, floating numbers, camera pulses, and a victory/reward panel.
-- Wolf Attack, Support (healing), and Defend (protect hero) behaviors. Wolf is incapacitated for the current battle at zero HP and recovers for the next encounter. Save schema reserves six roster entries and a separate postgame slot; only Wolf is implemented.
-- Eight independent equipment slots. Every slot affects attack or defense; sword, shield, and chest changes are visible immediately. Paladin/Ranger/Druid investment also affects stats.
-- Ten **normal** Forest Goblin victories unlock species Auto-Battle. Auto uses the same simulator without instantiating the battle scene. Its policy casts Regrowth below half health, otherwise Sacred Strike when affordable, otherwise Attack. It uses current gear, level, MP, HP, wolf behavior and seeded randomness. Defeat remains possible. Wins award 35 XP, 18 gold, and a deterministic seeded 1-in-3 potion drop in both modes. Auto wins do not increase the normal-win count.
-- Version 0.1 single-slot JSON persistence at `user://hero.json`, including class configuration, investments, equipment, companion state, mastery, consumables, gold, and random seed. Saved files are local to the OS user-data directory.
-
-## Structure and extension
-
-- `data/classes.json`: class names, starting skills, tree nodes, and mythic identities.
-- `scripts/state.gd`: persistent state, derived equipment stats, leveling and rewards.
-- `scripts/combat.gd`: presentation-independent round simulator used by both modes.
-- `scripts/world.gd` and `scenes/world.tscn`: forest, encounters and management.
-- `scripts/battle.gd` and `scenes/battle.tscn`: animation, combat menus and victory UI.
-- `scripts/forest.gd`: authored village, bridge, shrine, dressing and movement boundaries.
-- `scripts/art.gd`, `scripts/ui.gd`: shared procedural models and UI helpers.
-
-Adding a class definition creates its management track and primary-class option. New effects also require handlers in the simulator and a derived-stat rule where appropriate. Additional companions need roster data, a model, a selector, and a behavior implementation; placeholder slots are intentionally not selectable.
-
-## Validation
-
-```sh
-godot --headless --path . --editor --import --quit
-godot --headless --path . --quit-after 90
-# Use a separate data directory so tests cannot overwrite your personal save:
-XDG_DATA_HOME=/tmp/verdant-oath-tests godot --headless --path . res://tests/run.tscn
-```
-
-The integration runner checks seeded Auto/normal parity, MP use, possible defeat, secondary mythic gating, primary activation, gear stats, mastery, leveling, save round trip, forest startup, Auto-Battle gating/resolution, and animated battle completion/rewards. The expanded suite also exercises bridge and house boundaries, collecting all herbs, duplicate reward protection, quest completion, shrine discovery, exploration save/load and encounter cooldown. All 23 checks passed on Godot 4.6.3. It exits nonzero on failure. Headless checks validate runtime execution, not the subjective visual experience.
-
-## Known limitations
-
-One woodland zone, one enemy species, one implemented companion, procedural placeholder art, no sound, no interior scenes, no inventory shop, and no full physics or navigation. Hills are distant scenery; the explorable ground is flat. Tree/house blockers use circular approximations. Camera can pass through scenery. Equipment is a free development selector rather than loot inventory. Class trees are linear with three ranks and all six starting abilities are initially available. Wolf HP is per encounter; only selection/behavior/active state is persistent. Goblin cooldown and return position are session-only. Save migration supports the added exploration defaults, but recovery from manually corrupted saves is outside the prototype. Desktop menus target a 1280×720 window and scale with window size. Rendered visual playtesting on Windows is still recommended.
+The next production milestones are coherent authored character/environment assets and rigs, richer movement and attack animation, better camera collision and framing, a larger exploration route, inventory/economy balancing, and first-time-player feedback on pacing and difficulty. See [ROADMAP.md](ROADMAP.md).

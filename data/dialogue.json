@@ -1,0 +1,164 @@
+{
+  "intro": [
+    [
+      "Mira",
+      "You heard it too, didn't you? The bell beneath the woods. It has not rung since my grandmother was a girl."
+    ],
+    [
+      "Hero",
+      "And now the goblins are gathering around the shrine."
+    ],
+    [
+      "Mira",
+      "The roots have gone dark. Even your wolf can smell it. Bring me three Moonleaf sprigs; their light will open the old sanctuary."
+    ],
+    [
+      "Hero",
+      "We'll find what woke beneath Willowbrook."
+    ],
+    [
+      "Mira",
+      "Follow the northern trail, cross Sunstream, and look for the purple flowers. Come back before entering the ruin."
+    ]
+  ],
+  "herbs": [
+    [
+      "Mira",
+      "All three! Hold still. A little moonlight, a little courage... there."
+    ],
+    [
+      "Mira",
+      "Take these potions. The shrine will answer you now. Beneath it are two root seals: one in each side chamber."
+    ],
+    [
+      "Hero",
+      "Break the seals, then find the source?"
+    ],
+    [
+      "Mira",
+      "Yes. But the guardian was once our protector. If it draws back its branches, raise your shield. Do not meet that blow head-on."
+    ]
+  ],
+  "reminder": [
+    [
+      "Mira",
+      "Three purple Moonleaf plants. One on the woodland trail, one near the river, and one beyond the bridge. Your wolf will keep you company."
+    ]
+  ],
+  "ready": [
+    [
+      "Mira",
+      "The Moonleaf charm will open the shrine across Sunstream. Find both root seals below, then wake the guardian from its nightmare."
+    ]
+  ],
+  "shrine": [
+    [
+      "Hero",
+      "These carvings... a guardian sheltering the village beneath its branches."
+    ],
+    [
+      "Mira",
+      "Remember what we protect. That is the oath, not the sword."
+    ],
+    [
+      "Hero",
+      "Then let's bring our guardian home."
+    ]
+  ],
+  "sealed": [
+    [
+      "Hero",
+      "The stone door is alive with black roots. Mira may know how to loosen them. We should finish gathering Moonleaf first."
+    ]
+  ],
+  "dungeon": [
+    [
+      "Hero",
+      "The air is colder here. Two chambers, two seals. Stay close, friend."
+    ],
+    [
+      "Wolf",
+      "The wolf's ears prick toward the darkness. Somewhere below, wood creaks like a ship at sea."
+    ]
+  ],
+  "seal": [
+    [
+      "Hero",
+      "The roots loosen. A little light is finding its way back."
+    ],
+    [
+      "Wolf",
+      "Your companion nudges your hand, then watches the northern passage."
+    ]
+  ],
+  "boss_locked": [
+    [
+      "Hero",
+      "Two root seals bind the guardian. We need to cleanse both side chambers before the heart will open."
+    ]
+  ],
+  "boss": [
+    [
+      "Warden",
+      "SMALL... FLAMES... WHY DO YOU BURN MY ROOTS?"
+    ],
+    [
+      "Hero",
+      "We came to help. Willowbrook still remembers you."
+    ],
+    [
+      "Warden",
+      "THE BELL... THE DARK BENEATH... I CANNOT..."
+    ],
+    [
+      "Hero",
+      "Then let us carry the light until you can."
+    ]
+  ],
+  "boss_win": [
+    [
+      "Warden",
+      "The bell... is quiet. Little oathkeeper, I had forgotten the sound of birds."
+    ],
+    [
+      "Hero",
+      "They'll be waiting when you wake."
+    ],
+    [
+      "Warden",
+      "Take this living ember. Let Willowbrook know: the roots remember."
+    ]
+  ],
+  "ending": [
+    [
+      "Mira",
+      "The stream is clear again. I knew before I saw you."
+    ],
+    [
+      "Hero",
+      "The guardian was trapped. Something deeper was pulling at its roots."
+    ],
+    [
+      "Mira",
+      "Then there will be another road, another day. For now, you brought our forest back."
+    ],
+    [
+      "Hero",
+      "And our first adventure?"
+    ],
+    [
+      "Mira",
+      "I'd say it has only just begun."
+    ]
+  ],
+  "epilogue": [
+    [
+      "Mira",
+      "Listen. Birds, the stream, your wolf pretending not to want another treat. I could get used to this kind of quiet."
+    ],
+    [
+      "Hero",
+      "So could I. For a little while."
+    ]
+  ]
+}

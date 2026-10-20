@@ -1,7 +1,7 @@
 config_version=5
 [application]
 config/name="Verdant Oath — Prototype 0.1"
-run/main_scene="res://scenes/world.tscn"
+run/main_scene="res://scenes/title.tscn"
 [display]
 window/size/viewport_width=1280
 window/size/viewport_height=720
@@ -11,3 +11,4 @@ renderer/rendering_method="gl_compatibility"
 environment/defaults/default_clear_color=Color(0.16,0.24,0.25,1)
 [autoload]
 State="*res://scripts/state.gd"
+Sound="*res://scripts/sound.gd"

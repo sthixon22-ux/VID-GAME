@@ -11,9 +11,12 @@ func build(root: Node3D):
    var point: Vector3=segment[0].lerp(segment[1],i/23.0)
    Art.shape(root,point+Vector3(0,0.015,0),Vector3(3.6,0.04,3.6),Color("aa9a65"),"cylinder")
  # Stream and a bridge: crossing is restricted to the deck.
- Art.box(root,Vector3(12,0.055,0),Vector3(3.2,0.07,64),Color("579fac"))
+ var water=Art.box(root,Vector3(12,0.055,0),Vector3(3.2,0.07,64),Color("579fac"))
+ var water_material=ShaderMaterial.new()
+ water_material.shader=load("res://assets/shaders/water.gdshader")
+ water.material_override=water_material
  for i in range(13):
-  Art.box(root,Vector3(9.8+i*0.37,0.21,-12),Vector3(0.33,0.22,3.1),Color("9a714b"))
+  Art.box(root,Vector3(9.8+i*0.37,0.21,-12),Vector3(0.33,0.22,3.1),Color("9a714b")).material_override=Art.surface(Color("bd9d72"),"wood",2)
  for z in [-13.5,-10.5]:
   Art.box(root,Vector3(12,0.9,z),Vector3(5.2,0.12,0.13),Color("6f513c"))
   for x in [9.5,12,14.5]: Art.box(root,Vector3(x,0.55,z),Vector3(0.16,1.1,0.16),Color("6f513c"))
@@ -22,15 +25,16 @@ func build(root: Node3D):
   var house=Node3D.new()
   root.add_child(house)
   house.position=pos
-  Art.box(house,Vector3(0,1.25,0),Vector3(3.7,2.5,3.2),Color("dfc49a"))
+  Art.box(house,Vector3(0,1.25,0),Vector3(3.7,2.5,3.2),Color("dfc49a")).material_override=Art.surface(Color("f3dcaf"),"stone",2)
   for side in [-1,1]:
    var roof=Art.box(house,Vector3(side*1.05,2.85,0),Vector3(2.5,0.22,4.0),Color("8f514f"))
    roof.rotation.z=side*-0.5
+   roof.material_override=Art.surface(Color("b27669"),"tile",3)
   Art.box(house,Vector3(0,0.9,-1.65),Vector3(0.85,1.8,0.12),Color("725237"))
   for x in [-1.1,1.1]: Art.box(house,Vector3(x,1.5,-1.65),Vector3(0.6,0.65,0.1),Color("f4d990"))
   Art.box(house,Vector3(1.15,3.1,0.7),Vector3(0.5,1.3,0.5),Color("a39a86"))
   obstacles.append(Vector3(pos.x,2.65,pos.z))
- Art.sign_(root,Vector3(0,3,5),"WILLOWBROOK\nA quiet place to begin")
+ Art.sign_(root,Vector3(-3,1.8,7),"Willowbrook")
  # Campfire, seats, villager and a route marker.
  for i in range(8):
   var angle=i*TAU/8
@@ -42,7 +46,7 @@ func build(root: Node3D):
  fire.omni_range=5
  root.add_child(fire)
  for x in [-2,2]: Art.box(root,Vector3(x,0.3,2),Vector3(0.6,0.6,1.7),Color("816343"))
- var villager=Art.actor("Hero",{"Chest":"Leather Vest","Shield":"None"})
+ var villager=Art.actor("Mira",{"Chest":"Leather Vest","Shield":"None"})
  root.add_child(villager)
  villager.position=Vector3(-2.6,0,-0.8)
  Art.sign_(root,Vector3(-2.6,2.8,-0.8),"Mira · Herbalist\n[E] Talk")

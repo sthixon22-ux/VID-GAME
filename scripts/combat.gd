@@ -3,6 +3,9 @@ extends RefCounted
 var classes: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/classes.json"))
 var h: Dictionary
 var stats: Dictionary
+var enemy: Dictionary
+var species="goblin"
+var charging=false
 var enemy_hp=85
 var wolf_hp=55
 var marked=0
@@ -13,7 +16,11 @@ var turns=0
 var events: Array = []
 var outcome=""
 var rng: RandomNumberGenerator
-func _init(hero: Dictionary, attributes: Dictionary):
+func _init(hero: Dictionary, attributes: Dictionary, species_: String="goblin"):
+ species=species_
+ var enemies: Dictionary=JSON.parse_string(FileAccess.get_file_as_string("res://data/enemies.json"))
+ enemy=enemies[species].duplicate(true)
+ enemy_hp=int(enemy.hp)
  h=hero.duplicate(true)
  stats=attributes.duplicate()
  rng=RandomNumberGenerator.new()
@@ -27,11 +34,12 @@ func legal(action: String) -> bool:
  for c in classes:
   if classes[c].mythic==action:
    return h.primary==c and int(h.investments[c])>=3
+ if action not in ["Attack","Sword Slash","Shield Bash","Sacred Strike","Hunter's Mark","Thornbind","Regrowth","Items","Defend"]: return false
  return action!="Items" or h.potions>0
 func emit(actor: String, target: String, amount: int, label: String):
  events.append({"actor":actor,"target":target,"amount":amount,"text":label})
 func hit_enemy(actor: String, power: int, label: String):
- var amount=damage(power,6)+(6 if marked>0 else 0)
+ var amount=damage(power,int(enemy.defense))+(6 if marked>0 else 0)
  enemy_hp=maxi(0,enemy_hp-amount)
  emit(actor,"Goblin",amount,label)
 func hero_turn(action: String):
@@ -75,24 +83,30 @@ func enemy_turn():
   bound-=1
   emit("Goblin","Goblin",0,"Entangled; loses turn")
   return
- var power=24+rng.randi_range(-3,3)
- if wolf_hp>0 and h.companion.active and rng.randi_range(0,3)==0:
+ if species=="warden" and turns%3==2 and not charging:
+  charging=true
+  emit("Goblin","Goblin",0,"Branches coil! Crushing Canopy next turn — DEFEND!")
+  return
+ var heavy=charging
+ charging=false
+ var power=int(enemy.attack)+rng.randi_range(-3,3)+(22 if heavy else 0)
+ if not heavy and wolf_hp>0 and h.companion.active and rng.randi_range(0,3)==0:
   var amount=damage(power,5)
   wolf_hp=maxi(0,wolf_hp-amount)
-  emit("Goblin","Wolf",amount,"Goblin club")
+  emit("Goblin","Wolf",amount,"Crushing Canopy" if heavy else ("Briar lash" if species!="goblin" else "Goblin club"))
  else:
   var amount=damage(power,int(stats.defense))
   if guarding: amount=maxi(1,amount/2)
   if wolf_guard: amount=maxi(1,amount/2)
   h.hp=maxi(0,int(h.hp)-amount)
-  emit("Goblin","Hero",amount,"Goblin club")
+  emit("Goblin","Hero",amount,"Crushing Canopy" if heavy else ("Briar lash" if species!="goblin" else "Goblin club"))
 func round_(action: String) -> Array:
  events=[]
  if outcome!="" or not legal(action): return events
  guarding=false
  wolf_guard=false
  turns+=1
- var order=[{"id":"Hero","speed":stats.speed},{"id":"Wolf","speed":15},{"id":"Goblin","speed":10}]
+ var order=[{"id":"Hero","speed":stats.speed},{"id":"Wolf","speed":15},{"id":"Goblin","speed":int(enemy.speed)}]
  order.sort_custom(func(a,b): return a.speed>b.speed)
  for unit in order:
   if enemy_hp<=0 or h.hp<=0: break
