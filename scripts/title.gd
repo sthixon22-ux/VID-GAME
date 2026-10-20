@@ -1,7 +1,10 @@
 extends Node3D
 var menu: VBoxContainer
+var options: OptionsPanel
 var clock=0.0
 func _ready():
+ options=OptionsPanel.new()
+ add_child(options)
  Art.environment_(self)
  for i in range(16): Art.tree(self,Vector3(sin(i*1.9)*14,0,cos(i*1.9)*14),1.2)
  var hero=Art.actor("Hero",State.hero.equipment)
@@ -27,8 +30,10 @@ func main_menu():
  clear()
  var title=UI.label(menu,"VERDANT OATH")
  title.add_theme_font_size_override("font_size",36)
- UI.label(menu,"The Bell Beneath the Woods\nAdventure milestone 0.4\n")
- UI.button(menu,"Continue adventure",func(): get_tree().change_scene_to_file(State.travel_scene()))
+ UI.label(menu,"The Bell Beneath the Woods\nAdventure milestone 0.5\n")
+ UI.button(menu,"Continue adventure",func(): get_tree().change_scene_to_file(State.travel_scene())).disabled=State.save_blocked
+ if not State.save_notice.is_empty(): UI.label(menu,State.save_notice)
+ UI.button(menu,"Settings",options.open)
  UI.button(menu,"New adventure",confirm_new)
  UI.button(menu,"Music / sound: %s" % ("Off" if Sound.muted else "On"),func():
   Sound.toggle()
@@ -38,7 +43,11 @@ func confirm_new():
  clear()
  UI.label(menu,"Begin a new adventure?\nYour current save will be copied to hero.backup.json.")
  UI.button(menu,"Start new adventure",func():
-  if FileAccess.file_exists(State.SAVE): DirAccess.copy_absolute(State.SAVE,"user://hero.backup.json")
+  if FileAccess.file_exists(State.SAVE):
+   if DirAccess.copy_absolute(State.SAVE,"user://hero.backup.json")!=OK:
+    UI.label(menu,"Could not back up the save. New adventure cancelled.")
+    return
+   DirAccess.remove_absolute(State.SAVE)
   State.reset()
   State.return_position=Vector3.ZERO
   State.cleared_until.clear()

@@ -115,9 +115,9 @@ func play_action(action: String) -> float:
  var animation=player.get_animation(clip)
  var duration=clampf(animation.length,0.7,1.8)
  current_motion=""
- player.speed_scale=animation.length/duration
+ player.speed_scale=animation.length/duration*(UserSettings.battle_speed if battle else 1.0)
  player.play(clip,0.07)
- action_remaining=duration
+ action_remaining=duration/(UserSettings.battle_speed if battle else 1.0)
  if action=="Shield raised" or action=="Shield Bash": guarding=true
  return duration
 func _process(delta):
@@ -129,9 +129,9 @@ func play_reaction():
  if locked_pose: return
  current_motion=""
  var clip="Block_Hit" if guarding else "Hit_A"
- player.speed_scale=player.get_animation(clip).length/0.45
+ player.speed_scale=player.get_animation(clip).length/0.45*(UserSettings.battle_speed if battle else 1.0)
  player.play(clip,0.05)
- action_remaining=0.45
+ action_remaining=0.45/(UserSettings.battle_speed if battle else 1.0)
 
 func make_hood() -> MeshInstance3D:
  var mesh=MeshInstance3D.new()

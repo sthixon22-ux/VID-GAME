@@ -1,6 +1,6 @@
 # Verdant Oath — The Bell Beneath the Woods
 
-**Adventure milestone 0.4 · Godot 4.6+ · GDScript · Free CC0 art + original story/effects**
+**Adventure milestone 0.5 · Godot 4.6+ · GDScript · Free CC0 art + original story/effects**
 
 A short, complete story arc: meet Mira in Willowbrook, gather Moonleaf along the woodland trail, cross Sunstream, descend into the Rootbound Sanctuary, and free the Hollow Warden. Fully turn-based battles share one deterministic simulator with the original goblin Auto-Battle system.
 
@@ -52,6 +52,18 @@ Audio can be toggled from the title, forest management menu or dungeon pause men
 - After victory, speak to the guardian, leave the sanctuary at its southern entrance, and return to Mira for the ending. You can keep exploring afterward.
 
 If defeated, retreat to Willowbrook and press R at the campfire. Defeat never completes a quest or awards victory rewards. Herbs, caches, discoveries and story rewards cannot be collected twice.
+
+## New in 0.5 — Project Mythic foundation
+
+The [technical audit and prioritized plan](docs/PROJECT_MYTHIC_AUDIT.md) maps the existing game against the [complete design brief](docs/design/PROJECT_MYTHIC_V1.md). This milestone preserves the current story, quest layout, class balance and combat calculations.
+
+- Shared substepped movement prevents crossing narrow barriers during long frames.
+- Shared orbit camera sweeps against camera-only cottage, tree and sanctuary-wall blockers, pulling inward immediately and easing back out.
+- **Settings** is available from the title, forest/dungeon menus and idle battle screen. It includes 1×/1.75×/2.5× battle speed, minimal battle animations, reduced battle camera movement, mouse sensitivity, music/effect volumes and mute. Settings persist independently of your character. Exploration input and battle actions are blocked while settings are open.
+- Saves retain the existing flat hero format and slot, with schema version 1 metadata, validated temporary writes, a `.previous` recovery copy and an original `.v0.backup` when loading an unversioned save. A newer incompatible save is preserved and blocked from implicit overwrite. The title explains recovery or unreadable saves. New adventure still explicitly backs up your old slot.
+- Reusable implementation lives in `exploration_motion.gd`, `exploration_camera.gd`, `camera_obstacles.gd`, `user_settings.gd`, `options_panel.gd` and `save_store.gd`. Integration changes affect world/dungeon, title, battle presentation, hero animation, sound and State; quest/dialogue/content data remain intact.
+
+Next: stable ability IDs and data-driven spellbooks/status effects, followed by class chemistry, companion progression and owned equipment. The full design brief is a roadmap, not a claim that all planned systems exist.
 
 ## New in 0.4 — art, animation and character pages
 
@@ -124,6 +136,8 @@ XDG_DATA_HOME=/tmp/verdant-oath-tests godot --headless --path . res://tests/run.
 XDG_DATA_HOME=/tmp/verdant-presentation-tests godot --headless --path . res://tests/presentation.tscn
 ```
 
+The reliability suite adds **19 checks** for camera collision, long-frame movement, save corruption/recovery/version protection, setting persistence, modal input and presentation/simulation parity. Run it with `godot --headless --path . res://tests/reliability.tscn` using another isolated data directory.
+
 The full-game suite has **60 checks** and the new presentation/character suite has **61 checks**, all passing with Godot 4.6.3, covering seeded Auto/normal parity, possible defeat, MP legality, mythic restrictions, equipment stats, mastery, leveling, old-save defaults, fractional position persistence, reachable forest objectives, dialogue, unique rewards, actual dungeon/battle scene transitions, both guardians, seals, boss telegraph/defense, boss victory, return to Mira, ending persistence and defeat recovery. The presentation suite also verifies all eight slots, visible attachments, outfit swaps, distinct imported action clips, real clip playback, running, skill prerequisites/costs, legacy skill/gear migration, UI investment, wardrobe preview updates and effect cleanup. Tests accelerate game time and do not measure real play length. Audio playback is intentionally skipped in headless mode.
 
 Rendered OpenGL captures were also generated and inspected for the title, village, dialogue, equipment, skills, dungeon, boss and a combat action. Reproduce them with a display available:
@@ -145,6 +159,6 @@ Use the existing isolated checkout; an additional Git worktree is unnecessary.
 
 ## Current limits and next production work
 
-The story is playable through its ending, but the art pass is ongoing. The hero and Mira use CC0 KayKit character art with skeletal animation, and the cottages/materials use Quaternius's CC0 kit. Goblins, the wolf, Mosslings, the Warden and foliage still use simpler original geometry. Additional equipment overlays are basic prototype meshes. There is no facial animation, lip-sync or voice acting. Music is synthesized. There is one forest and one compact dungeon, with no village interiors. Explorable ground is flat; distant hills are scenery. Movement uses lightweight boundaries rather than full physics/navigation, and the camera can clip through scenery. The wolf can cut corners while following. Menus target a 1280×720 desktop layout. Only one save slot is supported, with a backup on new game; manually damaged saves are not fully recoverable.
+The story is playable through its ending, but the art pass is ongoing. The hero and Mira use CC0 KayKit character art with skeletal animation, and the cottages/materials use Quaternius's CC0 kit. Goblins, the wolf, Mosslings, the Warden and foliage still use simpler original geometry. Additional equipment overlays are basic prototype meshes. There is no facial animation, lip-sync or voice acting. Music is synthesized. There is one forest and one compact dungeon, with no village interiors. Explorable ground is flat; distant hills are scenery. Movement uses lightweight boundaries rather than full physics/navigation, and camera blockers are conservative approximations; close walls can pull the camera very near the hero. The wolf can cut corners while following. Menus target a 1280×720 desktop layout. Only one save slot is supported. Recovery restores the previous valid save when available; it cannot reconstruct progress lost from both damaged copies.
 
 Further work: bring remaining enemies/foliage to the character art's quality level, improve camera collision, create a real inventory/reward economy, and playtest pacing, balance and performance on Windows. See [ROADMAP.md](ROADMAP.md).

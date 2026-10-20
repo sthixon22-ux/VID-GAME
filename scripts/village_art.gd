@@ -26,6 +26,7 @@ static func cottage(root: Node3D, point: Vector3):
  var house=Node3D.new()
  root.add_child(house)
  house.position=point
+ CameraObstacles.box(house,Vector3(0,2,0),Vector3(4.5,4,3.9))
  Art.box(house,Vector3(0,1.2,0),Vector3(3.55,2.4,3.0),Color.WHITE).material_override=Art.surface(Color("f2ddbb"),"plaster",2)
  piece(house,"Wall_Plaster_WoodGrid",Vector3(0,0,1.6),Vector3(3.7,2.5,0.15))
  piece(house,"Wall_Plaster_WoodGrid",Vector3(-1.85,0,0),Vector3(3.2,2.5,0.15),PI/2)

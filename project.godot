@@ -10,5 +10,6 @@ window/stretch/mode="canvas_items"
 renderer/rendering_method="gl_compatibility"
 environment/defaults/default_clear_color=Color(0.16,0.24,0.25,1)
 [autoload]
+UserSettings="*res://scripts/user_settings.gd"
 State="*res://scripts/state.gd"
 Sound="*res://scripts/sound.gd"

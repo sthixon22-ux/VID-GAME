@@ -1,4 +1,5 @@
 extends Node3D
+var options: OptionsPanel
 var sim: Combat
 var actors: Dictionary={}
 var camera: Camera3D
@@ -11,6 +12,8 @@ var hero_bar: ProgressBar
 var enemy_bar: ProgressBar
 var breath=0.0
 func _ready():
+ options=OptionsPanel.new()
+ add_child(options)
  if State.enemy_id=="goblin":
   Art.environment_(self)
   for i in range(12):
@@ -36,6 +39,8 @@ func _ready():
  camera.position=Vector3(-4.8,3.4,6.4)
  camera.look_at(Vector3(0,1.3,0))
  camera.current=true
+ UI.button(UI.panel(self,Vector2(1080,20),Vector2(180,65)),"Settings",func():
+  if not busy: options.open())
  var panel=UI.panel(self,Vector2(20,20),Vector2(700,155))
  status=UI.label(panel,"")
  hero_bar=ProgressBar.new()
@@ -104,7 +109,7 @@ func companion_menu():
    main_menu())
  UI.button(commands,"Back",main_menu)
 func act(action: String):
- if busy or not sim.legal(action): return
+ if busy or options.active or not sim.legal(action): return
  busy=true
  commands.get_parent().get_parent().hide()
  clear_menu()
@@ -115,29 +120,32 @@ func act(action: String):
   if event.amount!=0: Sound.cue("heal" if event.amount<0 else "hit")
   var actor: Node3D=actors[event.actor]
   var target: Node3D=actors[event.target]
-  var duration=await BattleMotion.present(self,actor,target,event.text)
+  var duration=0.25
+  if not UserSettings.minimal_animations: duration=await BattleMotion.present(self,actor,target,event.text)
   refresh(event.state)
-  if event.amount>0 and target.has_method("play_reaction"): target.play_reaction()
+  if not UserSettings.minimal_animations and event.amount>0 and target.has_method("play_reaction"): target.play_reaction()
   var number=Label3D.new()
   add_child(number)
   number.position=target.position+Vector3(0,2.2,0)
   number.text=str(event.amount) if event.amount>0 else ("+%s" % -event.amount if event.amount<0 else event.text)
   number.font_size=60
   number.modulate=Color.SALMON if event.amount>0 else Color.LIGHT_GREEN
-  var float_tween=create_tween()
+  var float_tween=UserSettings.tween(self)
   float_tween.tween_property(number,"position:y",3.4,0.6)
   float_tween.tween_callback(number.queue_free)
-  var focus=target.position+Vector3(0,1,0)
-  var shot=focus+Vector3(-3.8 if event.target=="Goblin" else 3.8,2.2,5.0)
-  var cam_tween=create_tween()
-  cam_tween.set_parallel(true)
-  cam_tween.tween_property(camera,"position",shot,0.23).set_trans(Tween.TRANS_SINE)
-  cam_tween.tween_method(func(weight: float): camera.look_at(Vector3(0,1.3,0).lerp(focus,weight)),0.0,1.0,0.23)
-  await get_tree().create_timer(duration*0.62).timeout
- var reset_camera=create_tween()
- reset_camera.set_parallel(true)
- reset_camera.tween_property(camera,"position",Vector3(-4.8,3.4,6.4),0.3)
- reset_camera.tween_method(func(weight: float): camera.look_at(Vector3(0,1.3,0)),0.0,1.0,0.3)
+  if not UserSettings.reduced_camera_motion and not UserSettings.minimal_animations:
+   var focus=target.position+Vector3(0,1,0)
+   var shot=focus+Vector3(-3.8 if event.target=="Goblin" else 3.8,2.2,5.0)
+   var cam_tween=UserSettings.tween(self)
+   cam_tween.set_parallel(true)
+   cam_tween.tween_property(camera,"position",shot,0.23).set_trans(Tween.TRANS_SINE)
+   cam_tween.tween_method(func(weight: float): camera.look_at(Vector3(0,1.3,0).lerp(focus,weight)),0.0,1.0,0.23)
+  await get_tree().create_timer(UserSettings.duration(duration*0.62)).timeout
+ if not UserSettings.reduced_camera_motion and not UserSettings.minimal_animations:
+  var reset_camera=UserSettings.tween(self)
+  reset_camera.set_parallel(true)
+  reset_camera.tween_property(camera,"position",Vector3(-4.8,3.4,6.4),0.3)
+  reset_camera.tween_method(func(weight: float): camera.look_at(Vector3(0,1.3,0)),0.0,1.0,0.3)
  refresh()
  busy=false
  if sim.outcome!="": finish()
@@ -158,7 +166,7 @@ func finish():
    State.hero.equipment.Weapon="Sunsteel Sword"
    Sound.theme_("woodland")
   Sound.cue("victory")
-  var fall=create_tween()
+  var fall=UserSettings.tween(self)
   fall.tween_property(actors.Goblin,"scale",Vector3.ONE*0.01,0.6)
  else:
   State.hero.journey.region="forest"
@@ -180,7 +188,7 @@ func impact(target: Node3D, healing: bool, action: String):
   var spark=Art.shape(self,target.position+Vector3(0,1,0),Vector3.ONE*0.13,color_)
   var angle=i*TAU/7
   var destination=spark.position+Vector3(sin(angle)*0.9,0.5+cos(angle)*0.5,cos(angle)*0.5)
-  var tween=create_tween()
+  var tween=UserSettings.tween(self)
   tween.set_parallel(true)
   tween.tween_property(spark,"position",destination,0.4)
   tween.tween_property(spark,"scale",Vector3.ONE*0.01,0.4)

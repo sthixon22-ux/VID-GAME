@@ -4,6 +4,8 @@ var classes: Dictionary = {}
 var equipment_data: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/equipment.json"))
 var hero: Dictionary
 var notice = ""
+var save_notice=""
+var save_blocked=false
 var menu_page="equipment"
 var return_position=Vector3.ZERO
 var enemy_id="goblin"
@@ -15,6 +17,8 @@ func _ready():
  reset()
  load_game()
 func reset():
+ save_notice=""
+ save_blocked=false
  return_position=Vector3.ZERO
  hero = {"skills":{"Paladin":[],"Ranger":[],"Druid":[]},"journey":{"started":false,"guards":[],"seals":[],"boss":false,"finished":false,"chest":false,"entered":false,"region":"forest","position":[0.0,0.0,0.0]},"exploration":{"herbs":[],"quest_done":false,"shrine":false},"level":1,"xp":0,"hp":110,"mp":35,"gold":0,"points":3,"primary":"Paladin","secondary":["Ranger","Druid"],"investments":{"Paladin":0,"Ranger":0,"Druid":0},"equipment":{"Weapon":"Iron Sword","Shield":"Oak Shield","Helmet":"None","Chest":"Steel Cuirass","Gauntlets":"None","Pants":"None","Boots":"None","Accessory":"None"},"companion":{"selected":0,"behavior":"Attack","active":true,"roster":["Wolf",null,null,null,null,null],"postgame":null},"mastery":0,"potions":5,"seed":137}
 func stats() -> Dictionary:
@@ -83,26 +87,30 @@ func reward(normal: bool, species: String="goblin"):
   hero.level+=1
   hero.points+=3
   notice="Level up! Three skill points earned."
-func save_game():
- var f=FileAccess.open(SAVE,FileAccess.WRITE)
- if f: f.store_string(JSON.stringify(hero))
+func save_game() -> bool:
+ if save_blocked: return false
+ var success=SaveStore.write_hero(hero,SAVE)
+ if not success: save_notice="Save failed. Your previous file has been preserved."
+ return success
 func load_game():
- if FileAccess.file_exists(SAVE):
-  var data=JSON.parse_string(FileAccess.get_file_as_string(SAVE))
-  if data is Dictionary:
-   var legacy_skills=not data.has("skills")
-   var saved_position: Array=[]
-   if data.get("journey") is Dictionary and data.journey.get("position") is Array:
-    saved_position=data.journey.position.duplicate()
-   for key in hero:
-    if data.has(key): hero[key]=merge_defaults(hero[key],normalize(data[key]))
-   if saved_position.size()==3: hero.journey.position=[float(saved_position[0]),float(saved_position[1]),float(saved_position[2])]
-   if legacy_skills: migrate_skills()
-   var legacy_gear={"Helmet":"Ranger Hood","Gauntlets":"Leather Gloves","Pants":"Ranger Trousers","Boots":"Trail Boots","Accessory":"Moonleaf Charm"}
-   for slot in legacy_gear:
-    if hero.equipment[slot]=="Leather Gear": hero.equipment[slot]=legacy_gear[slot]
-   var pos=hero.journey.position
-   return_position=Vector3(float(pos[0]),float(pos[1]),float(pos[2]))
+ var result=SaveStore.load_hero(SAVE)
+ save_notice=result.notice
+ save_blocked=result.blocked
+ var data: Dictionary=result.hero
+ if not data.is_empty():
+  var legacy_skills=not data.has("skills")
+  var saved_position: Array=[]
+  if data.get("journey") is Dictionary and data.journey.get("position") is Array:
+   saved_position=data.journey.position.duplicate()
+  for key in hero:
+   if data.has(key): hero[key]=merge_defaults(hero[key],normalize(data[key]))
+  if saved_position.size()==3: hero.journey.position=[float(saved_position[0]),float(saved_position[1]),float(saved_position[2])]
+  if legacy_skills: migrate_skills()
+  var legacy_gear={"Helmet":"Ranger Hood","Gauntlets":"Leather Gloves","Pants":"Ranger Trousers","Boots":"Trail Boots","Accessory":"Moonleaf Charm"}
+  for slot in legacy_gear:
+   if hero.equipment[slot]=="Leather Gear": hero.equipment[slot]=legacy_gear[slot]
+  var pos=hero.journey.position
+  return_position=Vector3(float(pos[0]),float(pos[1]),float(pos[2]))
 func can_mythic(class_name_: String) -> bool:
  return hero.primary==class_name_ and hero.skills.get(class_name_,[]).has("mythic")
 

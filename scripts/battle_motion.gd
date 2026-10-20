@@ -33,7 +33,7 @@ static func ring(host: Node3D, position_: Vector3, color_: Color, radius: float=
  mesh.material_override=effect_material(color_)
  host.add_child(mesh)
  mesh.position=position_
- var tween=host.create_tween()
+ var tween=UserSettings.tween(host)
  tween.set_parallel(true)
  tween.tween_property(mesh,"scale",Vector3(1.6,1,1.6),0.65)
  tween.tween_property(mesh,"transparency",1.0,0.65)
@@ -54,7 +54,7 @@ static func arc(host: Node3D, point: Vector3, color_: Color, wide: bool):
  host.add_child(mesh)
  mesh.position=point
  mesh.rotation.z=-0.9
- var tween=host.create_tween()
+ var tween=UserSettings.tween(host)
  tween.set_parallel(true)
  tween.tween_property(mesh,"rotation:z",1.7,0.4)
  tween.tween_property(mesh,"transparency",1.0,0.45)
@@ -62,7 +62,7 @@ static func arc(host: Node3D, point: Vector3, color_: Color, wide: bool):
 static func mote(host: Node3D, start: Vector3, end: Vector3, color_: Color, time_: float=0.7, size_: float=0.09):
  var mesh=Art.shape(host,start,Vector3.ONE*size_,color_)
  mesh.material_override=effect_material(color_)
- var tween=host.create_tween()
+ var tween=UserSettings.tween(host)
  tween.set_parallel(true)
  tween.tween_property(mesh,"position",end,time_).set_trans(Tween.TRANS_SINE)
  tween.tween_property(mesh,"scale",Vector3.ONE*0.005,time_)
@@ -73,7 +73,7 @@ static func roots(host: Node3D, point: Vector3, count: int=9):
   var pos=point+Vector3(sin(angle)*0.7,-0.4,cos(angle)*0.7)
   var thorn=Art.shape(host,pos,Vector3(0.19,1.1+i%3*0.25,0.19),Color("75ba79"),"cone")
   thorn.rotation=Vector3(cos(angle)*0.4,0,sin(angle)*0.4)
-  var tween=host.create_tween()
+  var tween=UserSettings.tween(host)
   tween.tween_property(thorn,"position:y",0.7,0.25)
   tween.tween_interval(0.35)
   tween.tween_property(thorn,"scale",Vector3.ONE*0.01,0.3)
@@ -85,11 +85,11 @@ static func present(host: Node3D, actor: Node3D, target: Node3D, label: String) 
  var forward=(target.position-origin).normalized() if actor!=target else Vector3.ZERO
  var body=actor.get_node_or_null("Body")
  if label in ["Attack","Sword Slash","Shield Bash","Sacred Strike","Dawn Avatar","Wild Hunt","Wolf bite","Goblin club","Briar lash"]:
-  var lunge=host.create_tween()
+  var lunge=UserSettings.tween(host)
   lunge.tween_property(actor,"position",origin+forward*(1.0 if label=="Wolf bite" else 0.6),duration*0.35)
   lunge.tween_property(actor,"position",origin,duration*0.6)
  if not actor.has_method("play_action") and body and label in ["Crushing Canopy","Wolf bite","Goblin club"]:
-  var pose=host.create_tween()
+  var pose=UserSettings.tween(host)
   if label=="Crushing Canopy":
    pose.tween_property(body,"rotation:x",-0.45,0.35)
    pose.tween_property(body,"rotation:x",0.55,0.15)
@@ -103,7 +103,7 @@ static func present(host: Node3D, actor: Node3D, target: Node3D, label: String) 
    pose.tween_property(body,"rotation:y",0.4,0.15)
    pose.tween_property(body,"rotation:y",0,0.3)
  # Impact is synchronized to the forward portion of the animation.
- await host.get_tree().create_timer(duration*0.38).timeout
+ await host.get_tree().create_timer(UserSettings.duration(duration*0.38)).timeout
  var point=target.position
  match label:
   "Attack": arc(host,point+Vector3.UP,Color("d7edff"),false)
@@ -139,7 +139,7 @@ static func present(host: Node3D, actor: Node3D, target: Node3D, label: String) 
     wolf.position=actor.position+Vector3(0,0,i-1)
     for mesh in wolf.find_children("*","MeshInstance3D",true,false): mesh.material_override=effect_material(Color("a9e4d0"),0.6)
     wolf.look_at(target.position)
-    var chase=host.create_tween()
+    var chase=UserSettings.tween(host)
     chase.tween_property(wolf,"position",point+forward*1.8+Vector3(0,0,i-1),0.6)
     chase.tween_callback(wolf.queue_free)
   "Ancient Grove":
@@ -151,7 +151,7 @@ static func present(host: Node3D, actor: Node3D, target: Node3D, label: String) 
     tree.position=point+Vector3(sin(angle)*1.8,0,cos(angle)*1.8)
     Art.shape(tree,Vector3(0,0.8,0),Vector3(0.12,1.6,0.12),Color("d5b9dd"),"cylinder")
     Art.shape(tree,Vector3(0,1.5,0),Vector3(0.7,1.2,0.7),Color("b1d7bd"),"cone")
-    var grow=host.create_tween()
+    var grow=UserSettings.tween(host)
     grow.tween_interval(0.6)
     grow.tween_property(tree,"scale",Vector3.ONE*0.01,0.4)
     grow.tween_callback(tree.queue_free)

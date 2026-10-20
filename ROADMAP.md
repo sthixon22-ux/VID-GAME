@@ -18,13 +18,25 @@ The agreed target is a polished short adventure with a village, forest route, du
 - Dedicated six-node branching skill pages for Paladin, Ranger and Druid, with descriptions, prerequisites, point costs and mythic availability.
 - Legacy skill/equipment save migration and a separate presentation/character integration suite.
 
+## Delivered in 0.5 — Project Mythic foundation
+
+- Existing-project audit and prioritized dependencies: [technical audit](docs/PROJECT_MYTHIC_AUDIT.md), guided by the preserved [master brief](docs/design/PROJECT_MYTHIC_V1.md).
+- Shared movement substeps and collision-aware orbit camera, with camera-only scenery/wall blockers.
+- Modal settings in title, exploration and battle; independent presentation speed, minimal animations, reduced camera motion, sensitivity, audio volumes/mute.
+- Versioned, validated save replacement; previous-file recovery; preserved unversioned originals and incompatible newer saves.
+- Reliability regression suite alongside the original game/presentation suites.
+
+## Next: abilities and statuses
+
+Move ability IDs, costs, spellbooks and effects into data; retain legacy aliases. Implement reusable seeded stun/root, regeneration and timed buffs before class chemistry, mastery/proficiency requirements, companion progression and inventory ownership. Keep current balance/quests while migrating. The audit contains the ordered implementation plan and unresolved design decisions.
+
 ## Next: unify the art target
 
 The hero rig/outfits and village kit are integrated. Bring the wolf, enemies, Warden and foliage to the same quality bar with consistent meshes, UVs, textures and rigs. Refine the original prototype equipment overlays and spell choreography. Confirm visual style, silhouette, scale, lighting and readability in an actual Windows playtest before expanding the asset count.
 
 ## Next: camera and game feel
 
-Add camera collision, smooth encounter transitions, better attack choreography and spell-specific effects. Improve following/pathfinding and replace approximate blockers where needed. Move stats and telegraphs into a more deliberate battle HUD and test mouse/keyboard focus through all submenus. Add proper volume sliders and test the score and effects through speakers/headphones.
+Refine camera blockers, add smooth encounter transitions, better attack choreography and spell-specific effects. Improve following/pathfinding and replace approximate blockers where needed. Move stats and telegraphs into a more deliberate battle HUD and test mouse/keyboard focus through all submenus. Volume controls are now available; test the score and effects through speakers/headphones.
 
 ## Next: content, pacing and balance
 

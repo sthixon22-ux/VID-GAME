@@ -104,6 +104,8 @@ static func tree(root: Node3D, pos: Vector3, size_: float=1.0):
  root.add_child(tree_)
  tree_.position=pos
  tree_.scale=Vector3.ONE*size_
+ CameraObstacles.box(tree_,Vector3(0,1.7,0),Vector3(0.8,3.4,0.8))
+ CameraObstacles.sphere(tree_,Vector3(0,4,0),1.7)
  shape(tree_,Vector3(0,1.7,0),Vector3(0.65,3.4,0.65),Color("68513b"),"cylinder").material_override=surface(Color("9c8264"),"wood",2)
  for side in [-1,1]:
   var branch=shape(tree_,Vector3(side*0.4,2.6,0),Vector3(0.25,1.5,0.25),Color("68513b"),"cylinder")

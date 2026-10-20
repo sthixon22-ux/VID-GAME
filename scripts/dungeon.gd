@@ -1,7 +1,8 @@
 extends Node3D
 var hero: Node3D
 var wolf: Node3D
-var camera: Camera3D
+var camera: ExplorationCamera
+var options: OptionsPanel
 var dialogue: Dialogue
 var hud: Label
 var objective: Label
@@ -17,6 +18,8 @@ var chest: Node3D
 var pause_menu: VBoxContainer
 var enemy_homes=[Vector3(-8,0,-10),Vector3(8,0,-10)]
 func _ready():
+ options=OptionsPanel.new()
+ add_child(options)
  build_dungeon()
  hero=Art.actor("Hero",State.hero.equipment)
  add_child(hero)
@@ -25,7 +28,7 @@ func _ready():
  wolf=Art.actor("Wolf")
  add_child(wolf)
  wolf.position=hero.position+Vector3(1,0,1)
- camera=Camera3D.new()
+ camera=ExplorationCamera.new()
  add_child(camera)
  camera.current=true
  dialogue=Dialogue.new()
@@ -42,7 +45,7 @@ func _ready():
  UI.button(pause_menu,"Equipment & Appearance",func(): open_character("equipment"))
  UI.button(pause_menu,"Class Skill Trees",func(): open_character("skills"))
  UI.button(pause_menu,"Save",func(): State.save_game())
- UI.button(pause_menu,"Music / sound",Sound.toggle)
+ UI.button(pause_menu,"Settings",options.open)
  UI.button(pause_menu,"Save and return to title",func():
   State.save_game()
   get_tree().change_scene_to_file("res://scenes/title.tscn"))
@@ -79,6 +82,7 @@ func build_dungeon():
    if floor_cells.has(cell+edge): continue
    var wall_height=1.4 if edge==Vector2i.DOWN else 2.8
    var wall=Art.box(self,point+Vector3(edge.x,wall_height/2,edge.y),Vector3(0.28 if edge.x else 2.1,wall_height,0.28 if edge.y else 2.1),Color("61746d"))
+   CameraObstacles.box(self,wall.position,Vector3(0.28 if edge.x else 2.1,wall_height,0.28 if edge.y else 2.1))
    wall.material_override=Art.surface(Color("8c9e8b"),"stone",1.2)
  for x in [-8,8]:
   var seal=Node3D.new()
@@ -116,10 +120,10 @@ func build_dungeon():
 func can_walk(pos: Vector3) -> bool:
  return floor_cells.has(Vector2i(floori((pos.x+1)/2),floori((pos.z+1)/2)))
 func _unhandled_input(event):
- if dialogue.active: return
+ if options.active or dialogue.active: return
  if event is InputEventMouseMotion and Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
-  yaw-=event.relative.x*0.005
-  pitch=clampf(pitch-event.relative.y*0.004,-1.05,-0.3)
+  yaw-=event.relative.x*0.005*UserSettings.camera_sensitivity
+  pitch=clampf(pitch-event.relative.y*0.004*UserSettings.camera_sensitivity,-1.05,-0.3)
  if event is InputEventKey and event.pressed and not event.echo:
   match event.keycode:
    KEY_E: interact()
@@ -130,12 +134,10 @@ func _unhandled_input(event):
 func _process(delta):
  clock+=delta
  var direction=Vector3.ZERO
- if not dialogue.active and not pause_menu.get_parent().get_parent().visible:
+ if not options.active and not dialogue.active and not pause_menu.get_parent().get_parent().visible:
   direction=Vector3(float(Input.is_physical_key_pressed(KEY_D))-float(Input.is_physical_key_pressed(KEY_A)),0,float(Input.is_physical_key_pressed(KEY_S))-float(Input.is_physical_key_pressed(KEY_W))).rotated(Vector3.UP,yaw).normalized()
-  var next=hero.position+direction*(6.5 if Input.is_physical_key_pressed(KEY_SHIFT) else 4)*delta
-  if can_walk(Vector3(next.x,0,hero.position.z)): hero.position.x=next.x
-  if can_walk(Vector3(hero.position.x,0,next.z)): hero.position.z=next.z
-  if direction.length()>0: hero.rotation.y=lerp_angle(hero.rotation.y,atan2(-direction.x,-direction.z),delta*10)
+  hero.position=ExplorationMotion.move(hero.position,direction*(6.5 if Input.is_physical_key_pressed(KEY_SHIFT) else 4)*delta,can_walk)
+  if direction.length()>0: hero.rotation.y=lerp_angle(hero.rotation.y,atan2(-direction.x,-direction.z),minf(1,delta*10))
  State.remember_position(hero.position)
  Art.animate(hero,clock,direction.length()>0)
  wolf.position=wolf.position.lerp(hero.position+Vector3(0.7,0,1),minf(1,delta*4))
@@ -149,8 +151,7 @@ func _process(delta):
  boss.visible=not State.hero.journey.boss
  Art.animate(boss,clock,false)
  chest.visible=not State.hero.journey.chest
- camera.position=hero.position+Vector3(sin(yaw)*cos(pitch)*8,-sin(pitch)*8+1,cos(yaw)*cos(pitch)*8)
- camera.look_at(hero.position+Vector3.UP)
+ camera.update_view(hero.position+Vector3.UP,Vector3(sin(yaw)*cos(pitch)*8,-sin(pitch)*8,cos(yaw)*cos(pitch)*8),delta)
  hud.text="ROOTBOUND SANCTUARY\nLv %s · HP %s/%s · MP %s/%s · Potions %s" % [State.hero.level,State.hero.hp,State.stats().max_hp,State.hero.mp,State.stats().max_mp,State.hero.potions]
  objective.text="THE BELL BENEATH THE WOODS\nRoot seals: %s/2\n%s" % [State.hero.journey.seals.size(),"Return to Mira" if State.hero.journey.boss else "Cleanse the guardian's heart"]
  prompt.text="[E] Interact · Explore both side chambers · [Esc] Menu"

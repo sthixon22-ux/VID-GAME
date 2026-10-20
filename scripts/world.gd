@@ -3,7 +3,8 @@ var dialogue: Dialogue
 var completion: VBoxContainer
 var hero: Node3D
 var wolf: Node3D
-var camera: Camera3D
+var camera: ExplorationCamera
+var options: OptionsPanel
 var goblins: Array[Node3D]=[]
 var forest: Forest
 var objective: Label
@@ -16,6 +17,8 @@ var hud: Label
 var menu: VBoxContainer
 var message=""
 func _ready():
+ options=OptionsPanel.new()
+ add_child(options)
  forest=Forest.new()
  forest.build(self)
  State.hero.journey.region="forest"
@@ -33,7 +36,7 @@ func _ready():
   gob.position=pos
   goblins.append(gob)
   Art.sign_(gob,Vector3(0,2.6,0),"Forest Goblin")
- camera=Camera3D.new()
+ camera=ExplorationCamera.new()
  add_child(camera)
  camera.current=true
  var panel=UI.panel(self,Vector2(16,16),Vector2(600,180))
@@ -63,10 +66,10 @@ Thank you for playing this development milestone.")
  completion.get_parent().get_parent().hide()
  Input.mouse_mode=Input.MOUSE_MODE_VISIBLE
 func _unhandled_input(event):
- if dialogue.active or completion.get_parent().get_parent().visible: return
+ if options.active or dialogue.active or completion.get_parent().get_parent().visible: return
  if event is InputEventMouseMotion and Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
-  yaw-=event.relative.x*0.005
-  pitch=clampf(pitch-event.relative.y*0.004,-1.1,-0.15)
+  yaw-=event.relative.x*0.005*UserSettings.camera_sensitivity
+  pitch=clampf(pitch-event.relative.y*0.004*UserSettings.camera_sensitivity,-1.1,-0.15)
  if event is InputEventKey and event.pressed and not event.echo:
   match event.keycode:
    KEY_E: interact()
@@ -77,13 +80,12 @@ func _unhandled_input(event):
     menu.get_parent().get_parent().visible=not menu.get_parent().get_parent().visible
     if menu.get_parent().get_parent().visible: refresh_menu()
    KEY_F5:
-    State.save_game()
-    message="Saved."
+    message="Saved." if State.save_game() else State.save_notice
    KEY_F9:
     State.load_game()
     hero.position=State.return_position
     update_gear()
-    message="Loaded."
+    message=State.save_notice if not State.save_notice.is_empty() else "Loaded."
    KEY_R:
     if hero.position.length()<3:
      State.hero.hp=State.stats().max_hp
@@ -94,13 +96,11 @@ func _unhandled_input(event):
 func _process(delta):
  time_+=delta
  var direction=Vector3.ZERO
- if not menu.get_parent().get_parent().visible and not dialogue.active and not completion.get_parent().get_parent().visible:
+ if not options.active and not menu.get_parent().get_parent().visible and not dialogue.active and not completion.get_parent().get_parent().visible:
   var input=Vector3(float(Input.is_physical_key_pressed(KEY_D))-float(Input.is_physical_key_pressed(KEY_A)),0,float(Input.is_physical_key_pressed(KEY_S))-float(Input.is_physical_key_pressed(KEY_W)))
   direction=input.rotated(Vector3.UP,yaw).normalized()
   var speed=7.5 if Input.is_physical_key_pressed(KEY_SHIFT) else 4.3
-  var next=hero.position+direction*speed*delta
-  if forest.can_walk(Vector3(next.x,0,hero.position.z)): hero.position.x=next.x
-  if forest.can_walk(Vector3(hero.position.x,0,next.z)): hero.position.z=next.z
+  hero.position=ExplorationMotion.move(hero.position,direction*speed*delta,forest.can_walk)
   if direction.length()>0: hero.rotation.y=lerp_angle(hero.rotation.y,atan2(-direction.x,-direction.z),minf(1,delta*12))
  hero.position.y=0.32 if absf(hero.position.x-12)<2.5 and absf(hero.position.z+12)<1.5 else 0.0
  State.remember_position(hero.position)
@@ -119,9 +119,7 @@ func _process(delta):
    gob.rotation.y=-time_*0.5-i
    animate_actor(gob,true)
  for i in range(forest.herbs.size()): forest.herbs[i].visible=not State.hero.exploration.herbs.has(i)
- var desired=hero.position+Vector3(sin(yaw)*cos(pitch)*8,-sin(pitch)*8+1.5,cos(yaw)*cos(pitch)*8)
- camera.position=camera.position.lerp(desired,minf(1,delta*9)) if time_>0.1 else desired
- camera.look_at(hero.position+Vector3.UP*1.2)
+ camera.update_view(hero.position+Vector3.UP*1.2,Vector3(sin(yaw)*cos(pitch)*8,-sin(pitch)*8+0.3,cos(yaw)*cos(pitch)*8),delta)
  var s=State.stats()
  hud.text="%s · Lv %s · XP %s/%s
 HP %s/%s · MP %s/%s · Gold %s · Mastery %s/10
@@ -245,7 +243,7 @@ func refresh_menu():
   State.hero.companion.behavior=choices[(choices.find(State.hero.companion.behavior)+1)%3]
   State.save_game()
   refresh_menu())
- UI.button(menu,"Music / sound",Sound.toggle)
+ UI.button(menu,"Settings",options.open)
  UI.button(menu,"Save and return to title",func():
   State.save_game()
   get_tree().change_scene_to_file("res://scenes/title.tscn"))

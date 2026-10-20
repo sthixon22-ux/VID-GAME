@@ -1,14 +1,15 @@
 extends Node
 var music: AudioStreamPlayer
-var muted=false
+var muted: bool:
+ get: return UserSettings.muted
 var current=""
 func _ready():
  get_tree().auto_accept_quit=false
  music=AudioStreamPlayer.new()
  add_child(music)
  music.volume_db=-20
- var config=ConfigFile.new()
- if config.load("user://settings.cfg")==OK: muted=config.get_value("audio","muted",false)
+ UserSettings.changed.connect(apply_settings)
+ apply_settings()
  music.finished.connect(func():
   if not muted: music.play())
 func theme_(name_: String):
@@ -22,17 +23,24 @@ func cue(name_: String):
  if muted: return
  var player=AudioStreamPlayer.new()
  add_child(player)
- player.volume_db=-15
+ player.volume_db=UserSettings.effects_db
  player.stream=load("res://assets/audio/%s.wav" % name_)
  player.finished.connect(player.queue_free)
  player.play()
 func toggle():
- muted=not muted
- if muted: music.stop()
- elif music.stream: music.play()
- var config=ConfigFile.new()
- config.set_value("audio","muted",muted)
- config.save("user://settings.cfg")
+ UserSettings.set_option("muted",not muted)
+func apply_settings():
+ if not is_instance_valid(music): return
+ music.volume_db=UserSettings.music_db
+ if muted:
+  music.stop()
+  for child in get_children():
+   if child is AudioStreamPlayer:
+    child.stop()
+    if child!=music: child.queue_free()
+ elif music.stream and not music.playing: music.play()
+ for child in get_children():
+  if child is AudioStreamPlayer and child!=music: child.volume_db=UserSettings.effects_db
 func _exit_tree():
  for child in get_children():
   if child is AudioStreamPlayer:
