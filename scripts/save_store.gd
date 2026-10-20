@@ -1,6 +1,6 @@
 class_name SaveStore
 extends RefCounted
-const VERSION=1
+const VERSION=2
 static func inspect(path: String) -> Dictionary:
  if not FileAccess.file_exists(path): return {}
  var parser=JSON.new()
@@ -12,14 +12,17 @@ static func inspect(path: String) -> Dictionary:
   if not data.get(key) is float and not data.get(key) is int: return {}
  for key in ["equipment","companion","investments"]:
   if not data.get(key) is Dictionary: return {}
+ if not valid_nested(data): return {}
  return {"hero":data}
 static func load_hero(path: String) -> Dictionary:
  if not FileAccess.file_exists(path): return {"hero":{},"notice":"","blocked":false}
  var current=inspect(path)
  if current.has("future"): return {"hero":{},"notice":"This save needs a newer game version. It has been preserved.","blocked":true}
  if current.has("hero"):
-  if not current.hero.has("save_schema_version") and not FileAccess.file_exists(path+".v0.backup"):
-   DirAccess.copy_absolute(path,path+".v0.backup")
+  var previous_version=int(current.hero.get("save_schema_version",0))
+  var legacy_backup=path+".v%s.backup" % previous_version
+  if previous_version<VERSION and not FileAccess.file_exists(legacy_backup):
+   DirAccess.copy_absolute(path,legacy_backup)
   return {"hero":current.hero,"notice":"","blocked":false}
  var previous=inspect(path+".previous")
  if previous.has("hero"): return {"hero":previous.hero,"notice":"Recovered the previous save after the latest file could not be read.","blocked":false}
@@ -38,3 +41,49 @@ static func write_hero(hero: Dictionary, path: String) -> bool:
  if inspect(path).has("hero"):
   if DirAccess.copy_absolute(path,path+".previous")!=OK: return false
  return DirAccess.rename_absolute(temporary,path)==OK
+
+static func valid_nested(data: Dictionary) -> bool:
+ for key in ["profile","journey","exploration","skills","class_mastery","weapon_mastery","weapon_skills","monsters","demo"]:
+  if data.has(key) and not data[key] is Dictionary: return false
+ for key in ["secondary","inventory"]:
+  if data.has(key) and not string_array(data[key]): return false
+ for value in data.equipment.values():
+  if not value is String: return false
+ if data.has("profile"):
+  var profile: Dictionary=data.profile
+  if profile.has("name") and not profile.name is String: return false
+  for key in ["skin","hair","dye"]:
+   if profile.has(key) and (not numeric(profile[key]) or float(profile[key])<0 or float(profile[key])>2): return false
+ for key in ["primary"]:
+  if data.has(key) and not data[key] is String: return false
+ for key in ["skills","weapon_skills"]:
+  for value in data.get(key,{}).values():
+   if not string_array(value): return false
+ for key in ["investments","class_mastery","weapon_mastery","monsters"]:
+  for value in data.get(key,{}).values():
+   if not numeric(value): return false
+ for key in ["journey","exploration","demo"]:
+  for field in ["guards","seals","herbs","field_guards","position"]:
+   if not data.get(key,{}).has(field): continue
+   var values=data[key][field]
+   if not values is Array: return false
+   for value in values:
+    if not numeric(value): return false
+   if field=="position" and values.size()!=3: return false
+ var companion: Dictionary=data.companion
+ if companion.has("owned") and not string_array(companion.owned): return false
+ if companion.has("records"):
+  if not companion.records is Dictionary: return false
+  for record in companion.records.values():
+   if not record is Dictionary: return false
+   for key in ["level","xp","points","hp"]:
+    if not numeric(record.get(key)): return false
+   if not string_array(record.get("skills")): return false
+ return true
+static func numeric(value) -> bool:
+ return (value is int or value is float) and is_finite(float(value))
+static func string_array(value) -> bool:
+ if not value is Array: return false
+ for item in value:
+  if not item is String: return false
+ return true

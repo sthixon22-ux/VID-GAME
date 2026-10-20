@@ -24,7 +24,7 @@ func run():
  State.hero.gold=123
  State.remember_position(Vector3(1.25,0,-2.75))
  check(SaveStore.write_hero(State.hero,path),"Validated versioned save writes")
- check(SaveStore.inspect(path).hero.save_schema_version==1,"Schema metadata stored")
+ check(SaveStore.inspect(path).hero.save_schema_version==SaveStore.VERSION,"Schema metadata stored")
  check(SaveStore.inspect(path).hero.journey.position[0]==1.25,"Fractional position preserved")
  raw(path,"{truncated")
  var recovered=SaveStore.load_hero(path)

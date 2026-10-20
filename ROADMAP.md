@@ -26,9 +26,20 @@ The agreed target is a polished short adventure with a village, forest route, du
 - Versioned, validated save replacement; previous-file recovery; preserved unversioned originals and incompatible newer saves.
 - Reliability regression suite alongside the original game/presentation suites.
 
-## Next: abilities and statuses
+## Delivered in 0.6 — representative demo loop
 
-Move ability IDs, costs, spellbooks and effects into data; retain legacy aliases. Implement reusable seeded stun/root, regeneration and timed buffs before class chemistry, mastery/proficiency requirements, companion progression and inventory ownership. Keep current balance/quests while migrating. The audit contains the ordered implementation plan and unresolved design decisions.
+- Character creation with primary/two secondary selections and visual colors; unequipped arrival with a starter purse.
+- Outfitter, owned inventory/compatibility, starter-budget protection and consumable purchases.
+- Independent class/weapon mastery, compact weapon trees, data-defined abilities, timed statuses and Guardian of the Wild chemistry.
+- Six functional permanent companion choices, previews, automated roles, training/progression and persistent HP. First bond after the quest; second only after the optional postgame echo; two owned/one active.
+- Visible Moonleaf guards, journal/field guide, risk/results Auto-Battle UI, optional postgame board challenge and schema-2 save compatibility.
+- Full details and limitations: [demo report](docs/DEMO_0_6.md).
+
+## Next: verify the public-release bar
+
+Run fresh, timed Windows playthroughs without test teleports. Check whether the complete opening reaches the 15–20-minute target, tune costs/MP/encounter difficulty and verify everyone finds the shop, trees and companion endpoint. Review audio, keyboard/controller focus and readability. Bring remaining creature/companion art and animation to a consistent quality bar; the procedural additions demonstrate function, not final production quality.
+
+The ability/status/chemistry and basic ownership/companion foundations now exist. Extend content only after testing and refining these systems; do not replace the current quest or claim all twelve classes are complete.
 
 ## Next: unify the art target
 

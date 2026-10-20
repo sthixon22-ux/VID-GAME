@@ -23,7 +23,8 @@
           0.5,
           0.83
         ],
-        "cost": 1
+        "cost": 1,
+        "mastery_required": 0
       },
       {
         "id": "shield",
@@ -39,7 +40,8 @@
           0.24,
           0.56
         ],
-        "cost": 1
+        "cost": 1,
+        "mastery_required": 0
       },
       {
         "id": "light",
@@ -55,7 +57,8 @@
           0.76,
           0.56
         ],
-        "cost": 1
+        "cost": 1,
+        "mastery_required": 0
       },
       {
         "id": "vigor",
@@ -71,7 +74,8 @@
           0.14,
           0.28
         ],
-        "cost": 1
+        "cost": 1,
+        "mastery_required": 1
       },
       {
         "id": "grace",
@@ -87,7 +91,8 @@
           0.86,
           0.28
         ],
-        "cost": 1
+        "cost": 1,
+        "mastery_required": 1
       },
       {
         "id": "mythic",
@@ -102,10 +107,24 @@
           0.5,
           0.12
         ],
-        "cost": 2
+        "cost": 2,
+        "mastery_required": 3
       }
     ],
-    "color": "d8bc78"
+    "color": "d8bc78",
+    "id": "paladin",
+    "description": "Shield-bearing protector. High defense, sacred attacks and block chemistry.",
+    "primary_bonus": {
+      "defense": 2,
+      "max_hp": 10
+    },
+    "proficiencies": [
+      "sword",
+      "shield"
+    ],
+    "spellbook": [
+      "sacred_strike"
+    ]
   },
   "Ranger": {
     "skills": [
@@ -130,7 +149,8 @@
           0.5,
           0.83
         ],
-        "cost": 1
+        "cost": 1,
+        "mastery_required": 0
       },
       {
         "id": "shield",
@@ -146,7 +166,8 @@
           0.24,
           0.56
         ],
-        "cost": 1
+        "cost": 1,
+        "mastery_required": 0
       },
       {
         "id": "light",
@@ -162,7 +183,8 @@
           0.76,
           0.56
         ],
-        "cost": 1
+        "cost": 1,
+        "mastery_required": 0
       },
       {
         "id": "vigor",
@@ -178,7 +200,8 @@
           0.14,
           0.28
         ],
-        "cost": 1
+        "cost": 1,
+        "mastery_required": 1
       },
       {
         "id": "grace",
@@ -194,7 +217,8 @@
           0.86,
           0.28
         ],
-        "cost": 1
+        "cost": 1,
+        "mastery_required": 1
       },
       {
         "id": "mythic",
@@ -209,10 +233,24 @@
           0.5,
           0.12
         ],
-        "cost": 2
+        "cost": 2,
+        "mastery_required": 3
       }
     ],
-    "color": "8dc9b2"
+    "color": "8dc9b2",
+    "id": "ranger",
+    "description": "Swift tracker. Marks prey, strengthens companions and strikes first.",
+    "primary_bonus": {
+      "speed": 3,
+      "attack": 2
+    },
+    "proficiencies": [
+      "sword",
+      "shield"
+    ],
+    "spellbook": [
+      "hunters_mark"
+    ]
   },
   "Druid": {
     "skills": [
@@ -238,7 +276,8 @@
           0.5,
           0.83
         ],
-        "cost": 1
+        "cost": 1,
+        "mastery_required": 0
       },
       {
         "id": "shield",
@@ -254,7 +293,8 @@
           0.24,
           0.56
         ],
-        "cost": 1
+        "cost": 1,
+        "mastery_required": 0
       },
       {
         "id": "light",
@@ -270,7 +310,8 @@
           0.76,
           0.56
         ],
-        "cost": 1
+        "cost": 1,
+        "mastery_required": 0
       },
       {
         "id": "vigor",
@@ -286,7 +327,8 @@
           0.14,
           0.28
         ],
-        "cost": 1
+        "cost": 1,
+        "mastery_required": 1
       },
       {
         "id": "grace",
@@ -302,7 +344,8 @@
           0.86,
           0.28
         ],
-        "cost": 1
+        "cost": 1,
+        "mastery_required": 1
       },
       {
         "id": "mythic",
@@ -317,9 +360,24 @@
           0.5,
           0.12
         ],
-        "cost": 2
+        "cost": 2,
+        "mastery_required": 3
       }
     ],
-    "color": "ba9cd3"
+    "color": "ba9cd3",
+    "id": "druid",
+    "description": "Grove spellcaster. Roots enemies and restores health over time.",
+    "primary_bonus": {
+      "max_mp": 10,
+      "healing": 4
+    },
+    "proficiencies": [
+      "sword",
+      "shield"
+    ],
+    "spellbook": [
+      "thornbind",
+      "regrowth"
+    ]
   }
 }

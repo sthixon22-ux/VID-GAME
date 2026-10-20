@@ -1,0 +1,34 @@
+{
+  "sword": [
+    {
+      "id": "edge",
+      "name": "Honed Edge",
+      "cost": 1,
+      "requires": 0,
+      "description": "Sword attack power +2."
+    },
+    {
+      "id": "flow",
+      "name": "Flowing Slash",
+      "cost": 1,
+      "requires": 3,
+      "description": "Sword Slash gains +4 damage."
+    }
+  ],
+  "shield": [
+    {
+      "id": "brace",
+      "name": "Braced Guard",
+      "cost": 1,
+      "requires": 0,
+      "description": "With a shield, defense +2."
+    },
+    {
+      "id": "impact",
+      "name": "Shield Impact",
+      "cost": 1,
+      "requires": 3,
+      "description": "Shield Bash stun chance +20%."
+    }
+  ]
+}

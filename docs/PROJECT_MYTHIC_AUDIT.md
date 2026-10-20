@@ -1,5 +1,7 @@
 # Project Mythic — existing-project audit
 
+Historical 0.4/0.5 baseline. Several gaps below are now addressed by [demo 0.6](DEMO_0_6.md); read that report for current implementation and remaining release work.
+
 Baseline: `27d0c306bcd46d51ddd4c86d66956684a62d16d7` (adventure 0.4). Design authority: [PROJECT_MYTHIC_V1.md](design/PROJECT_MYTHIC_V1.md). A local Git backup branch, `backup/pre-project-mythic-0.4`, preserves this baseline; no replacement project or worktree was created.
 
 ## Baseline evidence

@@ -28,9 +28,10 @@ func clear():
   c.queue_free()
 func main_menu():
  clear()
+ if not FileAccess.file_exists(State.SAVE): State.new_adventure()
  var title=UI.label(menu,"VERDANT OATH")
  title.add_theme_font_size_override("font_size",36)
- UI.label(menu,"The Bell Beneath the Woods\nAdventure milestone 0.5\n")
+ UI.label(menu,"The Bell Beneath the Woods\nDemo 0.6 · Target playtime 15–20 minutes\n")
  UI.button(menu,"Continue adventure",func(): get_tree().change_scene_to_file(State.travel_scene())).disabled=State.save_blocked
  if not State.save_notice.is_empty(): UI.label(menu,State.save_notice)
  UI.button(menu,"Settings",options.open)
@@ -48,10 +49,10 @@ func confirm_new():
     UI.label(menu,"Could not back up the save. New adventure cancelled.")
     return
    DirAccess.remove_absolute(State.SAVE)
-  State.reset()
+  State.new_adventure()
   State.return_position=Vector3.ZERO
   State.cleared_until.clear()
   State.enemy_id="goblin"
   State.save_game()
-  get_tree().change_scene_to_file("res://scenes/world.tscn"))
+  get_tree().change_scene_to_file("res://scenes/create.tscn"))
  UI.button(menu,"Back",main_menu)

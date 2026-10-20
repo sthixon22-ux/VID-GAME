@@ -131,7 +131,10 @@ func run():
  check(world.message.contains("10 normal"),"Auto locked before mastery")
  State.hero.mastery=10
  world.encounter(true)
- check(world.message.contains("Auto:") and State.cleared_until.has(0),"Auto resolves without scene transition and clears encounter")
+ check(world.auto_panel.active,"Auto opens a risk preview without changing scene")
+ world.auto_panel.resolve()
+ check(State.cleared_until.has(0) and get_tree().current_scene==world,"Auto resolves without scene transition and clears encounter")
+ world.auto_panel.close()
  State.restore()
  world.hero.position=Vector3(24,0,-12)
  world.interact()

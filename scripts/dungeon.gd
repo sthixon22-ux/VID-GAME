@@ -13,6 +13,7 @@ var floor_cells: Dictionary={}
 var yaw=0.0
 var pitch=-0.6
 var clock=0.0
+var elapsed_fraction=0.0
 var boss: Node3D
 var chest: Node3D
 var pause_menu: VBoxContainer
@@ -25,7 +26,7 @@ func _ready():
  add_child(hero)
  hero.position=State.return_position
  if not can_walk(hero.position): hero.position=Vector3.ZERO
- wolf=Art.actor("Wolf")
+ wolf=CompanionVisual.build(State.hero.companion.current)
  add_child(wolf)
  wolf.position=hero.position+Vector3(1,0,1)
  camera=ExplorationCamera.new()
@@ -129,18 +130,26 @@ func _unhandled_input(event):
    KEY_E: interact()
    KEY_I: open_character("equipment")
    KEY_K: open_character("skills")
+   KEY_C: open_character("companions")
+   KEY_J: open_character("journal")
    KEY_ESCAPE: pause_menu.get_parent().get_parent().visible=not pause_menu.get_parent().get_parent().visible
    KEY_F5: State.save_game()
 func _process(delta):
  clock+=delta
  var direction=Vector3.ZERO
  if not options.active and not dialogue.active and not pause_menu.get_parent().get_parent().visible:
+  if State.hero.profile.economy:
+   elapsed_fraction+=delta
+   if elapsed_fraction>=1:
+    State.hero.demo.elapsed+=int(elapsed_fraction)
+    elapsed_fraction=fmod(elapsed_fraction,1.0)
   direction=Vector3(float(Input.is_physical_key_pressed(KEY_D))-float(Input.is_physical_key_pressed(KEY_A)),0,float(Input.is_physical_key_pressed(KEY_S))-float(Input.is_physical_key_pressed(KEY_W))).rotated(Vector3.UP,yaw).normalized()
-  hero.position=ExplorationMotion.move(hero.position,direction*(6.5 if Input.is_physical_key_pressed(KEY_SHIFT) else 4)*delta,can_walk)
+  hero.position=ExplorationMotion.move(hero.position,direction*(6.5 if Input.is_physical_key_pressed(KEY_SHIFT) else 4)*State.travel_multiplier()*delta,can_walk)
   if direction.length()>0: hero.rotation.y=lerp_angle(hero.rotation.y,atan2(-direction.x,-direction.z),minf(1,delta*10))
  State.remember_position(hero.position)
  Art.animate(hero,clock,direction.length()>0)
  wolf.position=wolf.position.lerp(hero.position+Vector3(0.7,0,1),minf(1,delta*4))
+ wolf.visible=State.hero.companion.active
  Art.animate(wolf,clock,direction.length()>0)
  for i in range(enemies.size()):
   enemies[i].visible=not State.hero.journey.guards.has(i)

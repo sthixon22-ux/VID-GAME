@@ -28,7 +28,8 @@ func _ready():
  add_child(dialogue)
  Sound.theme_("battle")
  for entry in [["Hero",Vector3(-2,0,1)],["Wolf",Vector3(-3,0,-1)],["Goblin",Vector3(2,0,0)]]:
-  var model=Art.actor(str(sim.enemy.model) if entry[0]=="Goblin" else entry[0],State.hero.equipment)
+  var model=CompanionVisual.build(State.hero.companion.current) if entry[0]=="Wolf" else Art.actor(str(sim.enemy.model) if entry[0]=="Goblin" else entry[0],State.hero.equipment)
+  if entry[0]=="Wolf": model.visible=State.hero.companion.active
   add_child(model)
   model.position=entry[1]
   actors[entry[0]]=model
@@ -41,7 +42,7 @@ func _ready():
  camera.current=true
  UI.button(UI.panel(self,Vector2(1080,20),Vector2(180,65)),"Settings",func():
   if not busy: options.open())
- var panel=UI.panel(self,Vector2(20,20),Vector2(700,155))
+ var panel=UI.panel(self,Vector2(20,20),Vector2(860,200))
  status=UI.label(panel,"")
  hero_bar=ProgressBar.new()
  panel.add_child(hero_bar)
@@ -62,6 +63,7 @@ func _ready():
  red.set_corner_radius_all(4)
  enemy_bar.add_theme_stylebox_override("fill",red)
  log_label=UI.label(panel,"%s approaches!" % sim.enemy.name)
+ log_label.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
  commands=UI.panel(self,Vector2(20,390),Vector2(350,300))
  main_menu()
  refresh()
@@ -76,7 +78,9 @@ func refresh(snapshot: Dictionary={}):
  var enemy_hp=int(snapshot.get("enemy_hp",sim.enemy_hp))
  hero_bar.value=hp
  enemy_bar.value=enemy_hp
- status.text="Hero HP %s/%s · MP %s/%s\nWolf HP %s · %s HP %s · Round %s" % [hp,sim.stats.max_hp,mp,sim.stats.max_mp,wolf_hp,sim.enemy.name,enemy_hp,sim.turns]
+ status.text="%s HP %s/%s · MP %s/%s\n%s HP %s · %s HP %s · Round %s" % [State.hero.profile.name,hp,sim.stats.max_hp,mp,sim.stats.max_mp,State.companion_name(),wolf_hp,sim.enemy.name,enemy_hp,sim.turns]
+ if sim.demo_rules:
+  status.text+="\n"+str(snapshot.get("statuses",sim.status_summary()))+"\nTurn speeds: hero %s · companion %s · enemy %s" % [sim.stats.speed,sim.companion_speed(),sim.enemy.speed]
 func clear_menu():
  for c in commands.get_children():
   commands.remove_child(c)
@@ -86,9 +90,9 @@ func main_menu():
  clear_menu()
  UI.button(commands,"Attack",func(): act("Attack"))
  UI.button(commands,"Weapon Skills",func(): submenu(["Sword Slash","Shield Bash"]))
- var spells=["Sacred Strike","Hunter's Mark","Thornbind","Regrowth"]
+ var spells=AbilityBook.spells(sim.h).map(func(id): return AbilityBook.name_for(id)) if sim.demo_rules else ["Sacred Strike","Hunter's Mark","Thornbind","Regrowth"]
  var primary: String=State.hero.primary
- if State.can_mythic(primary): spells.append(State.classes[primary].mythic)
+ if not sim.demo_rules and State.can_mythic(primary): spells.append(State.classes[primary].mythic)
  UI.button(commands,"Spells",func(): submenu(spells))
  UI.button(commands,"Items · Potions %s" % sim.h.potions,func(): act("Items"))
  UI.button(commands,"Defend",func(): act("Defend"))
@@ -99,6 +103,7 @@ func submenu(actions: Array):
   var selected: String=action
   var b=UI.button(commands,"%s · %s MP" % [action,sim.cost(action)],func(): act(selected))
   b.disabled=not sim.legal(selected)
+  b.tooltip_text=AbilityBook.entry(selected).get("description","")
  UI.button(commands,"Back",main_menu)
 func companion_menu():
  clear_menu()
@@ -158,11 +163,16 @@ func finish():
  if sim.outcome=="Victory":
   State.reward(true,sim.species)
   State.cleared_until[State.encounter_id]=Time.get_ticks_msec()+45000
+  if State.encounter_id>=300 and State.encounter_id<=302 and not State.hero.demo.field_guards.has(State.encounter_id-300): State.hero.demo.field_guards.append(State.encounter_id-300)
+  if State.encounter_id==1000:
+   State.hero.demo.echo=true
+   State.hero.companion.postgame_unlocked=true
   if sim.species=="mossling":
    var guardian=State.encounter_id-100
    if not State.hero.journey.guards.has(guardian): State.hero.journey.guards.append(guardian)
   if sim.species=="warden":
    State.hero.journey.boss=true
+   State.grant_item("Sunsteel Sword")
    State.hero.equipment.Weapon="Sunsteel Sword"
    Sound.theme_("woodland")
   Sound.cue("victory")
@@ -176,7 +186,10 @@ func finish():
  if sim.outcome=="Victory":
   log_label.text="Victory! +%s XP · +%s gold · %s\n%s" % [sim.enemy.xp,sim.enemy.gold,"Potion found!" if State.hero.potions>previous else "No item drop.","The guardian is free. Bring the living ember to Mira." if sim.species=="warden" else ("The seal is now unguarded. Cleanse it with E." if sim.species=="mossling" else "Normal goblin victories: %s/10" % State.hero.mastery)]
  else: log_label.text="Defeat. Retreat to Willowbrook and press R at camp to recover."
- if sim.species=="warden" and sim.outcome=="Victory":
+ if State.encounter_id==1000 and sim.outcome=="Victory":
+  log_label.text="Warden echo overcome! Your second and final companion bond is unlocked.\nReturn to camp, restore your strength and open Companion [C]."
+  UI.button(commands,"Return to Willowbrook",return_to_adventure)
+ elif sim.species=="warden" and sim.outcome=="Victory":
   UI.button(commands,"Speak to the guardian",func(): dialogue.show_id("boss_win",return_to_adventure))
  else: UI.button(commands,"Continue adventure",return_to_adventure)
 func return_to_adventure():

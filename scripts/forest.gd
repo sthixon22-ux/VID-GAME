@@ -25,6 +25,14 @@ func build(root: Node3D):
   VillageArt.cottage(root,pos)
   obstacles.append(Vector3(pos.x,2.65,pos.z))
  Art.sign_(root,Vector3(-3,1.8,7),"Willowbrook")
+ # Outfitter and board are in the starting clearing, away from house blockers.
+ var merchant=Art.actor("Mira")
+ root.add_child(merchant)
+ merchant.position=Vector3(3.5,0,1)
+ Art.box(root,Vector3(3.5,0.45,0),Vector3(1.6,0.9,0.7),Color("856341"))
+ Art.sign_(root,Vector3(3.5,2.8,1),"OUTFITTER · [E]\nSword · Shield · Armor")
+ Art.box(root,Vector3(0,1.2,5),Vector3(1.8,1.3,0.15),Color("856341"))
+ Art.sign_(root,Vector3(0,2.6,5),"FIELD BOARD · [E]")
  # Campfire, seats, villager and a route marker.
  for i in range(8):
   var angle=i*TAU/8

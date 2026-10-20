@@ -1,0 +1,212 @@
+{
+  "dire_wolf": {
+    "name": "Dire Wolf",
+    "role": "Fast attacker \u00b7 bleed",
+    "attack": 15,
+    "support": 10,
+    "hp": 65,
+    "color": "899eb3",
+    "travel": "Packstride",
+    "travel_multiplier": 1.25,
+    "branches": [
+      {
+        "id": "predator",
+        "name": "Instinct",
+        "description": "Attacks gain +4 power.",
+        "cost": 1
+      },
+      {
+        "id": "guardian",
+        "name": "Guardian",
+        "description": "Maximum HP +15 and stronger Defend protection.",
+        "cost": 1
+      },
+      {
+        "id": "bond",
+        "name": "Bond",
+        "description": "Support restores +6 HP; travel remains equally fast for every companion.",
+        "cost": 1
+      }
+    ],
+    "speed": 17,
+    "synergy_classes": [
+      "ranger"
+    ],
+    "synergy_bonus": 3
+  },
+  "griffin": {
+    "name": "Griffin",
+    "role": "Wind strikes \u00b7 aerial evasion",
+    "attack": 14,
+    "support": 10,
+    "hp": 62,
+    "color": "d7b990",
+    "travel": "Tailwind",
+    "travel_multiplier": 1.25,
+    "branches": [
+      {
+        "id": "predator",
+        "name": "Instinct",
+        "description": "Attacks gain +4 power.",
+        "cost": 1
+      },
+      {
+        "id": "guardian",
+        "name": "Guardian",
+        "description": "Maximum HP +15 and stronger Defend protection.",
+        "cost": 1
+      },
+      {
+        "id": "bond",
+        "name": "Bond",
+        "description": "Support restores +6 HP; travel remains equally fast for every companion.",
+        "cost": 1
+      }
+    ],
+    "speed": 18,
+    "synergy_classes": [
+      "ranger"
+    ],
+    "synergy_bonus": 3
+  },
+  "dragon": {
+    "name": "Dragon",
+    "role": "Fire breath \u00b7 powerful attacker",
+    "attack": 17,
+    "support": 9,
+    "hp": 70,
+    "color": "759b76",
+    "travel": "Emberstride",
+    "travel_multiplier": 1.25,
+    "branches": [
+      {
+        "id": "predator",
+        "name": "Instinct",
+        "description": "Attacks gain +4 power.",
+        "cost": 1
+      },
+      {
+        "id": "guardian",
+        "name": "Guardian",
+        "description": "Maximum HP +15 and stronger Defend protection.",
+        "cost": 1
+      },
+      {
+        "id": "bond",
+        "name": "Bond",
+        "description": "Support restores +6 HP; travel remains equally fast for every companion.",
+        "cost": 1
+      }
+    ],
+    "speed": 11,
+    "synergy_classes": [
+      "druid"
+    ],
+    "synergy_bonus": 3
+  },
+  "warhorse": {
+    "name": "Warhorse",
+    "role": "Charge \u00b7 steadfast protection",
+    "attack": 12,
+    "support": 12,
+    "hp": 80,
+    "color": "a87852",
+    "travel": "Trail gallop",
+    "travel_multiplier": 1.25,
+    "branches": [
+      {
+        "id": "predator",
+        "name": "Instinct",
+        "description": "Attacks gain +4 power.",
+        "cost": 1
+      },
+      {
+        "id": "guardian",
+        "name": "Guardian",
+        "description": "Maximum HP +15 and stronger Defend protection.",
+        "cost": 1
+      },
+      {
+        "id": "bond",
+        "name": "Bond",
+        "description": "Support restores +6 HP; travel remains equally fast for every companion.",
+        "cost": 1
+      }
+    ],
+    "speed": 13,
+    "synergy_classes": [
+      "paladin"
+    ],
+    "synergy_bonus": 3
+  },
+  "spirit_fox": {
+    "name": "Spirit Fox",
+    "role": "Healing \u00b7 cleansing",
+    "attack": 10,
+    "support": 20,
+    "hp": 55,
+    "color": "d3b1e6",
+    "travel": "Spirit step",
+    "travel_multiplier": 1.25,
+    "branches": [
+      {
+        "id": "predator",
+        "name": "Instinct",
+        "description": "Attacks gain +4 power.",
+        "cost": 1
+      },
+      {
+        "id": "guardian",
+        "name": "Guardian",
+        "description": "Maximum HP +15 and stronger Defend protection.",
+        "cost": 1
+      },
+      {
+        "id": "bond",
+        "name": "Bond",
+        "description": "Support restores +6 HP; travel remains equally fast for every companion.",
+        "cost": 1
+      }
+    ],
+    "speed": 16,
+    "synergy_classes": [
+      "druid"
+    ],
+    "synergy_bonus": 3
+  },
+  "golem": {
+    "name": "Golem",
+    "role": "Earth strikes \u00b7 heavy guard",
+    "attack": 13,
+    "support": 10,
+    "hp": 90,
+    "color": "92aa9a",
+    "travel": "Earthward",
+    "travel_multiplier": 1.25,
+    "branches": [
+      {
+        "id": "predator",
+        "name": "Instinct",
+        "description": "Attacks gain +4 power.",
+        "cost": 1
+      },
+      {
+        "id": "guardian",
+        "name": "Guardian",
+        "description": "Maximum HP +15 and stronger Defend protection.",
+        "cost": 1
+      },
+      {
+        "id": "bond",
+        "name": "Bond",
+        "description": "Support restores +6 HP; travel remains equally fast for every companion.",
+        "cost": 1
+      }
+    ],
+    "speed": 8,
+    "synergy_classes": [
+      "paladin"
+    ],
+    "synergy_bonus": 3
+  }
+}

@@ -4,139 +4,310 @@
     "attack": 8,
     "defense": 0,
     "style": "sword",
-    "color": "d4e4ed"
+    "color": "d4e4ed",
+    "id": "iron_sword",
+    "price": 30,
+    "rarity": "Common",
+    "classes": [
+      "Paladin",
+      "Ranger",
+      "Druid"
+    ],
+    "description": "A balanced blade for your first journey.",
+    "weapon_type": "sword"
   },
   "Sunsteel Sword": {
     "slot": "Weapon",
     "attack": 14,
     "defense": 0,
     "style": "sunblade",
-    "color": "f7d786"
+    "color": "f7d786",
+    "id": "sunsteel_sword",
+    "price": 160,
+    "rarity": "Rare",
+    "classes": [
+      "Paladin",
+      "Ranger",
+      "Druid"
+    ],
+    "description": "A rare blade carrying the guardian\u2019s living light.",
+    "weapon_type": "sword"
   },
   "Moonleaf Saber": {
     "slot": "Weapon",
     "attack": 10,
     "defense": 0,
     "style": "saber",
-    "color": "8acbbc"
+    "color": "8acbbc",
+    "id": "moonleaf_saber",
+    "price": 95,
+    "rarity": "Common",
+    "classes": [
+      "Paladin",
+      "Ranger",
+      "Druid"
+    ],
+    "description": "A fine curved sword from the river roads.",
+    "weapon_type": "sword"
   },
   "Oak Shield": {
     "slot": "Shield",
     "attack": 0,
     "defense": 5,
     "style": "round",
-    "color": "9c734e"
+    "color": "9c734e",
+    "id": "oak_shield",
+    "price": 20,
+    "rarity": "Common",
+    "classes": [
+      "Paladin",
+      "Ranger",
+      "Druid"
+    ],
+    "description": "A light shield; required for Shield Bash and block chemistry."
   },
   "Dawn Kite Shield": {
     "slot": "Shield",
     "attack": 0,
     "defense": 7,
     "style": "kite",
-    "color": "527596"
+    "color": "527596",
+    "id": "dawn_kite_shield",
+    "price": 85,
+    "rarity": "Rare",
+    "classes": [
+      "Paladin"
+    ],
+    "description": "A reliable piece of Willowbrook equipment."
   },
   "Grove Shield": {
     "slot": "Shield",
     "attack": 0,
     "defense": 5,
     "style": "leaf",
-    "color": "5c8468"
+    "color": "5c8468",
+    "id": "grove_shield",
+    "price": 65,
+    "rarity": "Common",
+    "classes": [
+      "Paladin",
+      "Ranger",
+      "Druid"
+    ],
+    "description": "A reliable piece of Willowbrook equipment."
   },
   "Steel Cuirass": {
     "slot": "Chest",
     "attack": 0,
     "defense": 6,
     "style": "plate",
-    "color": "99b4c7"
+    "color": "99b4c7",
+    "id": "steel_cuirass",
+    "price": 45,
+    "rarity": "Common",
+    "classes": [
+      "Paladin"
+    ],
+    "description": "Paladin plate. Strong protection, without restricting secondary magic."
   },
   "Leather Vest": {
     "slot": "Chest",
     "attack": 0,
     "defense": 2,
     "style": "leather",
-    "color": "947052"
+    "color": "947052",
+    "id": "leather_vest",
+    "price": 25,
+    "rarity": "Common",
+    "classes": [
+      "Paladin",
+      "Ranger",
+      "Druid"
+    ],
+    "description": "Light armor worn by woodland travelers."
   },
   "Verdant Robe": {
     "slot": "Chest",
     "attack": 0,
     "defense": 4,
     "style": "robe",
-    "color": "547963"
+    "color": "547963",
+    "id": "verdant_robe",
+    "price": 35,
+    "rarity": "Common",
+    "classes": [
+      "Paladin",
+      "Ranger",
+      "Druid"
+    ],
+    "description": "Woven grove cloth, reinforced with bark fiber."
   },
   "Steel Helm": {
     "slot": "Helmet",
     "attack": 0,
     "defense": 2,
     "style": "plate",
-    "color": "a9bdcc"
+    "color": "a9bdcc",
+    "id": "steel_helm",
+    "price": 35,
+    "rarity": "Common",
+    "classes": [
+      "Paladin"
+    ],
+    "description": "A reliable piece of Willowbrook equipment."
   },
   "Ranger Hood": {
     "slot": "Helmet",
     "attack": 0,
     "defense": 2,
     "style": "hood",
-    "color": "577365"
+    "color": "577365",
+    "id": "ranger_hood",
+    "price": 35,
+    "rarity": "Common",
+    "classes": [
+      "Paladin",
+      "Ranger",
+      "Druid"
+    ],
+    "description": "A reliable piece of Willowbrook equipment."
   },
   "Steel Gauntlets": {
     "slot": "Gauntlets",
     "attack": 0,
     "defense": 2,
     "style": "plate",
-    "color": "a4b7c9"
+    "color": "a4b7c9",
+    "id": "steel_gauntlets",
+    "price": 35,
+    "rarity": "Common",
+    "classes": [
+      "Paladin"
+    ],
+    "description": "A reliable piece of Willowbrook equipment."
   },
   "Leather Gloves": {
     "slot": "Gauntlets",
     "attack": 0,
     "defense": 2,
     "style": "leather",
-    "color": "84694b"
+    "color": "84694b",
+    "id": "leather_gloves",
+    "price": 35,
+    "rarity": "Common",
+    "classes": [
+      "Paladin",
+      "Ranger",
+      "Druid"
+    ],
+    "description": "A reliable piece of Willowbrook equipment."
   },
   "Steel Greaves": {
     "slot": "Pants",
     "attack": 0,
     "defense": 2,
     "style": "plate",
-    "color": "9eafbf"
+    "color": "9eafbf",
+    "id": "steel_greaves",
+    "price": 35,
+    "rarity": "Common",
+    "classes": [
+      "Paladin"
+    ],
+    "description": "A reliable piece of Willowbrook equipment."
   },
   "Ranger Trousers": {
     "slot": "Pants",
     "attack": 0,
     "defense": 2,
     "style": "leather",
-    "color": "51695a"
+    "color": "51695a",
+    "id": "ranger_trousers",
+    "price": 35,
+    "rarity": "Common",
+    "classes": [
+      "Paladin",
+      "Ranger",
+      "Druid"
+    ],
+    "description": "A reliable piece of Willowbrook equipment."
   },
   "Steel Sabatons": {
     "slot": "Boots",
     "attack": 0,
     "defense": 2,
     "style": "plate",
-    "color": "9aaebd"
+    "color": "9aaebd",
+    "id": "steel_sabatons",
+    "price": 35,
+    "rarity": "Common",
+    "classes": [
+      "Paladin"
+    ],
+    "description": "A reliable piece of Willowbrook equipment."
   },
   "Trail Boots": {
     "slot": "Boots",
     "attack": 0,
     "defense": 2,
     "style": "leather",
-    "color": "7c6247"
+    "color": "7c6247",
+    "id": "trail_boots",
+    "price": 35,
+    "rarity": "Common",
+    "classes": [
+      "Paladin",
+      "Ranger",
+      "Druid"
+    ],
+    "description": "A reliable piece of Willowbrook equipment."
   },
   "Sunstone Pendant": {
     "slot": "Accessory",
     "attack": 0,
     "defense": 2,
     "style": "gem",
-    "color": "e9cb78"
+    "color": "e9cb78",
+    "id": "sunstone_pendant",
+    "price": 35,
+    "rarity": "Common",
+    "classes": [
+      "Paladin",
+      "Ranger",
+      "Druid"
+    ],
+    "description": "A reliable piece of Willowbrook equipment."
   },
   "Moonleaf Charm": {
     "slot": "Accessory",
     "attack": 0,
     "defense": 2,
     "style": "leaf",
-    "color": "79b4a1"
+    "color": "79b4a1",
+    "id": "moonleaf_charm",
+    "price": 35,
+    "rarity": "Common",
+    "classes": [
+      "Paladin",
+      "Ranger",
+      "Druid"
+    ],
+    "description": "A reliable piece of Willowbrook equipment."
   },
   "Leather Gear": {
     "slot": "Any",
     "attack": 0,
     "defense": 2,
     "style": "leather",
-    "color": "81694e"
+    "color": "81694e",
+    "id": "leather_gear",
+    "price": 35,
+    "rarity": "Common",
+    "classes": [
+      "Paladin",
+      "Ranger",
+      "Druid"
+    ],
+    "description": "A reliable piece of Willowbrook equipment."
   }
 }

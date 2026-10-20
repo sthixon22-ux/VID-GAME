@@ -80,7 +80,8 @@ static func roots(host: Node3D, point: Vector3, count: int=9):
   tween.tween_callback(thorn.queue_free)
 static func present(host: Node3D, actor: Node3D, target: Node3D, label: String) -> float:
  var duration=0.95
- if actor.has_method("play_action"): duration=actor.play_action(label)
+ if actor.has_method("play_action") and (STYLES.has(label) or label in ["Victory","Defeat"]): duration=actor.play_action(label)
+ elif not STYLES.has(label): duration=0.4
  var origin=actor.position
  var forward=(target.position-origin).normalized() if actor!=target else Vector3.ZERO
  var body=actor.get_node_or_null("Body")
@@ -164,6 +165,10 @@ static func present(host: Node3D, actor: Node3D, target: Node3D, label: String) 
   "Goblin club":
    for i in range(8): mote(host,point+Vector3.UP,point+Vector3(sin(i),1.5,cos(i)),Color("c9ad85"),0.45)
   _:
-   if label.begins_with("Branches coil"):
+   if label.contains(" · ") and actor!=target:
+    var color_=Color("e6b575") if label.contains("Ember") else (Color("b4e8ee") if label.contains("Wind") else Color("b8d8b0"))
+    for i in range(6): mote(host,actor.position+Vector3.UP,point+Vector3(sin(i)*0.3,1.1,cos(i)*0.3),color_,0.3,0.13)
+    arc(host,point+Vector3.UP,color_,false)
+   elif label.begins_with("Branches coil"):
     ring(host,actor.position+Vector3.UP*0.1,Color("e8ae7c"),1.5)
  return duration

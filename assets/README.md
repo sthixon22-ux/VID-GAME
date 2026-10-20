@@ -33,3 +33,6 @@ Verdant Oath combines original work with free CC0 asset packs. All required file
 - Procedural wolf, goblin, Mossling, Warden, foliage and battle effects are project geometry/code.
 
 Run `python tools/generate_assets.py` to regenerate the original textures, portraits and audio (Pillow and numpy required). This does not download or replace the CC0 vendor packs. Godot requires only the checked-in assets. Music remains a synthesized demo score, and there is no voice acting.
+
+
+Demo 0.6 adds original procedural companion variants (Dire Wolf, Griffin, Dragon, Warhorse, Spirit Fox and Golem) in `scripts/companion_visual.gd` and a custom hero palette shader in `assets/shaders/hero_palette.gdshader`. These use original geometry or the existing original wolf geometry and retain the existing CC0 KayKit character textures for hero customization. No additional third-party assets or paid textures are required.

@@ -1,0 +1,19 @@
+[
+  {
+    "id": "guardian_of_the_wild",
+    "name": "Guardian of the Wild",
+    "classes": [
+      "paladin",
+      "ranger",
+      "druid"
+    ],
+    "trigger": "shield_block",
+    "consumers": [
+      "hunters_mark",
+      "regrowth"
+    ],
+    "bonus": 10,
+    "duration": 3,
+    "description": "Blocking with a shield primes a nature blessing for three rounds. The next Hunter\u2019s Mark gains +10 damage, or Regrowth gains +10 immediate healing. The blessing is consumed once."
+  }
+]

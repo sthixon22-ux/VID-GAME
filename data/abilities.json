@@ -1,0 +1,109 @@
+{
+  "attack": {
+    "name": "Attack",
+    "kind": "attack",
+    "mp": 0,
+    "effect": "damage",
+    "power": 0,
+    "description": "A basic weapon strike. Unarmed attacks are weaker."
+  },
+  "sword_slash": {
+    "name": "Sword Slash",
+    "kind": "weapon",
+    "mp": 0,
+    "effect": "damage",
+    "power": 5,
+    "weapon": "sword",
+    "description": "A sweeping sword strike. Requires a sword."
+  },
+  "shield_bash": {
+    "name": "Shield Bash",
+    "kind": "weapon",
+    "mp": 2,
+    "effect": "bash",
+    "power": 2,
+    "shield": true,
+    "chance": 0.45,
+    "description": "Shield strike. 45% chance to stun for one turn; raises your guard."
+  },
+  "sacred_strike": {
+    "name": "Sacred Strike",
+    "kind": "spell",
+    "mp": 7,
+    "effect": "damage",
+    "power": 13,
+    "class_id": "paladin",
+    "description": "A radiant single-target sword-and-spirit strike."
+  },
+  "hunters_mark": {
+    "name": "Hunter's Mark",
+    "kind": "spell",
+    "mp": 4,
+    "effect": "mark",
+    "power": 0,
+    "class_id": "ranger",
+    "duration": 3,
+    "description": "Mark for three rounds; all allies deal +6 damage. Triggers a primed nature blessing."
+  },
+  "thornbind": {
+    "name": "Thornbind",
+    "kind": "spell",
+    "mp": 6,
+    "effect": "root",
+    "power": 0,
+    "class_id": "druid",
+    "chance": 0.75,
+    "description": "Nature damage. 75% chance to root for one enemy turn."
+  },
+  "regrowth": {
+    "name": "Regrowth",
+    "kind": "spell",
+    "mp": 8,
+    "effect": "regrowth",
+    "power": 15,
+    "class_id": "druid",
+    "duration": 3,
+    "description": "Restore 15 HP now, then 12 HP at the end of each of the next three rounds. Recasting refreshes it."
+  },
+  "dawn_avatar": {
+    "name": "Dawn Avatar",
+    "kind": "mythic",
+    "mp": 15,
+    "effect": "damage",
+    "power": 32,
+    "class_id": "paladin",
+    "description": "Paladin mythic; only usable with Paladin primary and its mythic node learned."
+  },
+  "wild_hunt": {
+    "name": "Wild Hunt",
+    "kind": "mythic",
+    "mp": 15,
+    "effect": "damage",
+    "power": 32,
+    "class_id": "ranger",
+    "description": "Ranger mythic; only usable with Ranger primary and its mythic node learned."
+  },
+  "ancient_grove": {
+    "name": "Ancient Grove",
+    "kind": "mythic",
+    "mp": 15,
+    "effect": "heal",
+    "power": 75,
+    "class_id": "druid",
+    "description": "Druid mythic; only usable with Druid primary and its mythic node learned."
+  },
+  "items": {
+    "name": "Items",
+    "kind": "item",
+    "mp": 0,
+    "effect": "potion",
+    "description": "Use one owned potion to restore up to 45 HP."
+  },
+  "defend": {
+    "name": "Defend",
+    "kind": "defend",
+    "mp": 0,
+    "effect": "guard",
+    "description": "Halve incoming damage this round. With a shield, a block primes Guardian of the Wild."
+  }
+}

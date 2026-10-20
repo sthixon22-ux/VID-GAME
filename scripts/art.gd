@@ -41,7 +41,7 @@ static func shape(parent: Node3D, pos: Vector3, scale_: Vector3, color: Color, k
  parent.add_child(mesh)
  return mesh
 static func actor(kind: String, gear: Dictionary={}) -> Node3D:
- if kind=="Hero": return load("res://scripts/hero_visual.gd").new(gear)
+ if kind=="Hero": return load("res://scripts/hero_visual.gd").new(gear,State.hero.get("profile",{}))
  if kind=="Mira":
   var npc=load("res://scripts/hero_visual.gd").new({"Chest":"Leather Vest","Weapon":"Iron Sword","Shield":"None"})
   npc.find_child("EquippedWeapon",true,false).hide()

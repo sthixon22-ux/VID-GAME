@@ -27,13 +27,13 @@ var locked_pose=false
 var guarding=false
 var last_action=""
 var current_motion=""
-func _init(equipment: Dictionary={}):
+func _init(equipment: Dictionary={}, appearance: Dictionary={}):
  gear=equipment.duplicate(true)
  body=Node3D.new()
  body.name="Body"
  add_child(body)
  var outfit="Knight"
- if gear.get("Chest")=="Leather Vest": outfit="Rogue"
+ if gear.get("Chest")=="Leather Vest" or gear.get("Chest")=="None": outfit="Rogue"
  elif gear.get("Chest")=="Verdant Robe": outfit="Mage"
  model=load("res://assets/vendor/kaykit/%s.glb" % outfit).instantiate()
  body.add_child(model)
@@ -48,7 +48,7 @@ func _init(equipment: Dictionary={}):
  var weapon=source.find_child("1H_Sword",true,false).duplicate()
  var sword_name: String=gear.get("Weapon","Iron Sword")
  weapon.name="EquippedWeapon"
- weapon.visible=true
+ weapon.visible=sword_name!="None"
  var sword_color=Color(State.equipment_data.get(sword_name,{}).get("color","d4e4ed"))
  if sword_name!="Iron Sword": tint(weapon,sword_color)
  if sword_name=="Moonleaf Saber": weapon.scale*=Vector3(0.75,1.08,0.75)
@@ -81,6 +81,24 @@ func _init(equipment: Dictionary={}):
    elif slot=="Boots": piece=Art.box(attachment,Vector3(0,0.02,0.08),Vector3(0.22,0.2,0.36),color_)
    else: piece=Art.shape(attachment,Vector3(0,0.08,0),Vector3(0.23,0.28,0.23),color_,"cylinder")
    piece.name="Equipped"+slot+bone.replace(".","_")
+ if not appearance.is_empty():
+  var skins=[Color("f3c59f"),Color("b67b56"),Color("70452f")]
+  var hairs=[Color("473028"),Color("d1ad68"),Color("b9c3d2")]
+  var dyes=[Color("496f98"),Color("65865b"),Color("a05e68")]
+  for mesh in model.find_children("*","MeshInstance3D",true,false):
+   if mesh.get_parent() is BoneAttachment3D: continue
+   var material=ShaderMaterial.new()
+   material.shader=load("res://assets/shaders/hero_palette.gdshader")
+   material.set_shader_parameter("palette",load("res://assets/vendor/kaykit/%s_%s_texture.png" % [outfit,outfit.to_lower()]))
+   material.set_shader_parameter("skin_tone",skins[int(appearance.get("skin",0))])
+   material.set_shader_parameter("hair_tone",hairs[int(appearance.get("hair",0))])
+   material.set_shader_parameter("cloth_tone",dyes[int(appearance.get("dye",0))])
+   material.set_shader_parameter("head",str(mesh.name).ends_with("Head"))
+   material.set_shader_parameter("plain_clothes",gear.get("Chest")=="None")
+   mesh.material_override=material
+  if gear.get("Chest")=="None":
+   var cape=model.find_child("Rogue_Cape",true,false)
+   if cape: cape.hide()
  source.free()
  for clip in player.get_animation_list():
   var animation=player.get_animation(clip)
