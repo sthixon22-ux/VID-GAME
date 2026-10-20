@@ -30,3 +30,19 @@ static func build(family: String, color_: Color) -> Node3D:
   Art.box(root,Vector3(0,0.1,0),Vector3(0.35,0.06,0.1),Color("d0ae70"))
   Art.box(root,Vector3(0,-0.06,0),Vector3(0.1,0.3,0.1),wood)
  return root
+
+static func item(item_name: String) -> Node3D:
+ var entry: Dictionary=State.equipment_data[item_name]
+ if entry.weapon_type!="sword": return build(entry.weapon_type,Color(entry.color))
+ var source=load("res://assets/vendor/kaykit/Knight.glb").instantiate()
+ var weapon: MeshInstance3D=source.find_child("1H_Sword",true,false).duplicate()
+ source.free()
+ if item_name!="Iron Sword":
+  var material=StandardMaterial3D.new()
+  material.albedo_color=Color(entry.color)
+  material.metallic=0.4
+  material.roughness=0.35
+  weapon.material_override=material
+ if item_name=="Moonleaf Saber": weapon.scale*=Vector3(0.75,1.08,0.75)
+ weapon.show()
+ return weapon

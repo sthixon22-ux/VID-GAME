@@ -163,7 +163,7 @@ HP %s/%s · MP %s/%s · Gold %s · Mastery %s/10
  if State.hero.exploration.quest_done: goal="Enter the shrine beyond Sunstream"
  if State.hero.journey.boss: goal="Return to Mira with the living ember"
  if State.hero.journey.finished: goal="Choose your permanent companion [C]" if State.hero.companion.owned.is_empty() else "Adventure complete · Optional village board challenge"
- if State.hero.profile.economy and not State.starter_ready(): goal="Buy & equip a starter kit: outfitter east of camp"
+ if State.hero.profile.economy and not State.starter_ready(): goal="Buy a weapon: outfitter east of camp"
  objective.text="THE BELL BENEATH THE WOODS\n%s\nRoot seals: %s/2" % [goal,State.hero.journey.seals.size()]
  prompt.text=context_prompt()
 func animate_actor(model: Node3D, moving: bool):
@@ -299,11 +299,8 @@ func refresh_menu():
 
 func ready_for_trail() -> bool:
  if not State.hero.profile.economy: return true
- if not State.hero.journey.started:
-  message="Speak to Mira beside the camp before setting out."
-  return false
  if not State.starter_ready():
-  message="Visit the outfitter near camp. Buy AND equip compatible gear first (Monk-trained heroes may fight unarmed)."
+  message="Buy a weapon from the outfitter near camp to start fighting. Armor and speaking to Mira are optional."
   return false
  if State.hero.hp<=0:
   message="Return to camp and press R to recover."
@@ -315,7 +312,8 @@ func show_board():
   child.queue_free()
  board.get_parent().get_parent().show()
  UI.label(board,"WILLOWBROOK FIELD BOARD").add_theme_font_size_override("font_size",24)
- UI.label(board,"First steps: buy your kit, spend skill points [K], speak to Mira.
+ UI.label(board,"Buy a weapon to fight. Armor is optional.
+For the story: speak to Mira. Spend skill points [K] whenever you wish.
 Defend halves damage. Paladin + Ranger + Druid: shield blocks prime class chemistry.
 Gather Moonleaf, return to Mira, then enter the sanctuary.
 After the guardian: return to Mira and choose a companion [C].")

@@ -9,6 +9,8 @@ var body: Control
 var preview: SubViewport
 var preview_root: Node3D
 var preview_actor: Node3D
+var shop_preview: WeaponPreview
+var shop_info: Label
 var graph: SkillGraph
 var info: VBoxContainer
 var point_label: Label
@@ -44,6 +46,8 @@ func clear_body():
  for child in body.get_children():
   body.remove_child(child)
   child.queue_free()
+ shop_preview=null
+ shop_info=null
  preview_actor=null
  preview=null
  graph=null
@@ -207,13 +211,14 @@ func paragraph(parent: Node, text: String):
 func build_shop():
  var left=content_panel(Vector2(20,0),Vector2(390,565))
  UI.label(left,"WILLOWBROOK OUTFITTER").add_theme_font_size_override("font_size",23)
- paragraph(left,"Buy compatible gear before taking the northern trail. Your three classes grant weapon proficiencies; your primary class controls heavy armor. Monk-trained heroes may fight unarmed. Shields are optional. Purchases are permanent and equipping costs nothing.")
- paragraph(left,"120-gold starter budget.\nPick a compatible weapon and chest armor.\nLeather 25 / Robe 35 / Plate 45.\nPlate: Warrior or Paladin primary.\n\nYour proficiencies: "+", ".join(State.proficiencies()))
- UI.label(left,"Gold available: %s" % State.hero.gold)
- UI.label(left,"Starter funds are reserved until each essential slot is owned.")
+ paragraph(left,"Buy a weapon to start fighting. Armor and speaking to Mira are optional. Weapon access combines your primary and both secondary classes.")
+ shop_preview=WeaponPreview.new()
+ left.add_child(shop_preview)
+ shop_info=UI.label(left,"Hover over a weapon to preview it · keyboard focus also works")
+ UI.label(left,"Gold: %s · funds reserved only for your first weapon" % State.hero.gold)
  UI.button(left,"Potion · 8 gold",func():
   State.buy_potion()
-  show_page("shop")).disabled=State.hero.gold<8 or (State.hero.profile.economy and not State.starter_ready())
+  show_page("shop")).disabled=not State.can_buy_potion()
  UI.button(left,"View equipped gear",func(): show_page("equipment"))
  UI.button(left,"Return to village",leave)
  var right=content_panel(Vector2(430,0),Vector2(830,565))
@@ -229,6 +234,23 @@ func build_shop():
    show_page("shop"))
   button.disabled=not compatible or (not owned and not State.can_buy(item))
   button.tooltip_text=entry.description+" · "+entry.rarity
+  if entry.slot=="Weapon":
+   button.mouse_entered.connect(func(): preview_shop_weapon(item))
+   button.focus_entered.connect(func(): preview_shop_weapon(item))
+ if State.hero.equipment.Weapon!="None": preview_shop_weapon(State.hero.equipment.Weapon)
+ else:
+  for item in State.equipment_data:
+   if State.equipment_data[item].slot=="Weapon" and State.compatible(item):
+    preview_shop_weapon(item)
+    break
+func preview_shop_weapon(item: String):
+ if not is_instance_valid(shop_preview): return
+ shop_preview.show_item(item)
+ var entry: Dictionary=State.equipment_data[item]
+ var sources:Array=[]
+ for class_ in State.active_classes():
+  if State.classes[class_].proficiencies.has(entry.weapon_type): sources.append(class_)
+ shop_info.text="%s · %s gold\n%s\n%s" % [item,int(entry.price),GameRules.summary(entry,true),"Usable through: "+", ".join(sources) if not sources.is_empty() else "Not usable by your current class combination"]
 func build_weapons():
  var heading=content_panel(Vector2(20,0),Vector2(1240,82))
  var row=HBoxContainer.new()
@@ -329,7 +351,7 @@ func build_journal():
  UI.label(left,"THE BELL BENEATH THE WOODS").add_theme_font_size_override("font_size",23)
  var journey=State.hero.journey
  var steps=[
-  [State.starter_ready(),"Buy and equip a compatible starter kit at the outfitter"],
+  [State.starter_ready(),"Buy a weapon at the outfitter"],
   [journey.started,"Speak to Mira beside the camp"],
   [State.hero.exploration.herbs.size()==3,"Gather three Moonleaf sprigs along the northern trail"],
   [State.hero.exploration.quest_done,"Return the Moonleaf to Mira"],

@@ -268,7 +268,7 @@ func buy(item: String) -> bool:
  save_game()
  return true
 func buy_potion() -> bool:
- if hero.gold<8 or (hero.profile.economy and not starter_ready()): return false
+ if not can_buy_potion(): return false
  hero.gold-=8
  hero.potions+=1
  save_game()
@@ -333,19 +333,22 @@ func restore_companion():
  if not record.is_empty(): record.hp=companion_max_hp()
 
 func starter_ready() -> bool:
- return hero.equipment.Chest!="None" and (hero.equipment.Weapon!="None" or proficiencies().has("unarmed"))
+ # Owning a weapon is the only opening combat requirement; armor and quests are optional.
+ for item in equipment_data:
+  if equipment_data[item].slot=="Weapon" and owns(item): return true
+ return false
+func weapon_reserve() -> int:
+ if starter_ready(): return 0
+ var cheapest=100000
+ for item in equipment_data:
+  if equipment_data[item].slot=="Weapon" and compatible(item):
+   cheapest=mini(cheapest,int(equipment_data[item].price))
+ return cheapest
+func can_buy_potion() -> bool:
+ return int(hero.gold)>=8+weapon_reserve()
 func can_buy(item: String) -> bool:
  if not equipment_data.has(item) or owns(item) or not compatible(item): return false
- var reserve=0
- for slot in ["Weapon","Chest"]:
-  if equipment_data[item].slot==slot or (slot=="Weapon" and proficiencies().has("unarmed")): continue
-  var slot_owned=false
-  var cheapest=100000
-  for gear in equipment_data:
-   if equipment_data[gear].slot!=slot or not compatible(gear): continue
-   cheapest=mini(cheapest,int(equipment_data[gear].price))
-   if owns(gear): slot_owned=true
-  if not slot_owned: reserve+=cheapest
+ var reserve=0 if equipment_data[item].slot=="Weapon" else weapon_reserve()
  return int(hero.gold)>=int(equipment_data[item].price)+reserve
 func award_gold(base: int, source: String="Quest") -> Dictionary:
  var roll=GameRules.gold_roll(base,int(stats().dexterity),int(hero.seed))

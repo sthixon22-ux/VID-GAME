@@ -1,6 +1,6 @@
 # Verdant Oath — The Bell Beneath the Woods
 
-**Demo 0.7.1 · Godot 4.6+ · GDScript · CC0 assets + original art/story/effects**
+**Demo 0.7.2 · Godot 4.6+ · GDScript · CC0 assets + original art/story/effects**
 
 A short 3D turn-based fantasy adventure built around the Project Mythic overview: create a hero, choose classes, buy your first equipment, help Willowbrook, cleanse the sanctuary and choose a permanent companion. **15–20 minutes is the intended first-play target, not a measured guarantee.** This is a playable release candidate; production art and human playtesting remain unfinished.
 
@@ -12,6 +12,10 @@ A short 3D turn-based fantasy adventure built around the Project Mythic overview
 4. Choose **New adventure** to experience the new creation/shop progression. Your old save is backed up before a new adventure starts. **Continue adventure** preserves an existing character and its old progress/balance; it does not strip equipment to recreate the new opening.
 
 The internal application name remains unchanged so Godot finds the existing user-data directory. No paid assets, online accounts, external services or plugins are required. This is a desktop Godot project, not a browser build.
+
+## 0.7.2 opening freedom and shop previews
+
+Weapon proficiencies combine all three chosen classes. Owning a purchased weapon unlocks ordinary and Moonleaf-guard battles immediately: no Mira conversation, armor or mandatory equipped slot. The shop still equips purchases automatically. Only the cheapest compatible first weapon's price is protected from optional purchases, preventing a shopping dead end. Hover or keyboard-focus a weapon for its rotating 3D model, stats, price and the classes that grant access. Existing saves work without a reset.
 
 ## 0.7.1 display fix
 
@@ -41,7 +45,7 @@ Settings are available from the title, exploration menu and idle battle screen: 
 ## Your first adventure
 
 - **Create your hero before entering the world.** Enter a name, choose a primary class plus two distinct secondaries, and select skin, hair and travel-clothes colors. All twelve overview classes are selectable. Each has distinct HP, MP, attack, defense, agility and dexterity baselines/growth; the two secondaries add abilities, learned passives and weapon proficiencies. Only a learned primary-class mythic can be used.
-- **Start unequipped.** Travel clothes provide no armor stats. You have 120 gold and three potions. Visit the marked **OUTFITTER east of camp** and buy/equip a compatible weapon and chest piece: Leather Vest (25), Verdant Robe (35) or Warrior/Paladin Steel Cuirass (45). The shop offers swords, axes, bows, daggers, staves and other weapon families. Shields are optional; Monk-trained heroes may fight unarmed. Purchases remain owned; equipment changes are free. Essential starter funds are reserved to prevent a shopping dead end.
+- **Start unequipped.** Travel clothes provide no armor stats. You have 120 gold and three potions. Visit the marked **OUTFITTER east of camp** and buy a compatible weapon. You can fight immediately, before talking to Mira and without buying armor. Optional chest pieces: Leather Vest (25), Verdant Robe (35) or Warrior/Paladin Steel Cuirass (45). The shop offers swords, axes, bows, daggers, staves and other weapon families. Armor and shields are optional; buying any weapon unlocks combat, including for Monk-trained heroes who prefer to fight unarmed. Purchases remain owned; equipment changes are free. Only the cost of your first compatible weapon is reserved to prevent a shopping dead end.
 - **Speak to Mira beside camp.** Follow the northern trail to the three purple Moonleaf plants, defeat each visible guard, then interact again to gather. Check the journal and spend skill points in the class/weapon pages. Normal victories grant XP, gold, drop rolls and separate class/weapon mastery.
 - **Return the plants to Mira.** Cross the eastern bridge, enter the shrine and explore both sanctuary side chambers. Defeat each Mossling, then cleanse its root seal. The pilgrim's cache supplies potions and restores the party.
 - **Face the Hollow Warden.** When branches coil, choose **Defend** against the next charged blow. Restore the guardian, then return the living ember to Mira.
@@ -100,3 +104,5 @@ Core separation: `combat.gd` contains deterministic rules; `ability_book.gd`/`da
 The game needs a timed Windows playtest without developer shortcuts, audio listening, difficulty/pacing feedback and accessibility/controller review. Art quality is mixed: the hero/Mira use CC0 KayKit rigs and cottages use Quaternius textures/models, while creatures and companion animation remain simpler original geometry; overlays are basic, terrain is flat, following can cut corners and camera blockers approximate meshes. Character creation changes name/colors, not body shape or facial features. Portraits do not dynamically match appearance.
 
 The demo implements twelve functional introductory classes, six companion choices, extended class/weapon trees, one quest/dungeon/boss and a reused boss echo. It does not include a level-50 quest campaign or final full spell libraries. Crafting, selling, armor sets, multi-enemy battles, mounted/flight traversal, voice acting and full-game postgame content remain future work. Every permanent companion currently receives an equal movement blessing rather than a ride animation. The UI targets a 1280×720 desktop layout. These limits prevent calling this a finished production release despite the expanded playable systems.
+
+Shop weapons have rotating 3D previews on hover or keyboard focus, including unaffordable or incompatible items. The preview identifies which of your three classes grants access and never changes your equipment.

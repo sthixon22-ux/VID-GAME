@@ -120,7 +120,11 @@ func run():
  State.create_hero("Reserve","Paladin",0,0,0)
  check(State.buy("Steel Helm"),"Optional purchase allowed when starter funds remain")
  State.buy("Steel Gauntlets")
- check(not State.buy("Trail Boots") and not State.buy_potion(),"Starter reserve prevents spending essential equipment money")
+ check(not State.buy("Trail Boots"),"Starter reserve protects the first weapon budget")
+ var previous_gold=State.hero.gold
+ State.hero.gold=25
+ check(not State.buy_potion(),"Potions cannot spend reserved weapon funds")
+ State.hero.gold=previous_gold
  for item in ["Oak Staff","Leather Vest"]:
   check(State.buy(item),"Reserved budget still buys essential equipment: "+item)
  # All six companion definitions have a functioning model and three combat behaviors.
