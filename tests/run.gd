@@ -54,12 +54,37 @@ func run():
  await get_tree().process_frame
  world.refresh_menu()
  check(world.goblins.size()==3,"Forest scene starts with visible encounters")
+ check(not world.forest.can_walk(Vector3(12,0,0)) and world.forest.can_walk(Vector3(12,0,-12)),"Stream blocks movement except at the bridge")
+ check(not world.forest.can_walk(Vector3(-7,0,5)),"Village houses block movement")
+ for herb in world.forest.herbs:
+  world.hero.position=herb.position
+  world.interact()
+ check(state.hero.exploration.herbs.size()==3,"Three distinct Moonleaf plants can be gathered")
+ var potions=state.hero.potions
+ world.interact()
+ check(state.hero.potions==potions,"Gathered herb cannot reward twice")
+ world.hero.position=Vector3(-2.6,0,-0.8)
+ var gold=state.hero.gold
+ world.interact()
+ check(state.hero.exploration.quest_done and state.hero.gold==gold+60,"Mira completes the herb quest and awards gold")
+ world.interact()
+ check(state.hero.gold==gold+60,"Completed quest cannot reward twice")
+ world.hero.position=Vector3(24,0,-12)
+ world.interact()
+ check(state.hero.exploration.shrine and state.hero.gold==gold+90,"Shrine discovery grants a one-time reward")
+ world.interact()
+ check(state.hero.gold==gold+90,"Shrine cannot reward twice")
+ state.save_game()
+ state.reset()
+ state.load_game()
+ check(state.hero.exploration.quest_done and state.hero.exploration.herbs.size()==3,"Exploration progress survives save/load")
  world.hero.position=world.goblins[0].position
  world.encounter(true)
  check(world.message.contains("10 normal"),"Exploration blocks auto before mastery")
  state.hero.mastery=10
  world.encounter(true)
  check(world.message.contains("Auto:"),"Exploration resolves auto without battle scene")
+ check(not world.goblins[state.encounter_id].visible or state.cleared_until.has(state.encounter_id),"Auto victory starts encounter respawn cooldown")
  world.queue_free()
  await get_tree().process_frame
  state.hero=original.duplicate(true)

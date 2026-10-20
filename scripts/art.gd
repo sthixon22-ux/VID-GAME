@@ -11,36 +11,121 @@ static func box(parent: Node3D, pos: Vector3, size: Vector3, color: Color) -> Me
  mesh.material_override=material
  parent.add_child(mesh)
  return mesh
+static func shape(parent: Node3D, pos: Vector3, scale_: Vector3, color: Color, kind: String="sphere") -> MeshInstance3D:
+ var mesh=MeshInstance3D.new()
+ if kind=="cone":
+  var cone=CylinderMesh.new()
+  cone.top_radius=0.0
+  cone.bottom_radius=0.5
+  cone.height=1.0
+  cone.radial_segments=7
+  mesh.mesh=cone
+ elif kind=="cylinder":
+  var cylinder=CylinderMesh.new()
+  cylinder.top_radius=0.5
+  cylinder.bottom_radius=0.5
+  cylinder.height=1.0
+  cylinder.radial_segments=8
+  mesh.mesh=cylinder
+ else:
+  var sphere=SphereMesh.new()
+  sphere.radial_segments=10
+  sphere.rings=5
+  mesh.mesh=sphere
+ mesh.position=pos
+ mesh.scale=scale_
+ var material=StandardMaterial3D.new()
+ material.albedo_color=color
+ material.roughness=0.85
+ mesh.material_override=material
+ parent.add_child(mesh)
+ return mesh
 static func actor(kind: String, gear: Dictionary={}) -> Node3D:
  var root=Node3D.new()
+ var body=Node3D.new()
+ body.name="Body"
+ root.add_child(body)
  if kind=="Wolf":
-  box(root,Vector3(0,0.5,0),Vector3(0.6,0.6,1.1),Color.SLATE_GRAY)
-  box(root,Vector3(0,0.8,-0.6),Vector3(0.5,0.5,0.5),Color.LIGHT_SLATE_GRAY)
-  for x in [-0.2,0.2]:
-   for z in [-0.35,0.35]: box(root,Vector3(x,0.2,z),Vector3(0.15,0.4,0.15),Color.SLATE_GRAY)
+  shape(body,Vector3(0,0.65,0),Vector3(0.65,0.65,1.25),Color("798ba0"))
+  shape(body,Vector3(0,0.95,-0.58),Vector3(0.52,0.55,0.55),Color("a1b3c4"))
+  shape(body,Vector3(0,0.8,-0.9),Vector3(0.32,0.25,0.45),Color("d7e0df"))
+  for x in [-0.19,0.19]:
+   shape(body,Vector3(x,1.26,-0.57),Vector3(0.2,0.4,0.22),Color("617487"),"cone")
+   shape(body,Vector3(x,0.99,-0.81),Vector3(0.07,0.08,0.04),Color("f8d878"))
+   for z in [-0.35,0.35]:
+    shape(body,Vector3(x,0.27,z),Vector3(0.17,0.55,0.18),Color("738499"),"cylinder")
+  var tail=shape(body,Vector3(0,0.8,0.75),Vector3(0.25,0.3,0.8),Color("a1b3c4"))
+  tail.rotation.x=-0.5
  else:
   var goblin=kind=="Goblin"
-  var chest=Color.SADDLE_BROWN if goblin else (Color.STEEL_BLUE if gear.get("Chest","")=="Steel Cuirass" else Color.DARK_OLIVE_GREEN)
-  box(root,Vector3(0,0.95,0),Vector3(0.65,0.8,0.4),chest)
-  box(root,Vector3(0,1.6,0),Vector3(0.48,0.48,0.45),Color.YELLOW_GREEN if goblin else Color.BISQUE)
-  for x in [-0.2,0.2]: box(root,Vector3(x,0.3,0),Vector3(0.25,0.6,0.3),Color.DARK_SLATE_GRAY)
+  var skin=Color("83ad50") if goblin else Color("edbd91")
+  var armor=Color("794e3a") if goblin else (Color("7798b4") if gear.get("Chest")=="Steel Cuirass" else Color("647944"))
+  var cloak=box(body,Vector3(0,0.97,0.22),Vector3(0.62,1.0,0.08),Color("773e50"))
+  cloak.rotation.x=-0.12
+  shape(body,Vector3(0,1.02,0),Vector3(0.77,0.86,0.48),armor)
+  box(body,Vector3(0,0.73,-0.01),Vector3(0.66,0.13,0.46),Color("674633"))
+  box(body,Vector3(0,0.73,-0.26),Vector3(0.15,0.14,0.05),Color("d9b766"))
+  shape(body,Vector3(0,1.69,0),Vector3(0.58,0.61,0.52),skin)
+  shape(body,Vector3(0,1.92,0.06),Vector3(0.61,0.3,0.53),Color("334334") if goblin else Color("684734"))
+  for x in [-1,1]:
+   box(body,Vector3(x*0.13,1.72,-0.255),Vector3(0.08,0.1,0.035),Color("282d36"))
+   shape(body,Vector3(x*0.44,1.16,0),Vector3(0.27,0.35,0.37),armor)
+   shape(body,Vector3(x*0.46,0.89,0),Vector3(0.21,0.43,0.23),skin,"cylinder")
+   shape(body,Vector3(x*0.19,0.36,0),Vector3(0.24,0.65,0.27),Color("394b60"),"cylinder")
+   box(body,Vector3(x*0.19,0.12,-0.08),Vector3(0.27,0.24,0.42),Color("473f3b"))
+   if goblin:
+    var ear=shape(body,Vector3(x*0.35,1.75,0),Vector3(0.25,0.45,0.18),skin,"cone")
+    ear.rotation.z=x*-0.9
   if goblin:
-   box(root,Vector3(-0.6,0.9,0),Vector3(0.18,0.9,0.18),Color.SADDLE_BROWN)
+   shape(body,Vector3(-0.57,0.9,-0.15),Vector3(0.13,0.85,0.13),Color("654532"),"cylinder")
+   shape(body,Vector3(-0.57,1.45,-0.15),Vector3(0.32,0.45,0.32),Color("635e60"))
   else:
-   box(root,Vector3(-0.55,1,0),Vector3(0.12,1.15,0.15),Color.SILVER if gear.get("Weapon")=="Iron Sword" else Color.GOLD)
-   if gear.get("Shield","None")!="None": box(root,Vector3(0.55,0.95,0),Vector3(0.4,0.65,0.15),Color.PERU)
+   box(body,Vector3(-0.58,1.18,-0.12),Vector3(0.12,0.93,0.06),Color("d8e7ec") if gear.get("Weapon")=="Iron Sword" else Color("ffe49b"))
+   box(body,Vector3(-0.58,0.74,-0.12),Vector3(0.38,0.07,0.12),Color("d9b766"))
+   if gear.get("Shield","None")!="None":
+    shape(body,Vector3(0.57,1,-0.12),Vector3(0.58,0.73,0.14),Color("d9b766"))
+    shape(body,Vector3(0.57,1,-0.22),Vector3(0.45,0.6,0.07),Color("395d7c"))
+    box(body,Vector3(0.57,1,-0.27),Vector3(0.07,0.37,0.03),Color("e8ce8c"))
  return root
+static func tree(root: Node3D, pos: Vector3, size_: float=1.0):
+ var tree_=Node3D.new()
+ root.add_child(tree_)
+ tree_.position=pos
+ tree_.scale=Vector3.ONE*size_
+ shape(tree_,Vector3(0,1.7,0),Vector3(0.65,3.4,0.65),Color("68513b"),"cylinder")
+ for i in range(3):
+  shape(tree_,Vector3(sin(i*2.3)*0.65,3.4+i*0.65,cos(i*2.3)*0.55),Vector3(3.1-i*0.45,2.4,3.0-i*0.4),Color("47794e").lightened(i*0.045))
+static func sign_(root: Node3D, pos: Vector3, text_: String) -> Label3D:
+ var label=Label3D.new()
+ root.add_child(label)
+ label.position=pos
+ label.text=text_
+ label.font_size=34
+ label.pixel_size=0.012
+ label.billboard=BaseMaterial3D.BILLBOARD_ENABLED
+ label.modulate=Color("fff0ca")
+ label.outline_size=8
+ return label
 static func environment_(root: Node3D):
  var light=DirectionalLight3D.new()
- light.rotation_degrees=Vector3(-55,-30,0)
- light.light_energy=1.3
+ light.rotation_degrees=Vector3(-48,-28,0)
+ light.light_color=Color("fff0d4")
+ light.light_energy=1.25
+ light.shadow_enabled=true
  root.add_child(light)
  var env=WorldEnvironment.new()
  env.environment=Environment.new()
- env.environment.background_mode=Environment.BG_COLOR
- env.environment.background_color=Color(0.25,0.4,0.45)
+ env.environment.background_mode=Environment.BG_SKY
+ var sky=Sky.new()
+ var sky_material=ProceduralSkyMaterial.new()
+ sky_material.sky_top_color=Color("649fb8")
+ sky_material.sky_horizon_color=Color("d6e4c5")
+ sky_material.ground_horizon_color=Color("d6e4c5")
+ sky.sky_material=sky_material
+ env.environment.sky=sky
  env.environment.ambient_light_source=Environment.AMBIENT_SOURCE_COLOR
- env.environment.ambient_light_color=Color(0.7,0.8,0.85)
- env.environment.ambient_light_energy=0.7
+ env.environment.ambient_light_color=Color("c3d5db")
+ env.environment.ambient_light_energy=0.65
+ env.environment.tonemap_mode=Environment.TONE_MAPPER_FILMIC
  root.add_child(env)
- box(root,Vector3(0,-0.2,0),Vector3(50,0.4,50),Color(0.19,0.32,0.19))
+ box(root,Vector3(0,-0.25,0),Vector3(100,0.4,100),Color("537a43"))

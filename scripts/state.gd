@@ -3,12 +3,16 @@ const SAVE = "user://hero.json"
 var classes: Dictionary = {}
 var hero: Dictionary
 var notice = ""
+var return_position=Vector3.ZERO
+var encounter_id=-1
+var cleared_until: Dictionary={}
+
 func _ready():
  classes = JSON.parse_string(FileAccess.get_file_as_string("res://data/classes.json"))
  reset()
  load_game()
 func reset():
- hero = {"level":1,"xp":0,"hp":110,"mp":35,"gold":0,"points":3,"primary":"Paladin","secondary":["Ranger","Druid"],"investments":{"Paladin":0,"Ranger":0,"Druid":0},"equipment":{"Weapon":"Iron Sword","Shield":"Oak Shield","Helmet":"None","Chest":"Steel Cuirass","Gauntlets":"None","Pants":"None","Boots":"None","Accessory":"None"},"companion":{"selected":0,"behavior":"Attack","active":true,"roster":["Wolf",null,null,null,null,null],"postgame":null},"mastery":0,"potions":5,"seed":137}
+ hero = {"exploration":{"herbs":[],"quest_done":false,"shrine":false},"level":1,"xp":0,"hp":110,"mp":35,"gold":0,"points":3,"primary":"Paladin","secondary":["Ranger","Druid"],"investments":{"Paladin":0,"Ranger":0,"Druid":0},"equipment":{"Weapon":"Iron Sword","Shield":"Oak Shield","Helmet":"None","Chest":"Steel Cuirass","Gauntlets":"None","Pants":"None","Boots":"None","Accessory":"None"},"companion":{"selected":0,"behavior":"Attack","active":true,"roster":["Wolf",null,null,null,null,null],"postgame":null},"mastery":0,"potions":5,"seed":137}
 func stats() -> Dictionary:
  var l = int(hero.level)
  var e: Dictionary = hero.equipment

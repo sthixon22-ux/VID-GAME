@@ -5,6 +5,28 @@ static func panel(parent: Node, position: Vector2, size: Vector2) -> VBoxContain
  parent.add_child(layer)
  var panel_=PanelContainer.new()
  layer.add_child(panel_)
+ var theme_=Theme.new()
+ theme_.default_font_size=17
+ var frame=StyleBoxFlat.new()
+ frame.bg_color=Color(0.055,0.095,0.15,0.94)
+ frame.border_color=Color("b6a272")
+ frame.set_border_width_all(2)
+ frame.set_corner_radius_all(10)
+ frame.content_margin_left=14
+ frame.content_margin_right=14
+ frame.content_margin_top=10
+ frame.content_margin_bottom=10
+ theme_.set_stylebox("panel","PanelContainer",frame)
+ for style in ["normal","hover","pressed","focus"]:
+  var button_style=StyleBoxFlat.new()
+  button_style.bg_color=Color("35516c") if style=="hover" else Color("1c3046")
+  button_style.set_corner_radius_all(5)
+  button_style.content_margin_top=7
+  button_style.content_margin_bottom=7
+  button_style.content_margin_left=12
+  theme_.set_stylebox(style,"Button",button_style)
+ theme_.set_color("font_color","Label",Color("f5e8cc"))
+ panel_.theme=theme_
  panel_.position=position
  panel_.size=size
  var scroll=ScrollContainer.new()

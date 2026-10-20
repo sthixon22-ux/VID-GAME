@@ -1,6 +1,16 @@
-# Verdant Oath — Fantasy RPG Prototype 0.1
+# Verdant Oath — Fantasy RPG Prototype 0.2
 
 An original, small 3D fantasy RPG made with Godot 4 and GDScript. All art is generated from colored primitive meshes; no external assets, services, or plugins are required.
+
+## New in 0.2: Willowbrook and Sunstream
+
+A colorful woodland village replaces the empty clearing. Explore cottages, a campfire, a winding trail, Sunstream bridge, and the ancient Verdant Shrine. Mira the herbalist asks for three purple Moonleaf plants; collect them with E, then return for 60 gold and three potions. Each plant also gives one potion. Discovering the shrine awards 30 gold once. Quest, gathering and discovery progress are saved; existing 0.1 saves receive default exploration progress automatically.
+
+Characters now have rounded stylized silhouettes, faces, hair, armor, boots and weapon details. The wolf has ears, eyes and a muzzle. Layered tree canopies, flowers, distant hills, a sky gradient, warm sunlight, shadows and framed menus establish the setting. Battles take place in a forest arena, with characters facing one another and camera shots following actions.
+
+Goblins roam their encounter areas; victories clear them for 45 seconds. Battle returns preserve your exploration position for the current session. Shift sprints; houses, tree trunks, map edges and the stream block movement. Cross the stream using the bridge. These are lightweight movement checks, not a full physics/navigation implementation. Nearby context prompts and a persistent objective panel guide exploration.
+
+The project retains its original internal application name so existing local saves stay in the same user-data folder. Version 0.2 is still original procedural placeholder art, not production character assets.
 
 ## Launch
 
@@ -22,15 +32,15 @@ This task already has an isolated checkout. Use the existing checkout; no additi
 
 ## Controls and play loop
 
-- **WASD:** move relative to the orbit camera.
+- **WASD:** move relative to the orbit camera. **Shift:** sprint.
 - **Hold right mouse and move:** orbit camera. Mouse remains available for menus.
-- **E:** start normal combat within three meters of a visible goblin.
+- **E:** talk, gather, discover the shrine, or start combat near a visible goblin.
 - **Q:** Auto-Battle a nearby goblin after ten normal victories.
 - **I:** scrollable equipment and class-tree menu. Gear changes are free prototype toggles.
 - **R:** restore HP and MP within three meters of the starting clearing.
 - **F5 / F9:** save / load. Actions, management changes, and completed battles also save automatically.
 
-Approach the goblin directly ahead, press E, and select actions with the mouse. Every action resolves a full speed-ordered round; the wolf acts automatically. Companion opens a behavior menu without spending the hero's turn. Spells have a separate submenu, display their MP cost, and are disabled when unaffordable. Return to camp after defeat to recover. Goblins remain available for repeat encounters.
+Approach the goblin directly ahead, press E, and select actions with the mouse. Every action resolves a full speed-ordered round; the wolf acts automatically. Companion opens a behavior menu without spending the hero's turn. Spells have a separate submenu, display their MP cost, and are disabled when unaffordable. Return to camp after defeat to recover. Defeated goblins return after 45 seconds.
 
 ## Implemented systems
 
@@ -50,6 +60,7 @@ Approach the goblin directly ahead, press E, and select actions with the mouse. 
 - `scripts/combat.gd`: presentation-independent round simulator used by both modes.
 - `scripts/world.gd` and `scenes/world.tscn`: forest, encounters and management.
 - `scripts/battle.gd` and `scenes/battle.tscn`: animation, combat menus and victory UI.
+- `scripts/forest.gd`: authored village, bridge, shrine, dressing and movement boundaries.
 - `scripts/art.gd`, `scripts/ui.gd`: shared procedural models and UI helpers.
 
 Adding a class definition creates its management track and primary-class option. New effects also require handlers in the simulator and a derived-stat rule where appropriate. Additional companions need roster data, a model, a selector, and a behavior implementation; placeholder slots are intentionally not selectable.
@@ -63,8 +74,8 @@ godot --headless --path . --quit-after 90
 XDG_DATA_HOME=/tmp/verdant-oath-tests godot --headless --path . res://tests/run.tscn
 ```
 
-The integration runner checks seeded Auto/normal parity, MP use, possible defeat, secondary mythic gating, primary activation, gear stats, mastery, leveling, save round trip, forest startup, Auto-Battle gating/resolution, and animated battle completion/rewards. It exits nonzero on failure. Headless checks validate runtime execution, not the subjective visual experience.
+The integration runner checks seeded Auto/normal parity, MP use, possible defeat, secondary mythic gating, primary activation, gear stats, mastery, leveling, save round trip, forest startup, Auto-Battle gating/resolution, and animated battle completion/rewards. The expanded suite also exercises bridge and house boundaries, collecting all herbs, duplicate reward protection, quest completion, shrine discovery, exploration save/load and encounter cooldown. All 23 checks passed on Godot 4.6.3. It exits nonzero on failure. Headless checks validate runtime execution, not the subjective visual experience.
 
 ## Known limitations
 
-One forest, one enemy species, one implemented companion, primitive art, no sound, no inventory shop, no obstacle collision or navigation, and no quests. Trees are scenery; the clearing has hard movement boundaries. Equipment is a free development selector rather than loot inventory. Class trees are linear with three ranks and all six starting abilities are initially available. Wolf HP is per encounter; only selection/behavior/active state is persistent. Goblins respawn immediately; no encounter cooldown. Save migration and recovery from manually corrupted saves are outside this prototype. The menus target a 1280×720 desktop window. Mouse/UI visual playtesting is still recommended.
+One woodland zone, one enemy species, one implemented companion, procedural placeholder art, no sound, no interior scenes, no inventory shop, and no full physics or navigation. Hills are distant scenery; the explorable ground is flat. Tree/house blockers use circular approximations. Camera can pass through scenery. Equipment is a free development selector rather than loot inventory. Class trees are linear with three ranks and all six starting abilities are initially available. Wolf HP is per encounter; only selection/behavior/active state is persistent. Goblin cooldown and return position are session-only. Save migration supports the added exploration defaults, but recovery from manually corrupted saves is outside the prototype. Desktop menus target a 1280×720 window and scale with window size. Rendered visual playtesting on Windows is still recommended.
