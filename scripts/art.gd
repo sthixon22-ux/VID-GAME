@@ -41,6 +41,11 @@ static func shape(parent: Node3D, pos: Vector3, scale_: Vector3, color: Color, k
  parent.add_child(mesh)
  return mesh
 static func actor(kind: String, gear: Dictionary={}) -> Node3D:
+ if kind=="Hero": return load("res://scripts/hero_visual.gd").new(gear)
+ if kind=="Mira":
+  var npc=load("res://scripts/hero_visual.gd").new({"Chest":"Leather Vest","Weapon":"Iron Sword","Shield":"None"})
+  npc.find_child("EquippedWeapon",true,false).hide()
+  return npc
  if kind=="Warden": return warden()
  if kind=="Mossling": return mossling()
  var root=Node3D.new()
@@ -99,7 +104,11 @@ static func tree(root: Node3D, pos: Vector3, size_: float=1.0):
  root.add_child(tree_)
  tree_.position=pos
  tree_.scale=Vector3.ONE*size_
- shape(tree_,Vector3(0,1.7,0),Vector3(0.65,3.4,0.65),Color("68513b"),"cylinder")
+ shape(tree_,Vector3(0,1.7,0),Vector3(0.65,3.4,0.65),Color("68513b"),"cylinder").material_override=surface(Color("9c8264"),"wood",2)
+ for side in [-1,1]:
+  var branch=shape(tree_,Vector3(side*0.4,2.6,0),Vector3(0.25,1.5,0.25),Color("68513b"),"cylinder")
+  branch.rotation.z=side*-0.65
+  branch.material_override=surface(Color("9c8264"),"wood",1)
  for i in range(3):
   var canopy=shape(tree_,Vector3(sin(i*2.3)*0.65,3.4+i*0.65,cos(i*2.3)*0.55),Vector3(3.1-i*0.45,2.4,3.0-i*0.4),Color("47794e").lightened(i*0.045))
   canopy.material_override=foliage()
@@ -146,9 +155,25 @@ static func surface(color: Color, texture_: String, tiles: float=1.0) -> Standar
  if materials.has(key): return materials[key]
  var mat=StandardMaterial3D.new()
  mat.albedo_color=color
- mat.albedo_texture=load("res://assets/textures/%s.png" % texture_)
+ var mapped={"stone":"T_UnevenBrick","wood":"T_WoodTrim","tile":"T_RoundTiles","metal":"T_MetalOrnaments","plaster":"T_Plaster"}.get(texture_,"")
+ if mapped!="":
+  mat.albedo_texture=load("res://assets/vendor/quaternius_village/%s_BaseColor.png" % mapped)
+  var normal_path="res://assets/vendor/quaternius_village/%s_Normal.png" % mapped
+  if ResourceLoader.exists(normal_path):
+   mat.normal_enabled=true
+   mat.normal_texture=load(normal_path)
+  var roughness_path="res://assets/vendor/quaternius_village/%s_Roughness.png" % mapped
+  if ResourceLoader.exists(roughness_path): mat.roughness_texture=load(roughness_path)
+ else: mat.albedo_texture=load("res://assets/textures/%s.png" % texture_)
  mat.uv1_scale=Vector3(tiles,tiles,tiles)
  mat.roughness=0.9
+ if texture_=="wood":
+  # Sample the wood-grain strip of the pack's trim atlas, not its stone/end-grain rows.
+  mat.uv1_scale=Vector3(1,0.28,1)
+  mat.uv1_offset=Vector3(0,0.015,0)
+ if texture_=="plaster":
+  mat.roughness_texture=load("res://assets/vendor/quaternius_village/T_Plaster_ORM.png")
+  mat.roughness_texture_channel=BaseMaterial3D.TEXTURE_CHANNEL_GREEN
  materials[key]=mat
  return mat
 static func mossling() -> Node3D:
@@ -187,6 +212,9 @@ static func warden() -> Node3D:
  glow.light_energy=1.2
  return root
 static func animate(model: Node3D, time_: float, moving: bool):
+ if model.has_method("motion"):
+  model.motion(moving,Input.is_physical_key_pressed(KEY_SHIFT))
+  return
  var body=model.get_node_or_null("Body")
  if not body: return
  body.position.y=absf(sin(time_*9))*0.08 if moving else sin(time_*2)*0.025

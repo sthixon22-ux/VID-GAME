@@ -48,7 +48,8 @@ func run():
  var lose=Combat.new(weak,{"attack":1,"defense":0,"speed":1,"max_hp":110,"max_mp":35})
  check(lose.auto_resolve()=="Defeat","Auto can lose")
  var mythic=original.duplicate(true)
- mythic.investments.Ranger=3
+ mythic.investments.Ranger=4
+ mythic.skills.Ranger=["oath","shield","light","mythic"]
  check(not Combat.new(mythic,s).legal("Wild Hunt"),"Secondary mythic remains unavailable")
  mythic.primary="Ranger"
  check(Combat.new(mythic,s).legal("Wild Hunt"),"Primary mythic activates")

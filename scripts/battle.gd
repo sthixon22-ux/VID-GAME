@@ -29,13 +29,14 @@ func _ready():
   add_child(model)
   model.position=entry[1]
   actors[entry[0]]=model
+  if model.has_method("play_action"): model.battle=true
   model.look_at(Vector3(2,0,0) if entry[0]!="Goblin" else Vector3(-2,0,1))
  camera=Camera3D.new()
  add_child(camera)
  camera.position=Vector3(-4.8,3.4,6.4)
  camera.look_at(Vector3(0,1.3,0))
  camera.current=true
- var panel=UI.panel(self,Vector2(20,20),Vector2(700,205))
+ var panel=UI.panel(self,Vector2(20,20),Vector2(700,155))
  status=UI.label(panel,"")
  hero_bar=ProgressBar.new()
  panel.add_child(hero_bar)
@@ -63,16 +64,20 @@ func _process(delta):
  breath+=delta
  if not busy:
   for model in actors.values(): Art.animate(model,breath,false)
-func refresh():
- hero_bar.value=sim.h.hp
- enemy_bar.value=sim.enemy_hp
- status.text="Hero HP %s/%s · MP %s/%s
-Wolf HP %s · %s HP %s · Round %s" % [sim.h.hp,sim.stats.max_hp,sim.h.mp,sim.stats.max_mp,sim.wolf_hp,sim.enemy.name,sim.enemy_hp,sim.turns]
+func refresh(snapshot: Dictionary={}):
+ var hp=int(snapshot.get("hp",sim.h.hp))
+ var mp=int(snapshot.get("mp",sim.h.mp))
+ var wolf_hp=int(snapshot.get("wolf_hp",sim.wolf_hp))
+ var enemy_hp=int(snapshot.get("enemy_hp",sim.enemy_hp))
+ hero_bar.value=hp
+ enemy_bar.value=enemy_hp
+ status.text="Hero HP %s/%s · MP %s/%s\nWolf HP %s · %s HP %s · Round %s" % [hp,sim.stats.max_hp,mp,sim.stats.max_mp,wolf_hp,sim.enemy.name,enemy_hp,sim.turns]
 func clear_menu():
  for c in commands.get_children():
   commands.remove_child(c)
   c.queue_free()
 func main_menu():
+ commands.get_parent().get_parent().show()
  clear_menu()
  UI.button(commands,"Attack",func(): act("Attack"))
  UI.button(commands,"Weapon Skills",func(): submenu(["Sword Slash","Shield Bash"]))
@@ -101,18 +106,18 @@ func companion_menu():
 func act(action: String):
  if busy or not sim.legal(action): return
  busy=true
+ commands.get_parent().get_parent().hide()
  clear_menu()
+ if actors.Hero.has_method("play_action"): actors.Hero.guarding=false
  var events=sim.round_(action)
  for event in events:
   log_label.text="%s: %s" % [sim.enemy.name if event.actor=="Goblin" else event.actor,event.text]
   if event.amount!=0: Sound.cue("heal" if event.amount<0 else "hit")
   var actor: Node3D=actors[event.actor]
   var target: Node3D=actors[event.target]
-  if event.amount!=0: impact(target,event.amount<0,event.text)
-  var origin=actor.position
-  var tween=create_tween()
-  tween.tween_property(actor,"position",origin+(target.position-origin).normalized()*0.5,0.16)
-  tween.tween_property(actor,"position",origin,0.18)
+  var duration=await BattleMotion.present(self,actor,target,event.text)
+  refresh(event.state)
+  if event.amount>0 and target.has_method("play_reaction"): target.play_reaction()
   var number=Label3D.new()
   add_child(number)
   number.position=target.position+Vector3(0,2.2,0)
@@ -128,7 +133,7 @@ func act(action: String):
   cam_tween.set_parallel(true)
   cam_tween.tween_property(camera,"position",shot,0.23).set_trans(Tween.TRANS_SINE)
   cam_tween.tween_method(func(weight: float): camera.look_at(Vector3(0,1.3,0).lerp(focus,weight)),0.0,1.0,0.23)
-  await get_tree().create_timer(0.65).timeout
+  await get_tree().create_timer(duration*0.62).timeout
  var reset_camera=create_tween()
  reset_camera.set_parallel(true)
  reset_camera.tween_property(camera,"position",Vector3(-4.8,3.4,6.4),0.3)
@@ -138,6 +143,8 @@ func act(action: String):
  if sim.outcome!="": finish()
  else: main_menu()
 func finish():
+ commands.get_parent().get_parent().show()
+ if actors.Hero.has_method("play_action"): actors.Hero.play_action("Victory" if sim.outcome=="Victory" else "Defeat")
  State.hero=sim.h
  var previous=int(State.hero.potions)
  if sim.outcome=="Victory":

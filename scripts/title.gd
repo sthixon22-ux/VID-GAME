@@ -27,7 +27,7 @@ func main_menu():
  clear()
  var title=UI.label(menu,"VERDANT OATH")
  title.add_theme_font_size_override("font_size",36)
- UI.label(menu,"The Bell Beneath the Woods\nAdventure milestone 0.3\n")
+ UI.label(menu,"The Bell Beneath the Woods\nAdventure milestone 0.4\n")
  UI.button(menu,"Continue adventure",func(): get_tree().change_scene_to_file(State.travel_scene()))
  UI.button(menu,"New adventure",confirm_new)
  UI.button(menu,"Music / sound: %s" % ("Off" if Sound.muted else "On"),func():

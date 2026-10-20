@@ -1,0 +1,142 @@
+{
+  "Iron Sword": {
+    "slot": "Weapon",
+    "attack": 8,
+    "defense": 0,
+    "style": "sword",
+    "color": "d4e4ed"
+  },
+  "Sunsteel Sword": {
+    "slot": "Weapon",
+    "attack": 14,
+    "defense": 0,
+    "style": "sunblade",
+    "color": "f7d786"
+  },
+  "Moonleaf Saber": {
+    "slot": "Weapon",
+    "attack": 10,
+    "defense": 0,
+    "style": "saber",
+    "color": "8acbbc"
+  },
+  "Oak Shield": {
+    "slot": "Shield",
+    "attack": 0,
+    "defense": 5,
+    "style": "round",
+    "color": "9c734e"
+  },
+  "Dawn Kite Shield": {
+    "slot": "Shield",
+    "attack": 0,
+    "defense": 7,
+    "style": "kite",
+    "color": "527596"
+  },
+  "Grove Shield": {
+    "slot": "Shield",
+    "attack": 0,
+    "defense": 5,
+    "style": "leaf",
+    "color": "5c8468"
+  },
+  "Steel Cuirass": {
+    "slot": "Chest",
+    "attack": 0,
+    "defense": 6,
+    "style": "plate",
+    "color": "99b4c7"
+  },
+  "Leather Vest": {
+    "slot": "Chest",
+    "attack": 0,
+    "defense": 2,
+    "style": "leather",
+    "color": "947052"
+  },
+  "Verdant Robe": {
+    "slot": "Chest",
+    "attack": 0,
+    "defense": 4,
+    "style": "robe",
+    "color": "547963"
+  },
+  "Steel Helm": {
+    "slot": "Helmet",
+    "attack": 0,
+    "defense": 2,
+    "style": "plate",
+    "color": "a9bdcc"
+  },
+  "Ranger Hood": {
+    "slot": "Helmet",
+    "attack": 0,
+    "defense": 2,
+    "style": "hood",
+    "color": "577365"
+  },
+  "Steel Gauntlets": {
+    "slot": "Gauntlets",
+    "attack": 0,
+    "defense": 2,
+    "style": "plate",
+    "color": "a4b7c9"
+  },
+  "Leather Gloves": {
+    "slot": "Gauntlets",
+    "attack": 0,
+    "defense": 2,
+    "style": "leather",
+    "color": "84694b"
+  },
+  "Steel Greaves": {
+    "slot": "Pants",
+    "attack": 0,
+    "defense": 2,
+    "style": "plate",
+    "color": "9eafbf"
+  },
+  "Ranger Trousers": {
+    "slot": "Pants",
+    "attack": 0,
+    "defense": 2,
+    "style": "leather",
+    "color": "51695a"
+  },
+  "Steel Sabatons": {
+    "slot": "Boots",
+    "attack": 0,
+    "defense": 2,
+    "style": "plate",
+    "color": "9aaebd"
+  },
+  "Trail Boots": {
+    "slot": "Boots",
+    "attack": 0,
+    "defense": 2,
+    "style": "leather",
+    "color": "7c6247"
+  },
+  "Sunstone Pendant": {
+    "slot": "Accessory",
+    "attack": 0,
+    "defense": 2,
+    "style": "gem",
+    "color": "e9cb78"
+  },
+  "Moonleaf Charm": {
+    "slot": "Accessory",
+    "attack": 0,
+    "defense": 2,
+    "style": "leaf",
+    "color": "79b4a1"
+  },
+  "Leather Gear": {
+    "slot": "Any",
+    "attack": 0,
+    "defense": 2,
+    "style": "leather",
+    "color": "81694e"
+  }
+}

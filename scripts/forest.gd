@@ -22,17 +22,7 @@ func build(root: Node3D):
   for x in [9.5,12,14.5]: Art.box(root,Vector3(x,0.55,z),Vector3(0.16,1.1,0.16),Color("6f513c"))
  # Village houses, with plaster walls, overhanging roofs and lit windows.
  for pos in [Vector3(-7,0,5),Vector3(6,0,6),Vector3(-8,0,-2)]:
-  var house=Node3D.new()
-  root.add_child(house)
-  house.position=pos
-  Art.box(house,Vector3(0,1.25,0),Vector3(3.7,2.5,3.2),Color("dfc49a")).material_override=Art.surface(Color("f3dcaf"),"stone",2)
-  for side in [-1,1]:
-   var roof=Art.box(house,Vector3(side*1.05,2.85,0),Vector3(2.5,0.22,4.0),Color("8f514f"))
-   roof.rotation.z=side*-0.5
-   roof.material_override=Art.surface(Color("b27669"),"tile",3)
-  Art.box(house,Vector3(0,0.9,-1.65),Vector3(0.85,1.8,0.12),Color("725237"))
-  for x in [-1.1,1.1]: Art.box(house,Vector3(x,1.5,-1.65),Vector3(0.6,0.65,0.1),Color("f4d990"))
-  Art.box(house,Vector3(1.15,3.1,0.7),Vector3(0.5,1.3,0.5),Color("a39a86"))
+  VillageArt.cottage(root,pos)
   obstacles.append(Vector3(pos.x,2.65,pos.z))
  Art.sign_(root,Vector3(-3,1.8,7),"Willowbrook")
  # Campfire, seats, villager and a route marker.

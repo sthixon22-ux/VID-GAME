@@ -33,11 +33,11 @@ func legal(action: String) -> bool:
  if h.mp<cost(action): return false
  for c in classes:
   if classes[c].mythic==action:
-   return h.primary==c and int(h.investments[c])>=3
+   return h.primary==c and h.get("skills",{}).get(c,[]).has("mythic")
  if action not in ["Attack","Sword Slash","Shield Bash","Sacred Strike","Hunter's Mark","Thornbind","Regrowth","Items","Defend"]: return false
  return action!="Items" or h.potions>0
 func emit(actor: String, target: String, amount: int, label: String):
- events.append({"actor":actor,"target":target,"amount":amount,"text":label})
+ events.append({"actor":actor,"target":target,"amount":amount,"text":label,"state":{"hp":int(h.hp),"mp":int(h.mp),"wolf_hp":wolf_hp,"enemy_hp":enemy_hp}})
 func hit_enemy(actor: String, power: int, label: String):
  var amount=damage(power,int(enemy.defense))+(6 if marked>0 else 0)
  enemy_hp=maxi(0,enemy_hp-amount)
@@ -54,7 +54,7 @@ func hero_turn(action: String):
    h.hp+=healed
    emit("Hero","Hero",-healed,"Potion")
   "Regrowth", "Ancient Grove":
-   var healed=mini(40 if action=="Regrowth" else 75,stats.max_hp-int(h.hp))
+   var healed=mini((40 if action=="Regrowth" else 75)+int(stats.get("healing",0)),stats.max_hp-int(h.hp))
    h.hp+=healed
    emit("Hero","Hero",-healed,action)
   "Hunter's Mark":
@@ -77,7 +77,7 @@ func wolf_turn():
   "Defend":
    wolf_guard=true
    emit("Wolf","Hero",0,"Wolf protects you")
-  _: hit_enemy("Wolf",12+int(h.level)*2,"Wolf bite")
+  _: hit_enemy("Wolf",12+int(h.level)*2+int(stats.get("wolf_attack",0)),"Wolf bite")
 func enemy_turn():
  if bound>0:
   bound-=1

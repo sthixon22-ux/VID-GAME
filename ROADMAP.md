@@ -10,9 +10,17 @@ The agreed target is a polished short adventure with a village, forest route, du
 - Original procedural textures, portraits, music, water/wind shaders and basic animation.
 - Automatic combat/persistence/full-story checks and rendered-screen inspection.
 
-## Next: establish the final art target
+## Delivered in 0.4
 
-Build one hero, one wolf, one enemy and one small environment kit to a consistent quality bar. Replace assembled primitives with authored mesh topology, UVs and texture maps. Add a real character rig and reusable idle/walk/run/attack/hit/defend/victory animations. Confirm visual style, silhouette, scale, lighting and readability in an actual Windows playtest before expanding the asset count.
+- CC0 KayKit rigged Knight/Rogue/Mage outfits, with live equipment preview and eight independently managed slots.
+- Skeletal action clips, battle poses, walking/running, hit reactions and victory/defeat. Each hero ability has its own clip/effect combination.
+- CC0 Quaternius modular cottages and painted PBR stone/wood/plaster/roof materials.
+- Dedicated six-node branching skill pages for Paladin, Ranger and Druid, with descriptions, prerequisites, point costs and mythic availability.
+- Legacy skill/equipment save migration and a separate presentation/character integration suite.
+
+## Next: unify the art target
+
+The hero rig/outfits and village kit are integrated. Bring the wolf, enemies, Warden and foliage to the same quality bar with consistent meshes, UVs, textures and rigs. Refine the original prototype equipment overlays and spell choreography. Confirm visual style, silhouette, scale, lighting and readability in an actual Windows playtest before expanding the asset count.
 
 ## Next: camera and game feel
 

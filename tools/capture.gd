@@ -28,6 +28,12 @@ func run():
  world.hero.position=Vector3(-2.6,0,-0.8)
  world.interact()
  await shot("dialogue")
+ State.menu_page="equipment"
+ await change("res://scenes/character.tscn")
+ await shot("equipment")
+ State.menu_page="skills"
+ await change("res://scenes/character.tscn")
+ await shot("skills")
  State.return_position=Vector3(0,0,-24)
  State.hero.journey.entered=true
  State.hero.journey.region="dungeon"
@@ -36,5 +42,10 @@ func run():
  State.enemy_id="warden"
  await change("res://scenes/battle.tscn")
  await shot("boss")
+ var battle=get_tree().current_scene
+ battle.act("Sacred Strike")
+ await get_tree().create_timer(1.3).timeout
+ await shot("sacred_strike")
+ while battle.busy: await get_tree().process_frame
  await Sound.stop_all()
  get_tree().quit()

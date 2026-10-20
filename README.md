@@ -1,12 +1,14 @@
 # Verdant Oath — The Bell Beneath the Woods
 
-**Adventure milestone 0.3.1 · Godot 4.6+ · GDScript · Original assets**
+**Adventure milestone 0.4 · Godot 4.6+ · GDScript · Free CC0 art + original story/effects**
 
 A short, complete story arc: meet Mira in Willowbrook, gather Moonleaf along the woodland trail, cross Sunstream, descend into the Rootbound Sanctuary, and free the Hollow Warden. Fully turn-based battles share one deterministic simulator with the original goblin Auto-Battle system.
 
-This is the first story milestone toward a polished 15-minute RPG demo. The quest has an ending, but the project is still a development build. Play length has not been measured with new players. Character models and animation are procedural, and the synthesized soundtrack is a demo score.
+This is the first story milestone toward a polished 15-minute RPG demo. The quest has an ending, but the project is still a development build. Play length has not been measured with new players. The hero now uses licensed rigged character art with skeletal animation. Enemies and foliage still include procedural models, and the synthesized soundtrack is a demo score.
 
-![Dialogue with Mira in Willowbrook](docs/screenshots/dialogue.png)
+![Equipment and live 3D character preview](docs/screenshots/equipment.png)
+
+![Dedicated branched skill-tree page](docs/screenshots/skills.png)
 
 ![The Hollow Warden battle in the sanctuary](docs/screenshots/warden.png)
 
@@ -31,7 +33,8 @@ New adventure backs up your previous save to `user://hero.backup.json` before re
 | Mouse | Select dialogue, battle and management buttons |
 | Q in the forest | Goblin Auto-Battle, after ten normal goblin victories |
 | Escape | Management/menu; resume by closing it |
-| I in the forest | Equipment and class trees |
+| I while exploring | Equipment and appearance page |
+| K while exploring | Dedicated class skill-tree page |
 | R near the village campfire | Restore HP and MP |
 | F5 | Save while exploring |
 | F9 in the forest | Load |
@@ -49,6 +52,17 @@ Audio can be toggled from the title, forest management menu or dungeon pause men
 - After victory, speak to the guardian, leave the sanctuary at its southern entrance, and return to Mira for the ending. You can keep exploring afterward.
 
 If defeated, retreat to Willowbrook and press R at the campfire. Defeat never completes a quest or awards victory rewards. Herbs, caches, discoveries and story rewards cannot be collected twice.
+
+## New in 0.4 — art, animation and character pages
+
+- **Designed rigged characters:** KayKit's CC0 Knight, Rogue and Mage outfits replace the assembled hero. Plate, leather and robe choices change the full silhouette. The village NPC also uses a rigged model.
+- **Free textured environment kit:** selected Quaternius Medieval Village components build cottages with dimensional roofing, shutters, frames, doors, vines and chimneys. Painted stone, wood, plaster and roof textures include normal/roughness maps. All are bundled with CC0 license/provenance records.
+- **Distinct action animations:** default attack uses a thrust; Sword Slash a diagonal cut; Shield Bash a shield strike; Sacred Strike an overhead chop/holy column; Hunter's Mark a point-and-shoot/target sigil; Thornbind a raised casting/root spiral; Regrowth a longer healing cast/petal bloom. Each mythic uses its own clip and effect. Wolf/enemy moves have separate procedural choreography. The hero also walks, runs, blocks, reacts to hits, celebrates and falls on defeat using skeletal clips.
+- **Equipment & Appearance page:** press I. Select a slot on the left, compare candidate stats on the right, and inspect the live rotating 3D preview in the middle. Equipment attaches to animated hand/body sockets and persists. Plate/leather/robe are full outfit variants; other armor pieces add independent overlays to the base outfit.
+- **Class Skill Trees page:** press K or select its tab. Choose Paladin/Ranger/Druid, select a connected node, read its effect/prerequisites/cost, then press Learn. Each class has six nodes. Normal nodes cost one point; mythics cost two and require both branches. Learned nodes are gold. Starting abilities remain available.
+- **Save migration:** old class ranks convert to learned nodes without spending points again. Previously unlocked mythics remain unlocked, with their prerequisites included. Only the primary class's mythic can be used. Old generic leather gear converts to visible slot-specific gear.
+
+The wardrobe is still a free demo selection; there is no shop or inventory ownership system. The imported art is stylized and optimized for games. Remaining procedural enemies/foliage and camera collision are future art/game-feel work.
 
 ## Hotfix 0.3.1
 
@@ -69,9 +83,9 @@ Fixed a crash when using E to finish the shrine conversation and enter the dunge
 
 ## Existing RPG systems
 
-Paladin primary with Ranger and Druid secondary classes; all six starting skills; HP/MP, XP, gold, levels, skill points and independent three-rank class trees. Each level grants three skill points. Class investments affect stats and rank three unlocks that class's mythic. Secondary mythic investments persist, but their abilities remain unavailable until the class becomes primary.
+Paladin primary with Ranger and Druid secondary classes; all six starting skills; HP/MP, XP, gold, levels, skill points and independent six-node branching class trees. Each level grants three skill points. Nodes give the stat bonuses shown in their descriptions, including wolf damage and healing bonuses. Mythics require both central branches and two additional points. Secondary mythics stay saved and remain unavailable until their class becomes primary.
 
-Eight independent equipment slots affect stats. Sword, shield and chest changes are visible. Equipment selection is still a free development toggle, not a finished inventory or shop. Wolf Attack, Support and Defend behaviors are automated each round. Six future companion roster slots and a separate postgame slot remain reserved; only the wolf is implemented. Wolf HP resets per encounter.
+Eight independent equipment slots affect stats and appearance. Use the wardrobe page to select textured weapons/shields and full plate, leather or robe outfits, plus independent helmet, glove, leg, boot and accessory overlays. Equipment selection is a free demo wardrobe rather than a finished inventory or shop. Wolf Attack, Support and Defend behaviors are automated each round. Six future companion roster slots and a separate postgame slot remain reserved; only the wolf is implemented. Wolf HP resets per encounter.
 
 Ten **normal goblin victories** unlock goblin Auto-Battle. It never instantiates the 3D battle scene, uses the same combat rules and current stats/gear/companion, spends real HP/MP, can lose and rolls normal rewards. Its policy heals below half health, otherwise uses Sacred Strike if affordable, otherwise Attack. Auto wins and victories over other species do not advance normal goblin mastery. Auto-Battle is not available for the dungeon guardians or boss.
 
@@ -88,7 +102,11 @@ Ten **normal goblin victories** unlock goblin Auto-Battle. It never instantiates
 | `scripts/state.gd` | Hero state, derived stats, rewards, migration and saving |
 | `scripts/dialogue.gd`, `data/dialogue.json` | Portrait dialogue and original story |
 | `data/classes.json`, `data/enemies.json` | Modular class and enemy definitions |
-| `scripts/art.gd`, `scripts/ui.gd` | Procedural models, shared materials and themed controls |
+| `scripts/art.gd`, `scripts/ui.gd` | Shared materials, remaining procedural models and themed controls |
+| `scripts/hero_visual.gd`, `scripts/battle_motion.gd` | Imported skeleton/outfit/gear integration and per-action animation/VFX choreography |
+| `scripts/character_menu.gd`, `scripts/skill_graph.gd` | Dedicated wardrobe and connected skill-tree pages |
+| `scripts/village_art.gd` | CC0 modular cottage assemblies |
+| `data/equipment.json` | Slot-specific wardrobe definitions and stats |
 | `scripts/sound.gd`, `assets/` | Music, sound cues, portraits, textures and shaders |
 | `tools/generate_assets.py` | Reproducible original asset generation |
 | `tests/run.tscn` | Combat, persistence and full-story integration checks |
@@ -103,11 +121,12 @@ godot --headless --path . --editor --import --quit
 godot --headless --path . --quit-after 90
 # Use a separate data directory: these tests intentionally create and replace saves.
 XDG_DATA_HOME=/tmp/verdant-oath-tests godot --headless --path . res://tests/run.tscn
+XDG_DATA_HOME=/tmp/verdant-presentation-tests godot --headless --path . res://tests/presentation.tscn
 ```
 
-All **60 checks passed with Godot 4.6.3**, covering seeded Auto/normal parity, possible defeat, MP legality, mythic restrictions, equipment stats, mastery, leveling, old-save defaults, fractional position persistence, reachable forest objectives, dialogue, unique rewards, actual dungeon/battle scene transitions, both guardians, seals, boss telegraph/defense, boss victory, return to Mira, ending persistence and defeat recovery. Tests accelerate game time and do not measure real play length. Audio playback is intentionally skipped in headless mode.
+The full-game suite has **60 checks** and the new presentation/character suite has **61 checks**, all passing with Godot 4.6.3, covering seeded Auto/normal parity, possible defeat, MP legality, mythic restrictions, equipment stats, mastery, leveling, old-save defaults, fractional position persistence, reachable forest objectives, dialogue, unique rewards, actual dungeon/battle scene transitions, both guardians, seals, boss telegraph/defense, boss victory, return to Mira, ending persistence and defeat recovery. The presentation suite also verifies all eight slots, visible attachments, outfit swaps, distinct imported action clips, real clip playback, running, skill prerequisites/costs, legacy skill/gear migration, UI investment, wardrobe preview updates and effect cleanup. Tests accelerate game time and do not measure real play length. Audio playback is intentionally skipped in headless mode.
 
-Rendered OpenGL captures were also generated and inspected for the title, village, dialogue, dungeon and boss battle. Reproduce them with a display available:
+Rendered OpenGL captures were also generated and inspected for the title, village, dialogue, equipment, skills, dungeon, boss and a combat action. Reproduce them with a display available:
 
 ```sh
 XDG_DATA_HOME=/tmp/verdant-capture godot --path . --audio-driver Dummy res://tools/capture.tscn -- /tmp/verdant-captures
@@ -126,6 +145,6 @@ Use the existing isolated checkout; an additional Git worktree is unnecessary.
 
 ## Current limits and next production work
 
-The story is playable through its ending, but this is not the finished high-fidelity demo. Models are assembled from simple meshes with procedural animation; no production character rigs, facial animation, lip-sync, cutscene cinematography or professional voice acting are included. The original vector portraits and surface textures are modest placeholder-quality assets. There is one forest zone and one compact dungeon, with no village interiors. Explorable ground is flat; distant hills are scenery. Movement uses lightweight boundaries rather than full physics/navigation, and the camera can clip through scenery. The wolf can cut corners while following. Menus target a 1280×720 desktop layout. Only one save slot is supported, with a backup on new game; manually damaged saves are not fully recoverable.
+The story is playable through its ending, but the art pass is ongoing. The hero and Mira use CC0 KayKit character art with skeletal animation, and the cottages/materials use Quaternius's CC0 kit. Goblins, the wolf, Mosslings, the Warden and foliage still use simpler original geometry. Additional equipment overlays are basic prototype meshes. There is no facial animation, lip-sync or voice acting. Music is synthesized. There is one forest and one compact dungeon, with no village interiors. Explorable ground is flat; distant hills are scenery. Movement uses lightweight boundaries rather than full physics/navigation, and the camera can clip through scenery. The wolf can cut corners while following. Menus target a 1280×720 desktop layout. Only one save slot is supported, with a backup on new game; manually damaged saves are not fully recoverable.
 
-The next production milestones are coherent authored character/environment assets and rigs, richer movement and attack animation, better camera collision and framing, a larger exploration route, inventory/economy balancing, and first-time-player feedback on pacing and difficulty. See [ROADMAP.md](ROADMAP.md).
+Further work: bring remaining enemies/foliage to the character art's quality level, improve camera collision, create a real inventory/reward economy, and playtest pacing, balance and performance on Windows. See [ROADMAP.md](ROADMAP.md).

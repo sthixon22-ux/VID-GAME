@@ -39,7 +39,7 @@ func _ready():
  var panel=UI.panel(self,Vector2(16,16),Vector2(600,180))
  hud=UI.label(panel,"")
  UI.label(panel,"WASD move · Shift sprint · Right mouse orbit · E interact")
- UI.label(panel,"Q auto · I equipment / skills · F5 save · F9 load · R rest")
+ UI.label(panel,"Q auto · I gear · K skill trees · F5 save · F9 load · R rest")
  var journal=UI.panel(self,Vector2(900,20),Vector2(360,200))
  objective=UI.label(journal,"")
  var bottom=UI.panel(self,Vector2(350,640),Vector2(580,60))
@@ -52,7 +52,9 @@ Adventure complete
 
 You restored the guardian and brought light to Willowbrook.
 
-Story, music, portraits and procedural art: original assets.
+Character art: KayKit / Kay Lousberg (CC0).
+Village art and textures: Quaternius (CC0).
+Story, music, portraits and effects: original.
 Thank you for playing this development milestone.")
  UI.button(completion,"Keep exploring",func(): completion.get_parent().get_parent().hide())
  UI.button(completion,"Save and return to title",func():
@@ -69,7 +71,9 @@ func _unhandled_input(event):
   match event.keycode:
    KEY_E: interact()
    KEY_Q: encounter(true)
-   KEY_ESCAPE, KEY_I:
+   KEY_I: open_character("equipment")
+   KEY_K: open_character("skills")
+   KEY_ESCAPE:
     menu.get_parent().get_parent().visible=not menu.get_parent().get_parent().visible
     if menu.get_parent().get_parent().visible: refresh_menu()
    KEY_F5:
@@ -225,35 +229,17 @@ func update_gear():
  hero=Art.actor("Hero",State.hero.equipment)
  add_child(hero)
  hero.position=pos
+func open_character(page: String):
+ State.menu_page=page
+ State.remember_position(hero.position)
+ get_tree().change_scene_to_file("res://scenes/character.tscn")
 func refresh_menu():
  for child in menu.get_children():
   menu.remove_child(child)
   child.queue_free()
- UI.label(menu,"Hero management · Skill points: %s" % State.hero.points)
- for c in State.classes:
-  var class_key: String=c
-  UI.button(menu,"%s: %s invested · Invest 1" % [c,State.hero.investments[c]],func():
-   if State.hero.points>0 and State.hero.investments[class_key]<3:
-    State.hero.points-=1
-    State.hero.investments[class_key]+=1
-    State.save_game()
-    refresh_menu())
-  UI.label(menu," → ".join(State.classes[c].tree))
-  UI.button(menu,"Make %s primary (mythic at 3 points)" % c,func():
-   State.hero.primary=class_key
-   State.hero.secondary=State.classes.keys().filter(func(k): return k!=class_key)
-   State.save_game()
-   refresh_menu())
- UI.label(menu,"Trees: ranks 1–2 training; rank 3 mythic unlock.")
- UI.label(menu,"Primary: %s · All starting skills available" % State.hero.primary)
- for slot in State.hero.equipment:
-  var slot_key: String=slot
-  UI.button(menu,"%s: %s · Change" % [slot,State.hero.equipment[slot]],func():
-   var options={"Weapon":["Iron Sword","Sunsteel Sword"],"Shield":["Oak Shield","None"],"Chest":["Steel Cuirass","Leather Vest"]}.get(slot_key,["None","Leather Gear"])
-   State.hero.equipment[slot_key]=options[1] if State.hero.equipment[slot_key]==options[0] else options[0]
-   update_gear()
-   State.save_game()
-   refresh_menu())
+ UI.label(menu,"ADVENTURE MENU")
+ UI.button(menu,"Equipment & Appearance  [I]",func(): open_character("equipment"))
+ UI.button(menu,"Class Skill Trees  [K]",func(): open_character("skills"))
  UI.button(menu,"Wolf: %s · Change behavior" % State.hero.companion.behavior,func():
   var choices=["Attack","Support","Defend"]
   State.hero.companion.behavior=choices[(choices.find(State.hero.companion.behavior)+1)%3]

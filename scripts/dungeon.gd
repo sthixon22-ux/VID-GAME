@@ -39,6 +39,8 @@ func _ready():
  pause_menu=UI.panel(self,Vector2(440,220),Vector2(400,250))
  pause_menu.get_parent().get_parent().hide()
  UI.button(pause_menu,"Resume",func(): pause_menu.get_parent().get_parent().hide())
+ UI.button(pause_menu,"Equipment & Appearance",func(): open_character("equipment"))
+ UI.button(pause_menu,"Class Skill Trees",func(): open_character("skills"))
  UI.button(pause_menu,"Save",func(): State.save_game())
  UI.button(pause_menu,"Music / sound",Sound.toggle)
  UI.button(pause_menu,"Save and return to title",func():
@@ -121,6 +123,8 @@ func _unhandled_input(event):
  if event is InputEventKey and event.pressed and not event.echo:
   match event.keycode:
    KEY_E: interact()
+   KEY_I: open_character("equipment")
+   KEY_K: open_character("skills")
    KEY_ESCAPE: pause_menu.get_parent().get_parent().visible=not pause_menu.get_parent().get_parent().visible
    KEY_F5: State.save_game()
 func _process(delta):
@@ -194,3 +198,8 @@ func start_battle(species: String, id: int):
  State.encounter_id=id
  State.return_position=hero.position
  get_tree().change_scene_to_file("res://scenes/battle.tscn")
+
+func open_character(page: String):
+ State.menu_page=page
+ State.remember_position(hero.position)
+ get_tree().change_scene_to_file("res://scenes/character.tscn")

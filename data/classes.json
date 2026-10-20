@@ -9,7 +9,103 @@
       "Sword Discipline",
       "Shield Discipline",
       "Dawn Avatar"
-    ]
+    ],
+    "nodes": [
+      {
+        "id": "oath",
+        "name": "Oathkeeper",
+        "description": "Attack +2.",
+        "requires": [],
+        "bonus": {
+          "attack": 2
+        },
+        "position": [
+          0.5,
+          0.83
+        ],
+        "cost": 1
+      },
+      {
+        "id": "shield",
+        "name": "Bulwark",
+        "description": "Defense +2.",
+        "requires": [
+          "oath"
+        ],
+        "bonus": {
+          "defense": 2
+        },
+        "position": [
+          0.24,
+          0.56
+        ],
+        "cost": 1
+      },
+      {
+        "id": "light",
+        "name": "Radiant Edge",
+        "description": "Attack +2.",
+        "requires": [
+          "oath"
+        ],
+        "bonus": {
+          "attack": 2
+        },
+        "position": [
+          0.76,
+          0.56
+        ],
+        "cost": 1
+      },
+      {
+        "id": "vigor",
+        "name": "Unbroken",
+        "description": "Maximum HP +12.",
+        "requires": [
+          "shield"
+        ],
+        "bonus": {
+          "max_hp": 12
+        },
+        "position": [
+          0.14,
+          0.28
+        ],
+        "cost": 1
+      },
+      {
+        "id": "grace",
+        "name": "Grace",
+        "description": "Maximum MP +5.",
+        "requires": [
+          "light"
+        ],
+        "bonus": {
+          "max_mp": 5
+        },
+        "position": [
+          0.86,
+          0.28
+        ],
+        "cost": 1
+      },
+      {
+        "id": "mythic",
+        "name": "Dawn Avatar",
+        "description": "Paladin mythic. Primary class only.",
+        "requires": [
+          "shield",
+          "light"
+        ],
+        "bonus": {},
+        "position": [
+          0.5,
+          0.12
+        ],
+        "cost": 2
+      }
+    ],
+    "color": "d8bc78"
   },
   "Ranger": {
     "skills": [
@@ -20,7 +116,103 @@
       "Tracker Training",
       "Predator Training",
       "Wild Hunt"
-    ]
+    ],
+    "nodes": [
+      {
+        "id": "oath",
+        "name": "Trail Sense",
+        "description": "Speed +1.",
+        "requires": [],
+        "bonus": {
+          "speed": 1
+        },
+        "position": [
+          0.5,
+          0.83
+        ],
+        "cost": 1
+      },
+      {
+        "id": "shield",
+        "name": "Predator",
+        "description": "Attack +2.",
+        "requires": [
+          "oath"
+        ],
+        "bonus": {
+          "attack": 2
+        },
+        "position": [
+          0.24,
+          0.56
+        ],
+        "cost": 1
+      },
+      {
+        "id": "light",
+        "name": "Pack Bond",
+        "description": "Wolf attacks gain +3 power.",
+        "requires": [
+          "oath"
+        ],
+        "bonus": {
+          "wolf_attack": 3
+        },
+        "position": [
+          0.76,
+          0.56
+        ],
+        "cost": 1
+      },
+      {
+        "id": "vigor",
+        "name": "Survivalist",
+        "description": "Maximum HP +12.",
+        "requires": [
+          "shield"
+        ],
+        "bonus": {
+          "max_hp": 12
+        },
+        "position": [
+          0.14,
+          0.28
+        ],
+        "cost": 1
+      },
+      {
+        "id": "grace",
+        "name": "Sure Hand",
+        "description": "Attack +2.",
+        "requires": [
+          "light"
+        ],
+        "bonus": {
+          "attack": 2
+        },
+        "position": [
+          0.86,
+          0.28
+        ],
+        "cost": 1
+      },
+      {
+        "id": "mythic",
+        "name": "Wild Hunt",
+        "description": "Ranger mythic. Primary class only.",
+        "requires": [
+          "shield",
+          "light"
+        ],
+        "bonus": {},
+        "position": [
+          0.5,
+          0.12
+        ],
+        "cost": 2
+      }
+    ],
+    "color": "8dc9b2"
   },
   "Druid": {
     "skills": [
@@ -32,6 +224,102 @@
       "Root Wisdom",
       "Grove Wisdom",
       "Ancient Grove"
-    ]
+    ],
+    "nodes": [
+      {
+        "id": "oath",
+        "name": "Root Wisdom",
+        "description": "Maximum MP +3.",
+        "requires": [],
+        "bonus": {
+          "max_mp": 3
+        },
+        "position": [
+          0.5,
+          0.83
+        ],
+        "cost": 1
+      },
+      {
+        "id": "shield",
+        "name": "Grove Wisdom",
+        "description": "Maximum MP +3.",
+        "requires": [
+          "oath"
+        ],
+        "bonus": {
+          "max_mp": 3
+        },
+        "position": [
+          0.24,
+          0.56
+        ],
+        "cost": 1
+      },
+      {
+        "id": "light",
+        "name": "Renewal",
+        "description": "Healing spells restore +8 HP.",
+        "requires": [
+          "oath"
+        ],
+        "bonus": {
+          "healing": 8
+        },
+        "position": [
+          0.76,
+          0.56
+        ],
+        "cost": 1
+      },
+      {
+        "id": "vigor",
+        "name": "Ironbark",
+        "description": "Defense +2.",
+        "requires": [
+          "shield"
+        ],
+        "bonus": {
+          "defense": 2
+        },
+        "position": [
+          0.14,
+          0.28
+        ],
+        "cost": 1
+      },
+      {
+        "id": "grace",
+        "name": "Lifebloom",
+        "description": "Maximum HP +12.",
+        "requires": [
+          "light"
+        ],
+        "bonus": {
+          "max_hp": 12
+        },
+        "position": [
+          0.86,
+          0.28
+        ],
+        "cost": 1
+      },
+      {
+        "id": "mythic",
+        "name": "Ancient Grove",
+        "description": "Druid mythic. Primary class only.",
+        "requires": [
+          "shield",
+          "light"
+        ],
+        "bonus": {},
+        "position": [
+          0.5,
+          0.12
+        ],
+        "cost": 2
+      }
+    ],
+    "color": "ba9cd3"
   }
 }
