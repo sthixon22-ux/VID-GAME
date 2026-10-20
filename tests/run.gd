@@ -134,7 +134,7 @@ func run():
  State.restore()
  world.hero.position=Vector3(24,0,-12)
  world.interact()
- dismiss(world.dialogue)
+ dismiss_keyboard(world.dialogue,KEY_E)
  await settle()
  var dungeon=get_tree().current_scene
  check(dungeon.scene_file_path=="res://scenes/dungeon.tscn" and State.hero.journey.region=="dungeon","Shrine dialogue enters the dungeon")
@@ -181,7 +181,7 @@ func run():
  check(not charge.charging and before-charge.h.hp<35,"Defend mitigates the telegraphed attack")
  dungeon.hero.position=Vector3(0,0,-27)
  dungeon.interact()
- dismiss(dungeon.dialogue)
+ dismiss_keyboard(dungeon.dialogue,KEY_SPACE)
  await settle()
  var boss_battle=get_tree().current_scene
  check(boss_battle.sim.species=="warden","Boss intro launches the correct battle")
@@ -198,7 +198,7 @@ func run():
  check(State.hero.equipment.Weapon=="Sunsteel Sword","Boss awards the living ember weapon")
  check(State.hero.mastery==10,"Dungeon fights do not add goblin mastery")
  boss_battle.dialogue.show_id("boss_win",boss_battle.return_to_adventure)
- dismiss(boss_battle.dialogue)
+ dismiss_keyboard(boss_battle.dialogue,KEY_ENTER)
  await settle()
  dungeon=get_tree().current_scene
  check(not dungeon.boss.visible,"Freed boss stays absent after return")
@@ -253,3 +253,21 @@ func walkable_cells(forest: Forest) -> Dictionary:
     queue.append(next)
    else: blocked[next]=true
  return visited
+
+func dismiss_keyboard(box: Dialogue, key: Key):
+ var viewport=box.get_viewport()
+ var consumed=[false]
+ box.closed.connect(func(): consumed[0]=viewport.is_input_handled(),CONNECT_ONE_SHOT)
+ var safety=0
+ while box.active and safety<30:
+  var press=InputEventKey.new()
+  press.keycode=key
+  press.pressed=true
+  viewport.push_input(press)
+  var release=InputEventKey.new()
+  release.keycode=key
+  release.pressed=false
+  viewport.push_input(release)
+  safety+=1
+ check(not box.active,"Keyboard %s closes dialogue, including scene-changing callbacks" % OS.get_keycode_string(key))
+ check(consumed[0],"Keyboard %s is consumed before the dialogue closes or changes scenes" % OS.get_keycode_string(key))

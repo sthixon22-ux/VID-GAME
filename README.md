@@ -1,6 +1,6 @@
 # Verdant Oath — The Bell Beneath the Woods
 
-**Adventure milestone 0.3 · Godot 4.6+ · GDScript · Original assets**
+**Adventure milestone 0.3.1 · Godot 4.6+ · GDScript · Original assets**
 
 A short, complete story arc: meet Mira in Willowbrook, gather Moonleaf along the woodland trail, cross Sunstream, descend into the Rootbound Sanctuary, and free the Hollow Warden. Fully turn-based battles share one deterministic simulator with the original goblin Auto-Battle system.
 
@@ -49,6 +49,10 @@ Audio can be toggled from the title, forest management menu or dungeon pause men
 - After victory, speak to the guardian, leave the sanctuary at its southern entrance, and return to Mira for the ending. You can keep exploring afterward.
 
 If defeated, retreat to Willowbrook and press R at the campfire. Defeat never completes a quest or awards victory rewards. Herbs, caches, discoveries and story rewards cannot be collected twice.
+
+## Hotfix 0.3.1
+
+Fixed a crash when using E to finish the shrine conversation and enter the dungeon. The dialogue now consumes keyboard input before its completion callback can remove the scene. The same fix covers Space/Enter at the boss intro and guardian's final conversation. Regression tests send real viewport input and verify the input is consumed before dialogue closes. Existing saves remain compatible; download the updated project into a new folder and choose Continue adventure.
 
 ## What changed in 0.3
 
@@ -101,7 +105,7 @@ godot --headless --path . --quit-after 90
 XDG_DATA_HOME=/tmp/verdant-oath-tests godot --headless --path . res://tests/run.tscn
 ```
 
-All **54 checks passed with Godot 4.6.3**, covering seeded Auto/normal parity, possible defeat, MP legality, mythic restrictions, equipment stats, mastery, leveling, old-save defaults, fractional position persistence, reachable forest objectives, dialogue, unique rewards, actual dungeon/battle scene transitions, both guardians, seals, boss telegraph/defense, boss victory, return to Mira, ending persistence and defeat recovery. Tests accelerate game time and do not measure real play length. Audio playback is intentionally skipped in headless mode.
+All **60 checks passed with Godot 4.6.3**, covering seeded Auto/normal parity, possible defeat, MP legality, mythic restrictions, equipment stats, mastery, leveling, old-save defaults, fractional position persistence, reachable forest objectives, dialogue, unique rewards, actual dungeon/battle scene transitions, both guardians, seals, boss telegraph/defense, boss victory, return to Mira, ending persistence and defeat recovery. Tests accelerate game time and do not measure real play length. Audio playback is intentionally skipped in headless mode.
 
 Rendered OpenGL captures were also generated and inspected for the title, village, dialogue, dungeon and boss battle. Reproduce them with a display available:
 

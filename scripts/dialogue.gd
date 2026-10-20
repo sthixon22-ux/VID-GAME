@@ -62,5 +62,6 @@ func advance():
   if callback.is_valid(): callback.call()
 func _input(event):
  if active and event is InputEventKey and event.pressed and not event.echo and event.keycode in [KEY_E,KEY_SPACE,KEY_ENTER]:
-  advance()
+  # Advancing may change scenes and detach this node from its viewport.
   get_viewport().set_input_as_handled()
+  advance()
