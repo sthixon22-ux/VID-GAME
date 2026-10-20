@@ -2,8 +2,15 @@ extends Node3D
 var hero: Node3D
 var wolf: Node3D
 var camera: ExplorationCamera
+var auto_panel:AutoBattlePanel
 var options: OptionsPanel
 var dialogue: Dialogue
+var hud_layer:ExplorationHUD
+var puzzle_panel:VBoxContainer
+var puzzle_index=0
+var contact_grace=1.5
+var encounter_busy=false
+var gate:Node3D
 var hud: Label
 var objective: Label
 var prompt: Label
@@ -19,6 +26,12 @@ var chest: Node3D
 var pause_menu: VBoxContainer
 var enemy_homes=[Vector3(-8,0,-10),Vector3(8,0,-10)]
 func _ready():
+ auto_panel=AutoBattlePanel.new()
+ add_child(auto_panel)
+ auto_panel.fight_requested.connect(func(): start_battle(State.enemy_id,State.encounter_id,true))
+ auto_panel.closed.connect(func():
+  contact_grace=3.0
+  if State.hero.hp<=0: get_tree().change_scene_to_file.call_deferred("res://scenes/world.tscn"))
  options=OptionsPanel.new()
  add_child(options)
  build_dungeon()
@@ -34,15 +47,21 @@ func _ready():
  camera.current=true
  dialogue=Dialogue.new()
  add_child(dialogue)
- var top=UI.panel(self,Vector2(16,16),Vector2(650,120))
- hud=UI.label(top,"")
- UI.label(top,"WASD · Shift sprint · Right mouse orbit · E interact · Escape menu")
- var journal=UI.panel(self,Vector2(890,16),Vector2(370,145))
- objective=UI.label(journal,"")
- prompt=UI.label(UI.panel(self,Vector2(300,640),Vector2(680,60)),"")
- pause_menu=UI.panel(self,Vector2(440,220),Vector2(400,250))
+ hud_layer=ExplorationHUD.new()
+ add_child(hud_layer)
+ hud_layer.map.dungeon=true
+ hud_layer.map.floor_cells=floor_cells
+ hud_layer.map.markers=[{"position":Vector3(-8,0,-13),"color":Color("d9ba79")},{"position":Vector3(8,0,-13),"color":Color("d9ba79")},{"position":Vector3(0,0,-29),"color":Color("c9796b")}]
+ hud=hud_layer.status
+ objective=hud_layer.objective
+ prompt=hud_layer.prompt
+ puzzle_panel=UI.panel(self,Vector2(350,140),Vector2(580,440))
+ puzzle_panel.get_parent().get_parent().hide()
+ pause_menu=UI.panel(self,Vector2(430,150),Vector2(420,420))
  pause_menu.get_parent().get_parent().hide()
  UI.button(pause_menu,"Resume",func(): pause_menu.get_parent().get_parent().hide())
+ UI.button(pause_menu,"Inventory & healing",func(): open_character("inventory"))
+ UI.button(pause_menu,"Quest journal",func(): open_character("journal"))
  UI.button(pause_menu,"Equipment & Appearance",func(): open_character("equipment"))
  UI.button(pause_menu,"Class Skill Trees",func(): open_character("skills"))
  UI.button(pause_menu,"Save",func(): State.save_game())
@@ -109,6 +128,9 @@ func build_dungeon():
  add_child(boss)
  boss.position=Vector3(0,0,-29)
  Art.sign_(boss,Vector3(0,4.5,0),"THE HOLLOW WARDEN")
+ gate=Art.box(self,Vector3(0,1.3,-23),Vector3(3.7,2.6,0.35),Color("506966"))
+ gate.material_override=Art.surface(Color("8ea693"),"metal",2)
+ Art.sign_(gate,Vector3(0,1.9,0),"Two seals bind this door")
  Art.sign_(self,Vector3(0,2,2),"WILLOWBROOK ↑\n[E] Leave sanctuary")
  for i in range(8):
   var pos=Vector3(-2 if i%2==0 else 2,1.7,-i*4)
@@ -119,15 +141,20 @@ func build_dungeon():
   lamp.light_energy=1.2
   lamp.omni_range=5
 func can_walk(pos: Vector3) -> bool:
+ if pos.z< -22 and State.hero.journey.seals.size()<2: return false
  return floor_cells.has(Vector2i(floori((pos.x+1)/2),floori((pos.z+1)/2)))
 func _unhandled_input(event):
- if options.active or dialogue.active: return
+ if auto_panel.active or options.active or dialogue.active: return
+ if puzzle_panel.get_parent().get_parent().visible:
+  if event is InputEventKey and event.pressed and event.keycode==KEY_ESCAPE: puzzle_panel.get_parent().get_parent().hide()
+  return
  if event is InputEventMouseMotion and Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
   yaw-=event.relative.x*0.005*UserSettings.camera_sensitivity
   pitch=clampf(pitch-event.relative.y*0.004*UserSettings.camera_sensitivity,-1.05,-0.3)
  if event is InputEventKey and event.pressed and not event.echo:
   match event.keycode:
    KEY_E: interact()
+   KEY_TAB: open_character("inventory")
    KEY_I: open_character("equipment")
    KEY_K: open_character("skills")
    KEY_C: open_character("companions")
@@ -136,8 +163,9 @@ func _unhandled_input(event):
    KEY_F5: State.save_game()
 func _process(delta):
  clock+=delta
+ contact_grace=maxf(0,contact_grace-delta)
  var direction=Vector3.ZERO
- if not options.active and not dialogue.active and not pause_menu.get_parent().get_parent().visible:
+ if not auto_panel.active and not options.active and not dialogue.active and not pause_menu.get_parent().get_parent().visible and not puzzle_panel.get_parent().get_parent().visible and not encounter_busy:
   if State.hero.profile.economy:
    elapsed_fraction+=delta
    if elapsed_fraction>=1:
@@ -161,15 +189,22 @@ func _process(delta):
  Art.animate(boss,clock,false)
  chest.visible=not State.hero.journey.chest
  camera.update_view(hero.position+Vector3.UP,Vector3(sin(yaw)*cos(pitch)*8,-sin(pitch)*8,cos(yaw)*cos(pitch)*8),delta)
- hud.text="ROOTBOUND SANCTUARY\nLv %s · HP %s/%s · MP %s/%s · Potions %s" % [State.hero.level,State.hero.hp,State.stats().max_hp,State.hero.mp,State.stats().max_mp,State.hero.potions]
- objective.text="THE BELL BENEATH THE WOODS\nRoot seals: %s/2\n%s" % [State.hero.journey.seals.size(),"Return to Mira" if State.hero.journey.boss else "Cleanse the guardian's heart"]
- prompt.text="[E] Interact · Explore both side chambers · [Esc] Menu"
- if hero.position.distance_to(boss.position)<4 and boss.visible: prompt.text="[E] Face the Hollow Warden · Watch its charging attack!"
+ gate.visible=State.hero.journey.seals.size()<2
+ var context="[E] Interact · [Esc] Menu"
+ if hero.position.distance_to(boss.position)<4 and boss.visible: context="Contact the Hollow Warden · Defend its charged attack"
+ hud_layer.update_view(hero.position,"Rootbound Sanctuary · Seals %s/2 · Solve both chamber puzzles" % State.hero.journey.seals.size(),context,"",delta)
+ if contact_grace<=0 and not auto_panel.active and not dialogue.active and not options.active and not pause_menu.get_parent().get_parent().visible and not puzzle_panel.get_parent().get_parent().visible and not encounter_busy:
+  for index in range(enemies.size()):
+   if enemies[index].visible and hero.position.distance_to(enemies[index].position)<1.25:
+    start_battle("mossling",100+index)
+    return
+  if boss.visible and State.hero.journey.seals.size()==2 and hero.position.distance_to(boss.position)<2.5:
+   start_battle("warden",200)
 func interact():
- if dialogue.active or pause_menu.get_parent().get_parent().visible: return
+ if auto_panel.active or dialogue.active or options.active or puzzle_panel.get_parent().get_parent().visible or pause_menu.get_parent().get_parent().visible: return
  if hero.position.z>-1.0:
   State.hero.journey.region="forest"
-  State.remember_position(Vector3(24,0,-10))
+  State.remember_position(Forest.SHRINE+Vector3(0,0,3))
   State.save_game()
   get_tree().change_scene_to_file("res://scenes/world.tscn")
   return
@@ -188,6 +223,8 @@ func interact():
   if hero.position.distance_to(seals[i].position)<2 and not State.hero.journey.seals.has(i):
    if not State.hero.journey.guards.has(i):
     start_battle("mossling",100+i)
+   elif not State.hero.puzzles.solved.has("dials" if i==0 else "song"):
+    open_puzzle(i)
    else:
     State.hero.journey.seals.append(i)
     State.save_game()
@@ -202,14 +239,45 @@ func interact():
  if hero.position.distance_to(boss.position)<4 and not State.hero.journey.boss:
   if State.hero.journey.seals.size()<2: dialogue.show_id("boss_locked")
   else: dialogue.show_id("boss",func(): start_battle("warden",200))
-func start_battle(species: String, id: int):
- if State.hero.hp<=0: return
+func start_battle(species: String, id: int, force_normal:bool=false):
+ if State.hero.hp<=0 or encounter_busy or auto_panel.active: return
  State.enemy_id=species
  State.encounter_id=id
- State.return_position=hero.position
- get_tree().change_scene_to_file("res://scenes/battle.tscn")
+ State.remember_position(hero.position)
+ if species!="warden" and State.species_wins(species)>=10 and not force_normal:
+  auto_panel.open(species,true)
+  return
+ encounter_busy=true
+ get_tree().change_scene_to_file.call_deferred("res://scenes/battle.tscn")
 
 func open_character(page: String):
  State.menu_page=page
  State.remember_position(hero.position)
  get_tree().change_scene_to_file("res://scenes/character.tscn")
+
+func open_puzzle(index:int):
+ puzzle_index=index
+ for child in puzzle_panel.get_children():
+  puzzle_panel.remove_child(child)
+  child.queue_free()
+ puzzle_panel.get_parent().get_parent().show()
+ var solved=State.hero.puzzles.solved.has("dials" if index==0 else "song")
+ UI.label(puzzle_panel,"THE SUNWARD DIALS" if index==0 else "THE WATERSONG BELLS").add_theme_font_size_override("font_size",25)
+ UI.label(puzzle_panel,"Light returns to the seal. Close this page and press E to cleanse it." if solved else ("Inscription: 'The sun leads. The moon follows. The leaf rests last.'\nAlign the three dials from left to right. Each click rotates one symbol." if index==0 else "Inscription: 'Water wakes the dawn. Dawn stirs the leaves.'\nRing the three bells in that order. A wrong note clears the sequence."))
+ if index==0:
+  var symbols=["Seed","Sun","Leaf","Moon"]
+  for dial in range(3):
+   var dial_index=dial
+   UI.button(puzzle_panel,"Dial %s: %s · rotate" % [dial+1,symbols[State.hero.puzzles.dials[dial]]],func():
+    State.puzzle_dial(dial_index)
+    Sound.cue("confirm")
+    open_puzzle(0)).disabled=solved
+ else:
+  UI.label(puzzle_panel,"Harmony: %s / 3 notes" % State.hero.puzzles.sequence.size())
+  for bell in range(3):
+   var bell_index=bell
+   UI.button(puzzle_panel,["Dawn bell","Leaf bell","Water bell"][bell],func():
+    State.puzzle_note(bell_index)
+    Sound.cue("confirm")
+    open_puzzle(1)).disabled=solved
+ UI.button(puzzle_panel,"Return to chamber",func(): puzzle_panel.get_parent().get_parent().hide())

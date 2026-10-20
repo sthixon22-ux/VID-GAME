@@ -5,6 +5,12 @@ var hero: Node3D
 var wolf: Node3D
 var camera: ExplorationCamera
 var options: OptionsPanel
+var hud_layer: ExplorationHUD
+var contact_grace=1.5
+var encounter_busy=false
+var current_region=""
+var pending_species="goblin"
+var pending_id=0
 var auto_panel: AutoBattlePanel
 var board: VBoxContainer
 var elapsed_fraction=0.0
@@ -14,7 +20,8 @@ var forest: Forest
 var objective: Label
 var prompt: Label
 var time_=0.0
-var goblin_homes=[Vector3(0,0,-9),Vector3(7,0,-17),Vector3(19,0,-12)]
+var goblin_homes=[Vector3(-2,0,-21),Vector3(5,0,-34),Vector3(-3,0,-48),Vector3(28,0,-53),Vector3(48,0,-55),Vector3(59,0,-60)]
+var species_list=["goblin","goblin","goblin","bristleback","bristleback","bristleback"]
 var yaw=0.0
 var pitch=-0.45
 var hud: Label
@@ -23,6 +30,10 @@ var message=""
 func _ready():
  auto_panel=AutoBattlePanel.new()
  add_child(auto_panel)
+ auto_panel.fight_requested.connect(func(): start_normal_battle(pending_species,pending_id))
+ auto_panel.closed.connect(func():
+  contact_grace=3.0
+  if State.hero.hp<=0 and is_instance_valid(hero): hero.position=Vector3.ZERO)
  options=OptionsPanel.new()
  add_child(options)
  forest=Forest.new()
@@ -37,31 +48,28 @@ func _ready():
  wolf=CompanionVisual.build(State.hero.companion.current)
  add_child(wolf)
  if State.hero.profile.economy:
-  goblin_homes=[Vector3(-2,0,-12),Vector3(5,0,-24),Vector3(23,0,-7)]
   for pos in forest.herb_positions:
    var guard=Art.actor("Goblin")
    add_child(guard)
    guard.position=pos+Vector3(0.5,0,0.8)
-   Art.sign_(guard,Vector3(0,2.6,0),"Moonleaf guard · [E]")
+   Art.sign_(guard,Vector3(0,2.6,0),"Moonleaf guard")
    field_guards.append(guard)
- for pos in goblin_homes:
-  var gob=Art.actor("Goblin")
+ for index in range(goblin_homes.size()):
+  var gob=Art.actor("Goblin" if species_list[index]=="goblin" else "Bristleback")
   add_child(gob)
-  gob.position=pos
+  gob.position=goblin_homes[index]
   goblins.append(gob)
-  Art.sign_(gob,Vector3(0,2.6,0),"Forest Goblin")
+  Art.sign_(gob,Vector3(0,2.6,0),"Forest Goblin" if species_list[index]=="goblin" else "Meadow Bristleback")
  camera=ExplorationCamera.new()
  add_child(camera)
  camera.current=true
- var panel=UI.panel(self,Vector2(16,16),Vector2(600,180))
- hud=UI.label(panel,"")
- UI.label(panel,"WASD move · Shift sprint · Right mouse orbit · E interact")
- UI.label(panel,"Q auto · I gear · K skill trees · F5 save · F9 load · R rest")
- var journal=UI.panel(self,Vector2(900,20),Vector2(360,200))
- objective=UI.label(journal,"")
- var bottom=UI.panel(self,Vector2(350,640),Vector2(580,60))
- prompt=UI.label(bottom,"")
- menu=UI.panel(self,Vector2(820,20),Vector2(440,680))
+ hud_layer=ExplorationHUD.new()
+ add_child(hud_layer)
+ hud=hud_layer.status
+ objective=hud_layer.objective
+ prompt=hud_layer.prompt
+ hud_layer.map.markers=[{"position":Vector3(3.5,0,1),"color":Color("dbbe7d")},{"position":Forest.SHRINE,"color":Color("8dc6ce")}]
+ menu=UI.panel(self,Vector2(430,140),Vector2(420,460))
  menu.get_parent().get_parent().visible=false
  completion=UI.panel(self,Vector2(340,200),Vector2(600,340))
  UI.label(completion,"THE BELL BENEATH THE WOODS
@@ -90,6 +98,7 @@ func _unhandled_input(event):
    get_viewport().set_input_as_handled()
   return
  if auto_panel.active or options.active or dialogue.active or completion.get_parent().get_parent().visible: return
+ if menu.get_parent().get_parent().visible and not (event is InputEventKey and event.keycode==KEY_ESCAPE): return
  if event is InputEventMouseMotion and Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
   yaw-=event.relative.x*0.005*UserSettings.camera_sensitivity
   pitch=clampf(pitch-event.relative.y*0.004*UserSettings.camera_sensitivity,-1.1,-0.15)
@@ -97,6 +106,7 @@ func _unhandled_input(event):
   match event.keycode:
    KEY_E: interact()
    KEY_Q: encounter(true)
+   KEY_TAB: open_character("inventory")
    KEY_I: open_character("equipment")
    KEY_K: open_character("skills")
    KEY_C: open_character("companions")
@@ -119,7 +129,9 @@ func _unhandled_input(event):
      message="Rested at camp. Hero and companion restored."
     else: message="Return to the central clearing to rest."
 func _process(delta):
+ var contact_from=hero.position
  time_+=delta
+ contact_grace=maxf(0,contact_grace-delta)
  var direction=Vector3.ZERO
  if not auto_panel.active and not board.get_parent().get_parent().visible and not options.active and not menu.get_parent().get_parent().visible and not dialogue.active and not completion.get_parent().get_parent().visible:
   var input=Vector3(float(Input.is_physical_key_pressed(KEY_D))-float(Input.is_physical_key_pressed(KEY_A)),0,float(Input.is_physical_key_pressed(KEY_S))-float(Input.is_physical_key_pressed(KEY_W)))
@@ -132,7 +144,7 @@ func _process(delta):
     elapsed_fraction=fmod(elapsed_fraction,1.0)
   hero.position=ExplorationMotion.move(hero.position,direction*speed*delta,forest.can_walk)
   if direction.length()>0: hero.rotation.y=lerp_angle(hero.rotation.y,atan2(-direction.x,-direction.z),minf(1,delta*12))
- hero.position.y=0.32 if absf(hero.position.x-12)<2.5 and absf(hero.position.z+12)<1.5 else 0.0
+ hero.position.y=0.28 if absf(hero.position.x-18)<2.5 and absf(hero.position.z+54)<1.6 else 0.0
  State.remember_position(hero.position)
  animate_actor(hero,direction.length()>0)
  wolf.visible=State.hero.companion.active
@@ -145,7 +157,10 @@ func _process(delta):
   var gob=goblins[i]
   gob.visible=Time.get_ticks_msec()>int(State.cleared_until.get(i,0))
   if gob.visible:
-   gob.position=goblin_homes[i]+Vector3(sin(time_*0.5+i)*0.7,0,cos(time_*0.5+i)*0.7)
+   var target=goblin_homes[i]+Vector3(sin(time_*0.5+i)*0.9,0,cos(time_*0.5+i)*0.9)
+   if hero.position.distance_to(gob.position)<5 and hero.position.distance_to(goblin_homes[i])<8 and State.starter_ready(): target=hero.position
+   var step=(target-gob.position).limit_length(delta*1.9)
+   gob.position=ExplorationMotion.move(gob.position,step,forest.can_walk)
    gob.rotation.y=-time_*0.5-i
    animate_actor(gob,true)
  for i in range(forest.herbs.size()): forest.herbs[i].visible=not State.hero.exploration.herbs.has(i)
@@ -153,10 +168,6 @@ func _process(delta):
   field_guards[i].visible=not State.hero.demo.field_guards.has(i)
   animate_actor(field_guards[i],false)
  camera.update_view(hero.position+Vector3.UP*1.2,Vector3(sin(yaw)*cos(pitch)*8,-sin(pitch)*8+0.3,cos(yaw)*cos(pitch)*8),delta)
- var s=State.stats()
- hud.text="%s · Lv %s · XP %s/%s
-HP %s/%s · MP %s/%s · Gold %s · Mastery %s/10
-%s" % [State.hero.primary,State.hero.level,State.hero.xp,int(State.hero.level)*70,State.hero.hp,s.max_hp,State.hero.mp,s.max_mp,State.hero.gold,State.hero.mastery,message+"\n"+State.notice]
  var goal="Talk to Mira in Willowbrook"
  if State.hero.journey.started: goal="Gather Moonleaf: %s/3" % State.hero.exploration.herbs.size()
  if State.hero.exploration.herbs.size()==3: goal="Bring the Moonleaf to Mira"
@@ -164,23 +175,70 @@ HP %s/%s · MP %s/%s · Gold %s · Mastery %s/10
  if State.hero.journey.boss: goal="Return to Mira with the living ember"
  if State.hero.journey.finished: goal="Choose your permanent companion [C]" if State.hero.companion.owned.is_empty() else "Adventure complete · Optional village board challenge"
  if State.hero.profile.economy and not State.starter_ready(): goal="Buy a weapon: outfitter east of camp"
- objective.text="THE BELL BENEATH THE WOODS\n%s\nRoot seals: %s/2" % [goal,State.hero.journey.seals.size()]
- prompt.text=context_prompt()
+ var region=Forest.region(hero.position)
+ if region!=current_region:
+  current_region=region
+  message=region
+ hud_layer.map.markers=[{"position":Vector3(3.5,0,1),"color":Color("dbbe7d")},{"position":Forest.SHRINE,"color":Color("8dc6ce")}]
+ for herb in forest.herbs:
+  if herb.visible: hud_layer.map.markers.append({"position":herb.position,"color":Color("c598d3")})
+ for npc in Forest.QUEST_NPCS: hud_layer.map.markers.append({"position":npc,"color":Color("dbbe7d")})
+ for gob in goblins:
+  if gob.visible: hud_layer.map.markers.append({"position":gob.position,"color":Color("ca7770")})
+ if State.hero.side_quests.started.has("skyglass") and not State.hero.side_quests.claimed.has("skyglass"):
+  for index in range(Forest.CRYSTALS.size()):
+   if not State.hero.side_quests.crystals.has(index): hud_layer.map.markers.append({"position":Forest.CRYSTALS[index],"color":Color("8ac2e3")})
+ hud_layer.update_view(hero.position,goal,context_prompt(),message+"  "+State.notice,delta)
+ for i in range(forest.crystals.size()): forest.crystals[i].visible=not State.hero.side_quests.crystals.has(i)
+ if not modal_active() and contact_grace<=0 and not encounter_busy: check_contact(contact_from)
+func modal_active()->bool:
+ return auto_panel.active or options.active or dialogue.active or menu.get_parent().get_parent().visible or board.get_parent().get_parent().visible or completion.get_parent().get_parent().visible
+func check_contact(from_position:Vector3=Vector3.INF):
+ if from_position==Vector3.INF: from_position=hero.position
+ if State.hero.hp<=0 or not State.starter_ready(): return
+ for i in range(goblins.size()):
+  if goblins[i].visible and goblins[i].position.distance_to(Geometry3D.get_closest_point_to_segment(goblins[i].position,from_position,hero.position))<1.25:
+   request_encounter(species_list[i],i,true)
+   return
+ for i in range(field_guards.size()):
+  if field_guards[i].visible and field_guards[i].position.distance_to(Geometry3D.get_closest_point_to_segment(field_guards[i].position,from_position,hero.position))<1.25:
+   request_encounter("goblin",300+i,true)
+   return
+func request_encounter(species:String,id:int,can_auto:bool):
+ if modal_active() or encounter_busy or not ready_for_trail(): return
+ pending_species=species
+ pending_id=id
+ State.enemy_id=species
+ State.encounter_id=id
+ State.remember_position(hero.position)
+ if can_auto and State.species_wins(species)>=10: auto_panel.open(species,true)
+ else: start_normal_battle(species,id)
+func start_normal_battle(species:String,id:int):
+ if encounter_busy: return
+ encounter_busy=true
+ State.enemy_id=species
+ State.encounter_id=id
+ State.remember_position(hero.position)
+ get_tree().change_scene_to_file.call_deferred("res://scenes/battle.tscn")
 func animate_actor(model: Node3D, moving: bool):
  Art.animate(model,time_,moving)
 func context_prompt() -> String:
  if hero.position.distance_to(Vector3(3.5,0,1))<2.2: return "[E] Willowbrook outfitter · Buy your first equipment"
  if hero.position.distance_to(Vector3(0,0,5))<2.2: return "[E] Village board · Training & postgame challenge"
  if hero.position.distance_to(Vector3(-2.6,0,-0.8))<2.4: return "[E] Talk to Mira · [R] Rest at camp"
+ for i in range(Forest.QUEST_NPCS.size()):
+  if hero.position.distance_to(Forest.QUEST_NPCS[i])<2: return "[E] "+QuestBook.data[QuestBook.data.keys()[i]].giver+" · Town errand"
+ for crystal in forest.crystals:
+  if crystal.visible and hero.position.distance_to(crystal.position)<2: return "[E] Gather skyglass"
  for herb in forest.herbs:
   if herb.visible and hero.position.distance_to(herb.position)<2:
-   if State.hero.profile.economy and not State.hero.demo.field_guards.has(forest.herbs.find(herb)): return "[E] Challenge the visible Moonleaf guard"
+   if State.hero.profile.economy and not State.hero.demo.field_guards.has(forest.herbs.find(herb)): return "Touch the Moonleaf guard to battle"
    return "[E] Gather Moonleaf"
- if hero.position.distance_to(Vector3(24,0,-12))<3: return "[E] Enter the Rootbound Sanctuary"
+ if hero.position.distance_to(Forest.SHRINE)<3: return "[E] Enter the Rootbound Sanctuary"
  for gob in goblins:
-  if gob.visible and hero.position.distance_to(gob.position)<3: return "[E] Challenge Forest Goblin · [Q] Auto-Battle"
+  if gob.visible and hero.position.distance_to(gob.position)<3: return "Contact starts battle · mastered species offer Auto-Battle"
  if hero.position.length()<3: return "[R] Rest and restore HP / MP · Follow the northern trail"
- return "Explore the woodland · Cross the eastern bridge to the shrine"
+ return ""
 func interact():
  if auto_panel.active or options.active or board.get_parent().get_parent().visible or menu.get_parent().get_parent().visible or dialogue.active: return
  if hero.position.distance_to(Vector3(3.5,0,1))<2.2:
@@ -213,6 +271,17 @@ func interact():
    dialogue.show_id("herbs")
   else: dialogue.show_id("ready" if State.hero.exploration.quest_done else "reminder")
   return
+ for i in range(Forest.QUEST_NPCS.size()):
+  if hero.position.distance_to(Forest.QUEST_NPCS[i])<2:
+   show_side_quest(QuestBook.data.keys()[i])
+   return
+ for i in range(forest.crystals.size()):
+  if forest.crystals[i].visible and hero.position.distance_to(forest.crystals[i].position)<2:
+   State.hero.side_quests.crystals.append(i)
+   forest.crystals[i].hide()
+   message="Skyglass gathered · %s/3. Return to Artisan Nessa in Willowbrook." % State.hero.side_quests.crystals.size()
+   State.save_game()
+   return
  for i in range(forest.herbs.size()):
   var herb=forest.herbs[i]
   if herb.visible and hero.position.distance_to(herb.position)<2:
@@ -229,7 +298,7 @@ func interact():
    message="Gathered Moonleaf! +1 potion. Bring all three to Mira."
    State.save_game()
    return
- if hero.position.distance_to(Vector3(24,0,-12))<3:
+ if hero.position.distance_to(Forest.SHRINE)<3:
   if not State.hero.exploration.shrine:
    State.hero.exploration.shrine=true
    State.award_gold(30,"Shrine discovery")
@@ -245,28 +314,16 @@ func interact():
   return
  encounter(false)
 func encounter(auto: bool):
- if not ready_for_trail(): return
- if auto_panel.active or options.active or board.get_parent().get_parent().visible or menu.get_parent().get_parent().visible or dialogue.active: return
- var nearby=false
- State.enemy_id="goblin"
- for gob in goblins:
-  if gob.visible and hero.position.distance_to(gob.position)<3:
-   nearby=true
-   State.encounter_id=goblins.find(gob)
- if not nearby:
-  message="Approach a visible goblin (within 3 meters)."
-  return
- if State.hero.hp<=0:
-  message="Rest at camp first."
-  return
- if auto:
-  if State.hero.mastery<10:
-   message="Auto-Battle requires 10 normal goblin victories."
+ if modal_active() or not ready_for_trail(): return
+ for index in range(goblins.size()):
+  if goblins[index].visible and hero.position.distance_to(goblins[index].position)<3:
+   var species:String=species_list[index]
+   if auto and State.species_wins(species)<10:
+    message="Auto-Battle requires 10 normal victories for this species."
+    return
+   request_encounter(species,index,true)
    return
-  auto_panel.open("goblin")
- else:
-  State.return_position=hero.position
-  get_tree().change_scene_to_file("res://scenes/battle.tscn")
+ message="Approach a visible enemy. Contact starts battle."
 func update_gear():
  var pos=hero.position
  hero.queue_free()
@@ -282,6 +339,7 @@ func refresh_menu():
   menu.remove_child(child)
   child.queue_free()
  UI.label(menu,"ADVENTURE MENU")
+ UI.button(menu,"Inventory & healing  [Tab]",func(): open_character("inventory"))
  UI.button(menu,"Equipment & Appearance  [I]",func(): open_character("equipment"))
  UI.button(menu,"Class Skill Trees  [K]",func(): open_character("skills"))
  UI.button(menu,"%s: %s · Change behavior" % [State.companion_name(),State.hero.companion.behavior],func():
@@ -290,7 +348,7 @@ func refresh_menu():
   State.save_game()
   refresh_menu())
  UI.button(menu,"Companion bond  [C]",func(): open_character("companions"))
- UI.button(menu,"Journal & inventory  [J]",func(): open_character("journal"))
+ UI.button(menu,"Quest journal  [J]",func(): open_character("journal"))
  UI.button(menu,"Settings",options.open)
  UI.button(menu,"Save and return to title",func():
   State.save_game()
@@ -316,6 +374,7 @@ func show_board():
 For the story: speak to Mira. Spend skill points [K] whenever you wish.
 Defend halves damage. Paladin + Ranger + Druid: shield blocks prime class chemistry.
 Gather Moonleaf, return to Mira, then enter the sanctuary.
+Town errands: Rowan southwest, Nessa southeast, Oren west.
 After the guardian: return to Mira and choose a companion [C].")
  UI.button(board,"Open journal & field guide",func(): open_character("journal"))
  if State.hero.journey.finished and not State.hero.companion.owned.is_empty():
@@ -328,3 +387,17 @@ Victory unlocks your second and final permanent companion choice.")
    State.save_game()
    get_tree().change_scene_to_file("res://scenes/battle.tscn")).disabled=State.hero.hp<=0 or State.hero.demo.echo
  UI.button(board,"Close",func(): board.get_parent().get_parent().hide())
+
+func show_side_quest(id:String):
+ var entry:Dictionary=QuestBook.data[id]
+ var text=entry.description+"\nReward: %s gold + %s XP." % [entry.gold,entry.xp]
+ if State.hero.side_quests.claimed.has(id): text="Thank you. Your help has made Willowbrook safer."
+ elif QuestBook.complete(State.hero,id):
+  State.claim_side_quest(id)
+  text="You did it! "+entry.name+" complete.\n"+State.notice+" · +%s XP" % entry.xp
+ elif not State.hero.side_quests.started.has(id):
+  State.accept_side_quest(id)
+  text+="\nQuest added to your journal."
+ else: text+="\nProgress: %s / %s" % [QuestBook.progress(State.hero,id),entry.goal]
+ dialogue.database["side_quest"]=[[entry.giver,text]]
+ dialogue.show_id("side_quest")

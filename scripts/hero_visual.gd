@@ -35,7 +35,7 @@ func _init(equipment: Dictionary={}, appearance: Dictionary={}):
  var outfit="Knight"
  if gear.get("Chest")=="Leather Vest" or gear.get("Chest")=="None": outfit="Rogue"
  elif gear.get("Chest")=="Verdant Robe": outfit="Mage"
- model=load("res://assets/vendor/kaykit/%s.glb" % outfit).instantiate()
+ model=load("res://assets/models/heroes/%s.glb" % outfit).instantiate()
  body.add_child(model)
  body.rotation.y=PI
  body.scale=Vector3.ONE*0.85
@@ -44,34 +44,32 @@ func _init(equipment: Dictionary={}, appearance: Dictionary={}):
  for node in model.find_children("*","MeshInstance3D",true,false):
   if node.get_parent() is BoneAttachment3D: node.hide()
  # Attach pack weapons to the shared animated hand slots; never float beside the actor.
- var source=load("res://assets/vendor/kaykit/Knight.glb").instantiate()
  var sword_name: String=gear.get("Weapon","Iron Sword")
- var family: String=State.equipment_data.get(sword_name,{}).get("weapon_type","sword")
- var sword_color=Color(State.equipment_data.get(sword_name,{}).get("color","d4e4ed"))
- var weapon: Node3D
- if family=="sword":
-  weapon=source.find_child("1H_Sword",true,false).duplicate()
-  if sword_name!="Iron Sword": tint(weapon,sword_color)
-  if sword_name=="Moonleaf Saber": weapon.scale*=Vector3(0.75,1.08,0.75)
- else: weapon=GearVisual.build(family,sword_color)
+ var weapon:Node3D=GearVisual.item(sword_name) if sword_name!="None" else Node3D.new()
  weapon.name="EquippedWeapon"
  weapon.visible=sword_name!="None"
  socket("handslot.r").add_child(weapon)
  var shield_name: String=gear.get("Shield","None")
  if shield_name!="None":
-  var shield=source.find_child("Round_Shield" if shield_name=="Oak Shield" else "Badge_Shield",true,false).duplicate()
+  var shield=GearVisual.item(shield_name)
   shield.name="EquippedShield"
-  shield.visible=true
-  if shield_name!="Oak Shield": tint(shield,Color(State.equipment_data[shield_name].color))
+  shield.rotation.y=PI
   socket("handslot.l").add_child(shield)
  var helmet: String=gear.get("Helmet","None")
- if helmet=="Steel Helm":
-  var mesh=source.find_child("Knight_Helmet",true,false).duplicate()
-  mesh.name="EquippedHelmet"
-  mesh.visible=true
-  socket("head").add_child(mesh)
- elif helmet=="Ranger Hood":
-  socket("head").add_child(make_hood())
+ if helmet!="None":
+  var helm=GearVisual.item(helmet)
+  helm.name="EquippedHelmet"
+  helm.position.y=0.24
+  helm.rotation.y=PI
+  socket("head").add_child(helm)
+ var chest_name:String=gear.get("Chest","None")
+ if chest_name!="None":
+  var armor=GearVisual.item(chest_name)
+  armor.name="EquippedChest"
+  armor.scale=Vector3(1.0,0.9,1.75)
+  armor.position.z=0.06
+  armor.rotation.y=PI
+  socket("chest").add_child(armor)
  # Independent modular pieces remain visible regardless of chest outfit.
  for slot in ["Gauntlets","Pants","Boots","Accessory"]:
   var item: String=gear.get(slot,"None")
@@ -85,6 +83,12 @@ func _init(equipment: Dictionary={}, appearance: Dictionary={}):
    elif slot=="Boots": piece=Art.box(attachment,Vector3(0,0.02,0.08),Vector3(0.22,0.2,0.36),color_)
    else: piece=Art.shape(attachment,Vector3(0,0.08,0),Vector3(0.23,0.28,0.23),color_,"cylinder")
    piece.name="Equipped"+slot+bone.replace(".","_")
+   piece.material_override.metallic=0.75 if "Steel" in item else 0.05
+   piece.material_override.roughness=0.3 if "Steel" in item else 0.85
+   if slot!="Accessory":
+    var trim=Art.shape(attachment,Vector3(0,0.16,0),Vector3(0.245,0.035,0.245),Color("a68a53"),"cylinder")
+    trim.material_override.metallic=0.7
+    trim.material_override.roughness=0.32
  if not appearance.is_empty():
   var skins=[Color("f3c59f"),Color("b67b56"),Color("70452f")]
   var hairs=[Color("473028"),Color("d1ad68"),Color("b9c3d2")]
@@ -103,7 +107,14 @@ func _init(equipment: Dictionary={}, appearance: Dictionary={}):
   if gear.get("Chest")=="None":
    var cape=model.find_child("Rogue_Cape",true,false)
    if cape: cape.hide()
- source.free()
+ if helmet=="None":
+  var tones=[Color("35271f"),Color("9d713e"),Color("808d99")]
+  var hair_color:Color=tones[int(appearance.get("hair",0))]
+  var cap=Art.shape(socket("head"),Vector3(0,.52,0),Vector3(.70,.36,.74),hair_color)
+  cap.name="HairCap"
+  for index in range(5):
+   var fringe=Art.shape(socket("head"),Vector3((index-2)*.1,.38,.31),Vector3(.15,.16,.13),hair_color)
+   fringe.rotation.z=(index-2)*.15
  for clip in player.get_animation_list():
   var animation=player.get_animation(clip)
   if clip in ["Idle","2H_Melee_Idle","Walking_A","Running_A","Blocking"]: animation.loop_mode=Animation.LOOP_LINEAR
@@ -117,12 +128,6 @@ func socket(bone: String) -> BoneAttachment3D:
  attachment.name="Slot_"+bone.replace(".","_")
  skeleton.add_child(attachment)
  return attachment
-func tint(mesh: MeshInstance3D, color_: Color):
- var material=StandardMaterial3D.new()
- material.albedo_color=color_
- material.metallic=0.4
- material.roughness=0.35
- mesh.material_override=material
 func motion(moving: bool, sprint=false):
  if action_remaining>0 or locked_pose: return
  var clip="Running_A" if moving and sprint else ("Walking_A" if moving else ("Blocking" if guarding else ("2H_Melee_Idle" if battle else "Idle")))
@@ -163,28 +168,3 @@ func play_reaction():
  player.speed_scale=player.get_animation(clip).length/0.45*(UserSettings.battle_speed if battle else 1.0)
  player.play(clip,0.05)
  action_remaining=0.45/(UserSettings.battle_speed if battle else 1.0)
-
-func make_hood() -> MeshInstance3D:
- var mesh=MeshInstance3D.new()
- mesh.name="EquippedHelmet"
- var surface=SurfaceTool.new()
- surface.begin(Mesh.PRIMITIVE_TRIANGLES)
- for latitude in range(14):
-  for longitude in range(24):
-   var corners: Array[Vector3]=[]
-   for offset in [Vector2i(0,0),Vector2i(0,1),Vector2i(1,0),Vector2i(1,1)]:
-    var angle=-PI/2+(latitude+offset.x)*PI/14
-    var around=(longitude+offset.y)*TAU/24
-    corners.append(Vector3(sin(around)*cos(angle)*0.61,0.52+sin(angle)*0.66,cos(around)*cos(angle)*0.6))
-   var center=(corners[0]+corners[1]+corners[2]+corners[3])/4
-   # Keep an open front for the face, and a cloth shell around the hair/ears.
-   if center.z>0.22 and center.y>0.12 and center.y<1.02: continue
-   for index in [0,1,2,2,1,3]: surface.add_vertex(corners[index])
- surface.generate_normals()
- mesh.mesh=surface.commit()
- var material=StandardMaterial3D.new()
- material.albedo_color=Color("507263")
- material.roughness=1
- material.cull_mode=BaseMaterial3D.CULL_DISABLED
- mesh.material_override=material
- return mesh

@@ -13,5 +13,9 @@ void fragment() {
  else if (head && brightness > 0.11 && brightness < 0.7) color = hair_tone.rgb * (0.6 + brightness * 0.6);
  else if (plain_clothes && color.g > color.r * 1.15) color = cloth_tone.rgb * (0.65 + brightness * 0.35);
  ALBEDO = color;
- ROUGHNESS = 0.85;
+ float weave=sin(UV.x*1100.0)*sin(UV.y*1100.0)*0.015;
+ ALBEDO *= 1.0+weave;
+ bool metal = !head && !plain_clothes && abs(color.r-color.b)<0.2 && brightness>0.35;
+ METALLIC = metal ? 0.55 : 0.0;
+ ROUGHNESS = metal ? 0.32 : 0.85;
 }

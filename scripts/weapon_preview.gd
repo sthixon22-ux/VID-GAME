@@ -45,7 +45,7 @@ func show_item(value: String):
   bounds=boxes[0]
   for box in boxes: bounds=bounds.merge(box)
  model.position-=bounds.get_center()
- pivot.rotation.y=0.35
+ pivot.rotation.y=PI+0.35
  camera.position=Vector3(0,0,maxf(0.35,bounds.size.length()*0.5)/sin(deg_to_rad(camera.fov*0.5))*1.15)
 func collect_bounds(node: Node3D, parent_transform: Transform3D, boxes: Array[AABB]):
  var transform_=parent_transform*node.transform

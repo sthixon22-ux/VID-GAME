@@ -44,7 +44,8 @@ func _ready():
  secondary2=OptionButton.new()
  secondary_row.add_child(secondary1)
  secondary_row.add_child(secondary2)
- secondary1.item_selected.connect(func(index): update_secondaries(secondary1.get_item_text(index)))
+ secondary1.item_selected.connect(func(index): update_secondaries(secondary1.get_item_text(index)); refresh_stats())
+ secondary2.item_selected.connect(func(_index): refresh_stats())
  details=UI.label(menu,"")
  details.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
  details.custom_minimum_size=Vector2(580,135)
@@ -72,8 +73,17 @@ func select_class(value: String):
  primary=value
  class_picker.select(State.classes.keys().find(value))
  update_secondaries()
- var data: Dictionary=State.classes[value]
- details.text=data.description+"\nLevel 1: "+GameRules.summary(GameRules.base_stats(data,1))+"\nGrowth / level: HP +%s · MP +%s · ATK +%s\nDEF +%s · AGI +%s · DEX +%s\nWeapons: %s\nOnly a learned primary mythic can be used." % [data.growth.max_hp,data.growth.max_mp,data.growth.attack,data.growth.defense,data.growth.agility,data.growth.dexterity,", ".join(data.proficiencies)]
+ refresh_stats()
+func refresh_stats():
+ if secondary1.selected<0 or secondary2.selected<0: return
+ var secondaries=[secondary1.get_item_text(secondary1.selected),secondary2.get_item_text(secondary2.selected)]
+ var combined=GameRules.combined_stats(State.classes,primary,secondaries,1)
+ var future=GameRules.combined_stats(State.classes,primary,secondaries,10)
+ var profs:Array=[]
+ for role in [primary]+secondaries:
+  for family in State.classes[role].proficiencies:
+   if not profs.has(family): profs.append(family)
+ details.text="%s / %s / %s\n60%% primary + 20%% each secondary. Roles are LOCKED for this demo.\nLevel 1: %s\nLevel 10: %s\nWeapons: %s" % [primary,secondaries[0],secondaries[1],GameRules.summary(combined),GameRules.summary(future),", ".join(profs)]
 func update_preview():
  State.hero.profile.skin=skin
  State.hero.profile.hair=hair

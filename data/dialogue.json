@@ -28,7 +28,7 @@
     ],
     [
       "Mira",
-      "Take these potions. The shrine will answer you now. Beneath it are two root seals: one in each side chamber."
+      "Take these potions. Follow Whisperwood north, cross Sunstream into Sunmeadow Plains, then reach the shrine at the far end of the road. Below are two seals, guarded by creatures and puzzles."
     ],
     [
       "Hero",
@@ -42,7 +42,7 @@
   "reminder": [
     [
       "Mira",
-      "Three purple Moonleaf plants. One on the woodland trail, one near the river, and one beyond the bridge. Your wolf will keep you company."
+      "Three purple Moonleaf plants: two in Whisperwood, one on the plains beyond Sunstream. They are marked purple on your map. Your wolf will keep you company."
     ]
   ],
   "ready": [
@@ -74,7 +74,7 @@
   "dungeon": [
     [
       "Hero",
-      "The air is colder here. Two chambers, two seals. Stay close, friend."
+      "The air is colder here. Two chambers, two seals. Stone dials to the west and old bells to the east. Their inscriptions must tell us how to wake them."
     ],
     [
       "Wolf",

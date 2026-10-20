@@ -2,6 +2,7 @@ class_name GameRules
 extends RefCounted
 const STAT_KEYS=["max_hp","max_mp","attack","defense","agility","dexterity"]
 const STAT_LABELS={"max_hp":"HP","max_mp":"MP","attack":"ATK","defense":"DEF","agility":"AGI","dexterity":"DEX"}
+const TWO_HANDED=["greatsword","axe","spear","bow","staff","claws","scythe","hammer"]
 const POINTS_PER_LEVEL=2
 const PROGRESSION_VERSION=3
 static func dodge_chance(dexterity: int) -> float:
@@ -20,6 +21,19 @@ static func base_stats(class_data: Dictionary, level_: int) -> Dictionary:
  var result={}
  for key in STAT_KEYS: result[key]=int(class_data.base_stats[key])+floori(float(class_data.growth[key])*maxi(0,level_-1))
  return result
+static func combined_stats(classes: Dictionary, primary: String, secondary: Array, level_: int) -> Dictionary:
+ var result={}
+ var roles:Array=[primary]+secondary
+ var weights=[0.6,0.2,0.2]
+ for key in STAT_KEYS:
+  var total=0.0
+  for index in range(mini(3,roles.size())):
+   var data:Dictionary=classes.get(roles[index],classes.Paladin)
+   total+=float(data.base_stats[key]+float(data.growth[key])*maxi(0,level_-1))*weights[index]
+  result[key]=maxi(1,roundi(total))
+ return result
+static func two_handed(item: Dictionary) -> bool:
+ return item.get("slot","")=="Weapon" and TWO_HANDED.has(item.get("weapon_type",""))
 static func summary(stats: Dictionary, signed=false) -> String:
  var parts: Array=[]
  for key in STAT_KEYS:

@@ -91,7 +91,7 @@ func run():
   check(State.invest_skill(primary,"mythic") and State.can_mythic(primary),"Level fifty, mastery and prerequisites unlock primary mythic")
   var next: String=State.hero.secondary[0]
   State.set_primary(next)
-  check(not State.can_mythic(primary) and State.hero.skills[primary].has("mythic"),"Class switch retains and disables old primary mythic")
+  check(State.hero.primary==primary and State.can_mythic(primary),"Created primary designation cannot be changed")
   State.learn_weapon("sword","edge")
   check(State.learn_weapon("sword","flow"),"Weapon mastery unlocks separate weapon tree")
   State.save_game()
@@ -197,7 +197,7 @@ func run():
  world.hero.position=Vector3(-2.6,0,-0.8)
  world.interact()
  dismiss(world.dialogue)
- world.hero.position=Vector3(24,0,-12)
+ world.hero.position=Forest.SHRINE
  world.interact()
  dismiss(world.dialogue)
  await get_tree().process_frame
@@ -216,6 +216,7 @@ func run():
   await get_tree().process_frame
   await get_tree().process_frame
   dungeon=get_tree().current_scene
+  solve_puzzle(i)
   dungeon.hero.position=dungeon.seals[i].position
   dungeon.interact()
   dismiss(dungeon.dialogue)
@@ -270,3 +271,10 @@ func run():
  UserSettings.set_option("minimal_animations",false)
  print("Demo checks: %s Failures: %s" % [total,failures])
  get_tree().quit(1 if failures else 0)
+
+func solve_puzzle(index:int):
+ if index==0:
+  for dial in range(3):
+   for turn in [1,3,2][dial]: State.puzzle_dial(dial)
+ else:
+  for note in [2,0,1]: State.puzzle_note(note)

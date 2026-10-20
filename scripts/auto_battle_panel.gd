@@ -1,6 +1,7 @@
 class_name AutoBattlePanel
 extends CanvasLayer
 signal closed
+signal fight_requested
 var active=false
 var content: VBoxContainer
 var shade: ColorRect
@@ -19,7 +20,7 @@ func clear():
  for child in content.get_children():
   content.remove_child(child)
   child.queue_free()
-func open(species_: String="goblin"):
+func open(species_: String="goblin", offer_normal:bool=false):
  species=species_
  resolved=false
  active=true
@@ -27,9 +28,9 @@ func open(species_: String="goblin"):
  content.get_parent().get_parent().show()
  clear()
  UI.label(content,"AUTO-BATTLE / "+species.to_upper()).add_theme_font_size_override("font_size",25)
- var wins=int(State.hero.mastery) if species=="goblin" else int(State.hero.monsters.get(species,0))
- if species!="goblin" or wins<10:
-  UI.label(content,"Requires 10 normal victories for this species.\nBosses and story guardians cannot be skipped.")
+ var wins=State.species_wins(species)
+ if species=="warden" or wins<10:
+  UI.label(content,"Requires 10 normal victories for this species.\nThe Hollow Warden cannot be skipped.")
  else:
   var forecast=Combat.new(State.hero,State.stats(),species)
   forecast.auto_resolve()
@@ -37,12 +38,24 @@ func open(species_: String="goblin"):
   var risk="CERTAIN DEFEAT" if forecast.outcome!="Victory" else ("DANGEROUS" if ratio<0.25 else ("RISKY" if ratio<0.6 else "FAVORABLE"))
   UI.label(content,"Current-state forecast: "+risk)
   UI.label(content,"Based on your current HP, MP, equipment and companion.\nResolution consumes resources and can end in defeat. No rewards on defeat.\nThe forecast does not spend resources.")
-  UI.button(content,"Resolve this encounter",resolve)
+  var successes=0
+  for index in range(24):
+   var sample=State.hero.duplicate(true)
+   sample.seed=GameRules.next_seed(int(sample.seed)+index*977)
+   var rollout=Combat.new(sample,State.stats(),species)
+   rollout.auto_resolve()
+   if rollout.outcome=="Victory": successes+=1
+  UI.label(content,"Estimated wins: %s / 24 simulated seeds (%.0f%%).\nActual current-seed forecast: %s HP · %s MP · %s potions remaining." % [successes,successes/24.0*100,forecast.h.hp,forecast.h.mp,forecast.h.potions])
+  if offer_normal:
+   UI.button(content,"Fight normally",func():
+    close()
+    fight_requested.emit())
+  UI.button(content,"Auto-Battle · resolve with these resources",resolve)
  UI.button(content,"Back",close)
 func resolve():
- if resolved: return
- var wins=int(State.hero.mastery) if species=="goblin" else int(State.hero.monsters.get(species,0))
- if species!="goblin" or wins<10: return
+ if not active or resolved: return
+ var wins=State.species_wins(species)
+ if species=="warden" or wins<10: return
  resolved=true
  var hp=int(State.hero.hp)
  var mp=int(State.hero.mp)
@@ -54,7 +67,10 @@ func resolve():
  State.hero=sim.h
  if sim.outcome=="Victory":
   State.reward(false,species)
-  State.cleared_until[State.encounter_id]=Time.get_ticks_msec()+20000
+  State.record_encounter_clear()
+ else:
+  State.hero.journey.region="forest"
+  State.remember_position(Vector3.ZERO)
  State.save_game()
  clear()
  UI.label(content,"AUTO-BATTLE / "+sim.outcome.to_upper()).add_theme_font_size_override("font_size",25)

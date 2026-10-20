@@ -48,7 +48,7 @@ func run():
  await settle()
  var before=State.hero.duplicate(true)
  for item in State.equipment_data:
-  if State.equipment_data[item].slot!="Weapon": continue
+  if State.equipment_data[item].slot=="Any": continue
   menu.preview_shop_weapon(item)
   check(menu.shop_preview.item_name==item and menu.shop_preview.pivot.get_child_count()==1,"3D preview exists for "+item)
  check(State.hero==before,"Previewing all weapons does not buy, equip, spend gold or mutate hero")

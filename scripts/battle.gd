@@ -14,7 +14,7 @@ var breath=0.0
 func _ready():
  options=OptionsPanel.new()
  add_child(options)
- if State.enemy_id=="goblin":
+ if State.enemy_id in ["goblin","bristleback"]:
   Art.environment_(self)
   for i in range(12):
    var angle=i*TAU/12
@@ -166,7 +166,7 @@ func finish():
  var previous=int(State.hero.potions)
  if sim.outcome=="Victory":
   State.reward(true,sim.species)
-  State.cleared_until[State.encounter_id]=Time.get_ticks_msec()+45000
+  State.record_encounter_clear()
   if State.encounter_id>=300 and State.encounter_id<=302 and not State.hero.demo.field_guards.has(State.encounter_id-300): State.hero.demo.field_guards.append(State.encounter_id-300)
   if State.encounter_id==1000:
    State.hero.demo.echo=true

@@ -38,3 +38,9 @@ Run `python tools/generate_assets.py` to regenerate the original textures, portr
 Demo 0.6 adds original procedural companion variants (Dire Wolf, Griffin, Dragon, Warhorse, Spirit Fox and Golem) in `scripts/companion_visual.gd` and a custom hero palette shader in `assets/shaders/hero_palette.gdshader`. These use original geometry or the existing original wolf geometry and retain the existing CC0 KayKit character textures for hero customization. No additional third-party assets or paid textures are required.
 
 Demo 0.7 adds original procedural weapon geometry in `scripts/gear_visual.gd` for axes, polearms, bows, daggers, staves, wands, claws and heavy weapons. These reuse no third-party game meshes; they use the existing shared CC0 hero rig/animations and remain placeholder art.
+
+## Demo 0.8 original art pass
+
+`models/gear/` contains original designed weapon, shield, armor and accessory meshes with metal/leather/enamel materials. `models/companions/` contains sculpted bodies, articulated limb groups and distinct horns, wings, manes, feathers or tails for all six companions, the temporary wolf and meadow bristlebacks. `models/enemies/` contains the original goblin, mossling and guardian. `textures/rpg/` supplies original albedo, normal and roughness maps plus cutout leaf branches. These are project art created for this demo, with no external service or paid content.
+
+`models/heroes/` contains proportion-adjusted derivatives of the credited CC0 KayKit Knight, Rogue and Mage, retaining their skeletal clips. They still use the credited source palette textures. Rebuild meshes with `blender --background --factory-startup --python tools/build_rpg_art.py`. Rebuild surface maps with `python3 tools/build_surface_textures.py` (Pillow and NumPy). Blender/Python are development tools; opening or playing the shipped project only requires Godot. Hashes and source distinctions are recorded in `vendor/SOURCES.json`.

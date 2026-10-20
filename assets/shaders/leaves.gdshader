@@ -1,11 +1,15 @@
 shader_type spatial;
-uniform vec3 leaf_color : source_color = vec3(0.20, 0.38, 0.22);
+render_mode cull_disabled, depth_prepass_alpha;
+uniform sampler2D canopy : source_color, filter_linear_mipmap;
 void vertex() {
- float breeze = sin(TIME * 1.2 + NODE_POSITION_WORLD.x * 0.3 + NODE_POSITION_WORLD.z * 0.2);
- VERTEX.x += breeze * 0.035 * max(VERTEX.y + 0.5, 0.0);
+ float breeze=sin(TIME*1.15+NODE_POSITION_WORLD.x*.3+NODE_POSITION_WORLD.z*.2);
+ VERTEX.x+=breeze*.07*max(VERTEX.y+.5,0.0);
 }
 void fragment() {
- float shade = smoothstep(-0.4, 0.5, NORMAL.y);
- ALBEDO = leaf_color * mix(0.85, 1.12, shade);
- ROUGHNESS = 0.95;
+ vec4 leaf=texture(canopy,UV);
+ ALBEDO=leaf.rgb;
+ ALPHA=leaf.a;
+ ALPHA_SCISSOR_THRESHOLD=.5;
+ ROUGHNESS=.94;
+ BACKLIGHT=vec3(.22,.29,.12);
 }

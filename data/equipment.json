@@ -27,7 +27,8 @@
     "agility": 0,
     "dexterity": 0,
     "max_hp": 0,
-    "max_mp": 0
+    "max_mp": 0,
+    "hands": 1
   },
   "Sunsteel Sword": {
     "slot": "Weapon",
@@ -57,7 +58,8 @@
     "agility": 0,
     "dexterity": 0,
     "max_hp": 0,
-    "max_mp": 0
+    "max_mp": 0,
+    "hands": 1
   },
   "Moonleaf Saber": {
     "slot": "Weapon",
@@ -87,7 +89,8 @@
     "agility": 0,
     "dexterity": 3,
     "max_hp": 0,
-    "max_mp": 0
+    "max_mp": 0,
+    "hands": 1
   },
   "Oak Shield": {
     "slot": "Shield",
@@ -117,7 +120,8 @@
     "dexterity": 0,
     "max_hp": 0,
     "max_mp": 0,
-    "weapon_type": "shield"
+    "weapon_type": "shield",
+    "hands": 1
   },
   "Dawn Kite Shield": {
     "slot": "Shield",
@@ -147,7 +151,8 @@
     "dexterity": 0,
     "max_hp": 0,
     "max_mp": 0,
-    "weapon_type": "shield"
+    "weapon_type": "shield",
+    "hands": 1
   },
   "Grove Shield": {
     "slot": "Shield",
@@ -177,7 +182,8 @@
     "dexterity": 0,
     "max_hp": 0,
     "max_mp": 5,
-    "weapon_type": "shield"
+    "weapon_type": "shield",
+    "hands": 1
   },
   "Steel Cuirass": {
     "slot": "Chest",
@@ -206,7 +212,8 @@
     "agility": -1,
     "dexterity": 0,
     "max_hp": 5,
-    "max_mp": 0
+    "max_mp": 0,
+    "hands": 1
   },
   "Leather Vest": {
     "slot": "Chest",
@@ -235,7 +242,8 @@
     "agility": 2,
     "dexterity": 0,
     "max_hp": 0,
-    "max_mp": 0
+    "max_mp": 0,
+    "hands": 1
   },
   "Verdant Robe": {
     "slot": "Chest",
@@ -264,7 +272,8 @@
     "agility": 0,
     "dexterity": 0,
     "max_hp": 0,
-    "max_mp": 8
+    "max_mp": 8,
+    "hands": 1
   },
   "Steel Helm": {
     "slot": "Helmet",
@@ -293,7 +302,8 @@
     "agility": -1,
     "dexterity": 0,
     "max_hp": 5,
-    "max_mp": 0
+    "max_mp": 0,
+    "hands": 1
   },
   "Ranger Hood": {
     "slot": "Helmet",
@@ -322,7 +332,8 @@
     "agility": 0,
     "dexterity": 3,
     "max_hp": 0,
-    "max_mp": 0
+    "max_mp": 0,
+    "hands": 1
   },
   "Steel Gauntlets": {
     "slot": "Gauntlets",
@@ -351,7 +362,8 @@
     "agility": -1,
     "dexterity": 0,
     "max_hp": 5,
-    "max_mp": 0
+    "max_mp": 0,
+    "hands": 1
   },
   "Leather Gloves": {
     "slot": "Gauntlets",
@@ -380,7 +392,8 @@
     "agility": 0,
     "dexterity": 3,
     "max_hp": 0,
-    "max_mp": 0
+    "max_mp": 0,
+    "hands": 1
   },
   "Steel Greaves": {
     "slot": "Pants",
@@ -409,7 +422,8 @@
     "agility": -1,
     "dexterity": 0,
     "max_hp": 5,
-    "max_mp": 0
+    "max_mp": 0,
+    "hands": 1
   },
   "Ranger Trousers": {
     "slot": "Pants",
@@ -438,7 +452,8 @@
     "agility": 2,
     "dexterity": 0,
     "max_hp": 0,
-    "max_mp": 0
+    "max_mp": 0,
+    "hands": 1
   },
   "Steel Sabatons": {
     "slot": "Boots",
@@ -467,7 +482,8 @@
     "agility": -1,
     "dexterity": 0,
     "max_hp": 5,
-    "max_mp": 0
+    "max_mp": 0,
+    "hands": 1
   },
   "Trail Boots": {
     "slot": "Boots",
@@ -496,7 +512,8 @@
     "agility": 2,
     "dexterity": 0,
     "max_hp": 0,
-    "max_mp": 0
+    "max_mp": 0,
+    "hands": 1
   },
   "Sunstone Pendant": {
     "slot": "Accessory",
@@ -525,7 +542,8 @@
     "agility": 0,
     "dexterity": 0,
     "max_hp": 12,
-    "max_mp": 0
+    "max_mp": 0,
+    "hands": 1
   },
   "Moonleaf Charm": {
     "slot": "Accessory",
@@ -554,7 +572,8 @@
     "agility": 0,
     "dexterity": 6,
     "max_hp": 0,
-    "max_mp": 0
+    "max_mp": 0,
+    "hands": 1
   },
   "Leather Gear": {
     "slot": "Any",
@@ -583,15 +602,16 @@
     "agility": 0,
     "dexterity": 0,
     "max_hp": 0,
-    "max_mp": 0
+    "max_mp": 0,
+    "hands": 1
   },
   "Woodland Bow": {
     "id": "woodland_bow",
     "slot": "Weapon",
-    "attack": 6,
+    "attack": 10,
     "defense": 0,
-    "agility": 2,
-    "dexterity": 3,
+    "agility": 4,
+    "dexterity": 5,
     "weapon_type": "bow",
     "style": "bow",
     "price": 30,
@@ -611,14 +631,15 @@
       "Monk",
       "Necromancer"
     ],
-    "description": "A bow weapon. Requires proficiency from a primary or secondary class.",
+    "description": "A bow weapon. Requires proficiency from a primary or secondary class. Two-handed: cannot be used with a shield.",
     "max_hp": 0,
-    "max_mp": 0
+    "max_mp": 0,
+    "hands": 2
   },
   "Oak Staff": {
     "id": "oak_staff",
     "slot": "Weapon",
-    "attack": 5,
+    "attack": 7,
     "defense": 0,
     "agility": 0,
     "dexterity": 1,
@@ -641,14 +662,15 @@
       "Monk",
       "Necromancer"
     ],
-    "description": "A staff weapon. Requires proficiency from a primary or secondary class.",
+    "description": "A staff weapon. Requires proficiency from a primary or secondary class. Two-handed: cannot be used with a shield.",
     "max_hp": 0,
-    "max_mp": 8
+    "max_mp": 16,
+    "hands": 2
   },
   "Iron Axe": {
     "id": "iron_axe",
     "slot": "Weapon",
-    "attack": 11,
+    "attack": 15,
     "defense": 0,
     "agility": -1,
     "dexterity": 0,
@@ -671,16 +693,17 @@
       "Monk",
       "Necromancer"
     ],
-    "description": "A axe weapon. Requires proficiency from a primary or secondary class.",
-    "max_hp": 0,
-    "max_mp": 0
+    "description": "A axe weapon. Requires proficiency from a primary or secondary class. Two-handed: cannot be used with a shield.",
+    "max_hp": 6,
+    "max_mp": 0,
+    "hands": 2
   },
   "Training Spear": {
     "id": "training_spear",
     "slot": "Weapon",
-    "attack": 8,
+    "attack": 12,
     "defense": 0,
-    "agility": 1,
+    "agility": 3,
     "dexterity": 1,
     "weapon_type": "spear",
     "style": "spear",
@@ -701,9 +724,10 @@
       "Monk",
       "Necromancer"
     ],
-    "description": "A spear weapon. Requires proficiency from a primary or secondary class.",
+    "description": "A spear weapon. Requires proficiency from a primary or secondary class. Two-handed: cannot be used with a shield.",
     "max_hp": 0,
-    "max_mp": 0
+    "max_mp": 0,
+    "hands": 2
   },
   "Twin Daggers": {
     "id": "twin_daggers",
@@ -733,7 +757,8 @@
     ],
     "description": "A dagger weapon. Requires proficiency from a primary or secondary class.",
     "max_hp": 0,
-    "max_mp": 0
+    "max_mp": 0,
+    "hands": 1
   },
   "Iron Mace": {
     "id": "iron_mace",
@@ -763,7 +788,8 @@
     ],
     "description": "A mace weapon. Requires proficiency from a primary or secondary class.",
     "max_hp": 0,
-    "max_mp": 0
+    "max_mp": 0,
+    "hands": 1
   },
   "Bone Wand": {
     "id": "bone_wand",
@@ -793,15 +819,16 @@
     ],
     "description": "A wand weapon. Requires proficiency from a primary or secondary class.",
     "max_hp": 0,
-    "max_mp": 8
+    "max_mp": 8,
+    "hands": 1
   },
   "Traveler Claws": {
     "id": "traveler_claws",
     "slot": "Weapon",
-    "attack": 5,
+    "attack": 9,
     "defense": 0,
-    "agility": 3,
-    "dexterity": 2,
+    "agility": 5,
+    "dexterity": 4,
     "weapon_type": "claws",
     "style": "claws",
     "price": 25,
@@ -821,14 +848,15 @@
       "Monk",
       "Necromancer"
     ],
-    "description": "A claws weapon. Requires proficiency from a primary or secondary class.",
+    "description": "A claws weapon. Requires proficiency from a primary or secondary class. Two-handed: cannot be used with a shield.",
     "max_hp": 0,
-    "max_mp": 0
+    "max_mp": 0,
+    "hands": 2
   },
   "Field Scythe": {
     "id": "field_scythe",
     "slot": "Weapon",
-    "attack": 9,
+    "attack": 13,
     "defense": 0,
     "agility": 0,
     "dexterity": 1,
@@ -851,15 +879,16 @@
       "Monk",
       "Necromancer"
     ],
-    "description": "A scythe weapon. Requires proficiency from a primary or secondary class.",
+    "description": "A scythe weapon. Requires proficiency from a primary or secondary class. Two-handed: cannot be used with a shield.",
     "max_hp": 0,
-    "max_mp": 0
+    "max_mp": 5,
+    "hands": 2
   },
   "Greatsword": {
     "id": "greatsword",
     "slot": "Weapon",
-    "attack": 13,
-    "defense": 0,
+    "attack": 17,
+    "defense": 2,
     "agility": -2,
     "dexterity": 0,
     "weapon_type": "greatsword",
@@ -881,14 +910,15 @@
       "Monk",
       "Necromancer"
     ],
-    "description": "A greatsword weapon. Requires proficiency from a primary or secondary class.",
+    "description": "A greatsword weapon. Requires proficiency from a primary or secondary class. Two-handed: cannot be used with a shield.",
     "max_hp": 0,
-    "max_mp": 0
+    "max_mp": 0,
+    "hands": 2
   },
   "War Hammer": {
     "id": "war_hammer",
     "slot": "Weapon",
-    "attack": 14,
+    "attack": 18,
     "defense": 0,
     "agility": -3,
     "dexterity": 0,
@@ -911,8 +941,9 @@
       "Monk",
       "Necromancer"
     ],
-    "description": "A hammer weapon. Requires proficiency from a primary or secondary class.",
+    "description": "A hammer weapon. Requires proficiency from a primary or secondary class. Two-handed: cannot be used with a shield.",
     "max_hp": 0,
-    "max_mp": 0
+    "max_mp": 0,
+    "hands": 2
   }
 }

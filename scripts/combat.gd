@@ -34,6 +34,7 @@ func _init(hero: Dictionary, attributes: Dictionary, species_: String="goblin"):
  enemy=enemies[species].duplicate(true)
  enemy_hp=int(enemy.hp)
  h=hero.duplicate(true)
+ if GameRules.two_handed(AbilityBook.gear_data.get(h.equipment.Weapon,{})): h.equipment.Shield="None"
  demo_rules=h.get("profile",{}).get("economy",false)
  var record: Dictionary=h.companion.get("records",{}).get(h.companion.get("current","intro_wolf"),{})
  if not record.is_empty(): wolf_hp=int(record.get("hp",55))

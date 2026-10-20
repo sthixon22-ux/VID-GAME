@@ -44,8 +44,8 @@ func run():
   var base=State.stats()
   var correct=true
   for key in GameRules.STAT_KEYS:
-   if base[key]!=int(State.classes[name_].base_stats[key]): correct=false
-  check(correct,"Unequipped baseline contains six class-specific stats: "+name_)
+   if base[key]!=int(GameRules.combined_stats(State.classes,name_,State.hero.secondary,1)[key]): correct=false
+  check(correct,"Unequipped baseline blends all three classes: "+name_)
   State.hero.level=50
   var grown=State.stats()
   check(GameRules.STAT_KEYS.all(func(key): return grown[key]>base[key]),"All six stats grow naturally through level fifty: "+name_)
@@ -67,7 +67,8 @@ func run():
   check(sim.legal(State.classes[name_].mythic),"Primary mythic has a real usable ability: "+name_)
   sim.round_(State.classes[name_].mythic)
   check(sim.h.mp==State.hero.mp-sim.cost(State.classes[name_].mythic) and not sim.events.is_empty(),"Mythic spends MP and resolves events: "+name_)
-  State.set_class_slot("primary",State.hero.secondary[0])
+  check(not State.set_class_slot("primary",State.hero.secondary[0]),"Primary role is locked after creation: "+name_)
+  State.hero.primary=State.hero.secondary[0] # Simulate a future chapter to test mythic availability independently.
   check(State.hero.skills[name_].has("mythic") and not State.can_mythic(name_),"Secondary mythic remains saved but unavailable: "+name_)
  # Each class can afford its own matching kit and complete the existing battle sequence.
  var starters={"Warrior":"Iron Sword","Barbarian":"Iron Axe","Paladin":"Iron Sword","Wizard":"Oak Staff","Sorcerer":"Bone Wand","Healer":"Oak Staff","Ranger":"Woodland Bow","Rogue":"Twin Daggers","Assassin":"Twin Daggers","Monk":"Traveler Claws","Druid":"Oak Staff","Necromancer":"Field Scythe"}
@@ -75,7 +76,9 @@ func run():
   prepare(class_)
   var chest="Steel Cuirass" if class_ in ["Warrior","Paladin"] else ("Verdant Robe" if class_ in ["Wizard","Sorcerer","Healer","Druid","Necromancer"] else "Leather Vest")
   var kit_ok=true
-  for item in [starters[class_],"Oak Shield",chest]:
+  var kit_items=[starters[class_],chest]
+  if not GameRules.two_handed(State.equipment_data[starters[class_]]): kit_items.append("Oak Shield")
+  for item in kit_items:
    if not State.buy(item) or not State.equip(State.equipment_data[item].slot,item): kit_ok=false
   check(kit_ok and State.starter_ready(),"Matching starter kit is affordable and equippable: "+class_)
   State.restore()
@@ -145,8 +148,7 @@ func run():
  prepare("Wizard",["Sorcerer","Necromancer"])
  State.grant_item("Iron Sword")
  check(not State.equip("Weapon","Iron Sword") and not State.learn_weapon("sword","edge"),"Class proficiencies enforce both gear and weapon-tree eligibility")
- State.set_class_slot("secondary_1","Warrior")
- check(State.equip("Weapon","Iron Sword") and State.hero.primary=="Wizard" and State.hero.secondary[1]=="Necromancer","Changing one secondary grants proficiency without replacing other slots")
+ check(not State.set_class_slot("secondary_1","Warrior") and not State.equip("Weapon","Iron Sword") and State.hero.secondary==["Sorcerer","Necromancer"],"Secondary roles remain locked and incompatible weapons stay unavailable")
  # Gear bonuses affect the actual six-stat block, not only menu text.
  prepare("Paladin")
  var initial=State.stats()

@@ -35,6 +35,7 @@ func _ready():
  UI.button(tabs,"Class trees",func(): show_page("skills"))
  UI.button(tabs,"Weapons",func(): show_page("weapons"))
  UI.button(tabs,"Companion",func(): show_page("companions"))
+ UI.button(tabs,"Inventory",func(): show_page("inventory"))
  UI.button(tabs,"Journal",func(): show_page("journal"))
  UI.button(tabs,"Return  [Esc]",leave)
  body=Control.new()
@@ -71,6 +72,7 @@ func show_page(which: String):
   "companions": build_companions()
   "weapons": build_weapons()
   "journal": build_journal()
+  "inventory": build_inventory()
   _: build_equipment()
  constrain_page(body)
 func build_equipment():
@@ -92,14 +94,15 @@ func build_equipment():
  viewport_container.add_child(preview)
  preview_root=Node3D.new()
  preview.add_child(preview_root)
- Art.environment_(preview_root)
+ Art.studio(preview_root)
  preview_actor=Art.actor("Hero",State.hero.equipment)
  preview_root.add_child(preview_actor)
  preview_actor.rotation.y=model_yaw
  var camera=Camera3D.new()
  preview_root.add_child(camera)
- camera.position=Vector3(0,1.3,3.2)
- camera.look_at(Vector3(0,1.05,0))
+ camera.fov=36
+ camera.position=Vector3(0,1.5,4.8)
+ camera.look_at(Vector3(0,1.2,0))
  camera.current=true
  var stats=content_panel(Vector2(345,450),Vector2(450,120))
  var attributes=State.stats()
@@ -126,8 +129,8 @@ func build_equipment():
    State.equip(slot,name_)
    Sound.cue("confirm")
    show_page("equipment"))
-  button.tooltip_text="Change visible gear and derived stats."
-  button.disabled=item!="None" and not State.compatible(item)
+  button.tooltip_text="Change visible gear and derived stats. Two-handed weapons stow your shield."
+  button.disabled=item!="None" and (not State.compatible(item) or (slot=="Shield" and GameRules.two_handed(State.equipment_data.get(State.hero.equipment.Weapon,{}))))
  if items.size()==1: UI.label(options,"No equipment owned for this slot.
 Visit the outfitter beside the village camp.")
 func build_skills():
@@ -181,17 +184,7 @@ func refresh_skill_info():
  var mastery_needed=int(node.get("mastery_required",0))
  UI.label(info,"%s · Hero level %s / %s required\nClass mastery %s / %s required" % [node.rarity,State.hero.level,int(node.level_required),State.hero.class_mastery[selected_class],mastery_needed])
  learn.disabled=learned or not missing.is_empty() or State.hero.points<int(node.cost) or State.hero.level<int(node.level_required) or State.hero.class_mastery[selected_class]<mastery_needed or not State.active_classes().has(selected_class)
- var switch_button=UI.button(info,"Make %s primary" % selected_class,func():
-  State.set_primary(selected_class)
-  show_page("skills"))
- switch_button.disabled=not State.can_change_class() or State.hero.primary==selected_class
- for entry in [["secondary_1","Secondary 1"],["secondary_2","Secondary 2"]]:
-  var slot_id: String=entry[0]
-  UI.button(info,"Assign to "+entry[1],func():
-   State.set_class_slot(slot_id,selected_class)
-   show_page("skills")).disabled=not State.can_change_class()
- UI.label(info,"Each full tree costs 50 SP; capstone at level 50.\nEarn 2 shared SP per level.\nChange classes at the village camp.
-Starting abilities remain available.\nGold nodes are learned.\nLines show the required path.")
+ UI.label(info,"Your three classes and primary role are locked for this demo. Class reassignment belongs to a later chapter.\nEach full tree costs 50 SP; capstone at level 50. Earn 2 shared SP per level.\nGold nodes are learned. Lines show prerequisites.")
  constrain_page(info)
 func _process(delta):
  time_+=delta
@@ -216,9 +209,7 @@ func build_shop():
  left.add_child(shop_preview)
  shop_info=UI.label(left,"Hover over a weapon to preview it · keyboard focus also works")
  UI.label(left,"Gold: %s · funds reserved only for your first weapon" % State.hero.gold)
- UI.button(left,"Potion · 8 gold",func():
-  State.buy_potion()
-  show_page("shop")).disabled=not State.can_buy_potion()
+
  UI.button(left,"View equipped gear",func(): show_page("equipment"))
  UI.button(left,"Return to village",leave)
  var right=content_panel(Vector2(430,0),Vector2(830,565))
@@ -234,9 +225,18 @@ func build_shop():
    show_page("shop"))
   button.disabled=not compatible or (not owned and not State.can_buy(item))
   button.tooltip_text=entry.description+" · "+entry.rarity
-  if entry.slot=="Weapon":
+  if entry.slot!="Any":
    button.mouse_entered.connect(func(): preview_shop_weapon(item))
    button.focus_entered.connect(func(): preview_shop_weapon(item))
+ for id in InventoryBook.data:
+  var supply:String=id
+  var entry:Dictionary=InventoryBook.data[id]
+  var button=UI.button(right,"%s · %s gold · %s owned\n%s" % [entry.name,entry.price,State.item_count(id),entry.description],func():
+   State.buy_supply(supply)
+   show_page("shop"))
+  button.disabled=State.hero.gold<int(entry.price)+State.weapon_reserve()
+  button.mouse_entered.connect(func(): preview_supply(supply))
+  button.focus_entered.connect(func(): preview_supply(supply))
  if State.hero.equipment.Weapon!="None": preview_shop_weapon(State.hero.equipment.Weapon)
  else:
   for item in State.equipment_data:
@@ -249,8 +249,30 @@ func preview_shop_weapon(item: String):
  var entry: Dictionary=State.equipment_data[item]
  var sources:Array=[]
  for class_ in State.active_classes():
-  if State.classes[class_].proficiencies.has(entry.weapon_type): sources.append(class_)
- shop_info.text="%s · %s gold\n%s\n%s" % [item,int(entry.price),GameRules.summary(entry,true),"Usable through: "+", ".join(sources) if not sources.is_empty() else "Not usable by your current class combination"]
+  if State.classes[class_].proficiencies.has(entry.get("weapon_type","")): sources.append(class_)
+ var access="Usable through: "+", ".join(sources) if not sources.is_empty() else ("Compatible armor" if State.compatible(item) else "Not usable by your class combination")
+ shop_info.text="%s · %s gold\n%s\n%s%s" % [item,int(entry.price),GameRules.summary(entry,true),access,"\nTWO HANDED · shield is stowed" if GameRules.two_handed(entry) else ""]
+func preview_supply(id: String):
+ shop_preview.show_item(id)
+ shop_info.text=InventoryBook.data[id].name+"\n"+InventoryBook.data[id].description
+func build_inventory():
+ var left=content_panel(Vector2(20,0),Vector2(590,565))
+ UI.label(left,"TRAVEL SATCHEL").add_theme_font_size_override("font_size",28)
+ var stats=State.stats()
+ paragraph(left,"HP %s / %s · MP %s / %s\nCompanion: %s\nUse supplies freely outside battle. Nothing is spent when the target is already full." % [State.hero.hp,stats.max_hp,State.hero.mp,stats.max_mp,State.companion_name()])
+ for id in InventoryBook.data:
+  var item_id:String=id
+  var entry:Dictionary=InventoryBook.data[id]
+  paragraph(left,entry.description)
+  UI.button(left,"Use %s · %s owned" % [entry.name,State.item_count(id)],func():
+   if State.use_item(item_id): Sound.cue("heal")
+   show_page("inventory")).disabled=not State.can_use_item(id)
+ var right=content_panel(Vector2(630,0),Vector2(630,565))
+ UI.label(right,"OWNED EQUIPMENT")
+ for item in State.equipment_data:
+  if State.owns(item): paragraph(right,item+" · "+State.equipment_data[item].slot)
+ UI.button(right,"Equip and inspect gear",func(): show_page("equipment"))
+ paragraph(right,"Your classes: %s / %s / %s\nRoles locked until a later chapter.\nBase stats: 60%% primary + 20%% from each secondary, including level growth." % [State.hero.primary,State.hero.secondary[0],State.hero.secondary[1]])
 func build_weapons():
  var heading=content_panel(Vector2(20,0),Vector2(1240,82))
  var row=HBoxContainer.new()
@@ -353,7 +375,7 @@ func build_journal():
  var steps=[
   [State.starter_ready(),"Buy a weapon at the outfitter"],
   [journey.started,"Speak to Mira beside the camp"],
-  [State.hero.exploration.herbs.size()==3,"Gather three Moonleaf sprigs along the northern trail"],
+  [State.hero.exploration.herbs.size()==3,"Gather Moonleaf along Whisperwood and Sunmeadow road"],
   [State.hero.exploration.quest_done,"Return the Moonleaf to Mira"],
   [journey.seals.size()==2,"Cleanse both sanctuary root seals"],
   [journey.boss,"Defeat the Hollow Warden; Defend its charged blow"],
@@ -361,41 +383,44 @@ func build_journal():
   [not State.hero.companion.owned.is_empty(),"Choose your first permanent companion"]]
  for step in steps: paragraph(left,("✓ " if step[0] else "○ ")+step[1])
  paragraph(left,"Optional: unlock species mastery, train your companion, improve equipment, and challenge the postgame Warden echo from the village board.")
+ for id in QuestBook.data:
+  var quest:Dictionary=QuestBook.data[id]
+  paragraph(left,"%s · %s/%s%s\n%s" % [quest.name,QuestBook.progress(State.hero,id),quest.goal," · CLAIMED" if State.hero.side_quests.claimed.has(id) else (" · ACTIVE" if State.hero.side_quests.started.has(id) else " · speak to "+quest.giver),quest.description])
  UI.label(left,"Recorded exploration time: %s minutes" % (int(State.hero.demo.elapsed)/60))
  var right=content_panel(Vector2(630,0),Vector2(630,565))
  UI.label(right,"FIELD GUIDE & INVENTORY").add_theme_font_size_override("font_size",24)
- for species in ["goblin","mossling"]:
+ for species in ["goblin","bristleback","mossling"]:
   var wins=int(State.hero.monsters.get(species,0))
   if species=="goblin": wins=maxi(wins,int(State.hero.mastery))
   paragraph(right,"%s · %s / 10 normal victories
-%s" % ["Forest Goblin" if species=="goblin" else "Briar Mossling",wins,("AUTO-BATTLE UNLOCKED" if wins>=10 else "Normal victories unlock optional Auto-Battle.") if species=="goblin" else "Story guardians: counted in your journal, excluded from Auto-Battle."])
+%s" % [{"goblin":"Forest Goblin","bristleback":"Meadow Bristleback","mossling":"Briar Mossling"}[species],wins,("AUTO-BATTLE UNLOCKED" if wins>=10 else "Normal victories unlock optional Auto-Battle.") if species!="warden" else "The Hollow Warden must be faced normally."])
  UI.label(right,"Potions: %s · restore 45 HP" % State.hero.potions)
- UI.button(right,"Use a potion",func(): State.use_potion(); show_page("journal")).disabled=State.hero.potions<=0 or State.hero.hp>=State.stats().max_hp
+ UI.button(right,"Use a potion",func(): State.use_item("potion"); show_page("journal")).disabled=not State.can_use_item("potion")
  paragraph(right,"Rest at the village camp to restore HP, MP and companion HP. Save at any time outside battle. If defeated, you return to camp without rewards.")
  paragraph(right,"Owned equipment: "+", ".join(State.hero.inventory))
 
 func companion_preview(parent: Node, id: String):
  UI.label(parent,"PREVIEW / "+State.companions.get(id,{"name":"Temporary quest wolf"}).name)
  var container=SubViewportContainer.new()
- container.custom_minimum_size=Vector2(400,195)
+ container.custom_minimum_size=Vector2(400,245)
  container.stretch=true
  parent.add_child(container)
  var viewport=SubViewport.new()
- viewport.size=Vector2i(780,195)
+ viewport.size=Vector2i(780,245)
  viewport.own_world_3d=true
  container.add_child(viewport)
  var root=Node3D.new()
  viewport.add_child(root)
- Art.environment_(root)
+ Art.studio(root)
  preview_actor=CompanionVisual.build(id)
  root.add_child(preview_actor)
- model_yaw=0.45
+ model_yaw=PI+1.2
  preview_actor.rotation.y=model_yaw
  var camera=Camera3D.new()
  root.add_child(camera)
  camera.fov=40
- camera.position=Vector3(1.8,1.9,3.8)
- camera.look_at(Vector3(0,1,0))
+ camera.position=Vector3(2.3,2.0,4.3)
+ camera.look_at(Vector3(0,1.15,0))
  camera.current=true
 
 func constrain_page(root: Node):

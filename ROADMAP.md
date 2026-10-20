@@ -43,6 +43,16 @@ The agreed target is a polished short adventure with a village, forest route, du
 - Matching weapons/techniques, more class abilities, caster mana scaling, primary-only late mythics and safe old-save respec/archives.
 - Full details: [0.7 report](docs/DEMO_0_7.md).
 
+## Delivered in 0.8 — an expanded journey
+
+- Compact exploration HUD/minimap, pause inventory and out-of-battle HP/MP/companion supplies.
+- Physical contact encounters, patrol/chase behavior, species-specific mastery choice and forecast/results without a battle scene for Auto-Battle.
+- Primary/secondary stat blending with a live creation preview; class roles locked until a later chapter.
+- Two-handed/shield rules, compensating equipment bonuses, complete shop previews and a new original equipment model set.
+- A larger village–woodland–plains–shrine route, meadow enemies, three town errands and two persistent dungeon puzzles.
+- Original companion/enemy meshes, proportion-adjusted heroes, metal/leather detail, textured terrain and cutout foliage.
+- Schema-four migration/backups; see the [0.8 report](docs/DEMO_0_8.md).
+
 ## Next: verify the public-release bar
 
 Run fresh, timed Windows playthroughs without test teleports. Check whether the complete opening reaches the 15–20-minute target, tune costs/MP/encounter difficulty and verify everyone finds the shop, trees and companion endpoint. Review audio, keyboard/controller focus and readability. Bring remaining creature/companion art and animation to a consistent quality bar; the procedural additions demonstrate function, not final production quality.

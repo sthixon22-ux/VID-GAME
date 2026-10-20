@@ -17,7 +17,7 @@ func run():
  check(not State.invest_skill("Paladin","mythic") and State.hero.points==20,"Mythic prerequisites cannot be bypassed")
  check(State.invest_skill("Paladin","oath"),"Root node learns with one point")
  var attack=State.stats().attack
- check(attack==25,"Learned attack node changes derived stats")
+ check(attack==GameRules.combined_stats(State.classes,"Paladin",State.hero.secondary,1).attack+8+2,"Learned attack node changes blended derived stats")
  check(not State.invest_skill("Paladin","oath") and State.hero.points==19,"Duplicate investment rejected")
  check(not State.invest_skill("Paladin","shield"),"Level-one hero cannot buy level-five branch")
  State.hero.level=50
@@ -29,9 +29,10 @@ func run():
   if node.id not in ["oath","shield","mythic"]: State.invest_skill("Paladin",node.id)
  check(State.invest_skill("Paladin","mythic"),"Level-50 prerequisite path unlocks mythic")
  check(State.hero.points==50 and State.can_mythic("Paladin"),"Full tree costs fifty points and primary mythic activates")
- State.set_primary("Ranger")
+ check(not State.set_class_slot("primary","Ranger"),"Classes remain locked even at the village camp")
+ State.hero.primary="Ranger" # Independently exercise the primary-only mythic rule.
  check(not State.can_mythic("Paladin") and State.hero.skills.Paladin.has("mythic"),"Switching primary preserves but disables secondary mythic")
- State.set_primary("Paladin")
+ State.hero.primary="Paladin"
  State.save_game()
  var skills=State.hero.skills.duplicate(true)
  State.reset()
@@ -82,7 +83,7 @@ func run():
  State.equip("Helmet","Ranger Hood")
  var hooded=Art.actor("Hero",State.hero.equipment)
  add_child(hooded)
- check(hooded.find_child("EquippedHelmet",true,false).get_aabb().size.x>1,"Ranger hood has a full-size open-face mesh")
+ check(GearVisual.bounds(hooded.find_child("EquippedHelmet",true,false)).size.x>0.4,"Ranger hood has an open-face model sized for the revised hero")
  hooded.queue_free()
  hero.queue_free()
  State.reset()

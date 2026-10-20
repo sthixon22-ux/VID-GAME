@@ -37,5 +37,18 @@
     "drop_chance": 1,
     "agility": 9,
     "dexterity": 0
+  },
+  "bristleback": {
+    "name": "Meadow Bristleback",
+    "model": "Bristleback",
+    "hp": 95,
+    "attack": 25,
+    "defense": 7,
+    "speed": 12,
+    "agility": 12,
+    "dexterity": 2,
+    "xp": 40,
+    "gold": 20,
+    "drop_chance": 3
   }
 }

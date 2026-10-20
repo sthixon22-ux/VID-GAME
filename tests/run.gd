@@ -88,18 +88,18 @@ func run():
  State.hero=original.duplicate(true)
  State.return_position=Vector3.ZERO
  var world=await scene("res://scenes/world.tscn")
- check(world.goblins.size()==3,"Forest starts with three roaming encounters")
- check(not world.forest.can_walk(Vector3(12,0,0)) and world.forest.can_walk(Vector3(12,0,-12)),"Bridge is the river crossing")
- check(not world.forest.can_walk(Vector3(-7,0,5)),"Houses block movement")
+ check(world.goblins.size()==6,"Forest and plains contain six roaming encounters")
+ check(not world.forest.can_walk(Vector3(18,0,-40)) and world.forest.can_walk(Vector3(18,0,-54)),"Bridge is the river crossing")
+ check(not world.forest.can_walk(Vector3(-8,0,5)),"Houses block movement")
  var reachable=walkable_cells(world.forest)
- for destination in world.forest.herb_positions+[Vector3(24,0,-12)]:
+ for destination in world.forest.herb_positions+Forest.CRYSTALS+Forest.QUEST_NPCS+[Forest.SHRINE]:
   var found=false
   for cell in reachable:
    if Vector2(cell.x-destination.x,cell.y-destination.z).length()<1.5:
     found=true
     break
   check(found,"Quest destination reachable from village: %s" % destination)
- world.hero.position=Vector3(24,0,-12)
+ world.hero.position=Forest.SHRINE
  world.interact()
  check(world.dialogue.active and State.hero.exploration.shrine,"Shrine discovery opens locked-door dialogue")
  dismiss(world.dialogue)
@@ -137,7 +137,7 @@ func run():
  check(State.cleared_until.has(0) and get_tree().current_scene==world,"Auto resolves without scene transition and clears encounter")
  world.auto_panel.close()
  State.restore()
- world.hero.position=Vector3(24,0,-12)
+ world.hero.position=Forest.SHRINE
  world.interact()
  dismiss_keyboard(world.dialogue,KEY_E)
  await settle()
@@ -163,6 +163,7 @@ func run():
   battle.return_to_adventure()
   await settle()
   dungeon=get_tree().current_scene
+  solve_puzzle(i)
   dungeon.hero.position=dungeon.seals[i].position
   dungeon.interact()
   check(State.hero.journey.seals.has(i),"Unguarded seal can be cleansed")
@@ -276,3 +277,10 @@ func dismiss_keyboard(box: Dialogue, key: Key):
   safety+=1
  check(not box.active,"Keyboard %s closes dialogue, including scene-changing callbacks" % OS.get_keycode_string(key))
  check(consumed[0],"Keyboard %s is consumed before the dialogue closes or changes scenes" % OS.get_keycode_string(key))
+
+func solve_puzzle(index:int):
+ if index==0:
+  for dial in range(3):
+   for turn in [1,3,2][dial]: State.puzzle_dial(dial)
+ else:
+  for note in [2,0,1]: State.puzzle_note(note)

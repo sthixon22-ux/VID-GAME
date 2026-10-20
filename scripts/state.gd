@@ -26,6 +26,10 @@ func reset():
  save_blocked=false
  return_position=Vector3.ZERO
  hero = {"skills":{"Paladin":[],"Ranger":[],"Druid":[]},"journey":{"started":false,"guards":[],"seals":[],"boss":false,"finished":false,"chest":false,"entered":false,"region":"forest","position":[0.0,0.0,0.0]},"exploration":{"herbs":[],"quest_done":false,"shrine":false},"level":1,"xp":0,"hp":110,"mp":35,"gold":0,"points":3,"primary":"Paladin","secondary":["Ranger","Druid"],"investments":{"Paladin":0,"Ranger":0,"Druid":0},"equipment":{"Weapon":"Iron Sword","Shield":"Oak Shield","Helmet":"None","Chest":"Steel Cuirass","Gauntlets":"None","Pants":"None","Boots":"None","Accessory":"None"},"companion":{"selected":0,"behavior":"Attack","active":true,"roster":["Wolf",null,null,null,null,null],"postgame":null},"mastery":0,"potions":5,"seed":137}
+ hero.items={"ether":1,"treat":1}
+ hero.side_quests={"goblin":0,"mossling":0,"started":[],"claimed":[],"crystals":[]}
+ hero.puzzles={"dials":[0,0,0],"sequence":[],"solved":[]}
+ hero.world_version=8
  hero.progression_version=GameRules.PROGRESSION_VERSION
  hero.progression_archive={}
  hero.points=GameRules.POINTS_PER_LEVEL
@@ -37,7 +41,7 @@ func reset():
  for family in weapon_trees:
   hero.weapon_mastery[family]=0
   hero.weapon_skills[family]=[]
- hero.monsters={"goblin":0,"mossling":0}
+ hero.monsters={"goblin":0,"mossling":0,"bristleback":0}
  hero.demo={"field_guards":[],"elapsed":0,"echo":false,"first_choice":false,"started_at":0}
  for class_ in classes:
   if not hero.skills.has(class_): hero.skills[class_]=[]
@@ -46,16 +50,16 @@ func reset():
  hero.companion.merge({"current":"intro_wolf","owned":[],"records":{},"postgame_unlocked":false,"intro_hp":55})
 
 func stats() -> Dictionary:
- var class_data: Dictionary=classes.get(hero.primary,classes.Paladin)
- var result=GameRules.base_stats(class_data,int(hero.level))
+ var result=GameRules.combined_stats(classes,hero.primary,hero.secondary,int(hero.level))
  result.wolf_attack=0
  result.healing=0
- for item in hero.equipment.values():
-  apply_bonus(result,equipment_data.get(item,{}))
+ for slot in hero.equipment:
+  if slot=="Shield" and GameRules.two_handed(equipment_data.get(hero.equipment.Weapon,{})): continue
+  apply_bonus(result,equipment_data.get(hero.equipment[slot],{}))
  for class_ in active_classes():
   for node in classes[class_].nodes:
    if skill_active(class_,node.id): apply_bonus(result,node.bonus)
- for family in [weapon_type(),"shield" if hero.equipment.Shield!="None" else ""]:
+ for family in [weapon_type(),"shield" if hero.equipment.Shield!="None" and not GameRules.two_handed(equipment_data.get(hero.equipment.Weapon,{})) else ""]:
   for node in weapon_trees.get(family,[]):
    if weapon_skill_active(family,node.id): apply_bonus(result,node.bonus)
  result.agility=maxi(1,int(result.agility))
@@ -121,6 +125,8 @@ func equip(slot: String, item: String) -> bool:
   if not equipment_data.has(item): return false
   if equipment_data[item].slot not in [slot,"Any"]: return false
  if item!="None" and (not owns(item) or not compatible(item)): return false
+ if slot=="Shield" and item!="None" and GameRules.two_handed(equipment_data.get(hero.equipment.Weapon,{})): return false
+ if slot=="Weapon" and GameRules.two_handed(equipment_data.get(item,{})): hero.equipment.Shield="None"
  hero.equipment[slot]=item
  var attributes=stats()
  hero.hp=mini(hero.hp,attributes.max_hp)
@@ -141,6 +147,7 @@ func reward(normal: bool, species: String="goblin"):
  var enemy: Dictionary=enemies[species]
  hero.xp+=int(enemy.xp)
  award_gold(int(enemy.gold),"Battle victory")
+ hero.side_quests[species]=int(hero.side_quests.get(species,0))+1
  if normal and species=="goblin": hero.mastery+=1
  if normal and hero.monsters.has(species): hero.monsters[species]+=1
  for class_ in active_classes(): hero.class_mastery[class_]+=1
@@ -188,6 +195,15 @@ func load_game():
 
   hero.monsters.goblin=maxi(int(hero.monsters.goblin),int(hero.mastery))
   migrate_progression(data)
+  if GameRules.two_handed(equipment_data.get(hero.equipment.Weapon,{})): hero.equipment.Shield="None"
+  if int(data.get("world_version",0))<8:
+   # The authored outdoor route moved; keep progress but place old saves safely in town.
+   if hero.journey.region!="dungeon":
+    hero.journey.position=[0.0,0.0,0.0]
+    saved_position=[0.0,0.0,0.0]
+   hero.world_version=8
+  if hero.journey.boss:
+   hero.puzzles.solved=["dials","song"]
   hero.hp=mini(int(hero.hp),int(stats().max_hp))
   hero.mp=mini(int(hero.mp),int(stats().max_mp))
   var pos=hero.journey.position
@@ -224,6 +240,7 @@ func remember_position(pos: Vector3):
 func new_adventure():
  reset()
  cleared_until.clear()
+ encounter_id=-1
  enemy_id="goblin"
  hero.profile.economy=true
  hero.primary=""
@@ -247,7 +264,7 @@ func active_classes() -> Array:
  if classes.has(hero.primary): result.push_front(hero.primary)
  return result
 func can_change_class() -> bool:
- return not hero.profile.economy or (hero.journey.region=="forest" and return_position.length()<5)
+ return false # Class reassignment is reserved for a later chapter.
 func compatible(item: String) -> bool:
  var entry: Dictionary=equipment_data.get(item,{})
  if entry.is_empty(): return false
@@ -274,7 +291,7 @@ func buy_potion() -> bool:
  save_game()
  return true
 func use_potion() -> bool:
- if hero.potions<=0 or hero.hp>=stats().max_hp: return false
+ if hero.potions<=0 or hero.hp<=0 or hero.hp>=stats().max_hp: return false
  hero.potions-=1
  hero.hp=mini(int(hero.hp)+45,int(stats().max_hp))
  save_game()
@@ -371,3 +388,73 @@ func migrate_progression(data: Dictionary):
  hero.points=maxi(1,int(hero.level))*GameRules.POINTS_PER_LEVEL
  hero.progression_version=GameRules.PROGRESSION_VERSION
  save_notice="Progression updated: skills reset to %s unspent points for the new level-50 trees. Previous investments are archived; level, quests, equipment and companions are kept." % hero.points
+
+func item_count(id: String) -> int:
+ return int(hero.potions) if id=="potion" else int(hero.items.get(id,0))
+func can_use_item(id: String) -> bool:
+ if item_count(id)<=0 or hero.hp<=0: return false
+ if id=="potion": return hero.hp<stats().max_hp
+ if id=="ether": return hero.mp<stats().max_mp
+ if id=="treat":
+  return hero.companion.intro_hp<55 if hero.companion.current=="intro_wolf" else companion_record().get("hp",0)<companion_max_hp()
+ return false
+func use_item(id: String) -> bool:
+ if not can_use_item(id): return false
+ if id=="potion": return use_potion()
+ hero.items[id]-=1
+ if id=="ether": hero.mp=mini(int(stats().max_mp),int(hero.mp)+20)
+ if id=="treat":
+  if hero.companion.current=="intro_wolf": hero.companion.intro_hp=mini(55,int(hero.companion.intro_hp)+35)
+  else:
+   var record=companion_record()
+   record.hp=mini(companion_max_hp(),int(record.hp)+35)
+ notice="Used "+InventoryBook.data[id].name+"."
+ save_game()
+ return true
+func buy_supply(id: String) -> bool:
+ if not InventoryBook.data.has(id): return false
+ if hero.gold<int(InventoryBook.data[id].price)+weapon_reserve(): return false
+ hero.gold-=int(InventoryBook.data[id].price)
+ if id=="potion": hero.potions+=1
+ else: hero.items[id]=item_count(id)+1
+ return save_game()
+func award_xp(amount: int):
+ hero.xp+=amount
+ while hero.xp>=int(hero.level)*70:
+  hero.xp-=int(hero.level)*70
+  hero.level+=1
+  hero.points+=GameRules.POINTS_PER_LEVEL
+  hero.hp=mini(int(stats().max_hp),int(hero.hp)+20)
+  hero.mp=mini(int(stats().max_mp),int(hero.mp)+8)
+func accept_side_quest(id: String):
+ if not QuestBook.data.has(id) or hero.side_quests.started.has(id): return
+ hero.side_quests.started.append(id)
+ save_game()
+func claim_side_quest(id: String) -> bool:
+ if not QuestBook.complete(hero,id) or hero.side_quests.claimed.has(id): return false
+ hero.side_quests.claimed.append(id)
+ var quest:Dictionary=QuestBook.data[id]
+ award_xp(int(quest.xp))
+ award_gold(int(quest.gold),quest.name)
+ save_game()
+ return true
+func puzzle_dial(index: int):
+ if hero.puzzles.solved.has("dials"): return
+ hero.puzzles.dials[index]=(int(hero.puzzles.dials[index])+1)%4
+ if hero.puzzles.dials==[1,3,2]: hero.puzzles.solved.append("dials")
+ save_game()
+func puzzle_note(index: int):
+ if hero.puzzles.solved.has("song"): return
+ var target=[2,0,1]
+ var progress: Array=hero.puzzles.sequence
+ if index==target[progress.size()]: progress.append(index)
+ else: progress.clear()
+ if progress.size()==3: hero.puzzles.solved.append("song")
+ save_game()
+
+func species_wins(species: String) -> int:
+ return maxi(int(hero.mastery),int(hero.monsters.get(species,0))) if species=="goblin" else int(hero.monsters.get(species,0))
+func record_encounter_clear():
+ cleared_until[encounter_id]=Time.get_ticks_msec()+45000
+ if encounter_id>=300 and encounter_id<=302 and not hero.demo.field_guards.has(encounter_id-300): hero.demo.field_guards.append(encounter_id-300)
+ if encounter_id in [100,101] and not hero.journey.guards.has(encounter_id-100): hero.journey.guards.append(encounter_id-100)
