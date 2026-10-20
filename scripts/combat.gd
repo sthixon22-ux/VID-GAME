@@ -8,6 +8,10 @@ var species="goblin"
 var charging=false
 var chemistry: Array=JSON.parse_string(FileAccess.get_file_as_string("res://data/chemistry.json"))
 var companion_data: Dictionary=JSON.parse_string(FileAccess.get_file_as_string("res://data/companions.json"))
+var buffs: Dictionary={}
+var cooldowns: Dictionary={}
+var poison=0
+var weakened=0
 var nature_blessing=0
 var enemy_stun=0
 var regeneration=0
@@ -35,6 +39,8 @@ func _init(hero: Dictionary, attributes: Dictionary, species_: String="goblin"):
  if not record.is_empty(): wolf_hp=int(record.get("hp",55))
  elif demo_rules: wolf_hp=int(h.companion.get("intro_hp",55))
  stats=attributes.duplicate()
+ stats.agility=int(stats.get("agility",stats.get("speed",1)))
+ stats.dexterity=int(stats.get("dexterity",0))
  rng=RandomNumberGenerator.new()
  rng.seed=int(h.seed)
 func damage(power: int, defense: int) -> int:
@@ -46,9 +52,13 @@ func legal(action: String) -> bool:
  if demo_rules:
   var entry=AbilityBook.entry(action)
   if entry.is_empty() or h.mp<entry.mp: return false
-  if entry.get("weapon","")=="sword" and h.equipment.Weapon=="None": return false
-  if entry.get("shield",false) and h.equipment.Shield=="None": return false
-  if entry.kind in ["spell","mythic"] and not AbilityBook.spells(h).has(AbilityBook.id_for(action)): return false
+  var family=AbilityBook.weapon_type(h)
+  if cooldowns.get(AbilityBook.id_for(action),0)>0: return false
+  if entry.has("weapon_node") and not AbilityBook.techniques(h).has(AbilityBook.id_for(action)): return false
+  if not entry.get("weapon_types",[]).is_empty() and (not entry.weapon_types.has(family) or not AbilityBook.proficient(h,family)): return false
+  if entry.get("weapon","")=="sword" and (family!="sword" or not AbilityBook.proficient(h,"sword")): return false
+  if entry.get("shield",false) and (h.equipment.Shield=="None" or not AbilityBook.proficient(h,"shield")): return false
+  if entry.kind in ["spell","mythic","technique"] and not AbilityBook.available(h).has(AbilityBook.id_for(action)): return false
   return entry.effect!="potion" or h.potions>0
  if h.mp<cost(action): return false
  for c in classes:
@@ -58,10 +68,16 @@ func legal(action: String) -> bool:
  return action!="Items" or h.potions>0
 func emit(actor: String, target: String, amount: int, label: String):
  events.append({"actor":actor,"target":target,"amount":amount,"text":label,"state":{"hp":int(h.hp),"mp":int(h.mp),"wolf_hp":wolf_hp,"enemy_hp":enemy_hp,"statuses":status_summary()}})
-func hit_enemy(actor: String, power: int, label: String):
- var amount=damage(power,int(enemy.defense))+(6 if marked>0 else 0)
+func hit_enemy(actor: String, power: int, label: String) -> bool:
+ var entry=AbilityBook.entry(label)
+ var physical=actor=="Wolf" or entry.get("kind","") in ["attack","weapon","technique"]
+ if physical and int(enemy.get("dexterity",0))>0 and rng.randf()<GameRules.dodge_chance(int(enemy.dexterity)):
+  emit(actor,"Goblin",0,"Dodged")
+  return false
+ var amount=damage(power,maxi(0,int(enemy.defense)-(5 if weakened>0 else 0)))+(6 if marked>0 else 0)
  enemy_hp=maxi(0,enemy_hp-amount)
  emit(actor,"Goblin",amount,label)
+ return true
 func hero_turn(action: String):
  if demo_rules:
   demo_hero_turn(action)
@@ -119,7 +135,7 @@ func enemy_turn():
   return
  var heavy=charging
  charging=false
- var power=int(enemy.attack)+rng.randi_range(-3,3)+(22 if heavy else 0)
+ var power=int(enemy.attack)-(5 if weakened>0 else 0)+rng.randi_range(-3,3)+(22 if heavy else 0)
  if not heavy and wolf_hp>0 and h.companion.active and rng.randi_range(0,3)==0:
   if demo_rules and h.companion.current=="griffin" and rng.randf()<0.15:
    emit("Goblin","Wolf",0,"Aerial evasion")
@@ -128,7 +144,10 @@ func enemy_turn():
   wolf_hp=maxi(0,wolf_hp-amount)
   emit("Goblin","Wolf",amount,"Crushing Canopy" if heavy else ("Briar lash" if species!="goblin" else "Goblin club"))
  else:
-  var amount=damage(power,int(stats.defense))
+  if rng.randf()<GameRules.dodge_chance(current_stat("dexterity")):
+   emit("Goblin","Hero",0,"Dodged")
+   return
+  var amount=damage(power,current_stat("defense"))
   if guarding:
    amount=maxi(1,amount/2)
    if demo_rules and h.equipment.Shield!="None": prime_chemistry()
@@ -140,10 +159,10 @@ func round_(action: String) -> Array:
  events=[]
  regeneration_cast=false
  if outcome!="" or not legal(action): return events
- guarding=false
+ guarding=action=="Defend"
  wolf_guard=false
  turns+=1
- var order=[{"id":"Hero","speed":stats.speed},{"id":"Wolf","speed":companion_speed()},{"id":"Goblin","speed":int(enemy.speed)}]
+ var order=[{"id":"Hero","speed":current_stat("agility")},{"id":"Wolf","speed":companion_speed()},{"id":"Goblin","speed":int(enemy.get("agility",enemy.get("speed",1)))}]
  for index in range(order.size()): order[index].tie=index
  order.sort_custom(func(a,b): return a.speed>b.speed if a.speed!=b.speed else a.tie<b.tie)
  for unit in order:
@@ -160,6 +179,15 @@ func round_(action: String) -> Array:
    bleed-=1
    enemy_hp=maxi(0,enemy_hp-5)
    emit("Wolf","Goblin",5,"Bleeding")
+ if poison>0 and enemy_hp>0 and h.hp>0:
+  poison-=1
+  enemy_hp=maxi(0,enemy_hp-5)
+  emit("Hero","Goblin",5,"Poison")
+ if weakened>0: weakened-=1
+ for key in buffs.keys():
+  buffs[key].rounds-=1
+  if buffs[key].rounds<=0: buffs.erase(key)
+ for id in cooldowns: cooldowns[id]=maxi(0,int(cooldowns[id])-1)
  if nature_blessing>0: nature_blessing-=1
  if marked>0: marked-=1
  if enemy_hp<=0: outcome="Victory"
@@ -171,9 +199,7 @@ func round_(action: String) -> Array:
  return events.duplicate(true)
 func auto_resolve() -> String:
  while outcome=="" and turns<200:
-  var action="Attack"
-  if h.hp<stats.max_hp/2 and legal("Regrowth"): action="Regrowth"
-  elif legal("Sacred Strike"): action="Sacred Strike"
+  var action=auto_action()
   round_(action)
  if outcome=="": outcome="Defeat"
  return outcome
@@ -209,9 +235,37 @@ func demo_hero_turn(action: String):
  var entry=AbilityBook.entry(id)
  h.mp-=int(entry.mp)
  var blessing=consume_blessing(id)
- var power=int(stats.attack)+int(entry.get("power",0))+blessing
- if h.equipment.Weapon=="None": power-=8
+ var power=current_stat("attack")+int(entry.get("power",0))+blessing
+ if h.equipment.Weapon=="None" and not AbilityBook.proficient(h,"unarmed"): power-=8
+ if entry.kind in ["weapon","technique"] and h.weapon_skills.get(AbilityBook.weapon_type(h),[]).has("flow"): power+=4
  match entry.effect:
+  "buff":
+   buffs[entry.stat]={"amount":int(entry.power),"rounds":int(entry.duration)+1}
+   emit("Hero","Hero",0,action+" · "+str(entry.stat)+" increased")
+  "meditate":
+   h.mp=mini(int(stats.max_mp),int(h.mp)+int(entry.power))
+   heal(5,action)
+   cooldowns[id]=int(entry.cooldown)+1
+  "renewal":
+   heal(int(entry.power)+int(stats.healing),action)
+   regeneration=int(entry.duration)
+   regeneration_cast=true
+  "weaken":
+   weakened=int(entry.duration)+1
+   emit("Hero","Goblin",0,action+" · attack/defense weakened")
+  "poison":
+   if hit_enemy("Hero",power,action): poison=int(entry.duration)
+  "execute": hit_enemy("Hero",power+(12 if marked>0 or poison>0 else 0),action)
+  "pierce": hit_enemy("Hero",power+int(enemy.defense)/2,action)
+  "rage":
+   h.hp=maxi(1,int(h.hp)-int(entry.get("self_damage",0)))
+   hit_enemy("Hero",power,action)
+  "magic", "frost", "drain":
+   var magic=int(entry.power)+int(stats.max_mp)*0.18+int(h.level)*1.5
+   var before=enemy_hp
+   hit_enemy("Hero",int(magic),action)
+   if entry.effect=="drain": heal((before-enemy_hp)/2,action+" · drain")
+   if entry.effect=="frost" and rng.randf()<float(entry.chance): bound=1
   "guard":
    guarding=true
    emit("Hero","Hero",0,"Shield raised")
@@ -231,13 +285,12 @@ func demo_hero_turn(action: String):
    if rng.randf()<float(entry.chance): bound=1
    emit("Hero","Goblin",0,"Rooted for one turn" if bound else "Roots resisted")
   "bash":
-   hit_enemy("Hero",power,action)
+   var landed=hit_enemy("Hero",power,action)
    guarding=true
    var chance=float(entry.chance)+(0.2 if h.weapon_skills.shield.has("impact") else 0.0)
-   if rng.randf()<chance: enemy_stun=1
+   if landed and rng.randf()<chance: enemy_stun=1
    emit("Hero","Goblin",0,"Stunned for one turn" if enemy_stun else "Stun resisted")
   _:
-   if id=="sword_slash" and h.weapon_skills.sword.has("flow"): power+=4
    hit_enemy("Hero",power,action)
 func companion_turn():
  if wolf_hp<=0 or not h.companion.active: return
@@ -261,18 +314,47 @@ func companion_turn():
    emit("Wolf","Hero",0,data.name+" · protection")
   _:
    var power=int(data.attack)+synergy+int(record.level)*2+int(stats.get("wolf_attack",0))+(4 if skills.has("predator") else 0)
-   hit_enemy("Wolf",power,data.name+" · "+{"dire_wolf":"Rending bite","griffin":"Wind dive","dragon":"Ember breath","warhorse":"Charge","spirit_fox":"Spirit spark","golem":"Earth fist"}[id])
-   if id=="dire_wolf": bleed=2
-   if id=="golem" and rng.randf()<0.2: enemy_stun=1
+   var landed=hit_enemy("Wolf",power,data.name+" · "+{"dire_wolf":"Rending bite","griffin":"Wind dive","dragon":"Ember breath","warhorse":"Charge","spirit_fox":"Spirit spark","golem":"Earth fist"}[id])
+   if landed and id=="dire_wolf": bleed=2
+   if landed and id=="golem" and rng.randf()<0.2: enemy_stun=1
 func status_summary() -> String:
  var labels: Array=[]
  if marked>0: labels.append("Marked %s" % marked)
  if bound>0: labels.append("Rooted %s" % bound)
  if enemy_stun>0: labels.append("Stunned %s" % enemy_stun)
- if regeneration>0: labels.append("Regrowth %s" % regeneration)
+ if regeneration>0: labels.append("Regeneration %s" % regeneration)
  if nature_blessing>0: labels.append("Nature blessing %s" % nature_blessing)
  if bleed>0: labels.append("Bleeding %s" % bleed)
+ if poison>0: labels.append("Poison %s" % poison)
+ if weakened>0: labels.append("Weakened %s" % weakened)
+ for stat in buffs: labels.append("%s +%s (%s)" % [stat.capitalize(),buffs[stat].amount,buffs[stat].rounds])
  return " · ".join(labels) if not labels.is_empty() else "No active status effects"
 
 func companion_speed() -> int:
  return int(companion_data.get(h.companion.get("current","intro_wolf"),{"speed":15}).speed) if demo_rules else 15
+
+func current_stat(key: String) -> int:
+ return int(stats.get(key,0))+int(buffs.get(key,{}).get("amount",0))
+func auto_action() -> String:
+ if not demo_rules:
+  if h.hp<stats.max_hp/2 and legal("Regrowth"): return "Regrowth"
+  if legal("Sacred Strike"): return "Sacred Strike"
+  return "Attack"
+ if charging: return "Defend"
+ if h.hp<stats.max_hp/2:
+  for id in ["healing_light","regrowth","purifying_light"]:
+   if legal(id) and (id!="regrowth" or regeneration==0): return id
+  if legal("items"): return "Items"
+ var candidates=AbilityBook.available(h)+AbilityBook.techniques(h)
+ var best="Attack"
+ var score=0.0
+ for id in candidates:
+  if not legal(id): continue
+  var entry=AbilityBook.entry(id)
+  if entry.effect not in ["damage","magic","drain","rage","execute","pierce","frost"]: continue
+  var value=float(entry.get("power",0))
+  if entry.effect in ["magic","drain","frost"]: value+=float(stats.max_mp)*0.18+float(h.level)*1.5-float(stats.attack)
+  if value>score:
+   score=value
+   best=id
+ return best

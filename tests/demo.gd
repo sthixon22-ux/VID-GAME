@@ -43,7 +43,7 @@ func fight(battle):
 func run():
  Engine.time_scale=8
  UserSettings.set_option("minimal_animations",true)
- for primary in State.classes:
+ for primary in ["Paladin","Ranger","Druid"]:
   State.new_adventure()
   check(State.hero.primary=="" and State.hero.secondary.is_empty(),"New game has no preselected classes")
   check(State.hero.equipment.values().all(func(value): return value=="None") and State.hero.inventory.is_empty(),"New game starts with no equipped or owned equipment")
@@ -70,7 +70,9 @@ func run():
   sim.round_("Defend")
   check(sim.regeneration==2 and sim.events.any(func(event): return event.text=="Regrowth · renewal"),"Regrowth ticks on following rounds")
   State.restore()
-  sim=Combat.new(State.hero,State.stats())
+  var block_stats=State.stats()
+  block_stats.dexterity=0
+  sim=Combat.new(State.hero,block_stats)
   sim.round_("Defend")
   check(sim.nature_blessing>0,"Shield block primes data-defined class chemistry")
   sim.round_("Hunter's Mark")
@@ -80,10 +82,17 @@ func run():
   for node in ["oath","shield","light"]: State.invest_skill(primary,node)
   check(not State.invest_skill(primary,"mythic"),"Mythic requires independent class mastery")
   for index in range(3): State.reward(true)
-  check(State.invest_skill(primary,"mythic") and State.can_mythic(primary),"Mastery and skill points together unlock primary mythic")
+  check(not State.invest_skill(primary,"mythic"),"Three demo victories cannot unlock the level-fifty capstone")
+  State.hero.level=50
+  State.hero.class_mastery[primary]=100
+  State.hero.points=100
+  for node in State.classes[primary].nodes:
+   if node.id!="mythic" and not State.hero.skills[primary].has(node.id): State.invest_skill(primary,node.id)
+  check(State.invest_skill(primary,"mythic") and State.can_mythic(primary),"Level fifty, mastery and prerequisites unlock primary mythic")
   var next: String=State.hero.secondary[0]
   State.set_primary(next)
   check(not State.can_mythic(primary) and State.hero.skills[primary].has("mythic"),"Class switch retains and disables old primary mythic")
+  State.learn_weapon("sword","edge")
   check(State.learn_weapon("sword","flow"),"Weapon mastery unlocks separate weapon tree")
   State.save_game()
   var owned=State.hero.inventory.duplicate()
@@ -93,24 +102,26 @@ func run():
  kit("Paladin")
  State.hero.hp=1
  State.hero.mp=0
+ State.hero.potions=0
  State.hero.companion.active=false
- var weak=Combat.new(State.hero,State.stats())
+ var weak_stats=State.stats()
+ weak_stats.dexterity=0
+ var weak=Combat.new(State.hero,weak_stats)
  check(weak.auto_resolve()=="Defeat","New-rule Auto-Battle can lose")
  kit("Paladin")
  var direct=Combat.new(State.hero,State.stats())
  var auto=Combat.new(State.hero,State.stats())
  auto.auto_resolve()
  while direct.outcome=="" and direct.turns<200:
-  var action="Attack"
-  if direct.h.hp<direct.stats.max_hp/2 and direct.legal("Regrowth"): action="Regrowth"
-  elif direct.legal("Sacred Strike"): action="Sacred Strike"
+  var action=direct.auto_action()
   direct.round_(action)
  check(direct.h==auto.h and direct.enemy_hp==auto.enemy_hp,"New normal and Auto-Battle use identical deterministic rules")
  State.new_adventure()
  State.create_hero("Reserve","Paladin",0,0,0)
  check(State.buy("Steel Helm"),"Optional purchase allowed when starter funds remain")
- check(not State.buy("Steel Gauntlets") and not State.buy_potion(),"Starter reserve prevents spending essential equipment money")
- for item in ["Iron Sword","Oak Shield","Leather Vest"]:
+ State.buy("Steel Gauntlets")
+ check(not State.buy("Trail Boots") and not State.buy_potion(),"Starter reserve prevents spending essential equipment money")
+ for item in ["Oak Staff","Leather Vest"]:
   check(State.buy(item),"Reserved budget still buys essential equipment: "+item)
  # All six companion definitions have a functioning model and three combat behaviors.
  for id in State.companions:

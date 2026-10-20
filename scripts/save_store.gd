@@ -1,6 +1,6 @@
 class_name SaveStore
 extends RefCounted
-const VERSION=2
+const VERSION=3
 static func inspect(path: String) -> Dictionary:
  if not FileAccess.file_exists(path): return {}
  var parser=JSON.new()

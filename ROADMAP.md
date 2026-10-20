@@ -35,11 +35,19 @@ The agreed target is a polished short adventure with a village, forest route, du
 - Visible Moonleaf guards, journal/field guide, risk/results Auto-Battle UI, optional postgame board challenge and schema-2 save compatibility.
 - Full details and limitations: [demo report](docs/DEMO_0_6.md).
 
+## Delivered in 0.7 — stats and long-term progression
+
+- All twelve classes selectable for primary/secondary slots, with distinct six-stat baselines and natural per-level growth.
+- AGI initiative, DEX evasion and seeded battle/quest bonus-gold rolls; gear and temporary abilities affect more than ATK/DEF.
+- Twelve class trees and thirteen weapon-family trees, twelve nodes/50 points each, with final gates at level 50; two shared points per level.
+- Matching weapons/techniques, more class abilities, caster mana scaling, primary-only late mythics and safe old-save respec/archives.
+- Full details: [0.7 report](docs/DEMO_0_7.md).
+
 ## Next: verify the public-release bar
 
 Run fresh, timed Windows playthroughs without test teleports. Check whether the complete opening reaches the 15–20-minute target, tune costs/MP/encounter difficulty and verify everyone finds the shop, trees and companion endpoint. Review audio, keyboard/controller focus and readability. Bring remaining creature/companion art and animation to a consistent quality bar; the procedural additions demonstrate function, not final production quality.
 
-The ability/status/chemistry and basic ownership/companion foundations now exist. Extend content only after testing and refining these systems; do not replace the current quest or claim all twelve classes are complete.
+The ability/status/chemistry and basic ownership/companion foundations now exist. Extend content only after testing and refining these systems; do not replace the current quest or treat the introductory class kits as complete production spell libraries.
 
 ## Next: unify the art target
 

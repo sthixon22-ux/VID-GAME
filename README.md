@@ -1,6 +1,6 @@
 # Verdant Oath — The Bell Beneath the Woods
 
-**Demo 0.6 · Godot 4.6+ · GDScript · CC0 assets + original art/story/effects**
+**Demo 0.7 · Godot 4.6+ · GDScript · CC0 assets + original art/story/effects**
 
 A short 3D turn-based fantasy adventure built around the Project Mythic overview: create a hero, choose classes, buy your first equipment, help Willowbrook, cleanse the sanctuary and choose a permanent companion. **15–20 minutes is the intended first-play target, not a measured guarantee.** This is a playable release candidate; production art and human playtesting remain unfinished.
 
@@ -36,8 +36,8 @@ Settings are available from the title, exploration menu and idle battle screen: 
 
 ## Your first adventure
 
-- **Create your hero before entering the world.** Enter a name, choose a primary class plus two distinct secondaries, and select skin, hair and travel-clothes colors. Paladin, Ranger and Druid are the three implemented demo classes. Each offers a different primary stat specialization; all three contribute starting abilities. Only a learned primary-class mythic can be used.
-- **Start unequipped.** Travel clothes provide no armor stats. You have 120 gold and three potions. Visit the marked **OUTFITTER east of camp** and buy/equip an Iron Sword (30), Oak Shield (20) and chest piece: Leather Vest (25), Verdant Robe (35) or Paladin-only Steel Cuirass (45). Purchases remain owned; equipment changes are free. Essential starter funds are reserved to prevent a shopping dead end.
+- **Create your hero before entering the world.** Enter a name, choose a primary class plus two distinct secondaries, and select skin, hair and travel-clothes colors. All twelve overview classes are selectable. Each has distinct HP, MP, attack, defense, agility and dexterity baselines/growth; the two secondaries add abilities, learned passives and weapon proficiencies. Only a learned primary-class mythic can be used.
+- **Start unequipped.** Travel clothes provide no armor stats. You have 120 gold and three potions. Visit the marked **OUTFITTER east of camp** and buy/equip a compatible weapon and chest piece: Leather Vest (25), Verdant Robe (35) or Warrior/Paladin Steel Cuirass (45). The shop offers swords, axes, bows, daggers, staves and other weapon families. Shields are optional; Monk-trained heroes may fight unarmed. Purchases remain owned; equipment changes are free. Essential starter funds are reserved to prevent a shopping dead end.
 - **Speak to Mira beside camp.** Follow the northern trail to the three purple Moonleaf plants, defeat each visible guard, then interact again to gather. Check the journal and spend skill points in the class/weapon pages. Normal victories grant XP, gold, drop rolls and separate class/weapon mastery.
 - **Return the plants to Mira.** Cross the eastern bridge, enter the shrine and explore both sanctuary side chambers. Defeat each Mossling, then cleanse its root seal. The pilgrim's cache supplies potions and restores the party.
 - **Face the Hollow Warden.** When branches coil, choose **Defend** against the next charged blow. Restore the guardian, then return the living ember to Mira.
@@ -47,7 +47,8 @@ Settings are available from the title, exploration menu and idle battle screen: 
 ## Systems represented in the demo
 
 - Eight independently equipped, owned slots with stat changes, class compatibility and visible weapon/shield/chest changes plus simple modular armor details.
-- Hero XP/levels/skill points, distinct class mastery, class skill trees, separate sword/shield mastery and learnable weapon techniques. Primary switching is available near the village camp and retains learned skills; incompatible plate is unequipped rather than deleted.
+- Hero XP/levels/skill points, distinct class mastery, twelve class trees and thirteen weapon-family trees. Each full tree has twelve nodes and costs 50 points, with its final node locked until level 50. Earn two shared points per level; focusing a class and weapon can finish both at 50, while broader builds take longer. Primary and secondary reassignment is available near the village camp and retains learned skills; incompatible plate is unequipped rather than deleted.
+- Six growing stats: AGI controls initiative; DEX gives capped seeded dodge odds and a chance for +25% gold after battles/quests. Equipment and abilities can raise HP, MP, ATK, DEF, AGI or DEX. Actual chances are shown on the character page.
 - MP spells in a submenu; data-defined stable ability IDs/aliases, class spellbooks and equipment requirements. Attack, Weapon Skills, Spells, Items, Defend and Companion commands remain fully turn based with deterministic speed order.
 - Regrowth heals now and over the following three rounds. Shield Bash can stun; Thornbind can root. Mark, guard, bleed and status feedback support tactical choices.
 - **Guardian of the Wild** class chemistry: a successful shield block primes one stronger Hunter's Mark or Regrowth, with a three-round expiry. Mythics remain primary-only.
@@ -56,13 +57,13 @@ Settings are available from the title, exploration menu and idle battle screen: 
 - Existing beginning-to-ending quest/dialogue, companion selection endpoint, shop, field board, guarded gathering sites, cache, journal/field guide, camp recovery and optional postgame challenge.
 - Skeletal hero animation, action-specific effects, damage numbers, event-state bars/status feedback, cinematic battle shots and victory/defeat presentation with pacing controls.
 
-The [0.6 implementation report](docs/DEMO_0_6.md) lists changed files, demo-specific rules, validation and remaining work. The [master overview](docs/design/PROJECT_MYTHIC_V1.md), [technical audit](docs/PROJECT_MYTHIC_AUDIT.md) and [roadmap](ROADMAP.md) distinguish the full-game direction from what is implemented here.
+The [0.7 class/stat/progression report](docs/DEMO_0_7.md) lists changed files, demo-specific rules, validation and remaining work. The [master overview](docs/design/PROJECT_MYTHIC_V1.md), [technical audit](docs/PROJECT_MYTHIC_AUDIT.md) and [roadmap](ROADMAP.md) distinguish the full-game direction from what is implemented here.
 
 ## Save compatibility
 
-One character slot lives at `user://hero.json`. Schema 2 stores profile, inventory, classes/skills/masteries, equipment, HP/MP, companion ownership/training/HP, quest state/position, monster wins and gold. Saves use a validated temporary write and `.previous` recovery copy. Earlier schema originals are copied to `.v0.backup` or `.v1.backup`; explicit New adventure creates `hero.backup.json`. Newer incompatible or unreadable unrecoverable saves are preserved and blocked from silent overwrite. Recovery may lose the latest progress and cannot reconstruct two damaged copies.
+One character slot lives at `user://hero.json`. Schema 3 stores profile, inventory, classes/skills/masteries, equipment, HP/MP, companion ownership/training/HP, quest state/position, monster wins and gold. Saves use a validated temporary write and `.previous` recovery copy. Earlier schema originals are copied to `.v0.backup`, `.v1.backup` or `.v2.backup`; explicit New adventure creates `hero.backup.json`. Newer incompatible or unreadable unrecoverable saves are preserved and blocked from silent overwrite. Recovery may lose the latest progress and cannot reconstruct two damaged copies.
 
-Older characters keep the previous wardrobe and combat balance rules; use **New adventure** to test the new economy, statuses and creation flow. New inventory/ability/companion identifiers are stable IDs. Existing class/equipped-gear display-name keys remain supported migration aliases.
+Older characters receive a one-time respec: previous investments are archived and the available budget resets to two points per current level. Level, story, gold, gear and companions remain intact. The old file is backed up and upgraded characters use the new stats/progression rules. Use **New adventure** for the full twelve-class creation flow. New inventory/ability/companion identifiers are stable IDs. Existing class/equipped-gear display-name keys remain supported migration aliases.
 
 ## Development and validation
 
@@ -75,9 +76,10 @@ XDG_DATA_HOME=/tmp/verdant-game godot --headless --path . res://tests/run.tscn
 XDG_DATA_HOME=/tmp/verdant-presentation godot --headless --path . res://tests/presentation.tscn
 XDG_DATA_HOME=/tmp/verdant-reliability godot --headless --path . res://tests/reliability.tscn
 XDG_DATA_HOME=/tmp/verdant-demo godot --headless --path . res://tests/demo.tscn
+XDG_DATA_HOME=/tmp/verdant-progression godot --headless --path . res://tests/progression.tscn
 ```
 
-**298 automated checks pass in Godot 4.6.3** (61 full-game + 61 presentation + 19 reliability + 157 demo), with no runtime/script errors. Validation includes legacy full-story flow, character/presentation integration, camera/movement/save reliability and the new creation-to-postgame suite. Tests check all three class starts, shopping/ownership/reserve safety, equipment legality, timed effects, chemistry, mastery gates, all six companion models/behaviors, permanent-choice limits, actual new-playthrough scene transitions, the Warden echo and saved second-bond state. Tests accelerate time and use scene teleports; they do not establish a 15–20-minute playtime or final visual quality.
+**597 automated checks pass in Godot 4.6.3** across five regression suites, including the twelve-class/stat/level-50 progression suite. Validation includes legacy full-story flow, character/presentation integration, camera/movement/save reliability and the new creation-to-postgame suite. Tests check all twelve class starts, shopping/ownership/reserve safety, equipment legality, timed effects, chemistry, mastery gates, all six companion models/behaviors, permanent-choice limits, actual new-playthrough scene transitions, the Warden echo and saved second-bond state. Tests accelerate time and use scene teleports; they do not establish a 15–20-minute playtime or final visual quality.
 
 ```bash
 # Requires a display; use a separate data directory for captures too.
@@ -92,4 +94,4 @@ Core separation: `combat.gd` contains deterministic rules; `ability_book.gd`/`da
 
 The game needs a timed Windows playtest without developer shortcuts, audio listening, difficulty/pacing feedback and accessibility/controller review. Art quality is mixed: the hero/Mira use CC0 KayKit rigs and cottages use Quaternius textures/models, while creatures and companion animation remain simpler original geometry; overlays are basic, terrain is flat, following can cut corners and camera blockers approximate meshes. Character creation changes name/colors, not body shape or facial features. Portraits do not dynamically match appearance.
 
-The demo implements three classes, six functional companion choices, compact training trees, one quest/dungeon/boss and a reused boss echo. It does not implement all twelve classes, crafting, selling, armor sets, multi-enemy battles, mounted/flight traversal, voice acting or full-game postgame content. Every permanent companion currently receives an equal movement blessing rather than a ride animation. The UI targets a 1280×720 desktop layout. These limits prevent calling this a finished production release despite the expanded playable systems.
+The demo implements twelve functional introductory classes, six companion choices, extended class/weapon trees, one quest/dungeon/boss and a reused boss echo. It does not include a level-50 quest campaign or final full spell libraries. Crafting, selling, armor sets, multi-enemy battles, mounted/flight traversal, voice acting and full-game postgame content remain future work. Every permanent companion currently receives an equal movement blessing rather than a ride animation. The UI targets a 1280×720 desktop layout. These limits prevent calling this a finished production release despite the expanded playable systems.

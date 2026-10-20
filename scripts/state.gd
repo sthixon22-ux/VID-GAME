@@ -5,6 +5,7 @@ var companions: Dictionary=JSON.parse_string(FileAccess.get_file_as_string("res:
 var weapon_trees: Dictionary=JSON.parse_string(FileAccess.get_file_as_string("res://data/weapon_trees.json"))
 var equipment_data: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/equipment.json"))
 var hero: Dictionary
+var last_reward: Dictionary={}
 var notice = ""
 var save_notice=""
 var save_blocked=false
@@ -19,15 +20,23 @@ func _ready():
  reset()
  load_game()
 func reset():
+ notice=""
+ last_reward={}
  save_notice=""
  save_blocked=false
  return_position=Vector3.ZERO
  hero = {"skills":{"Paladin":[],"Ranger":[],"Druid":[]},"journey":{"started":false,"guards":[],"seals":[],"boss":false,"finished":false,"chest":false,"entered":false,"region":"forest","position":[0.0,0.0,0.0]},"exploration":{"herbs":[],"quest_done":false,"shrine":false},"level":1,"xp":0,"hp":110,"mp":35,"gold":0,"points":3,"primary":"Paladin","secondary":["Ranger","Druid"],"investments":{"Paladin":0,"Ranger":0,"Druid":0},"equipment":{"Weapon":"Iron Sword","Shield":"Oak Shield","Helmet":"None","Chest":"Steel Cuirass","Gauntlets":"None","Pants":"None","Boots":"None","Accessory":"None"},"companion":{"selected":0,"behavior":"Attack","active":true,"roster":["Wolf",null,null,null,null,null],"postgame":null},"mastery":0,"potions":5,"seed":137}
+ hero.progression_version=GameRules.PROGRESSION_VERSION
+ hero.progression_archive={}
+ hero.points=GameRules.POINTS_PER_LEVEL
  hero.profile={"created":false,"economy":false,"name":"Traveler","skin":0,"hair":0,"dye":0}
  hero.inventory=[]
  hero.class_mastery={"Paladin":0,"Ranger":0,"Druid":0}
- hero.weapon_mastery={"sword":0,"shield":0}
- hero.weapon_skills={"sword":[],"shield":[]}
+ hero.weapon_mastery={}
+ hero.weapon_skills={}
+ for family in weapon_trees:
+  hero.weapon_mastery[family]=0
+  hero.weapon_skills[family]=[]
  hero.monsters={"goblin":0,"mossling":0}
  hero.demo={"field_guards":[],"elapsed":0,"echo":false,"first_choice":false,"started_at":0}
  for class_ in classes:
@@ -37,20 +46,39 @@ func reset():
  hero.companion.merge({"current":"intro_wolf","owned":[],"records":{},"postgame_unlocked":false,"intro_hp":55})
 
 func stats() -> Dictionary:
- var l=int(hero.level)
- var result={"max_hp":100+l*10,"max_mp":30+l*5,"attack":12+l*3,"defense":4+l,"speed":12+l,"wolf_attack":0,"healing":0}
+ var class_data: Dictionary=classes.get(hero.primary,classes.Paladin)
+ var result=GameRules.base_stats(class_data,int(hero.level))
+ result.wolf_attack=0
+ result.healing=0
  for item in hero.equipment.values():
-  var data: Dictionary=equipment_data.get(item,{})
-  result.attack+=int(data.get("attack",0))
-  result.defense+=int(data.get("defense",0))
- if hero.profile.economy and classes.has(hero.primary):
-  for key in classes[hero.primary].primary_bonus: result[key]+=int(classes[hero.primary].primary_bonus[key])
- for c in active_classes():
-  for node in classes[c].nodes:
-   if hero.skills.get(c,[]).has(node.id):
-    for key in node.bonus: result[key]+=int(node.bonus[key])
- if hero.equipment.Weapon!="None" and hero.weapon_skills.sword.has("edge"): result.attack+=2
- if hero.equipment.Shield!="None" and hero.weapon_skills.shield.has("brace"): result.defense+=2
+  apply_bonus(result,equipment_data.get(item,{}))
+ for class_ in active_classes():
+  for node in classes[class_].nodes:
+   if skill_active(class_,node.id): apply_bonus(result,node.bonus)
+ for family in [weapon_type(),"shield" if hero.equipment.Shield!="None" else ""]:
+  for node in weapon_trees.get(family,[]):
+   if weapon_skill_active(family,node.id): apply_bonus(result,node.bonus)
+ result.agility=maxi(1,int(result.agility))
+ result.dexterity=maxi(0,int(result.dexterity))
+ result.speed=result.agility # Compatibility alias for older tools; initiative uses agility.
+ return result
+func apply_bonus(result: Dictionary, source: Dictionary):
+ for key in result:
+  result[key]+=int(source.get(key,0))
+func skill_active(class_: String, id: String) -> bool:
+ var node=skill_node(class_,id)
+ return not node.is_empty() and hero.skills.get(class_,[]).has(id) and int(hero.level)>=int(node.get("level_required",1))
+func weapon_skill_active(family: String, id: String) -> bool:
+ for node in weapon_trees.get(family,[]):
+  if node.id==id: return hero.weapon_skills.get(family,[]).has(id) and hero.level>=int(node.level_required)
+ return false
+func weapon_type() -> String:
+ return equipment_data.get(hero.equipment.Weapon,{}).get("weapon_type","unarmed")
+func proficiencies() -> Array:
+ var result: Array=[]
+ for class_ in active_classes():
+  for family in classes[class_].proficiencies:
+   if not result.has(family): result.append(family)
  return result
 func skill_node(class_: String, id: String) -> Dictionary:
  for node in classes.get(class_,{}).get("nodes",[]):
@@ -60,7 +88,8 @@ func invest_skill(class_: String, id: String) -> bool:
  var node=skill_node(class_,id)
  if node.is_empty() or hero.skills[class_].has(id): return false
  if hero.points<int(node.cost): return false
- if hero.profile.economy and int(hero.class_mastery[class_])<int(node.get("mastery_required",0)): return false
+ if not active_classes().has(class_): return false
+ if hero.level<int(node.get("level_required",1)) or int(hero.class_mastery[class_])<int(node.get("mastery_required",0)): return false
  for prerequisite in node.requires:
   if not hero.skills[class_].has(prerequisite): return false
  hero.skills[class_].append(id)
@@ -69,14 +98,23 @@ func invest_skill(class_: String, id: String) -> bool:
  save_game()
  return true
 func set_primary(class_: String):
- if not classes.has(class_) or not can_change_class(): return
- hero.primary=class_
- hero.secondary=classes.keys().filter(func(c): return c!=class_).slice(0,2)
- for slot in hero.equipment:
-  if hero.equipment[slot]!="None" and not compatible(hero.equipment[slot]): hero.equipment[slot]="None"
+ set_class_slot("primary",class_)
+func set_class_slot(slot: String, class_: String) -> bool:
+ if not classes.has(class_) or not can_change_class(): return false
+ var loadout: Array=[hero.primary]+hero.secondary
+ var index=["primary","secondary_1","secondary_2"].find(slot)
+ if index<0 or loadout.size()!=3: return false
+ var existing=loadout.find(class_)
+ if existing>=0: loadout[existing]=loadout[index]
+ loadout[index]=class_
+ hero.primary=loadout[0]
+ hero.secondary=loadout.slice(1,3)
+ for gear_slot in hero.equipment:
+  if hero.equipment[gear_slot]!="None" and not compatible(hero.equipment[gear_slot]): hero.equipment[gear_slot]="None"
  hero.hp=mini(int(hero.hp),int(stats().max_hp))
  hero.mp=mini(int(hero.mp),int(stats().max_mp))
  save_game()
+ return true
 func equip(slot: String, item: String) -> bool:
  if not hero.equipment.has(slot): return false
  if item!="None":
@@ -102,11 +140,11 @@ func reward(normal: bool, species: String="goblin"):
  var enemies: Dictionary=JSON.parse_string(FileAccess.get_file_as_string("res://data/enemies.json"))
  var enemy: Dictionary=enemies[species]
  hero.xp+=int(enemy.xp)
- hero.gold+=int(enemy.gold)
+ award_gold(int(enemy.gold),"Battle victory")
  if normal and species=="goblin": hero.mastery+=1
  if normal and hero.monsters.has(species): hero.monsters[species]+=1
  for class_ in active_classes(): hero.class_mastery[class_]+=1
- if hero.equipment.Weapon!="None": hero.weapon_mastery.sword+=1
+ if proficiencies().has(weapon_type()): hero.weapon_mastery[weapon_type()]+=1
  if hero.equipment.Shield!="None": hero.weapon_mastery.shield+=1
  if hero.companion.current!="intro_wolf" and hero.companion.active:
   var record=hero.companion.records[hero.companion.current]
@@ -120,8 +158,8 @@ func reward(normal: bool, species: String="goblin"):
  while hero.xp>=int(hero.level)*70:
   hero.xp-=int(hero.level)*70
   hero.level+=1
-  hero.points+=3
-  notice="Level up! Three skill points earned."
+  hero.points+=GameRules.POINTS_PER_LEVEL
+  notice="Level up! Two skill points earned; class stats increased."
 func save_game() -> bool:
  if save_blocked: return false
  var success=SaveStore.write_hero(hero,SAVE)
@@ -149,10 +187,13 @@ func load_game():
    for item in equipment_data: grant_item(item)
 
   hero.monsters.goblin=maxi(int(hero.monsters.goblin),int(hero.mastery))
+  migrate_progression(data)
+  hero.hp=mini(int(hero.hp),int(stats().max_hp))
+  hero.mp=mini(int(hero.mp),int(stats().max_mp))
   var pos=hero.journey.position
   return_position=Vector3(float(pos[0]),float(pos[1]),float(pos[2]))
 func can_mythic(class_name_: String) -> bool:
- return hero.primary==class_name_ and hero.skills.get(class_name_,[]).has("mythic")
+ return hero.primary==class_name_ and skill_active(class_name_,"mythic")
 
 func normalize(value):
  if value is float: return int(value)
@@ -192,7 +233,7 @@ func new_adventure():
  hero.potions=3
 func create_hero(name_: String, primary: String, skin: int, hair: int, dye: int, secondary: Array=[]) -> bool:
  if hero.profile.created or not classes.has(primary): return false
- if secondary.is_empty(): secondary=classes.keys().filter(func(c): return c!=primary).slice(0,2)
+ if secondary.is_empty(): secondary=classes[primary].recommended_secondary.duplicate()
  if secondary.size()!=2 or secondary[0]==secondary[1] or secondary.has(primary): return false
  for value in secondary:
   if not classes.has(value): return false
@@ -208,10 +249,11 @@ func active_classes() -> Array:
 func can_change_class() -> bool:
  return not hero.profile.economy or (hero.journey.region=="forest" and return_position.length()<5)
 func compatible(item: String) -> bool:
- if not hero.profile.economy: return true
  var entry: Dictionary=equipment_data.get(item,{})
- if entry.get("style")=="plate": return hero.primary=="Paladin"
- return entry.get("classes",[]).has(hero.primary)
+ if entry.is_empty(): return false
+ if entry.slot=="Weapon" or entry.slot=="Shield": return proficiencies().has(entry.get("weapon_type","sword"))
+ if entry.get("style")=="plate": return hero.primary in ["Paladin","Warrior"]
+ return true
 func owns(item: String) -> bool:
  return not hero.profile.economy or hero.inventory.has(equipment_data.get(item,{}).get("id",""))
 func grant_item(item: String):
@@ -268,11 +310,15 @@ func train_companion(id: String) -> bool:
  return true
 func learn_weapon(type_: String, id: String) -> bool:
  for node in weapon_trees.get(type_,[]):
-  if node.id==id and hero.points>=node.cost and hero.weapon_mastery[type_]>=node.requires and not hero.weapon_skills[type_].has(id):
-   hero.points-=int(node.cost)
-   hero.weapon_skills[type_].append(id)
-   save_game()
-   return true
+  if node.id!=id: continue
+  if not proficiencies().has(type_) or hero.level<int(node.level_required): return false
+  if hero.points<int(node.cost) or hero.weapon_mastery[type_]<int(node.requires) or hero.weapon_skills[type_].has(id): return false
+  for prerequisite in node.prerequisites:
+   if not hero.weapon_skills[type_].has(prerequisite): return false
+  hero.points-=int(node.cost)
+  hero.weapon_skills[type_].append(id)
+  save_game()
+  return true
  return false
 func companion_record() -> Dictionary:
  return hero.companion.records.get(hero.companion.current,{})
@@ -287,14 +333,38 @@ func restore_companion():
  if not record.is_empty(): record.hp=companion_max_hp()
 
 func starter_ready() -> bool:
- return hero.equipment.Weapon!="None" and hero.equipment.Shield!="None" and hero.equipment.Chest!="None"
+ return hero.equipment.Chest!="None" and (hero.equipment.Weapon!="None" or proficiencies().has("unarmed"))
 func can_buy(item: String) -> bool:
  if not equipment_data.has(item) or owns(item) or not compatible(item): return false
  var reserve=0
- for slot in ["Weapon","Shield","Chest"]:
-  if equipment_data[item].slot==slot: continue
+ for slot in ["Weapon","Chest"]:
+  if equipment_data[item].slot==slot or (slot=="Weapon" and proficiencies().has("unarmed")): continue
   var slot_owned=false
+  var cheapest=100000
   for gear in equipment_data:
-   if equipment_data[gear].slot==slot and owns(gear) and compatible(gear): slot_owned=true
-  if not slot_owned: reserve+={"Weapon":30,"Shield":20,"Chest":25}[slot]
+   if equipment_data[gear].slot!=slot or not compatible(gear): continue
+   cheapest=mini(cheapest,int(equipment_data[gear].price))
+   if owns(gear): slot_owned=true
+  if not slot_owned: reserve+=cheapest
  return int(hero.gold)>=int(equipment_data[item].price)+reserve
+func award_gold(base: int, source: String="Quest") -> Dictionary:
+ var roll=GameRules.gold_roll(base,int(stats().dexterity),int(hero.seed))
+ hero.seed=roll.seed
+ hero.gold+=roll.total
+ last_reward={"source":source,"base":roll.base,"bonus":roll.bonus,"total":roll.total}
+ notice="%s: +%s gold%s" % [source,roll.total," (Dexterity bonus +%s)" % roll.bonus if roll.bonus>0 else ""]
+ return last_reward
+func migrate_progression(data: Dictionary):
+ if int(data.get("progression_version",0))>=GameRules.PROGRESSION_VERSION: return
+ if not hero.profile.economy:
+  for item in equipment_data: grant_item(item)
+ hero.profile.economy=true
+ if classes.has(hero.primary): hero.profile.created=true
+ hero.progression_archive={"skills":hero.skills.duplicate(true),"weapon_skills":hero.weapon_skills.duplicate(true),"old_points":hero.points}
+ for class_ in classes:
+  hero.skills[class_]=[]
+  hero.investments[class_]=0
+ for family in weapon_trees: hero.weapon_skills[family]=[]
+ hero.points=maxi(1,int(hero.level))*GameRules.POINTS_PER_LEVEL
+ hero.progression_version=GameRules.PROGRESSION_VERSION
+ save_notice="Progression updated: skills reset to %s unspent points for the new level-50 trees. Previous investments are archived; level, quests, equipment and companions are kept." % hero.points

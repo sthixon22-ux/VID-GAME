@@ -3,32 +3,2846 @@
     {
       "id": "edge",
       "name": "Honed Edge",
+      "description": "Attack +2.",
       "cost": 1,
       "requires": 0,
-      "description": "Sword attack power +2."
+      "level_required": 1,
+      "prerequisites": [],
+      "bonus": {
+        "attack": 2
+      },
+      "position": [
+        0.15,
+        0.87
+      ]
     },
     {
       "id": "flow",
       "name": "Flowing Slash",
-      "cost": 1,
-      "requires": 3,
-      "description": "Sword Slash gains +4 damage."
+      "description": "Matching weapon techniques gain +4 damage.",
+      "cost": 2,
+      "requires": 0,
+      "level_required": 5,
+      "prerequisites": [
+        "edge"
+      ],
+      "bonus": {},
+      "position": [
+        0.5,
+        0.87
+      ]
+    },
+    {
+      "id": "focus",
+      "name": "Precision",
+      "description": "Dexterity +2.",
+      "cost": 3,
+      "requires": 0,
+      "level_required": 10,
+      "prerequisites": [
+        "flow"
+      ],
+      "bonus": {
+        "dexterity": 2
+      },
+      "position": [
+        0.85,
+        0.87
+      ]
+    },
+    {
+      "id": "vitality",
+      "name": "Endurance",
+      "description": "HP +15.",
+      "cost": 3,
+      "requires": 7,
+      "level_required": 15,
+      "prerequisites": [
+        "focus"
+      ],
+      "bonus": {
+        "max_hp": 15
+      },
+      "position": [
+        0.15,
+        0.62
+      ]
+    },
+    {
+      "id": "reserve",
+      "name": "Reserve",
+      "description": "MP +6.",
+      "cost": 4,
+      "requires": 10,
+      "level_required": 20,
+      "prerequisites": [
+        "vitality"
+      ],
+      "bonus": {
+        "max_mp": 6
+      },
+      "position": [
+        0.5,
+        0.62
+      ]
+    },
+    {
+      "id": "control",
+      "name": "Control",
+      "description": "Agility +2.",
+      "cost": 4,
+      "requires": 12,
+      "level_required": 25,
+      "prerequisites": [
+        "reserve"
+      ],
+      "bonus": {
+        "agility": 2
+      },
+      "position": [
+        0.85,
+        0.62
+      ]
+    },
+    {
+      "id": "fortitude",
+      "name": "Fortitude",
+      "description": "Defense +3.",
+      "cost": 5,
+      "requires": 15,
+      "level_required": 30,
+      "prerequisites": [
+        "control"
+      ],
+      "bonus": {
+        "defense": 3
+      },
+      "position": [
+        0.15,
+        0.37
+      ]
+    },
+    {
+      "id": "technique",
+      "name": "Advanced Technique",
+      "description": "Attack +4. Unlocks Tempest Slash.",
+      "cost": 5,
+      "requires": 17,
+      "level_required": 35,
+      "prerequisites": [
+        "fortitude"
+      ],
+      "bonus": {
+        "attack": 4
+      },
+      "position": [
+        0.5,
+        0.37
+      ],
+      "grants": [
+        "sword_master_technique"
+      ]
+    },
+    {
+      "id": "reflex",
+      "name": "Reflexes",
+      "description": "Dexterity +4.",
+      "cost": 5,
+      "requires": 20,
+      "level_required": 40,
+      "prerequisites": [
+        "technique"
+      ],
+      "bonus": {
+        "dexterity": 4
+      },
+      "position": [
+        0.85,
+        0.37
+      ]
+    },
+    {
+      "id": "veteran",
+      "name": "Veteran Instinct",
+      "description": "Agility +4.",
+      "cost": 6,
+      "requires": 22,
+      "level_required": 45,
+      "prerequisites": [
+        "reflex"
+      ],
+      "bonus": {
+        "agility": 4
+      },
+      "position": [
+        0.15,
+        0.12
+      ]
+    },
+    {
+      "id": "legend",
+      "name": "Legendary Form",
+      "description": "HP +25, MP +10.",
+      "cost": 6,
+      "requires": 24,
+      "level_required": 48,
+      "prerequisites": [
+        "veteran"
+      ],
+      "bonus": {
+        "max_hp": 25,
+        "max_mp": 10
+      },
+      "position": [
+        0.5,
+        0.12
+      ]
+    },
+    {
+      "id": "master",
+      "name": "Sword Mastery",
+      "description": "Attack +6, Dexterity +3.",
+      "cost": 6,
+      "requires": 25,
+      "level_required": 50,
+      "prerequisites": [
+        "legend"
+      ],
+      "bonus": {
+        "attack": 6,
+        "dexterity": 3
+      },
+      "position": [
+        0.85,
+        0.12
+      ]
     }
   ],
   "shield": [
     {
       "id": "brace",
       "name": "Braced Guard",
+      "description": "Defense +2.",
       "cost": 1,
       "requires": 0,
-      "description": "With a shield, defense +2."
+      "level_required": 1,
+      "prerequisites": [],
+      "bonus": {
+        "defense": 2
+      },
+      "position": [
+        0.15,
+        0.87
+      ]
     },
     {
       "id": "impact",
       "name": "Shield Impact",
+      "description": "Shield Bash stun chance +20%.",
+      "cost": 2,
+      "requires": 0,
+      "level_required": 5,
+      "prerequisites": [
+        "brace"
+      ],
+      "bonus": {},
+      "position": [
+        0.5,
+        0.87
+      ]
+    },
+    {
+      "id": "focus",
+      "name": "Precision",
+      "description": "Dexterity +2.",
+      "cost": 3,
+      "requires": 0,
+      "level_required": 10,
+      "prerequisites": [
+        "impact"
+      ],
+      "bonus": {
+        "dexterity": 2
+      },
+      "position": [
+        0.85,
+        0.87
+      ]
+    },
+    {
+      "id": "vitality",
+      "name": "Endurance",
+      "description": "HP +15.",
+      "cost": 3,
+      "requires": 7,
+      "level_required": 15,
+      "prerequisites": [
+        "focus"
+      ],
+      "bonus": {
+        "max_hp": 15
+      },
+      "position": [
+        0.15,
+        0.62
+      ]
+    },
+    {
+      "id": "reserve",
+      "name": "Reserve",
+      "description": "MP +6.",
+      "cost": 4,
+      "requires": 10,
+      "level_required": 20,
+      "prerequisites": [
+        "vitality"
+      ],
+      "bonus": {
+        "max_mp": 6
+      },
+      "position": [
+        0.5,
+        0.62
+      ]
+    },
+    {
+      "id": "control",
+      "name": "Control",
+      "description": "Agility +2.",
+      "cost": 4,
+      "requires": 12,
+      "level_required": 25,
+      "prerequisites": [
+        "reserve"
+      ],
+      "bonus": {
+        "agility": 2
+      },
+      "position": [
+        0.85,
+        0.62
+      ]
+    },
+    {
+      "id": "fortitude",
+      "name": "Fortitude",
+      "description": "Defense +3.",
+      "cost": 5,
+      "requires": 15,
+      "level_required": 30,
+      "prerequisites": [
+        "control"
+      ],
+      "bonus": {
+        "defense": 3
+      },
+      "position": [
+        0.15,
+        0.37
+      ]
+    },
+    {
+      "id": "technique",
+      "name": "Advanced Technique",
+      "description": "Attack +4. Unlocks Guardian Reprisal.",
+      "cost": 5,
+      "requires": 17,
+      "level_required": 35,
+      "prerequisites": [
+        "fortitude"
+      ],
+      "bonus": {
+        "attack": 4
+      },
+      "position": [
+        0.5,
+        0.37
+      ],
+      "grants": [
+        "shield_master_technique"
+      ]
+    },
+    {
+      "id": "reflex",
+      "name": "Reflexes",
+      "description": "Dexterity +4.",
+      "cost": 5,
+      "requires": 20,
+      "level_required": 40,
+      "prerequisites": [
+        "technique"
+      ],
+      "bonus": {
+        "dexterity": 4
+      },
+      "position": [
+        0.85,
+        0.37
+      ]
+    },
+    {
+      "id": "veteran",
+      "name": "Veteran Instinct",
+      "description": "Agility +4.",
+      "cost": 6,
+      "requires": 22,
+      "level_required": 45,
+      "prerequisites": [
+        "reflex"
+      ],
+      "bonus": {
+        "agility": 4
+      },
+      "position": [
+        0.15,
+        0.12
+      ]
+    },
+    {
+      "id": "legend",
+      "name": "Legendary Form",
+      "description": "HP +25, MP +10.",
+      "cost": 6,
+      "requires": 24,
+      "level_required": 48,
+      "prerequisites": [
+        "veteran"
+      ],
+      "bonus": {
+        "max_hp": 25,
+        "max_mp": 10
+      },
+      "position": [
+        0.5,
+        0.12
+      ]
+    },
+    {
+      "id": "master",
+      "name": "Shield Mastery",
+      "description": "Defense +5.",
+      "cost": 6,
+      "requires": 25,
+      "level_required": 50,
+      "prerequisites": [
+        "legend"
+      ],
+      "bonus": {
+        "defense": 5
+      },
+      "position": [
+        0.85,
+        0.12
+      ]
+    }
+  ],
+  "axe": [
+    {
+      "id": "edge",
+      "name": "Axe Training",
+      "description": "Attack +2.",
       "cost": 1,
-      "requires": 3,
-      "description": "Shield Bash stun chance +20%."
+      "requires": 0,
+      "level_required": 1,
+      "prerequisites": [],
+      "bonus": {
+        "attack": 2
+      },
+      "position": [
+        0.15,
+        0.87
+      ]
+    },
+    {
+      "id": "flow",
+      "name": "Axe Rhythm",
+      "description": "Matching weapon techniques gain +4 damage.",
+      "cost": 2,
+      "requires": 0,
+      "level_required": 5,
+      "prerequisites": [
+        "edge"
+      ],
+      "bonus": {},
+      "position": [
+        0.5,
+        0.87
+      ]
+    },
+    {
+      "id": "focus",
+      "name": "Precision",
+      "description": "Dexterity +2.",
+      "cost": 3,
+      "requires": 0,
+      "level_required": 10,
+      "prerequisites": [
+        "flow"
+      ],
+      "bonus": {
+        "dexterity": 2
+      },
+      "position": [
+        0.85,
+        0.87
+      ]
+    },
+    {
+      "id": "vitality",
+      "name": "Endurance",
+      "description": "HP +15.",
+      "cost": 3,
+      "requires": 7,
+      "level_required": 15,
+      "prerequisites": [
+        "focus"
+      ],
+      "bonus": {
+        "max_hp": 15
+      },
+      "position": [
+        0.15,
+        0.62
+      ]
+    },
+    {
+      "id": "reserve",
+      "name": "Reserve",
+      "description": "MP +6.",
+      "cost": 4,
+      "requires": 10,
+      "level_required": 20,
+      "prerequisites": [
+        "vitality"
+      ],
+      "bonus": {
+        "max_mp": 6
+      },
+      "position": [
+        0.5,
+        0.62
+      ]
+    },
+    {
+      "id": "control",
+      "name": "Control",
+      "description": "Agility +2.",
+      "cost": 4,
+      "requires": 12,
+      "level_required": 25,
+      "prerequisites": [
+        "reserve"
+      ],
+      "bonus": {
+        "agility": 2
+      },
+      "position": [
+        0.85,
+        0.62
+      ]
+    },
+    {
+      "id": "fortitude",
+      "name": "Fortitude",
+      "description": "Defense +3.",
+      "cost": 5,
+      "requires": 15,
+      "level_required": 30,
+      "prerequisites": [
+        "control"
+      ],
+      "bonus": {
+        "defense": 3
+      },
+      "position": [
+        0.15,
+        0.37
+      ]
+    },
+    {
+      "id": "technique",
+      "name": "Advanced Technique",
+      "description": "Attack +4. Unlocks Rupturing Cleave.",
+      "cost": 5,
+      "requires": 17,
+      "level_required": 35,
+      "prerequisites": [
+        "fortitude"
+      ],
+      "bonus": {
+        "attack": 4
+      },
+      "position": [
+        0.5,
+        0.37
+      ],
+      "grants": [
+        "axe_master_technique"
+      ]
+    },
+    {
+      "id": "reflex",
+      "name": "Reflexes",
+      "description": "Dexterity +4.",
+      "cost": 5,
+      "requires": 20,
+      "level_required": 40,
+      "prerequisites": [
+        "technique"
+      ],
+      "bonus": {
+        "dexterity": 4
+      },
+      "position": [
+        0.85,
+        0.37
+      ]
+    },
+    {
+      "id": "veteran",
+      "name": "Veteran Instinct",
+      "description": "Agility +4.",
+      "cost": 6,
+      "requires": 22,
+      "level_required": 45,
+      "prerequisites": [
+        "reflex"
+      ],
+      "bonus": {
+        "agility": 4
+      },
+      "position": [
+        0.15,
+        0.12
+      ]
+    },
+    {
+      "id": "legend",
+      "name": "Legendary Form",
+      "description": "HP +25, MP +10.",
+      "cost": 6,
+      "requires": 24,
+      "level_required": 48,
+      "prerequisites": [
+        "veteran"
+      ],
+      "bonus": {
+        "max_hp": 25,
+        "max_mp": 10
+      },
+      "position": [
+        0.5,
+        0.12
+      ]
+    },
+    {
+      "id": "master",
+      "name": "Axe Mastery",
+      "description": "Attack +6, Dexterity +3.",
+      "cost": 6,
+      "requires": 25,
+      "level_required": 50,
+      "prerequisites": [
+        "legend"
+      ],
+      "bonus": {
+        "attack": 6,
+        "dexterity": 3
+      },
+      "position": [
+        0.85,
+        0.12
+      ]
+    }
+  ],
+  "greatsword": [
+    {
+      "id": "edge",
+      "name": "Greatsword Training",
+      "description": "Attack +2.",
+      "cost": 1,
+      "requires": 0,
+      "level_required": 1,
+      "prerequisites": [],
+      "bonus": {
+        "attack": 2
+      },
+      "position": [
+        0.15,
+        0.87
+      ]
+    },
+    {
+      "id": "flow",
+      "name": "Greatsword Rhythm",
+      "description": "Matching weapon techniques gain +4 damage.",
+      "cost": 2,
+      "requires": 0,
+      "level_required": 5,
+      "prerequisites": [
+        "edge"
+      ],
+      "bonus": {},
+      "position": [
+        0.5,
+        0.87
+      ]
+    },
+    {
+      "id": "focus",
+      "name": "Precision",
+      "description": "Dexterity +2.",
+      "cost": 3,
+      "requires": 0,
+      "level_required": 10,
+      "prerequisites": [
+        "flow"
+      ],
+      "bonus": {
+        "dexterity": 2
+      },
+      "position": [
+        0.85,
+        0.87
+      ]
+    },
+    {
+      "id": "vitality",
+      "name": "Endurance",
+      "description": "HP +15.",
+      "cost": 3,
+      "requires": 7,
+      "level_required": 15,
+      "prerequisites": [
+        "focus"
+      ],
+      "bonus": {
+        "max_hp": 15
+      },
+      "position": [
+        0.15,
+        0.62
+      ]
+    },
+    {
+      "id": "reserve",
+      "name": "Reserve",
+      "description": "MP +6.",
+      "cost": 4,
+      "requires": 10,
+      "level_required": 20,
+      "prerequisites": [
+        "vitality"
+      ],
+      "bonus": {
+        "max_mp": 6
+      },
+      "position": [
+        0.5,
+        0.62
+      ]
+    },
+    {
+      "id": "control",
+      "name": "Control",
+      "description": "Agility +2.",
+      "cost": 4,
+      "requires": 12,
+      "level_required": 25,
+      "prerequisites": [
+        "reserve"
+      ],
+      "bonus": {
+        "agility": 2
+      },
+      "position": [
+        0.85,
+        0.62
+      ]
+    },
+    {
+      "id": "fortitude",
+      "name": "Fortitude",
+      "description": "Defense +3.",
+      "cost": 5,
+      "requires": 15,
+      "level_required": 30,
+      "prerequisites": [
+        "control"
+      ],
+      "bonus": {
+        "defense": 3
+      },
+      "position": [
+        0.15,
+        0.37
+      ]
+    },
+    {
+      "id": "technique",
+      "name": "Advanced Technique",
+      "description": "Attack +4. Unlocks Cyclone Blade.",
+      "cost": 5,
+      "requires": 17,
+      "level_required": 35,
+      "prerequisites": [
+        "fortitude"
+      ],
+      "bonus": {
+        "attack": 4
+      },
+      "position": [
+        0.5,
+        0.37
+      ],
+      "grants": [
+        "greatsword_master_technique"
+      ]
+    },
+    {
+      "id": "reflex",
+      "name": "Reflexes",
+      "description": "Dexterity +4.",
+      "cost": 5,
+      "requires": 20,
+      "level_required": 40,
+      "prerequisites": [
+        "technique"
+      ],
+      "bonus": {
+        "dexterity": 4
+      },
+      "position": [
+        0.85,
+        0.37
+      ]
+    },
+    {
+      "id": "veteran",
+      "name": "Veteran Instinct",
+      "description": "Agility +4.",
+      "cost": 6,
+      "requires": 22,
+      "level_required": 45,
+      "prerequisites": [
+        "reflex"
+      ],
+      "bonus": {
+        "agility": 4
+      },
+      "position": [
+        0.15,
+        0.12
+      ]
+    },
+    {
+      "id": "legend",
+      "name": "Legendary Form",
+      "description": "HP +25, MP +10.",
+      "cost": 6,
+      "requires": 24,
+      "level_required": 48,
+      "prerequisites": [
+        "veteran"
+      ],
+      "bonus": {
+        "max_hp": 25,
+        "max_mp": 10
+      },
+      "position": [
+        0.5,
+        0.12
+      ]
+    },
+    {
+      "id": "master",
+      "name": "Greatsword Mastery",
+      "description": "Attack +6, Dexterity +3.",
+      "cost": 6,
+      "requires": 25,
+      "level_required": 50,
+      "prerequisites": [
+        "legend"
+      ],
+      "bonus": {
+        "attack": 6,
+        "dexterity": 3
+      },
+      "position": [
+        0.85,
+        0.12
+      ]
+    }
+  ],
+  "hammer": [
+    {
+      "id": "edge",
+      "name": "Hammer Training",
+      "description": "Attack +2.",
+      "cost": 1,
+      "requires": 0,
+      "level_required": 1,
+      "prerequisites": [],
+      "bonus": {
+        "attack": 2
+      },
+      "position": [
+        0.15,
+        0.87
+      ]
+    },
+    {
+      "id": "flow",
+      "name": "Hammer Rhythm",
+      "description": "Matching weapon techniques gain +4 damage.",
+      "cost": 2,
+      "requires": 0,
+      "level_required": 5,
+      "prerequisites": [
+        "edge"
+      ],
+      "bonus": {},
+      "position": [
+        0.5,
+        0.87
+      ]
+    },
+    {
+      "id": "focus",
+      "name": "Precision",
+      "description": "Dexterity +2.",
+      "cost": 3,
+      "requires": 0,
+      "level_required": 10,
+      "prerequisites": [
+        "flow"
+      ],
+      "bonus": {
+        "dexterity": 2
+      },
+      "position": [
+        0.85,
+        0.87
+      ]
+    },
+    {
+      "id": "vitality",
+      "name": "Endurance",
+      "description": "HP +15.",
+      "cost": 3,
+      "requires": 7,
+      "level_required": 15,
+      "prerequisites": [
+        "focus"
+      ],
+      "bonus": {
+        "max_hp": 15
+      },
+      "position": [
+        0.15,
+        0.62
+      ]
+    },
+    {
+      "id": "reserve",
+      "name": "Reserve",
+      "description": "MP +6.",
+      "cost": 4,
+      "requires": 10,
+      "level_required": 20,
+      "prerequisites": [
+        "vitality"
+      ],
+      "bonus": {
+        "max_mp": 6
+      },
+      "position": [
+        0.5,
+        0.62
+      ]
+    },
+    {
+      "id": "control",
+      "name": "Control",
+      "description": "Agility +2.",
+      "cost": 4,
+      "requires": 12,
+      "level_required": 25,
+      "prerequisites": [
+        "reserve"
+      ],
+      "bonus": {
+        "agility": 2
+      },
+      "position": [
+        0.85,
+        0.62
+      ]
+    },
+    {
+      "id": "fortitude",
+      "name": "Fortitude",
+      "description": "Defense +3.",
+      "cost": 5,
+      "requires": 15,
+      "level_required": 30,
+      "prerequisites": [
+        "control"
+      ],
+      "bonus": {
+        "defense": 3
+      },
+      "position": [
+        0.15,
+        0.37
+      ]
+    },
+    {
+      "id": "technique",
+      "name": "Advanced Technique",
+      "description": "Attack +4. Unlocks Seismic Smash.",
+      "cost": 5,
+      "requires": 17,
+      "level_required": 35,
+      "prerequisites": [
+        "fortitude"
+      ],
+      "bonus": {
+        "attack": 4
+      },
+      "position": [
+        0.5,
+        0.37
+      ],
+      "grants": [
+        "hammer_master_technique"
+      ]
+    },
+    {
+      "id": "reflex",
+      "name": "Reflexes",
+      "description": "Dexterity +4.",
+      "cost": 5,
+      "requires": 20,
+      "level_required": 40,
+      "prerequisites": [
+        "technique"
+      ],
+      "bonus": {
+        "dexterity": 4
+      },
+      "position": [
+        0.85,
+        0.37
+      ]
+    },
+    {
+      "id": "veteran",
+      "name": "Veteran Instinct",
+      "description": "Agility +4.",
+      "cost": 6,
+      "requires": 22,
+      "level_required": 45,
+      "prerequisites": [
+        "reflex"
+      ],
+      "bonus": {
+        "agility": 4
+      },
+      "position": [
+        0.15,
+        0.12
+      ]
+    },
+    {
+      "id": "legend",
+      "name": "Legendary Form",
+      "description": "HP +25, MP +10.",
+      "cost": 6,
+      "requires": 24,
+      "level_required": 48,
+      "prerequisites": [
+        "veteran"
+      ],
+      "bonus": {
+        "max_hp": 25,
+        "max_mp": 10
+      },
+      "position": [
+        0.5,
+        0.12
+      ]
+    },
+    {
+      "id": "master",
+      "name": "Hammer Mastery",
+      "description": "Attack +6, Dexterity +3.",
+      "cost": 6,
+      "requires": 25,
+      "level_required": 50,
+      "prerequisites": [
+        "legend"
+      ],
+      "bonus": {
+        "attack": 6,
+        "dexterity": 3
+      },
+      "position": [
+        0.85,
+        0.12
+      ]
+    }
+  ],
+  "spear": [
+    {
+      "id": "edge",
+      "name": "Spear Training",
+      "description": "Attack +2.",
+      "cost": 1,
+      "requires": 0,
+      "level_required": 1,
+      "prerequisites": [],
+      "bonus": {
+        "attack": 2
+      },
+      "position": [
+        0.15,
+        0.87
+      ]
+    },
+    {
+      "id": "flow",
+      "name": "Spear Rhythm",
+      "description": "Matching weapon techniques gain +4 damage.",
+      "cost": 2,
+      "requires": 0,
+      "level_required": 5,
+      "prerequisites": [
+        "edge"
+      ],
+      "bonus": {},
+      "position": [
+        0.5,
+        0.87
+      ]
+    },
+    {
+      "id": "focus",
+      "name": "Precision",
+      "description": "Dexterity +2.",
+      "cost": 3,
+      "requires": 0,
+      "level_required": 10,
+      "prerequisites": [
+        "flow"
+      ],
+      "bonus": {
+        "dexterity": 2
+      },
+      "position": [
+        0.85,
+        0.87
+      ]
+    },
+    {
+      "id": "vitality",
+      "name": "Endurance",
+      "description": "HP +15.",
+      "cost": 3,
+      "requires": 7,
+      "level_required": 15,
+      "prerequisites": [
+        "focus"
+      ],
+      "bonus": {
+        "max_hp": 15
+      },
+      "position": [
+        0.15,
+        0.62
+      ]
+    },
+    {
+      "id": "reserve",
+      "name": "Reserve",
+      "description": "MP +6.",
+      "cost": 4,
+      "requires": 10,
+      "level_required": 20,
+      "prerequisites": [
+        "vitality"
+      ],
+      "bonus": {
+        "max_mp": 6
+      },
+      "position": [
+        0.5,
+        0.62
+      ]
+    },
+    {
+      "id": "control",
+      "name": "Control",
+      "description": "Agility +2.",
+      "cost": 4,
+      "requires": 12,
+      "level_required": 25,
+      "prerequisites": [
+        "reserve"
+      ],
+      "bonus": {
+        "agility": 2
+      },
+      "position": [
+        0.85,
+        0.62
+      ]
+    },
+    {
+      "id": "fortitude",
+      "name": "Fortitude",
+      "description": "Defense +3.",
+      "cost": 5,
+      "requires": 15,
+      "level_required": 30,
+      "prerequisites": [
+        "control"
+      ],
+      "bonus": {
+        "defense": 3
+      },
+      "position": [
+        0.15,
+        0.37
+      ]
+    },
+    {
+      "id": "technique",
+      "name": "Advanced Technique",
+      "description": "Attack +4. Unlocks Dragon Thrust.",
+      "cost": 5,
+      "requires": 17,
+      "level_required": 35,
+      "prerequisites": [
+        "fortitude"
+      ],
+      "bonus": {
+        "attack": 4
+      },
+      "position": [
+        0.5,
+        0.37
+      ],
+      "grants": [
+        "spear_master_technique"
+      ]
+    },
+    {
+      "id": "reflex",
+      "name": "Reflexes",
+      "description": "Dexterity +4.",
+      "cost": 5,
+      "requires": 20,
+      "level_required": 40,
+      "prerequisites": [
+        "technique"
+      ],
+      "bonus": {
+        "dexterity": 4
+      },
+      "position": [
+        0.85,
+        0.37
+      ]
+    },
+    {
+      "id": "veteran",
+      "name": "Veteran Instinct",
+      "description": "Agility +4.",
+      "cost": 6,
+      "requires": 22,
+      "level_required": 45,
+      "prerequisites": [
+        "reflex"
+      ],
+      "bonus": {
+        "agility": 4
+      },
+      "position": [
+        0.15,
+        0.12
+      ]
+    },
+    {
+      "id": "legend",
+      "name": "Legendary Form",
+      "description": "HP +25, MP +10.",
+      "cost": 6,
+      "requires": 24,
+      "level_required": 48,
+      "prerequisites": [
+        "veteran"
+      ],
+      "bonus": {
+        "max_hp": 25,
+        "max_mp": 10
+      },
+      "position": [
+        0.5,
+        0.12
+      ]
+    },
+    {
+      "id": "master",
+      "name": "Spear Mastery",
+      "description": "Attack +6, Dexterity +3.",
+      "cost": 6,
+      "requires": 25,
+      "level_required": 50,
+      "prerequisites": [
+        "legend"
+      ],
+      "bonus": {
+        "attack": 6,
+        "dexterity": 3
+      },
+      "position": [
+        0.85,
+        0.12
+      ]
+    }
+  ],
+  "bow": [
+    {
+      "id": "edge",
+      "name": "Bow Training",
+      "description": "Attack +2.",
+      "cost": 1,
+      "requires": 0,
+      "level_required": 1,
+      "prerequisites": [],
+      "bonus": {
+        "attack": 2
+      },
+      "position": [
+        0.15,
+        0.87
+      ]
+    },
+    {
+      "id": "flow",
+      "name": "Bow Rhythm",
+      "description": "Matching weapon techniques gain +4 damage.",
+      "cost": 2,
+      "requires": 0,
+      "level_required": 5,
+      "prerequisites": [
+        "edge"
+      ],
+      "bonus": {},
+      "position": [
+        0.5,
+        0.87
+      ]
+    },
+    {
+      "id": "focus",
+      "name": "Precision",
+      "description": "Dexterity +2.",
+      "cost": 3,
+      "requires": 0,
+      "level_required": 10,
+      "prerequisites": [
+        "flow"
+      ],
+      "bonus": {
+        "dexterity": 2
+      },
+      "position": [
+        0.85,
+        0.87
+      ]
+    },
+    {
+      "id": "vitality",
+      "name": "Endurance",
+      "description": "HP +15.",
+      "cost": 3,
+      "requires": 7,
+      "level_required": 15,
+      "prerequisites": [
+        "focus"
+      ],
+      "bonus": {
+        "max_hp": 15
+      },
+      "position": [
+        0.15,
+        0.62
+      ]
+    },
+    {
+      "id": "reserve",
+      "name": "Reserve",
+      "description": "MP +6.",
+      "cost": 4,
+      "requires": 10,
+      "level_required": 20,
+      "prerequisites": [
+        "vitality"
+      ],
+      "bonus": {
+        "max_mp": 6
+      },
+      "position": [
+        0.5,
+        0.62
+      ]
+    },
+    {
+      "id": "control",
+      "name": "Control",
+      "description": "Agility +2.",
+      "cost": 4,
+      "requires": 12,
+      "level_required": 25,
+      "prerequisites": [
+        "reserve"
+      ],
+      "bonus": {
+        "agility": 2
+      },
+      "position": [
+        0.85,
+        0.62
+      ]
+    },
+    {
+      "id": "fortitude",
+      "name": "Fortitude",
+      "description": "Defense +3.",
+      "cost": 5,
+      "requires": 15,
+      "level_required": 30,
+      "prerequisites": [
+        "control"
+      ],
+      "bonus": {
+        "defense": 3
+      },
+      "position": [
+        0.15,
+        0.37
+      ]
+    },
+    {
+      "id": "technique",
+      "name": "Advanced Technique",
+      "description": "Attack +4. Unlocks Piercing Volley.",
+      "cost": 5,
+      "requires": 17,
+      "level_required": 35,
+      "prerequisites": [
+        "fortitude"
+      ],
+      "bonus": {
+        "attack": 4
+      },
+      "position": [
+        0.5,
+        0.37
+      ],
+      "grants": [
+        "bow_master_technique"
+      ]
+    },
+    {
+      "id": "reflex",
+      "name": "Reflexes",
+      "description": "Dexterity +4.",
+      "cost": 5,
+      "requires": 20,
+      "level_required": 40,
+      "prerequisites": [
+        "technique"
+      ],
+      "bonus": {
+        "dexterity": 4
+      },
+      "position": [
+        0.85,
+        0.37
+      ]
+    },
+    {
+      "id": "veteran",
+      "name": "Veteran Instinct",
+      "description": "Agility +4.",
+      "cost": 6,
+      "requires": 22,
+      "level_required": 45,
+      "prerequisites": [
+        "reflex"
+      ],
+      "bonus": {
+        "agility": 4
+      },
+      "position": [
+        0.15,
+        0.12
+      ]
+    },
+    {
+      "id": "legend",
+      "name": "Legendary Form",
+      "description": "HP +25, MP +10.",
+      "cost": 6,
+      "requires": 24,
+      "level_required": 48,
+      "prerequisites": [
+        "veteran"
+      ],
+      "bonus": {
+        "max_hp": 25,
+        "max_mp": 10
+      },
+      "position": [
+        0.5,
+        0.12
+      ]
+    },
+    {
+      "id": "master",
+      "name": "Bow Mastery",
+      "description": "Attack +6, Dexterity +3.",
+      "cost": 6,
+      "requires": 25,
+      "level_required": 50,
+      "prerequisites": [
+        "legend"
+      ],
+      "bonus": {
+        "attack": 6,
+        "dexterity": 3
+      },
+      "position": [
+        0.85,
+        0.12
+      ]
+    }
+  ],
+  "dagger": [
+    {
+      "id": "edge",
+      "name": "Dagger Training",
+      "description": "Attack +2.",
+      "cost": 1,
+      "requires": 0,
+      "level_required": 1,
+      "prerequisites": [],
+      "bonus": {
+        "attack": 2
+      },
+      "position": [
+        0.15,
+        0.87
+      ]
+    },
+    {
+      "id": "flow",
+      "name": "Dagger Rhythm",
+      "description": "Matching weapon techniques gain +4 damage.",
+      "cost": 2,
+      "requires": 0,
+      "level_required": 5,
+      "prerequisites": [
+        "edge"
+      ],
+      "bonus": {},
+      "position": [
+        0.5,
+        0.87
+      ]
+    },
+    {
+      "id": "focus",
+      "name": "Precision",
+      "description": "Dexterity +2.",
+      "cost": 3,
+      "requires": 0,
+      "level_required": 10,
+      "prerequisites": [
+        "flow"
+      ],
+      "bonus": {
+        "dexterity": 2
+      },
+      "position": [
+        0.85,
+        0.87
+      ]
+    },
+    {
+      "id": "vitality",
+      "name": "Endurance",
+      "description": "HP +15.",
+      "cost": 3,
+      "requires": 7,
+      "level_required": 15,
+      "prerequisites": [
+        "focus"
+      ],
+      "bonus": {
+        "max_hp": 15
+      },
+      "position": [
+        0.15,
+        0.62
+      ]
+    },
+    {
+      "id": "reserve",
+      "name": "Reserve",
+      "description": "MP +6.",
+      "cost": 4,
+      "requires": 10,
+      "level_required": 20,
+      "prerequisites": [
+        "vitality"
+      ],
+      "bonus": {
+        "max_mp": 6
+      },
+      "position": [
+        0.5,
+        0.62
+      ]
+    },
+    {
+      "id": "control",
+      "name": "Control",
+      "description": "Agility +2.",
+      "cost": 4,
+      "requires": 12,
+      "level_required": 25,
+      "prerequisites": [
+        "reserve"
+      ],
+      "bonus": {
+        "agility": 2
+      },
+      "position": [
+        0.85,
+        0.62
+      ]
+    },
+    {
+      "id": "fortitude",
+      "name": "Fortitude",
+      "description": "Defense +3.",
+      "cost": 5,
+      "requires": 15,
+      "level_required": 30,
+      "prerequisites": [
+        "control"
+      ],
+      "bonus": {
+        "defense": 3
+      },
+      "position": [
+        0.15,
+        0.37
+      ]
+    },
+    {
+      "id": "technique",
+      "name": "Advanced Technique",
+      "description": "Attack +4. Unlocks Twin Crescents.",
+      "cost": 5,
+      "requires": 17,
+      "level_required": 35,
+      "prerequisites": [
+        "fortitude"
+      ],
+      "bonus": {
+        "attack": 4
+      },
+      "position": [
+        0.5,
+        0.37
+      ],
+      "grants": [
+        "dagger_master_technique"
+      ]
+    },
+    {
+      "id": "reflex",
+      "name": "Reflexes",
+      "description": "Dexterity +4.",
+      "cost": 5,
+      "requires": 20,
+      "level_required": 40,
+      "prerequisites": [
+        "technique"
+      ],
+      "bonus": {
+        "dexterity": 4
+      },
+      "position": [
+        0.85,
+        0.37
+      ]
+    },
+    {
+      "id": "veteran",
+      "name": "Veteran Instinct",
+      "description": "Agility +4.",
+      "cost": 6,
+      "requires": 22,
+      "level_required": 45,
+      "prerequisites": [
+        "reflex"
+      ],
+      "bonus": {
+        "agility": 4
+      },
+      "position": [
+        0.15,
+        0.12
+      ]
+    },
+    {
+      "id": "legend",
+      "name": "Legendary Form",
+      "description": "HP +25, MP +10.",
+      "cost": 6,
+      "requires": 24,
+      "level_required": 48,
+      "prerequisites": [
+        "veteran"
+      ],
+      "bonus": {
+        "max_hp": 25,
+        "max_mp": 10
+      },
+      "position": [
+        0.5,
+        0.12
+      ]
+    },
+    {
+      "id": "master",
+      "name": "Dagger Mastery",
+      "description": "Attack +6, Dexterity +3.",
+      "cost": 6,
+      "requires": 25,
+      "level_required": 50,
+      "prerequisites": [
+        "legend"
+      ],
+      "bonus": {
+        "attack": 6,
+        "dexterity": 3
+      },
+      "position": [
+        0.85,
+        0.12
+      ]
+    }
+  ],
+  "staff": [
+    {
+      "id": "edge",
+      "name": "Staff Training",
+      "description": "Attack +2.",
+      "cost": 1,
+      "requires": 0,
+      "level_required": 1,
+      "prerequisites": [],
+      "bonus": {
+        "attack": 2
+      },
+      "position": [
+        0.15,
+        0.87
+      ]
+    },
+    {
+      "id": "flow",
+      "name": "Staff Rhythm",
+      "description": "Matching weapon techniques gain +4 damage.",
+      "cost": 2,
+      "requires": 0,
+      "level_required": 5,
+      "prerequisites": [
+        "edge"
+      ],
+      "bonus": {},
+      "position": [
+        0.5,
+        0.87
+      ]
+    },
+    {
+      "id": "focus",
+      "name": "Precision",
+      "description": "Dexterity +2.",
+      "cost": 3,
+      "requires": 0,
+      "level_required": 10,
+      "prerequisites": [
+        "flow"
+      ],
+      "bonus": {
+        "dexterity": 2
+      },
+      "position": [
+        0.85,
+        0.87
+      ]
+    },
+    {
+      "id": "vitality",
+      "name": "Endurance",
+      "description": "HP +15.",
+      "cost": 3,
+      "requires": 7,
+      "level_required": 15,
+      "prerequisites": [
+        "focus"
+      ],
+      "bonus": {
+        "max_hp": 15
+      },
+      "position": [
+        0.15,
+        0.62
+      ]
+    },
+    {
+      "id": "reserve",
+      "name": "Reserve",
+      "description": "MP +6.",
+      "cost": 4,
+      "requires": 10,
+      "level_required": 20,
+      "prerequisites": [
+        "vitality"
+      ],
+      "bonus": {
+        "max_mp": 6
+      },
+      "position": [
+        0.5,
+        0.62
+      ]
+    },
+    {
+      "id": "control",
+      "name": "Control",
+      "description": "Agility +2.",
+      "cost": 4,
+      "requires": 12,
+      "level_required": 25,
+      "prerequisites": [
+        "reserve"
+      ],
+      "bonus": {
+        "agility": 2
+      },
+      "position": [
+        0.85,
+        0.62
+      ]
+    },
+    {
+      "id": "fortitude",
+      "name": "Fortitude",
+      "description": "Defense +3.",
+      "cost": 5,
+      "requires": 15,
+      "level_required": 30,
+      "prerequisites": [
+        "control"
+      ],
+      "bonus": {
+        "defense": 3
+      },
+      "position": [
+        0.15,
+        0.37
+      ]
+    },
+    {
+      "id": "technique",
+      "name": "Advanced Technique",
+      "description": "Attack +4. Unlocks Runic Rupture.",
+      "cost": 5,
+      "requires": 17,
+      "level_required": 35,
+      "prerequisites": [
+        "fortitude"
+      ],
+      "bonus": {
+        "attack": 4
+      },
+      "position": [
+        0.5,
+        0.37
+      ],
+      "grants": [
+        "staff_master_technique"
+      ]
+    },
+    {
+      "id": "reflex",
+      "name": "Reflexes",
+      "description": "Dexterity +4.",
+      "cost": 5,
+      "requires": 20,
+      "level_required": 40,
+      "prerequisites": [
+        "technique"
+      ],
+      "bonus": {
+        "dexterity": 4
+      },
+      "position": [
+        0.85,
+        0.37
+      ]
+    },
+    {
+      "id": "veteran",
+      "name": "Veteran Instinct",
+      "description": "Agility +4.",
+      "cost": 6,
+      "requires": 22,
+      "level_required": 45,
+      "prerequisites": [
+        "reflex"
+      ],
+      "bonus": {
+        "agility": 4
+      },
+      "position": [
+        0.15,
+        0.12
+      ]
+    },
+    {
+      "id": "legend",
+      "name": "Legendary Form",
+      "description": "HP +25, MP +10.",
+      "cost": 6,
+      "requires": 24,
+      "level_required": 48,
+      "prerequisites": [
+        "veteran"
+      ],
+      "bonus": {
+        "max_hp": 25,
+        "max_mp": 10
+      },
+      "position": [
+        0.5,
+        0.12
+      ]
+    },
+    {
+      "id": "master",
+      "name": "Staff Mastery",
+      "description": "Attack +6, Dexterity +3.",
+      "cost": 6,
+      "requires": 25,
+      "level_required": 50,
+      "prerequisites": [
+        "legend"
+      ],
+      "bonus": {
+        "attack": 6,
+        "dexterity": 3
+      },
+      "position": [
+        0.85,
+        0.12
+      ]
+    }
+  ],
+  "wand": [
+    {
+      "id": "edge",
+      "name": "Wand Training",
+      "description": "Attack +2.",
+      "cost": 1,
+      "requires": 0,
+      "level_required": 1,
+      "prerequisites": [],
+      "bonus": {
+        "attack": 2
+      },
+      "position": [
+        0.15,
+        0.87
+      ]
+    },
+    {
+      "id": "flow",
+      "name": "Wand Rhythm",
+      "description": "Matching weapon techniques gain +4 damage.",
+      "cost": 2,
+      "requires": 0,
+      "level_required": 5,
+      "prerequisites": [
+        "edge"
+      ],
+      "bonus": {},
+      "position": [
+        0.5,
+        0.87
+      ]
+    },
+    {
+      "id": "focus",
+      "name": "Precision",
+      "description": "Dexterity +2.",
+      "cost": 3,
+      "requires": 0,
+      "level_required": 10,
+      "prerequisites": [
+        "flow"
+      ],
+      "bonus": {
+        "dexterity": 2
+      },
+      "position": [
+        0.85,
+        0.87
+      ]
+    },
+    {
+      "id": "vitality",
+      "name": "Endurance",
+      "description": "HP +15.",
+      "cost": 3,
+      "requires": 7,
+      "level_required": 15,
+      "prerequisites": [
+        "focus"
+      ],
+      "bonus": {
+        "max_hp": 15
+      },
+      "position": [
+        0.15,
+        0.62
+      ]
+    },
+    {
+      "id": "reserve",
+      "name": "Reserve",
+      "description": "MP +6.",
+      "cost": 4,
+      "requires": 10,
+      "level_required": 20,
+      "prerequisites": [
+        "vitality"
+      ],
+      "bonus": {
+        "max_mp": 6
+      },
+      "position": [
+        0.5,
+        0.62
+      ]
+    },
+    {
+      "id": "control",
+      "name": "Control",
+      "description": "Agility +2.",
+      "cost": 4,
+      "requires": 12,
+      "level_required": 25,
+      "prerequisites": [
+        "reserve"
+      ],
+      "bonus": {
+        "agility": 2
+      },
+      "position": [
+        0.85,
+        0.62
+      ]
+    },
+    {
+      "id": "fortitude",
+      "name": "Fortitude",
+      "description": "Defense +3.",
+      "cost": 5,
+      "requires": 15,
+      "level_required": 30,
+      "prerequisites": [
+        "control"
+      ],
+      "bonus": {
+        "defense": 3
+      },
+      "position": [
+        0.15,
+        0.37
+      ]
+    },
+    {
+      "id": "technique",
+      "name": "Advanced Technique",
+      "description": "Attack +4. Unlocks Prismatic Ray.",
+      "cost": 5,
+      "requires": 17,
+      "level_required": 35,
+      "prerequisites": [
+        "fortitude"
+      ],
+      "bonus": {
+        "attack": 4
+      },
+      "position": [
+        0.5,
+        0.37
+      ],
+      "grants": [
+        "wand_master_technique"
+      ]
+    },
+    {
+      "id": "reflex",
+      "name": "Reflexes",
+      "description": "Dexterity +4.",
+      "cost": 5,
+      "requires": 20,
+      "level_required": 40,
+      "prerequisites": [
+        "technique"
+      ],
+      "bonus": {
+        "dexterity": 4
+      },
+      "position": [
+        0.85,
+        0.37
+      ]
+    },
+    {
+      "id": "veteran",
+      "name": "Veteran Instinct",
+      "description": "Agility +4.",
+      "cost": 6,
+      "requires": 22,
+      "level_required": 45,
+      "prerequisites": [
+        "reflex"
+      ],
+      "bonus": {
+        "agility": 4
+      },
+      "position": [
+        0.15,
+        0.12
+      ]
+    },
+    {
+      "id": "legend",
+      "name": "Legendary Form",
+      "description": "HP +25, MP +10.",
+      "cost": 6,
+      "requires": 24,
+      "level_required": 48,
+      "prerequisites": [
+        "veteran"
+      ],
+      "bonus": {
+        "max_hp": 25,
+        "max_mp": 10
+      },
+      "position": [
+        0.5,
+        0.12
+      ]
+    },
+    {
+      "id": "master",
+      "name": "Wand Mastery",
+      "description": "Attack +6, Dexterity +3.",
+      "cost": 6,
+      "requires": 25,
+      "level_required": 50,
+      "prerequisites": [
+        "legend"
+      ],
+      "bonus": {
+        "attack": 6,
+        "dexterity": 3
+      },
+      "position": [
+        0.85,
+        0.12
+      ]
+    }
+  ],
+  "scythe": [
+    {
+      "id": "edge",
+      "name": "Scythe Training",
+      "description": "Attack +2.",
+      "cost": 1,
+      "requires": 0,
+      "level_required": 1,
+      "prerequisites": [],
+      "bonus": {
+        "attack": 2
+      },
+      "position": [
+        0.15,
+        0.87
+      ]
+    },
+    {
+      "id": "flow",
+      "name": "Scythe Rhythm",
+      "description": "Matching weapon techniques gain +4 damage.",
+      "cost": 2,
+      "requires": 0,
+      "level_required": 5,
+      "prerequisites": [
+        "edge"
+      ],
+      "bonus": {},
+      "position": [
+        0.5,
+        0.87
+      ]
+    },
+    {
+      "id": "focus",
+      "name": "Precision",
+      "description": "Dexterity +2.",
+      "cost": 3,
+      "requires": 0,
+      "level_required": 10,
+      "prerequisites": [
+        "flow"
+      ],
+      "bonus": {
+        "dexterity": 2
+      },
+      "position": [
+        0.85,
+        0.87
+      ]
+    },
+    {
+      "id": "vitality",
+      "name": "Endurance",
+      "description": "HP +15.",
+      "cost": 3,
+      "requires": 7,
+      "level_required": 15,
+      "prerequisites": [
+        "focus"
+      ],
+      "bonus": {
+        "max_hp": 15
+      },
+      "position": [
+        0.15,
+        0.62
+      ]
+    },
+    {
+      "id": "reserve",
+      "name": "Reserve",
+      "description": "MP +6.",
+      "cost": 4,
+      "requires": 10,
+      "level_required": 20,
+      "prerequisites": [
+        "vitality"
+      ],
+      "bonus": {
+        "max_mp": 6
+      },
+      "position": [
+        0.5,
+        0.62
+      ]
+    },
+    {
+      "id": "control",
+      "name": "Control",
+      "description": "Agility +2.",
+      "cost": 4,
+      "requires": 12,
+      "level_required": 25,
+      "prerequisites": [
+        "reserve"
+      ],
+      "bonus": {
+        "agility": 2
+      },
+      "position": [
+        0.85,
+        0.62
+      ]
+    },
+    {
+      "id": "fortitude",
+      "name": "Fortitude",
+      "description": "Defense +3.",
+      "cost": 5,
+      "requires": 15,
+      "level_required": 30,
+      "prerequisites": [
+        "control"
+      ],
+      "bonus": {
+        "defense": 3
+      },
+      "position": [
+        0.15,
+        0.37
+      ]
+    },
+    {
+      "id": "technique",
+      "name": "Advanced Technique",
+      "description": "Attack +4. Unlocks Soul Reaping.",
+      "cost": 5,
+      "requires": 17,
+      "level_required": 35,
+      "prerequisites": [
+        "fortitude"
+      ],
+      "bonus": {
+        "attack": 4
+      },
+      "position": [
+        0.5,
+        0.37
+      ],
+      "grants": [
+        "scythe_master_technique"
+      ]
+    },
+    {
+      "id": "reflex",
+      "name": "Reflexes",
+      "description": "Dexterity +4.",
+      "cost": 5,
+      "requires": 20,
+      "level_required": 40,
+      "prerequisites": [
+        "technique"
+      ],
+      "bonus": {
+        "dexterity": 4
+      },
+      "position": [
+        0.85,
+        0.37
+      ]
+    },
+    {
+      "id": "veteran",
+      "name": "Veteran Instinct",
+      "description": "Agility +4.",
+      "cost": 6,
+      "requires": 22,
+      "level_required": 45,
+      "prerequisites": [
+        "reflex"
+      ],
+      "bonus": {
+        "agility": 4
+      },
+      "position": [
+        0.15,
+        0.12
+      ]
+    },
+    {
+      "id": "legend",
+      "name": "Legendary Form",
+      "description": "HP +25, MP +10.",
+      "cost": 6,
+      "requires": 24,
+      "level_required": 48,
+      "prerequisites": [
+        "veteran"
+      ],
+      "bonus": {
+        "max_hp": 25,
+        "max_mp": 10
+      },
+      "position": [
+        0.5,
+        0.12
+      ]
+    },
+    {
+      "id": "master",
+      "name": "Scythe Mastery",
+      "description": "Attack +6, Dexterity +3.",
+      "cost": 6,
+      "requires": 25,
+      "level_required": 50,
+      "prerequisites": [
+        "legend"
+      ],
+      "bonus": {
+        "attack": 6,
+        "dexterity": 3
+      },
+      "position": [
+        0.85,
+        0.12
+      ]
+    }
+  ],
+  "claws": [
+    {
+      "id": "edge",
+      "name": "Claws Training",
+      "description": "Attack +2.",
+      "cost": 1,
+      "requires": 0,
+      "level_required": 1,
+      "prerequisites": [],
+      "bonus": {
+        "attack": 2
+      },
+      "position": [
+        0.15,
+        0.87
+      ]
+    },
+    {
+      "id": "flow",
+      "name": "Claws Rhythm",
+      "description": "Matching weapon techniques gain +4 damage.",
+      "cost": 2,
+      "requires": 0,
+      "level_required": 5,
+      "prerequisites": [
+        "edge"
+      ],
+      "bonus": {},
+      "position": [
+        0.5,
+        0.87
+      ]
+    },
+    {
+      "id": "focus",
+      "name": "Precision",
+      "description": "Dexterity +2.",
+      "cost": 3,
+      "requires": 0,
+      "level_required": 10,
+      "prerequisites": [
+        "flow"
+      ],
+      "bonus": {
+        "dexterity": 2
+      },
+      "position": [
+        0.85,
+        0.87
+      ]
+    },
+    {
+      "id": "vitality",
+      "name": "Endurance",
+      "description": "HP +15.",
+      "cost": 3,
+      "requires": 7,
+      "level_required": 15,
+      "prerequisites": [
+        "focus"
+      ],
+      "bonus": {
+        "max_hp": 15
+      },
+      "position": [
+        0.15,
+        0.62
+      ]
+    },
+    {
+      "id": "reserve",
+      "name": "Reserve",
+      "description": "MP +6.",
+      "cost": 4,
+      "requires": 10,
+      "level_required": 20,
+      "prerequisites": [
+        "vitality"
+      ],
+      "bonus": {
+        "max_mp": 6
+      },
+      "position": [
+        0.5,
+        0.62
+      ]
+    },
+    {
+      "id": "control",
+      "name": "Control",
+      "description": "Agility +2.",
+      "cost": 4,
+      "requires": 12,
+      "level_required": 25,
+      "prerequisites": [
+        "reserve"
+      ],
+      "bonus": {
+        "agility": 2
+      },
+      "position": [
+        0.85,
+        0.62
+      ]
+    },
+    {
+      "id": "fortitude",
+      "name": "Fortitude",
+      "description": "Defense +3.",
+      "cost": 5,
+      "requires": 15,
+      "level_required": 30,
+      "prerequisites": [
+        "control"
+      ],
+      "bonus": {
+        "defense": 3
+      },
+      "position": [
+        0.15,
+        0.37
+      ]
+    },
+    {
+      "id": "technique",
+      "name": "Advanced Technique",
+      "description": "Attack +4. Unlocks Tiger Flurry.",
+      "cost": 5,
+      "requires": 17,
+      "level_required": 35,
+      "prerequisites": [
+        "fortitude"
+      ],
+      "bonus": {
+        "attack": 4
+      },
+      "position": [
+        0.5,
+        0.37
+      ],
+      "grants": [
+        "claws_master_technique"
+      ]
+    },
+    {
+      "id": "reflex",
+      "name": "Reflexes",
+      "description": "Dexterity +4.",
+      "cost": 5,
+      "requires": 20,
+      "level_required": 40,
+      "prerequisites": [
+        "technique"
+      ],
+      "bonus": {
+        "dexterity": 4
+      },
+      "position": [
+        0.85,
+        0.37
+      ]
+    },
+    {
+      "id": "veteran",
+      "name": "Veteran Instinct",
+      "description": "Agility +4.",
+      "cost": 6,
+      "requires": 22,
+      "level_required": 45,
+      "prerequisites": [
+        "reflex"
+      ],
+      "bonus": {
+        "agility": 4
+      },
+      "position": [
+        0.15,
+        0.12
+      ]
+    },
+    {
+      "id": "legend",
+      "name": "Legendary Form",
+      "description": "HP +25, MP +10.",
+      "cost": 6,
+      "requires": 24,
+      "level_required": 48,
+      "prerequisites": [
+        "veteran"
+      ],
+      "bonus": {
+        "max_hp": 25,
+        "max_mp": 10
+      },
+      "position": [
+        0.5,
+        0.12
+      ]
+    },
+    {
+      "id": "master",
+      "name": "Claws Mastery",
+      "description": "Attack +6, Dexterity +3.",
+      "cost": 6,
+      "requires": 25,
+      "level_required": 50,
+      "prerequisites": [
+        "legend"
+      ],
+      "bonus": {
+        "attack": 6,
+        "dexterity": 3
+      },
+      "position": [
+        0.85,
+        0.12
+      ]
+    }
+  ],
+  "unarmed": [
+    {
+      "id": "edge",
+      "name": "Unarmed Training",
+      "description": "Attack +2.",
+      "cost": 1,
+      "requires": 0,
+      "level_required": 1,
+      "prerequisites": [],
+      "bonus": {
+        "attack": 2
+      },
+      "position": [
+        0.15,
+        0.87
+      ]
+    },
+    {
+      "id": "flow",
+      "name": "Unarmed Rhythm",
+      "description": "Matching weapon techniques gain +4 damage.",
+      "cost": 2,
+      "requires": 0,
+      "level_required": 5,
+      "prerequisites": [
+        "edge"
+      ],
+      "bonus": {},
+      "position": [
+        0.5,
+        0.87
+      ]
+    },
+    {
+      "id": "focus",
+      "name": "Precision",
+      "description": "Dexterity +2.",
+      "cost": 3,
+      "requires": 0,
+      "level_required": 10,
+      "prerequisites": [
+        "flow"
+      ],
+      "bonus": {
+        "dexterity": 2
+      },
+      "position": [
+        0.85,
+        0.87
+      ]
+    },
+    {
+      "id": "vitality",
+      "name": "Endurance",
+      "description": "HP +15.",
+      "cost": 3,
+      "requires": 7,
+      "level_required": 15,
+      "prerequisites": [
+        "focus"
+      ],
+      "bonus": {
+        "max_hp": 15
+      },
+      "position": [
+        0.15,
+        0.62
+      ]
+    },
+    {
+      "id": "reserve",
+      "name": "Reserve",
+      "description": "MP +6.",
+      "cost": 4,
+      "requires": 10,
+      "level_required": 20,
+      "prerequisites": [
+        "vitality"
+      ],
+      "bonus": {
+        "max_mp": 6
+      },
+      "position": [
+        0.5,
+        0.62
+      ]
+    },
+    {
+      "id": "control",
+      "name": "Control",
+      "description": "Agility +2.",
+      "cost": 4,
+      "requires": 12,
+      "level_required": 25,
+      "prerequisites": [
+        "reserve"
+      ],
+      "bonus": {
+        "agility": 2
+      },
+      "position": [
+        0.85,
+        0.62
+      ]
+    },
+    {
+      "id": "fortitude",
+      "name": "Fortitude",
+      "description": "Defense +3.",
+      "cost": 5,
+      "requires": 15,
+      "level_required": 30,
+      "prerequisites": [
+        "control"
+      ],
+      "bonus": {
+        "defense": 3
+      },
+      "position": [
+        0.15,
+        0.37
+      ]
+    },
+    {
+      "id": "technique",
+      "name": "Advanced Technique",
+      "description": "Attack +4. Unlocks Rising Knee.",
+      "cost": 5,
+      "requires": 17,
+      "level_required": 35,
+      "prerequisites": [
+        "fortitude"
+      ],
+      "bonus": {
+        "attack": 4
+      },
+      "position": [
+        0.5,
+        0.37
+      ],
+      "grants": [
+        "unarmed_master_technique"
+      ]
+    },
+    {
+      "id": "reflex",
+      "name": "Reflexes",
+      "description": "Dexterity +4.",
+      "cost": 5,
+      "requires": 20,
+      "level_required": 40,
+      "prerequisites": [
+        "technique"
+      ],
+      "bonus": {
+        "dexterity": 4
+      },
+      "position": [
+        0.85,
+        0.37
+      ]
+    },
+    {
+      "id": "veteran",
+      "name": "Veteran Instinct",
+      "description": "Agility +4.",
+      "cost": 6,
+      "requires": 22,
+      "level_required": 45,
+      "prerequisites": [
+        "reflex"
+      ],
+      "bonus": {
+        "agility": 4
+      },
+      "position": [
+        0.15,
+        0.12
+      ]
+    },
+    {
+      "id": "legend",
+      "name": "Legendary Form",
+      "description": "HP +25, MP +10.",
+      "cost": 6,
+      "requires": 24,
+      "level_required": 48,
+      "prerequisites": [
+        "veteran"
+      ],
+      "bonus": {
+        "max_hp": 25,
+        "max_mp": 10
+      },
+      "position": [
+        0.5,
+        0.12
+      ]
+    },
+    {
+      "id": "master",
+      "name": "Unarmed Mastery",
+      "description": "Attack +6, Dexterity +3.",
+      "cost": 6,
+      "requires": 25,
+      "level_required": 50,
+      "prerequisites": [
+        "legend"
+      ],
+      "bonus": {
+        "attack": 6,
+        "dexterity": 3
+      },
+      "position": [
+        0.85,
+        0.12
+      ]
     }
   ]
 }

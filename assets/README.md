@@ -36,3 +36,5 @@ Run `python tools/generate_assets.py` to regenerate the original textures, portr
 
 
 Demo 0.6 adds original procedural companion variants (Dire Wolf, Griffin, Dragon, Warhorse, Spirit Fox and Golem) in `scripts/companion_visual.gd` and a custom hero palette shader in `assets/shaders/hero_palette.gdshader`. These use original geometry or the existing original wolf geometry and retain the existing CC0 KayKit character textures for hero customization. No additional third-party assets or paid textures are required.
+
+Demo 0.7 adds original procedural weapon geometry in `scripts/gear_visual.gd` for axes, polearms, bows, daggers, staves, wands, claws and heavy weapons. These reuse no third-party game meshes; they use the existing shared CC0 hero rig/animations and remain placeholder art.

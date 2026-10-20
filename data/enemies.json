@@ -1,5 +1,41 @@
 {
- "goblin":{"name":"Forest Goblin","model":"Goblin","hp":85,"attack":24,"defense":6,"speed":10,"xp":35,"gold":18,"drop_chance":3},
- "mossling":{"name":"Briar Mossling","model":"Mossling","hp":105,"attack":27,"defense":8,"speed":11,"xp":45,"gold":22,"drop_chance":2},
- "warden":{"name":"The Hollow Warden","model":"Warden","hp":300,"attack":34,"defense":10,"speed":9,"xp":140,"gold":100,"drop_chance":1}
+  "goblin": {
+    "name": "Forest Goblin",
+    "model": "Goblin",
+    "hp": 85,
+    "attack": 24,
+    "defense": 6,
+    "speed": 10,
+    "xp": 35,
+    "gold": 18,
+    "drop_chance": 3,
+    "agility": 10,
+    "dexterity": 0
+  },
+  "mossling": {
+    "name": "Briar Mossling",
+    "model": "Mossling",
+    "hp": 105,
+    "attack": 27,
+    "defense": 8,
+    "speed": 11,
+    "xp": 45,
+    "gold": 22,
+    "drop_chance": 2,
+    "agility": 11,
+    "dexterity": 0
+  },
+  "warden": {
+    "name": "The Hollow Warden",
+    "model": "Warden",
+    "hp": 300,
+    "attack": 34,
+    "defense": 10,
+    "speed": 9,
+    "xp": 140,
+    "gold": 100,
+    "drop_chance": 1,
+    "agility": 9,
+    "dexterity": 0
+  }
 }

@@ -28,6 +28,11 @@ func run():
  get_tree().current_scene.options.close()
  var creator=await change("res://scenes/create.tscn")
  await shot("creation")
+ creator.class_picker.show_popup()
+ await shot("all_classes")
+ creator.class_picker.get_popup().hide()
+ creator.select_class("Wizard")
+ await shot("wizard_creation")
  creator.name_field.text="Rowan"
  creator.skin=1
  creator.hair=2
@@ -40,7 +45,7 @@ func run():
  State.menu_page="shop"
  await change("res://scenes/character.tscn")
  await shot("shop")
- for item in ["Iron Sword","Oak Shield","Steel Cuirass"]:
+ for item in ["Oak Staff","Oak Shield","Verdant Robe"]:
   State.buy(item)
   State.equip(State.equipment_data[item].slot,item)
  var world=await change("res://scenes/world.tscn")
@@ -55,7 +60,9 @@ func run():
  await change("res://scenes/character.tscn")
  await shot("skills")
  State.menu_page="weapons"
- await change("res://scenes/character.tscn")
+ var weapons=await change("res://scenes/character.tscn")
+ weapons.weapon_family="staff"
+ weapons.show_page("weapons")
  await shot("weapons")
  State.menu_page="journal"
  await change("res://scenes/character.tscn")

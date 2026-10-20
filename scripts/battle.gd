@@ -80,7 +80,7 @@ func refresh(snapshot: Dictionary={}):
  enemy_bar.value=enemy_hp
  status.text="%s HP %s/%s · MP %s/%s\n%s HP %s · %s HP %s · Round %s" % [State.hero.profile.name,hp,sim.stats.max_hp,mp,sim.stats.max_mp,State.companion_name(),wolf_hp,sim.enemy.name,enemy_hp,sim.turns]
  if sim.demo_rules:
-  status.text+="\n"+str(snapshot.get("statuses",sim.status_summary()))+"\nTurn speeds: hero %s · companion %s · enemy %s" % [sim.stats.speed,sim.companion_speed(),sim.enemy.speed]
+  status.text+="\n"+str(snapshot.get("statuses",sim.status_summary()))+"\nAgility: hero %s · companion %s · enemy %s" % [sim.current_stat("agility"),sim.companion_speed(),int(sim.enemy.agility)]
 func clear_menu():
  for c in commands.get_children():
   commands.remove_child(c)
@@ -89,7 +89,7 @@ func main_menu():
  commands.get_parent().get_parent().show()
  clear_menu()
  UI.button(commands,"Attack",func(): act("Attack"))
- UI.button(commands,"Weapon Skills",func(): submenu(["Sword Slash","Shield Bash"]))
+ UI.button(commands,"Weapon Skills",func(): submenu(AbilityBook.techniques(sim.h).map(func(id): return AbilityBook.name_for(id))))
  var spells=AbilityBook.spells(sim.h).map(func(id): return AbilityBook.name_for(id)) if sim.demo_rules else ["Sacred Strike","Hunter's Mark","Thornbind","Regrowth"]
  var primary: String=State.hero.primary
  if not sim.demo_rules and State.can_mythic(primary): spells.append(State.classes[primary].mythic)
@@ -126,7 +126,11 @@ func act(action: String):
   var actor: Node3D=actors[event.actor]
   var target: Node3D=actors[event.target]
   var duration=0.25
-  if not UserSettings.minimal_animations: duration=await BattleMotion.present(self,actor,target,event.text)
+  if not UserSettings.minimal_animations:
+   if event.text=="Dodged" and target.has_method("play_action"):
+    duration=target.play_action("Dodge")
+    await get_tree().create_timer(UserSettings.duration(duration*0.38)).timeout
+   else: duration=await BattleMotion.present(self,actor,target,event.text)
   refresh(event.state)
   if not UserSettings.minimal_animations and event.amount>0 and target.has_method("play_reaction"): target.play_reaction()
   var number=Label3D.new()
@@ -184,10 +188,11 @@ func finish():
  State.save_game()
  clear_menu()
  if sim.outcome=="Victory":
-  log_label.text="Victory! +%s XP · +%s gold · %s\n%s" % [sim.enemy.xp,sim.enemy.gold,"Potion found!" if State.hero.potions>previous else "No item drop.","The guardian is free. Bring the living ember to Mira." if sim.species=="warden" else ("The seal is now unguarded. Cleanse it with E." if sim.species=="mossling" else "Normal goblin victories: %s/10" % State.hero.mastery)]
+  log_label.text="Victory! +%s XP · +%s gold · %s\n%s" % [sim.enemy.xp,State.last_reward.get("total",int(sim.enemy.gold)),"Potion found!" if State.hero.potions>previous else "No item drop.","The guardian is free. Bring the living ember to Mira." if sim.species=="warden" else ("The seal is now unguarded. Cleanse it with E." if sim.species=="mossling" else "Normal goblin victories: %s/10" % State.hero.mastery)]
  else: log_label.text="Defeat. Retreat to Willowbrook and press R at camp to recover."
+ if sim.outcome=="Victory" and int(State.last_reward.get("bonus",0))>0: log_label.text+="\nDexterity bonus: +%s extra gold!" % State.last_reward.bonus
  if State.encounter_id==1000 and sim.outcome=="Victory":
-  log_label.text="Warden echo overcome! Your second and final companion bond is unlocked.\nReturn to camp, restore your strength and open Companion [C]."
+  log_label.text+="\nWarden echo overcome! Second and final bond unlocked. Return to camp and open Companion [C]."
   UI.button(commands,"Return to Willowbrook",return_to_adventure)
  elif sim.species=="warden" and sim.outcome=="Victory":
   UI.button(commands,"Speak to the guardian",func(): dialogue.show_id("boss_win",return_to_adventure))

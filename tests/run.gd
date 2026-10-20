@@ -121,11 +121,12 @@ func run():
  world.hero.position=Vector3(-2.6,0,-0.8)
  var gold=State.hero.gold
  world.interact()
- check(State.hero.exploration.quest_done and State.hero.gold==gold+60,"Mira awards quest supplies")
+ check(State.hero.exploration.quest_done and State.last_reward.base==60 and State.hero.gold==gold+State.last_reward.total,"Mira awards quest supplies including any dexterity bonus")
+ var quest_gold=State.hero.gold
  dismiss(world.dialogue)
  world.interact()
  dismiss(world.dialogue)
- check(State.hero.gold==gold+60,"Quest reward cannot repeat")
+ check(State.hero.gold==quest_gold,"Quest reward cannot repeat")
  world.hero.position=world.goblins[0].position
  world.encounter(true)
  check(world.message.contains("10 normal"),"Auto locked before mastery")

@@ -3,6 +3,8 @@ var page="equipment"
 var selected_class="Paladin"
 var slot="Weapon"
 var selected_skill="oath"
+var weapon_family="sword"
+var weapon_node="edge"
 var body: Control
 var preview: SubViewport
 var preview_root: Node3D
@@ -97,7 +99,8 @@ func build_equipment():
  camera.current=true
  var stats=content_panel(Vector2(345,450),Vector2(450,120))
  var attributes=State.stats()
- UI.label(stats,"ATK %s   DEF %s   SPD %s\nMAX HP %s   MAX MP %s" % [attributes.attack,attributes.defense,attributes.speed,attributes.max_hp,attributes.max_mp])
+ UI.label(stats,GameRules.summary(attributes))
+ UI.label(stats,"Dodge %.1f%% · bonus-gold chance %.1f%% (+25%% gold)" % [GameRules.dodge_chance(attributes.dexterity)*100,GameRules.gold_chance(attributes.dexterity)*100])
  var row=HBoxContainer.new()
  stats.add_child(row)
  UI.button(row,"Rotate left",func(): model_yaw-=0.55)
@@ -113,7 +116,9 @@ func build_equipment():
   var name_: String=item
   var data: Dictionary=State.equipment_data.get(item,{"attack":0,"defense":0})
   var old: Dictionary=State.equipment_data.get(State.hero.equipment[slot],{"attack":0,"defense":0})
-  var button=UI.button(options,"%s%s\nATK %+d  DEF %+d" % ["✓ " if State.hero.equipment[slot]==item else "",item,int(data.attack)-int(old.attack),int(data.defense)-int(old.defense)],func():
+  var difference={}
+  for key in GameRules.STAT_KEYS: difference[key]=int(data.get(key,0))-int(old.get(key,0))
+  var button=UI.button(options,"%s%s\n%s" % ["✓ " if State.hero.equipment[slot]==item else "",item,GameRules.summary(difference,true)],func():
    State.equip(slot,name_)
    Sound.cue("confirm")
    show_page("equipment"))
@@ -125,12 +130,16 @@ func build_skills():
  var heading=content_panel(Vector2(20,0),Vector2(1240,82))
  var tabs=HBoxContainer.new()
  heading.add_child(tabs)
- for class_ in State.classes:
-  var selected: String=class_
-  UI.button(tabs,"%s%s" % [class_," · PRIMARY" if State.hero.primary==class_ else ""],func():
-   selected_class=selected
-   selected_skill="oath"
-   show_page("skills"))
+ var picker=OptionButton.new()
+ picker.custom_minimum_size=Vector2(245,38)
+ for class_ in State.classes: picker.add_item(class_+(" · PRIMARY" if State.hero.primary==class_ else ""))
+ picker.select(State.classes.keys().find(selected_class))
+ picker.item_selected.connect(func(index):
+  selected_class=State.classes.keys()[index]
+  selected_skill="oath"
+  show_page("skills"))
+ tabs.add_child(picker)
+ UI.label(tabs,"Loadout: %s / %s / %s" % [State.hero.primary,State.hero.secondary[0],State.hero.secondary[1]]).size_flags_horizontal=Control.SIZE_EXPAND_FILL
  point_label=UI.label(heading,"Available skill points: %s · %s mastery: %s victories · Gold nodes are learned." % [State.hero.points,selected_class,State.hero.class_mastery[selected_class]])
  graph=SkillGraph.new()
  graph.position=Vector2(25,90)
@@ -159,21 +168,27 @@ func refresh_skill_info():
  var state="LEARNED" if learned else ("Requires: "+", ".join(missing) if not missing.is_empty() else "Available to learn")
  UI.label(info,"%s\nCost: %s skill points\nPoints available: %s" % [state,int(node.cost),State.hero.points])
  if node.id=="mythic":
-  var label=UI.label(info,"AVAILABLE IN COMBAT" if learned and State.hero.primary==selected_class else "Only usable while this class is PRIMARY.\nUnlock stays saved when switching classes.")
+  var label=UI.label(info,"AVAILABLE IN COMBAT" if learned and State.hero.primary==selected_class else "Requires level 50 and this class PRIMARY.\nUnlock stays saved when switching classes.")
   label.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
  var learn=UI.button(info,"Learn skill" if not learned else "Already learned",func():
   State.invest_skill(selected_class,selected_skill)
   Sound.cue("confirm")
   show_page("skills"))
  var mastery_needed=int(node.get("mastery_required",0))
- if State.hero.profile.economy: UI.label(info,"Class mastery: %s / %s required" % [State.hero.class_mastery[selected_class],mastery_needed])
- learn.disabled=learned or not missing.is_empty() or State.hero.points<int(node.cost) or (State.hero.profile.economy and State.hero.class_mastery[selected_class]<mastery_needed)
+ UI.label(info,"%s · Hero level %s / %s required\nClass mastery %s / %s required" % [node.rarity,State.hero.level,int(node.level_required),State.hero.class_mastery[selected_class],mastery_needed])
+ learn.disabled=learned or not missing.is_empty() or State.hero.points<int(node.cost) or State.hero.level<int(node.level_required) or State.hero.class_mastery[selected_class]<mastery_needed or not State.active_classes().has(selected_class)
  var switch_button=UI.button(info,"Make %s primary" % selected_class,func():
   State.set_primary(selected_class)
   show_page("skills"))
  switch_button.disabled=not State.can_change_class() or State.hero.primary==selected_class
- UI.label(info,"Change primary class at the village camp.
+ for entry in [["secondary_1","Secondary 1"],["secondary_2","Secondary 2"]]:
+  var slot_id: String=entry[0]
+  UI.button(info,"Assign to "+entry[1],func():
+   State.set_class_slot(slot_id,selected_class)
+   show_page("skills")).disabled=not State.can_change_class()
+ UI.label(info,"Each full tree costs 50 SP; capstone at level 50.\nEarn 2 shared SP per level.\nChange classes at the village camp.
 Starting abilities remain available.\nGold nodes are learned.\nLines show the required path.")
+ constrain_page(info)
 func _process(delta):
  time_+=delta
  if is_instance_valid(preview_actor):
@@ -192,12 +207,8 @@ func paragraph(parent: Node, text: String):
 func build_shop():
  var left=content_panel(Vector2(20,0),Vector2(390,565))
  UI.label(left,"WILLOWBROOK OUTFITTER").add_theme_font_size_override("font_size",23)
- paragraph(left,"Your first equipment is a purchase, not a gift. Buy a sword, shield and chest piece before taking the northern trail. Purchases are permanent and equipping costs nothing.")
- paragraph(left,"Starter budget: 120 gold.
-Sword 30 · Shield 20
-Leather 25 / Robe 35 / Plate 45
-
-Plate requires Paladin primary. Other starter gear works with every demo class.")
+ paragraph(left,"Buy compatible gear before taking the northern trail. Your three classes grant weapon proficiencies; your primary class controls heavy armor. Monk-trained heroes may fight unarmed. Shields are optional. Purchases are permanent and equipping costs nothing.")
+ paragraph(left,"120-gold starter budget.\nPick a compatible weapon and chest armor.\nLeather 25 / Robe 35 / Plate 45.\nPlate: Warrior or Paladin primary.\n\nYour proficiencies: "+", ".join(State.proficiencies()))
  UI.label(left,"Gold available: %s" % State.hero.gold)
  UI.label(left,"Starter funds are reserved until each essential slot is owned.")
  UI.button(left,"Potion · 8 gold",func():
@@ -213,32 +224,57 @@ Plate requires Paladin primary. Other starter gear works with every demo class."
   if entry.slot=="Any" or item=="Sunsteel Sword": continue
   var owned=State.owns(item)
   var compatible=State.compatible(item)
-  var button=UI.button(right,"%s · %s · ATK +%d / DEF +%d%s" % [item,"OWNED / EQUIP" if owned else "%d gold" % int(entry.price),int(entry.attack),int(entry.defense)," · incompatible primary" if not compatible else ""],func():
+  var button=UI.button(right,"%s · %s%s\n%s" % [item,"OWNED / EQUIP" if owned else "%d gold" % int(entry.price)," · incompatible" if not compatible else "",GameRules.summary(entry,true)],func():
    if State.owns(item) or State.buy(item): State.equip(entry.slot,item)
    show_page("shop"))
   button.disabled=not compatible or (not owned and not State.can_buy(item))
   button.tooltip_text=entry.description+" · "+entry.rarity
 func build_weapons():
- var left=content_panel(Vector2(20,0),Vector2(390,565))
- UI.label(left,"WEAPON MASTERY").add_theme_font_size_override("font_size",25)
- paragraph(left,"Class mastery and weapon mastery are separate. Victories with an equipped sword or shield increase that weapon’s mastery. Spend hero skill points to learn eligible techniques. Weapon skills require the matching equipped weapon.")
- UI.label(left,"Available points: %s" % State.hero.points)
- paragraph(left,"Guardian of the Wild
-Paladin + Ranger + Druid
-
-Block with an equipped shield to prime a nature blessing. Your next Hunter’s Mark deals +10 damage, or Regrowth restores +10 immediate HP. It expires after three rounds or one use.")
- var right=content_panel(Vector2(430,0),Vector2(830,565))
- for type_ in State.weapon_trees:
-  UI.label(right,"%s · mastery %s victories" % [type_.to_upper(),State.hero.weapon_mastery[type_]])
-  for node in State.weapon_trees[type_]:
-   var type_id: String=type_
-   var node_id: String=node.id
-   var learned=State.hero.weapon_skills[type_].has(node.id)
-   var button=UI.button(right,"%s · %s · requires mastery %s
-%s" % [node.name,"LEARNED" if learned else "%d SP" % int(node.cost),int(node.requires),node.description],func():
-    State.learn_weapon(type_id,node_id)
-    show_page("weapons"))
-   button.disabled=learned or State.hero.points<node.cost or State.hero.weapon_mastery[type_]<node.requires
+ var heading=content_panel(Vector2(20,0),Vector2(1240,82))
+ var row=HBoxContainer.new()
+ heading.add_child(row)
+ var picker=OptionButton.new()
+ picker.custom_minimum_size=Vector2(245,38)
+ for family in State.weapon_trees: picker.add_item(family.capitalize())
+ picker.select(State.weapon_trees.keys().find(weapon_family))
+ picker.item_selected.connect(func(index):
+  weapon_family=State.weapon_trees.keys()[index]
+  weapon_node=State.weapon_trees[weapon_family][0].id
+  show_page("weapons"))
+ row.add_child(picker)
+ UI.label(row,"%s mastery: %s victories · %s skill points" % [weapon_family.capitalize(),State.hero.weapon_mastery[weapon_family],State.hero.points]).size_flags_horizontal=Control.SIZE_EXPAND_FILL
+ UI.label(heading,"50 points per full tree · 2 shared points per level · final node requires level 50")
+ graph=SkillGraph.new()
+ graph.position=Vector2(25,90)
+ graph.size=Vector2(845,470)
+ body.add_child(graph)
+ graph.configure_weapon(weapon_family)
+ if not graph.buttons.has(weapon_node): weapon_node=State.weapon_trees[weapon_family][0].id
+ graph.selected_id=weapon_node
+ graph.selected.connect(func(id): weapon_node=id; refresh_weapon_info())
+ info=content_panel(Vector2(895,90),Vector2(365,470))
+ refresh_weapon_info()
+func refresh_weapon_info():
+ for child in info.get_children():
+  info.remove_child(child)
+  child.queue_free()
+ var node: Dictionary={}
+ for candidate in State.weapon_trees[weapon_family]:
+  if candidate.id==weapon_node: node=candidate
+ UI.label(info,weapon_family.to_upper()+" / "+node.name)
+ paragraph(info,node.description)
+ var learned=State.hero.weapon_skills[weapon_family].has(node.id)
+ var missing: Array=[]
+ for prerequisite in node.prerequisites:
+  if not State.hero.weapon_skills[weapon_family].has(prerequisite): missing.append(prerequisite)
+ paragraph(info,"Hero level %s / %s required\nWeapon mastery %s / %s required\nCost %s SP · available %s\n%s" % [State.hero.level,int(node.level_required),State.hero.weapon_mastery[weapon_family],int(node.requires),int(node.cost),State.hero.points,"Prerequisites: "+", ".join(missing) if not missing.is_empty() else "Prerequisites met"])
+ var button=UI.button(info,"Learn technique" if not learned else "Already learned",func():
+  State.learn_weapon(weapon_family,weapon_node)
+  show_page("weapons"))
+ button.disabled=learned or not missing.is_empty() or State.hero.level<int(node.level_required) or State.hero.weapon_mastery[weapon_family]<int(node.requires) or State.hero.points<int(node.cost) or not State.proficiencies().has(weapon_family)
+ paragraph(info,"Requires proficiency from an equipped class. Learned bonuses apply only while using this weapon family. Shield bonuses require an equipped shield.")
+ paragraph(info,"Guardian of the Wild: Paladin + Ranger + Druid. Block to empower your next Mark or Regrowth.")
+ constrain_page(info)
 func build_companions():
  var left=content_panel(Vector2(20,0),Vector2(390,565))
  UI.label(left,"COMPANION BOND").add_theme_font_size_override("font_size",25)
@@ -293,7 +329,7 @@ func build_journal():
  UI.label(left,"THE BELL BENEATH THE WOODS").add_theme_font_size_override("font_size",23)
  var journey=State.hero.journey
  var steps=[
-  [State.hero.equipment.Weapon!="None" and State.hero.equipment.Chest!="None","Buy and equip a starter kit at the outfitter"],
+  [State.starter_ready(),"Buy and equip a compatible starter kit at the outfitter"],
   [journey.started,"Speak to Mira beside the camp"],
   [State.hero.exploration.herbs.size()==3,"Gather three Moonleaf sprigs along the northern trail"],
   [State.hero.exploration.quest_done,"Return the Moonleaf to Mira"],

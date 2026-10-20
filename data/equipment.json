@@ -11,10 +11,23 @@
     "classes": [
       "Paladin",
       "Ranger",
-      "Druid"
+      "Druid",
+      "Warrior",
+      "Barbarian",
+      "Wizard",
+      "Sorcerer",
+      "Healer",
+      "Rogue",
+      "Assassin",
+      "Monk",
+      "Necromancer"
     ],
     "description": "A balanced blade for your first journey.",
-    "weapon_type": "sword"
+    "weapon_type": "sword",
+    "agility": 0,
+    "dexterity": 0,
+    "max_hp": 0,
+    "max_mp": 0
   },
   "Sunsteel Sword": {
     "slot": "Weapon",
@@ -28,10 +41,23 @@
     "classes": [
       "Paladin",
       "Ranger",
-      "Druid"
+      "Druid",
+      "Warrior",
+      "Barbarian",
+      "Wizard",
+      "Sorcerer",
+      "Healer",
+      "Rogue",
+      "Assassin",
+      "Monk",
+      "Necromancer"
     ],
     "description": "A rare blade carrying the guardian\u2019s living light.",
-    "weapon_type": "sword"
+    "weapon_type": "sword",
+    "agility": 0,
+    "dexterity": 0,
+    "max_hp": 0,
+    "max_mp": 0
   },
   "Moonleaf Saber": {
     "slot": "Weapon",
@@ -45,10 +71,23 @@
     "classes": [
       "Paladin",
       "Ranger",
-      "Druid"
+      "Druid",
+      "Warrior",
+      "Barbarian",
+      "Wizard",
+      "Sorcerer",
+      "Healer",
+      "Rogue",
+      "Assassin",
+      "Monk",
+      "Necromancer"
     ],
     "description": "A fine curved sword from the river roads.",
-    "weapon_type": "sword"
+    "weapon_type": "sword",
+    "agility": 0,
+    "dexterity": 3,
+    "max_hp": 0,
+    "max_mp": 0
   },
   "Oak Shield": {
     "slot": "Shield",
@@ -62,9 +101,23 @@
     "classes": [
       "Paladin",
       "Ranger",
-      "Druid"
+      "Druid",
+      "Warrior",
+      "Barbarian",
+      "Wizard",
+      "Sorcerer",
+      "Healer",
+      "Rogue",
+      "Assassin",
+      "Monk",
+      "Necromancer"
     ],
-    "description": "A light shield; required for Shield Bash and block chemistry."
+    "description": "A light shield; required for Shield Bash and block chemistry.",
+    "agility": -1,
+    "dexterity": 0,
+    "max_hp": 0,
+    "max_mp": 0,
+    "weapon_type": "shield"
   },
   "Dawn Kite Shield": {
     "slot": "Shield",
@@ -76,9 +129,25 @@
     "price": 85,
     "rarity": "Rare",
     "classes": [
-      "Paladin"
+      "Paladin",
+      "Ranger",
+      "Druid",
+      "Warrior",
+      "Barbarian",
+      "Wizard",
+      "Sorcerer",
+      "Healer",
+      "Rogue",
+      "Assassin",
+      "Monk",
+      "Necromancer"
     ],
-    "description": "A reliable piece of Willowbrook equipment."
+    "description": "A reliable piece of Willowbrook equipment.",
+    "agility": -1,
+    "dexterity": 0,
+    "max_hp": 0,
+    "max_mp": 0,
+    "weapon_type": "shield"
   },
   "Grove Shield": {
     "slot": "Shield",
@@ -92,9 +161,23 @@
     "classes": [
       "Paladin",
       "Ranger",
-      "Druid"
+      "Druid",
+      "Warrior",
+      "Barbarian",
+      "Wizard",
+      "Sorcerer",
+      "Healer",
+      "Rogue",
+      "Assassin",
+      "Monk",
+      "Necromancer"
     ],
-    "description": "A reliable piece of Willowbrook equipment."
+    "description": "A reliable piece of Willowbrook equipment.",
+    "agility": -1,
+    "dexterity": 0,
+    "max_hp": 0,
+    "max_mp": 5,
+    "weapon_type": "shield"
   },
   "Steel Cuirass": {
     "slot": "Chest",
@@ -106,9 +189,24 @@
     "price": 45,
     "rarity": "Common",
     "classes": [
-      "Paladin"
+      "Paladin",
+      "Ranger",
+      "Druid",
+      "Warrior",
+      "Barbarian",
+      "Wizard",
+      "Sorcerer",
+      "Healer",
+      "Rogue",
+      "Assassin",
+      "Monk",
+      "Necromancer"
     ],
-    "description": "Paladin plate. Strong protection, without restricting secondary magic."
+    "description": "Paladin plate. Strong protection, without restricting secondary magic.",
+    "agility": -1,
+    "dexterity": 0,
+    "max_hp": 5,
+    "max_mp": 0
   },
   "Leather Vest": {
     "slot": "Chest",
@@ -122,9 +220,22 @@
     "classes": [
       "Paladin",
       "Ranger",
-      "Druid"
+      "Druid",
+      "Warrior",
+      "Barbarian",
+      "Wizard",
+      "Sorcerer",
+      "Healer",
+      "Rogue",
+      "Assassin",
+      "Monk",
+      "Necromancer"
     ],
-    "description": "Light armor worn by woodland travelers."
+    "description": "Light armor worn by woodland travelers.",
+    "agility": 2,
+    "dexterity": 0,
+    "max_hp": 0,
+    "max_mp": 0
   },
   "Verdant Robe": {
     "slot": "Chest",
@@ -138,9 +249,22 @@
     "classes": [
       "Paladin",
       "Ranger",
-      "Druid"
+      "Druid",
+      "Warrior",
+      "Barbarian",
+      "Wizard",
+      "Sorcerer",
+      "Healer",
+      "Rogue",
+      "Assassin",
+      "Monk",
+      "Necromancer"
     ],
-    "description": "Woven grove cloth, reinforced with bark fiber."
+    "description": "Woven grove cloth, reinforced with bark fiber.",
+    "agility": 0,
+    "dexterity": 0,
+    "max_hp": 0,
+    "max_mp": 8
   },
   "Steel Helm": {
     "slot": "Helmet",
@@ -152,9 +276,24 @@
     "price": 35,
     "rarity": "Common",
     "classes": [
-      "Paladin"
+      "Paladin",
+      "Ranger",
+      "Druid",
+      "Warrior",
+      "Barbarian",
+      "Wizard",
+      "Sorcerer",
+      "Healer",
+      "Rogue",
+      "Assassin",
+      "Monk",
+      "Necromancer"
     ],
-    "description": "A reliable piece of Willowbrook equipment."
+    "description": "A reliable piece of Willowbrook equipment.",
+    "agility": -1,
+    "dexterity": 0,
+    "max_hp": 5,
+    "max_mp": 0
   },
   "Ranger Hood": {
     "slot": "Helmet",
@@ -168,9 +307,22 @@
     "classes": [
       "Paladin",
       "Ranger",
-      "Druid"
+      "Druid",
+      "Warrior",
+      "Barbarian",
+      "Wizard",
+      "Sorcerer",
+      "Healer",
+      "Rogue",
+      "Assassin",
+      "Monk",
+      "Necromancer"
     ],
-    "description": "A reliable piece of Willowbrook equipment."
+    "description": "A reliable piece of Willowbrook equipment.",
+    "agility": 0,
+    "dexterity": 3,
+    "max_hp": 0,
+    "max_mp": 0
   },
   "Steel Gauntlets": {
     "slot": "Gauntlets",
@@ -182,9 +334,24 @@
     "price": 35,
     "rarity": "Common",
     "classes": [
-      "Paladin"
+      "Paladin",
+      "Ranger",
+      "Druid",
+      "Warrior",
+      "Barbarian",
+      "Wizard",
+      "Sorcerer",
+      "Healer",
+      "Rogue",
+      "Assassin",
+      "Monk",
+      "Necromancer"
     ],
-    "description": "A reliable piece of Willowbrook equipment."
+    "description": "A reliable piece of Willowbrook equipment.",
+    "agility": -1,
+    "dexterity": 0,
+    "max_hp": 5,
+    "max_mp": 0
   },
   "Leather Gloves": {
     "slot": "Gauntlets",
@@ -198,9 +365,22 @@
     "classes": [
       "Paladin",
       "Ranger",
-      "Druid"
+      "Druid",
+      "Warrior",
+      "Barbarian",
+      "Wizard",
+      "Sorcerer",
+      "Healer",
+      "Rogue",
+      "Assassin",
+      "Monk",
+      "Necromancer"
     ],
-    "description": "A reliable piece of Willowbrook equipment."
+    "description": "A reliable piece of Willowbrook equipment.",
+    "agility": 0,
+    "dexterity": 3,
+    "max_hp": 0,
+    "max_mp": 0
   },
   "Steel Greaves": {
     "slot": "Pants",
@@ -212,9 +392,24 @@
     "price": 35,
     "rarity": "Common",
     "classes": [
-      "Paladin"
+      "Paladin",
+      "Ranger",
+      "Druid",
+      "Warrior",
+      "Barbarian",
+      "Wizard",
+      "Sorcerer",
+      "Healer",
+      "Rogue",
+      "Assassin",
+      "Monk",
+      "Necromancer"
     ],
-    "description": "A reliable piece of Willowbrook equipment."
+    "description": "A reliable piece of Willowbrook equipment.",
+    "agility": -1,
+    "dexterity": 0,
+    "max_hp": 5,
+    "max_mp": 0
   },
   "Ranger Trousers": {
     "slot": "Pants",
@@ -228,9 +423,22 @@
     "classes": [
       "Paladin",
       "Ranger",
-      "Druid"
+      "Druid",
+      "Warrior",
+      "Barbarian",
+      "Wizard",
+      "Sorcerer",
+      "Healer",
+      "Rogue",
+      "Assassin",
+      "Monk",
+      "Necromancer"
     ],
-    "description": "A reliable piece of Willowbrook equipment."
+    "description": "A reliable piece of Willowbrook equipment.",
+    "agility": 2,
+    "dexterity": 0,
+    "max_hp": 0,
+    "max_mp": 0
   },
   "Steel Sabatons": {
     "slot": "Boots",
@@ -242,9 +450,24 @@
     "price": 35,
     "rarity": "Common",
     "classes": [
-      "Paladin"
+      "Paladin",
+      "Ranger",
+      "Druid",
+      "Warrior",
+      "Barbarian",
+      "Wizard",
+      "Sorcerer",
+      "Healer",
+      "Rogue",
+      "Assassin",
+      "Monk",
+      "Necromancer"
     ],
-    "description": "A reliable piece of Willowbrook equipment."
+    "description": "A reliable piece of Willowbrook equipment.",
+    "agility": -1,
+    "dexterity": 0,
+    "max_hp": 5,
+    "max_mp": 0
   },
   "Trail Boots": {
     "slot": "Boots",
@@ -258,9 +481,22 @@
     "classes": [
       "Paladin",
       "Ranger",
-      "Druid"
+      "Druid",
+      "Warrior",
+      "Barbarian",
+      "Wizard",
+      "Sorcerer",
+      "Healer",
+      "Rogue",
+      "Assassin",
+      "Monk",
+      "Necromancer"
     ],
-    "description": "A reliable piece of Willowbrook equipment."
+    "description": "A reliable piece of Willowbrook equipment.",
+    "agility": 2,
+    "dexterity": 0,
+    "max_hp": 0,
+    "max_mp": 0
   },
   "Sunstone Pendant": {
     "slot": "Accessory",
@@ -274,9 +510,22 @@
     "classes": [
       "Paladin",
       "Ranger",
-      "Druid"
+      "Druid",
+      "Warrior",
+      "Barbarian",
+      "Wizard",
+      "Sorcerer",
+      "Healer",
+      "Rogue",
+      "Assassin",
+      "Monk",
+      "Necromancer"
     ],
-    "description": "A reliable piece of Willowbrook equipment."
+    "description": "A reliable piece of Willowbrook equipment.",
+    "agility": 0,
+    "dexterity": 0,
+    "max_hp": 12,
+    "max_mp": 0
   },
   "Moonleaf Charm": {
     "slot": "Accessory",
@@ -290,9 +539,22 @@
     "classes": [
       "Paladin",
       "Ranger",
-      "Druid"
+      "Druid",
+      "Warrior",
+      "Barbarian",
+      "Wizard",
+      "Sorcerer",
+      "Healer",
+      "Rogue",
+      "Assassin",
+      "Monk",
+      "Necromancer"
     ],
-    "description": "A reliable piece of Willowbrook equipment."
+    "description": "A reliable piece of Willowbrook equipment.",
+    "agility": 0,
+    "dexterity": 6,
+    "max_hp": 0,
+    "max_mp": 0
   },
   "Leather Gear": {
     "slot": "Any",
@@ -306,8 +568,351 @@
     "classes": [
       "Paladin",
       "Ranger",
-      "Druid"
+      "Druid",
+      "Warrior",
+      "Barbarian",
+      "Wizard",
+      "Sorcerer",
+      "Healer",
+      "Rogue",
+      "Assassin",
+      "Monk",
+      "Necromancer"
     ],
-    "description": "A reliable piece of Willowbrook equipment."
+    "description": "A reliable piece of Willowbrook equipment.",
+    "agility": 0,
+    "dexterity": 0,
+    "max_hp": 0,
+    "max_mp": 0
+  },
+  "Woodland Bow": {
+    "id": "woodland_bow",
+    "slot": "Weapon",
+    "attack": 6,
+    "defense": 0,
+    "agility": 2,
+    "dexterity": 3,
+    "weapon_type": "bow",
+    "style": "bow",
+    "price": 30,
+    "color": "acbdcc",
+    "rarity": "Common",
+    "classes": [
+      "Paladin",
+      "Ranger",
+      "Druid",
+      "Warrior",
+      "Barbarian",
+      "Wizard",
+      "Sorcerer",
+      "Healer",
+      "Rogue",
+      "Assassin",
+      "Monk",
+      "Necromancer"
+    ],
+    "description": "A bow weapon. Requires proficiency from a primary or secondary class.",
+    "max_hp": 0,
+    "max_mp": 0
+  },
+  "Oak Staff": {
+    "id": "oak_staff",
+    "slot": "Weapon",
+    "attack": 5,
+    "defense": 0,
+    "agility": 0,
+    "dexterity": 1,
+    "weapon_type": "staff",
+    "style": "staff",
+    "price": 25,
+    "color": "acbdcc",
+    "rarity": "Common",
+    "classes": [
+      "Paladin",
+      "Ranger",
+      "Druid",
+      "Warrior",
+      "Barbarian",
+      "Wizard",
+      "Sorcerer",
+      "Healer",
+      "Rogue",
+      "Assassin",
+      "Monk",
+      "Necromancer"
+    ],
+    "description": "A staff weapon. Requires proficiency from a primary or secondary class.",
+    "max_hp": 0,
+    "max_mp": 8
+  },
+  "Iron Axe": {
+    "id": "iron_axe",
+    "slot": "Weapon",
+    "attack": 11,
+    "defense": 0,
+    "agility": -1,
+    "dexterity": 0,
+    "weapon_type": "axe",
+    "style": "axe",
+    "price": 30,
+    "color": "acbdcc",
+    "rarity": "Common",
+    "classes": [
+      "Paladin",
+      "Ranger",
+      "Druid",
+      "Warrior",
+      "Barbarian",
+      "Wizard",
+      "Sorcerer",
+      "Healer",
+      "Rogue",
+      "Assassin",
+      "Monk",
+      "Necromancer"
+    ],
+    "description": "A axe weapon. Requires proficiency from a primary or secondary class.",
+    "max_hp": 0,
+    "max_mp": 0
+  },
+  "Training Spear": {
+    "id": "training_spear",
+    "slot": "Weapon",
+    "attack": 8,
+    "defense": 0,
+    "agility": 1,
+    "dexterity": 1,
+    "weapon_type": "spear",
+    "style": "spear",
+    "price": 30,
+    "color": "acbdcc",
+    "rarity": "Common",
+    "classes": [
+      "Paladin",
+      "Ranger",
+      "Druid",
+      "Warrior",
+      "Barbarian",
+      "Wizard",
+      "Sorcerer",
+      "Healer",
+      "Rogue",
+      "Assassin",
+      "Monk",
+      "Necromancer"
+    ],
+    "description": "A spear weapon. Requires proficiency from a primary or secondary class.",
+    "max_hp": 0,
+    "max_mp": 0
+  },
+  "Twin Daggers": {
+    "id": "twin_daggers",
+    "slot": "Weapon",
+    "attack": 6,
+    "defense": 0,
+    "agility": 3,
+    "dexterity": 4,
+    "weapon_type": "dagger",
+    "style": "dagger",
+    "price": 25,
+    "color": "acbdcc",
+    "rarity": "Common",
+    "classes": [
+      "Paladin",
+      "Ranger",
+      "Druid",
+      "Warrior",
+      "Barbarian",
+      "Wizard",
+      "Sorcerer",
+      "Healer",
+      "Rogue",
+      "Assassin",
+      "Monk",
+      "Necromancer"
+    ],
+    "description": "A dagger weapon. Requires proficiency from a primary or secondary class.",
+    "max_hp": 0,
+    "max_mp": 0
+  },
+  "Iron Mace": {
+    "id": "iron_mace",
+    "slot": "Weapon",
+    "attack": 9,
+    "defense": 0,
+    "agility": 0,
+    "dexterity": 0,
+    "weapon_type": "mace",
+    "style": "mace",
+    "price": 30,
+    "color": "acbdcc",
+    "rarity": "Common",
+    "classes": [
+      "Paladin",
+      "Ranger",
+      "Druid",
+      "Warrior",
+      "Barbarian",
+      "Wizard",
+      "Sorcerer",
+      "Healer",
+      "Rogue",
+      "Assassin",
+      "Monk",
+      "Necromancer"
+    ],
+    "description": "A mace weapon. Requires proficiency from a primary or secondary class.",
+    "max_hp": 0,
+    "max_mp": 0
+  },
+  "Bone Wand": {
+    "id": "bone_wand",
+    "slot": "Weapon",
+    "attack": 3,
+    "defense": 0,
+    "agility": 1,
+    "dexterity": 2,
+    "weapon_type": "wand",
+    "style": "wand",
+    "price": 25,
+    "color": "acbdcc",
+    "rarity": "Common",
+    "classes": [
+      "Paladin",
+      "Ranger",
+      "Druid",
+      "Warrior",
+      "Barbarian",
+      "Wizard",
+      "Sorcerer",
+      "Healer",
+      "Rogue",
+      "Assassin",
+      "Monk",
+      "Necromancer"
+    ],
+    "description": "A wand weapon. Requires proficiency from a primary or secondary class.",
+    "max_hp": 0,
+    "max_mp": 8
+  },
+  "Traveler Claws": {
+    "id": "traveler_claws",
+    "slot": "Weapon",
+    "attack": 5,
+    "defense": 0,
+    "agility": 3,
+    "dexterity": 2,
+    "weapon_type": "claws",
+    "style": "claws",
+    "price": 25,
+    "color": "acbdcc",
+    "rarity": "Common",
+    "classes": [
+      "Paladin",
+      "Ranger",
+      "Druid",
+      "Warrior",
+      "Barbarian",
+      "Wizard",
+      "Sorcerer",
+      "Healer",
+      "Rogue",
+      "Assassin",
+      "Monk",
+      "Necromancer"
+    ],
+    "description": "A claws weapon. Requires proficiency from a primary or secondary class.",
+    "max_hp": 0,
+    "max_mp": 0
+  },
+  "Field Scythe": {
+    "id": "field_scythe",
+    "slot": "Weapon",
+    "attack": 9,
+    "defense": 0,
+    "agility": 0,
+    "dexterity": 1,
+    "weapon_type": "scythe",
+    "style": "scythe",
+    "price": 35,
+    "color": "acbdcc",
+    "rarity": "Common",
+    "classes": [
+      "Paladin",
+      "Ranger",
+      "Druid",
+      "Warrior",
+      "Barbarian",
+      "Wizard",
+      "Sorcerer",
+      "Healer",
+      "Rogue",
+      "Assassin",
+      "Monk",
+      "Necromancer"
+    ],
+    "description": "A scythe weapon. Requires proficiency from a primary or secondary class.",
+    "max_hp": 0,
+    "max_mp": 0
+  },
+  "Greatsword": {
+    "id": "greatsword",
+    "slot": "Weapon",
+    "attack": 13,
+    "defense": 0,
+    "agility": -2,
+    "dexterity": 0,
+    "weapon_type": "greatsword",
+    "style": "greatsword",
+    "price": 35,
+    "color": "acbdcc",
+    "rarity": "Common",
+    "classes": [
+      "Paladin",
+      "Ranger",
+      "Druid",
+      "Warrior",
+      "Barbarian",
+      "Wizard",
+      "Sorcerer",
+      "Healer",
+      "Rogue",
+      "Assassin",
+      "Monk",
+      "Necromancer"
+    ],
+    "description": "A greatsword weapon. Requires proficiency from a primary or secondary class.",
+    "max_hp": 0,
+    "max_mp": 0
+  },
+  "War Hammer": {
+    "id": "war_hammer",
+    "slot": "Weapon",
+    "attack": 14,
+    "defense": 0,
+    "agility": -3,
+    "dexterity": 0,
+    "weapon_type": "hammer",
+    "style": "hammer",
+    "price": 35,
+    "color": "acbdcc",
+    "rarity": "Common",
+    "classes": [
+      "Paladin",
+      "Ranger",
+      "Druid",
+      "Warrior",
+      "Barbarian",
+      "Wizard",
+      "Sorcerer",
+      "Healer",
+      "Rogue",
+      "Assassin",
+      "Monk",
+      "Necromancer"
+    ],
+    "description": "A hammer weapon. Requires proficiency from a primary or secondary class.",
+    "max_hp": 0,
+    "max_mp": 0
   }
 }

@@ -8,7 +8,7 @@ var actor: Node3D
 var secondary1: OptionButton
 var secondary2: OptionButton
 var details: Label
-var class_buttons: Dictionary={}
+var class_picker: OptionButton
 var message: Label
 var clock=0.0
 func _ready():
@@ -23,7 +23,7 @@ func _ready():
  camera.fov=45
  camera.look_at(Vector3(1.2,1,0))
  camera.current=true
- var menu=UI.panel(self,Vector2(36,25),Vector2(660,665))
+ var menu=UI.panel(self,Vector2(36,25),Vector2(660,595))
  UI.label(menu,"CREATE YOUR HERO").add_theme_font_size_override("font_size",30)
  UI.label(menu,"The Bell Beneath the Woods · a complete short adventure")
  UI.label(menu,"Name")
@@ -33,11 +33,10 @@ func _ready():
  name_field.custom_minimum_size=Vector2(0,36)
  menu.add_child(name_field)
  UI.label(menu,"Choose your PRIMARY class")
- var row=HBoxContainer.new()
- menu.add_child(row)
- for class_ in State.classes:
-  var value: String=class_
-  class_buttons[class_]=UI.button(row,class_,func(): select_class(value))
+ class_picker=OptionButton.new()
+ for class_ in State.classes: class_picker.add_item(class_)
+ class_picker.item_selected.connect(func(index): select_class(class_picker.get_item_text(index)))
+ menu.add_child(class_picker)
  var secondary_row=HBoxContainer.new()
  menu.add_child(secondary_row)
  UI.label(secondary_row,"Secondary classes: ")
@@ -48,14 +47,17 @@ func _ready():
  secondary1.item_selected.connect(func(index): update_secondaries(secondary1.get_item_text(index)))
  details=UI.label(menu,"")
  details.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
- details.custom_minimum_size=Vector2(580,75)
+ details.custom_minimum_size=Vector2(580,135)
  appearance_choice(menu,"Skin tone",["Warm","Bronze","Deep"],func(index): skin=index; update_preview())
  appearance_choice(menu,"Hair color",["Chestnut","Golden","Silver"],func(index): hair=index; update_preview())
  appearance_choice(menu,"Travel clothes",["River blue","Forest green","Berry red"],func(index): dye=index; update_preview())
- UI.label(menu,"You arrive UNEQUIPPED, with 120 gold and 3 potions.\nBuy your first sword, shield and armor at the village outfitter.\nMira lends you a wolf for the quest; choose your own companion afterward.")
+ UI.label(menu,"You arrive unequipped with 120 gold and 3 potions.\nBuy compatible gear at the outfitter; shields are optional.\nMira lends you a wolf; choose your own after the quest.")
  message=UI.label(menu,"")
- UI.button(menu,"Begin adventure",begin)
- UI.button(menu,"Back to title",func(): get_tree().change_scene_to_file("res://scenes/title.tscn"))
+ var footer=UI.panel(self,Vector2(36,630),Vector2(660,75))
+ var actions=HBoxContainer.new()
+ footer.add_child(actions)
+ UI.button(actions,"Begin adventure",begin).size_flags_horizontal=Control.SIZE_EXPAND_FILL
+ UI.button(actions,"Back to title",func(): get_tree().change_scene_to_file("res://scenes/title.tscn"))
  select_class(primary)
  Sound.theme_("woodland")
 func appearance_choice(parent: Node, label: String, values: Array, callback: Callable):
@@ -68,9 +70,10 @@ func appearance_choice(parent: Node, label: String, values: Array, callback: Cal
  row.add_child(option)
 func select_class(value: String):
  primary=value
- for key in class_buttons: class_buttons[key].disabled=key==value
+ class_picker.select(State.classes.keys().find(value))
  update_secondaries()
- details.text=State.classes[value].description+"\nAll three grant skills. Only your primary class can use its learned mythic."
+ var data: Dictionary=State.classes[value]
+ details.text=data.description+"\nLevel 1: "+GameRules.summary(GameRules.base_stats(data,1))+"\nGrowth / level: HP +%s · MP +%s · ATK +%s\nDEF +%s · AGI +%s · DEX +%s\nWeapons: %s\nOnly a learned primary mythic can be used." % [data.growth.max_hp,data.growth.max_mp,data.growth.attack,data.growth.defense,data.growth.agility,data.growth.dexterity,", ".join(data.proficiencies)]
 func update_preview():
  State.hero.profile.skin=skin
  State.hero.profile.hair=hair
@@ -90,11 +93,14 @@ func _process(delta):
 
 func update_secondaries(first: String=""):
  var available=State.classes.keys().filter(func(value): return value!=primary)
- if first.is_empty() or not available.has(first): first=available[0]
+ if first.is_empty() or not available.has(first): first=State.classes[primary].recommended_secondary[0]
  secondary1.clear()
  secondary2.clear()
  for value in available:
   secondary1.add_item(value)
   if value!=first: secondary2.add_item(value)
  secondary1.select(available.find(first))
- secondary2.select(0)
+ var second=State.classes[primary].recommended_secondary[1]
+ for index in range(secondary2.item_count):
+  if secondary2.get_item_text(index)==second: secondary2.select(index); break
+ if secondary2.selected<0: secondary2.select(0)

@@ -156,14 +156,14 @@ func _process(delta):
  var s=State.stats()
  hud.text="%s · Lv %s · XP %s/%s
 HP %s/%s · MP %s/%s · Gold %s · Mastery %s/10
-%s" % [State.hero.primary,State.hero.level,State.hero.xp,int(State.hero.level)*70,State.hero.hp,s.max_hp,State.hero.mp,s.max_mp,State.hero.gold,State.hero.mastery,message]
+%s" % [State.hero.primary,State.hero.level,State.hero.xp,int(State.hero.level)*70,State.hero.hp,s.max_hp,State.hero.mp,s.max_mp,State.hero.gold,State.hero.mastery,message+"\n"+State.notice]
  var goal="Talk to Mira in Willowbrook"
  if State.hero.journey.started: goal="Gather Moonleaf: %s/3" % State.hero.exploration.herbs.size()
  if State.hero.exploration.herbs.size()==3: goal="Bring the Moonleaf to Mira"
  if State.hero.exploration.quest_done: goal="Enter the shrine beyond Sunstream"
  if State.hero.journey.boss: goal="Return to Mira with the living ember"
  if State.hero.journey.finished: goal="Choose your permanent companion [C]" if State.hero.companion.owned.is_empty() else "Adventure complete · Optional village board challenge"
- if State.hero.profile.economy and (State.hero.equipment.Weapon=="None" or State.hero.equipment.Chest=="None"): goal="Buy & equip a starter kit: outfitter east of camp"
+ if State.hero.profile.economy and not State.starter_ready(): goal="Buy & equip a starter kit: outfitter east of camp"
  objective.text="THE BELL BENEATH THE WOODS\n%s\nRoot seals: %s/2" % [goal,State.hero.journey.seals.size()]
  prompt.text=context_prompt()
 func animate_actor(model: Node3D, moving: bool):
@@ -193,7 +193,7 @@ func interact():
   if State.hero.journey.boss and not State.hero.journey.finished:
    dialogue.show_id("ending",func():
     State.hero.journey.finished=true
-    State.hero.gold+=120
+    State.award_gold(120,"Mira’s ending reward")
     State.save_game()
     if State.hero.profile.economy: open_character("companions")
     else: completion.get_parent().get_parent().show())
@@ -205,7 +205,7 @@ func interact():
    dialogue.show_id("intro")
   elif State.hero.exploration.herbs.size()>=3 and not State.hero.exploration.quest_done:
    State.hero.exploration.quest_done=true
-   State.hero.gold+=60
+   State.award_gold(60,"Moonleaf quest")
    State.hero.potions+=3
    State.restore()
    State.save_game()
@@ -232,7 +232,7 @@ func interact():
  if hero.position.distance_to(Vector3(24,0,-12))<3:
   if not State.hero.exploration.shrine:
    State.hero.exploration.shrine=true
-   State.hero.gold+=30
+   State.award_gold(30,"Shrine discovery")
    State.save_game()
   if not State.hero.exploration.quest_done:
    dialogue.show_id("sealed")
@@ -302,8 +302,8 @@ func ready_for_trail() -> bool:
  if not State.hero.journey.started:
   message="Speak to Mira beside the camp before setting out."
   return false
- if State.hero.equipment.Weapon=="None" or State.hero.equipment.Chest=="None" or State.hero.equipment.Shield=="None":
-  message="Visit the outfitter near camp. Buy AND equip a sword, shield and chest piece first."
+ if not State.starter_ready():
+  message="Visit the outfitter near camp. Buy AND equip compatible gear first (Monk-trained heroes may fight unarmed)."
   return false
  if State.hero.hp<=0:
   message="Return to camp and press R to recover."
@@ -316,7 +316,7 @@ func show_board():
  board.get_parent().get_parent().show()
  UI.label(board,"WILLOWBROOK FIELD BOARD").add_theme_font_size_override("font_size",24)
  UI.label(board,"First steps: buy your kit, spend skill points [K], speak to Mira.
-Defend halves damage. Block with a shield to prime class chemistry.
+Defend halves damage. Paladin + Ranger + Druid: shield blocks prime class chemistry.
 Gather Moonleaf, return to Mira, then enter the sanctuary.
 After the guardian: return to Mira and choose a companion [C].")
  UI.button(board,"Open journal & field guide",func(): open_character("journal"))

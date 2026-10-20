@@ -19,10 +19,16 @@ func run():
  var attack=State.stats().attack
  check(attack==25,"Learned attack node changes derived stats")
  check(not State.invest_skill("Paladin","oath") and State.hero.points==19,"Duplicate investment rejected")
- check(State.invest_skill("Paladin","shield"),"First branch can be learned")
- check(not State.invest_skill("Paladin","mythic"),"Mythic requires both branches")
- check(State.invest_skill("Paladin","light") and State.invest_skill("Paladin","mythic"),"Both branches unlock two-point mythic")
- check(State.hero.points==15 and State.can_mythic("Paladin"),"Costs are exact and primary mythic activates")
+ check(not State.invest_skill("Paladin","shield"),"Level-one hero cannot buy level-five branch")
+ State.hero.level=50
+ State.hero.class_mastery.Paladin=100
+ State.hero.points=99
+ check(State.invest_skill("Paladin","shield"),"Eligible first branch can be learned")
+ check(not State.invest_skill("Paladin","mythic"),"Mythic still requires its entire prerequisite path")
+ for node in State.classes.Paladin.nodes:
+  if node.id not in ["oath","shield","mythic"]: State.invest_skill("Paladin",node.id)
+ check(State.invest_skill("Paladin","mythic"),"Level-50 prerequisite path unlocks mythic")
+ check(State.hero.points==50 and State.can_mythic("Paladin"),"Full tree costs fifty points and primary mythic activates")
  State.set_primary("Ranger")
  check(not State.can_mythic("Paladin") and State.hero.skills.Paladin.has("mythic"),"Switching primary preserves but disables secondary mythic")
  State.set_primary("Paladin")
@@ -33,6 +39,7 @@ func run():
  check(State.hero.skills==skills,"Branched skills persist")
  var legacy=State.hero.duplicate(true)
  legacy.erase("skills")
+ legacy.erase("progression_version")
  legacy.investments.Druid=3
  legacy.equipment.Helmet="Leather Gear"
  var file=FileAccess.open(State.SAVE,FileAccess.WRITE)
@@ -40,7 +47,7 @@ func run():
  file.close()
  State.reset()
  State.load_game()
- check(State.hero.skills.Druid.has("mythic") and State.hero.points==15,"Legacy mythic and spent points migrate without a second charge")
+ check(State.hero.skills.Druid.is_empty() and State.hero.progression_archive.skills.Druid.has("mythic") and State.hero.points==100,"Legacy skills are archived and respecced into the new point budget")
  check(State.hero.equipment.Helmet=="Ranger Hood","Legacy generic armor migrates to visible slot-specific gear")
  State.reset()
  check(not State.equip("Helmet","Sunsteel Sword"),"Wrong-slot equipment rejected")
@@ -84,12 +91,12 @@ func run():
  await get_tree().process_frame
  await get_tree().process_frame
  var menu=get_tree().current_scene
- check(menu.graph.buttons.size()==6,"Dedicated page shows six connected skill nodes")
+ check(menu.graph.buttons.size()==12,"Dedicated page shows twelve connected skill nodes")
  menu.graph.buttons.oath.pressed.emit()
  var learn=find_button(menu.info,"Learn skill")
  check(learn!=null and not learn.disabled,"Root node has an enabled Learn button")
  learn.pressed.emit()
- check(State.hero.skills.Paladin.has("oath") and State.hero.points==2,"UI investment spends exactly one point")
+ check(State.hero.skills.Paladin.has("oath") and State.hero.points==1,"UI investment spends exactly one point")
  menu.graph.buttons.mythic.pressed.emit()
  learn=find_button(menu.info,"Learn skill")
  check(learn.disabled,"UI prevents learning locked mythic")

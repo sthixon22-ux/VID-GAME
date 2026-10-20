@@ -1,7 +1,7 @@
 class_name HeroVisual
 extends Node3D
 const ACTION_CLIPS={
- "Victory":"Cheer", "Defeat":"Death_A",
+ "Victory":"Cheer", "Defeat":"Death_A", "Dodge":"Dodge_Backward",
  "Attack":"1H_Melee_Attack_Stab",
  "Sword Slash":"1H_Melee_Attack_Slice_Diagonal",
  "Shield Bash":"Block_Attack",
@@ -45,13 +45,17 @@ func _init(equipment: Dictionary={}, appearance: Dictionary={}):
   if node.get_parent() is BoneAttachment3D: node.hide()
  # Attach pack weapons to the shared animated hand slots; never float beside the actor.
  var source=load("res://assets/vendor/kaykit/Knight.glb").instantiate()
- var weapon=source.find_child("1H_Sword",true,false).duplicate()
  var sword_name: String=gear.get("Weapon","Iron Sword")
+ var family: String=State.equipment_data.get(sword_name,{}).get("weapon_type","sword")
+ var sword_color=Color(State.equipment_data.get(sword_name,{}).get("color","d4e4ed"))
+ var weapon: Node3D
+ if family=="sword":
+  weapon=source.find_child("1H_Sword",true,false).duplicate()
+  if sword_name!="Iron Sword": tint(weapon,sword_color)
+  if sword_name=="Moonleaf Saber": weapon.scale*=Vector3(0.75,1.08,0.75)
+ else: weapon=GearVisual.build(family,sword_color)
  weapon.name="EquippedWeapon"
  weapon.visible=sword_name!="None"
- var sword_color=Color(State.equipment_data.get(sword_name,{}).get("color","d4e4ed"))
- if sword_name!="Iron Sword": tint(weapon,sword_color)
- if sword_name=="Moonleaf Saber": weapon.scale*=Vector3(0.75,1.08,0.75)
  socket("handslot.r").add_child(weapon)
  var shield_name: String=gear.get("Shield","None")
  if shield_name!="None":
@@ -86,7 +90,7 @@ func _init(equipment: Dictionary={}, appearance: Dictionary={}):
   var hairs=[Color("473028"),Color("d1ad68"),Color("b9c3d2")]
   var dyes=[Color("496f98"),Color("65865b"),Color("a05e68")]
   for mesh in model.find_children("*","MeshInstance3D",true,false):
-   if mesh.get_parent() is BoneAttachment3D: continue
+   if mesh.get_parent() is BoneAttachment3D or not str(mesh.name).begins_with(outfit+"_"): continue
    var material=ShaderMaterial.new()
    material.shader=load("res://assets/shaders/hero_palette.gdshader")
    material.set_shader_parameter("palette",load("res://assets/vendor/kaykit/%s_%s_texture.png" % [outfit,outfit.to_lower()]))
@@ -129,7 +133,16 @@ func motion(moving: bool, sprint=false):
 func play_action(action: String) -> float:
  if action=="Defeat": locked_pose=true
  last_action=action
- var clip: String=ACTION_CLIPS.get(action,"Idle")
+ var clip: String=ACTION_CLIPS.get(action,"")
+ if clip.is_empty():
+  var entry=AbilityBook.entry(action)
+  clip="Spellcast_Long" if entry.get("effect","") in ["heal","buff","renewal","meditate"] else ("Spellcast_Raise" if entry.get("kind","") in ["spell","mythic"] else "1H_Melee_Attack_Chop")
+ var family: String=State.equipment_data.get(gear.get("Weapon","None"),{}).get("weapon_type","unarmed")
+ if action=="Attack":
+  if family=="bow": clip="2H_Ranged_Shoot"
+  elif family=="wand": clip="Spellcast_Shoot"
+  elif family in ["unarmed","claws"]: clip="Unarmed_Melee_Attack_Punch_A"
+  elif family in ["greatsword","hammer","scythe"]: clip="2H_Melee_Attack_Chop"
  var animation=player.get_animation(clip)
  var duration=clampf(animation.length,0.7,1.8)
  current_motion=""

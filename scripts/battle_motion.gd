@@ -80,7 +80,7 @@ static func roots(host: Node3D, point: Vector3, count: int=9):
   tween.tween_callback(thorn.queue_free)
 static func present(host: Node3D, actor: Node3D, target: Node3D, label: String) -> float:
  var duration=0.95
- if actor.has_method("play_action") and (STYLES.has(label) or label in ["Victory","Defeat"]): duration=actor.play_action(label)
+ if actor.has_method("play_action") and (STYLES.has(label) or not AbilityBook.entry(label).is_empty() or label in ["Victory","Defeat"]): duration=actor.play_action(label)
  elif not STYLES.has(label): duration=0.4
  var origin=actor.position
  var forward=(target.position-origin).normalized() if actor!=target else Vector3.ZERO
@@ -165,7 +165,17 @@ static func present(host: Node3D, actor: Node3D, target: Node3D, label: String) 
   "Goblin club":
    for i in range(8): mote(host,point+Vector3.UP,point+Vector3(sin(i),1.5,cos(i)),Color("c9ad85"),0.45)
   _:
-   if label.contains(" · ") and actor!=target:
+   var ability=AbilityBook.entry(label)
+   if not ability.is_empty():
+    var effect=ability.effect
+    var healing=effect in ["heal","buff","renewal","meditate"]
+    var color_=Color("a7e2ac") if healing else (Color("a3b5ee") if effect in ["magic","drain","frost"] else Color("e4bc89"))
+    if effect=="drain": color_=Color("b69cce")
+    if effect=="frost": color_=Color("a3ddeb")
+    ring(host,point+Vector3.UP*0.1,color_,1.1)
+    for i in range(10): mote(host,point+Vector3(sin(i)*0.6,0.3,cos(i)*0.6) if healing else actor.position+Vector3.UP,point+Vector3(sin(i)*0.25,1.5,cos(i)*0.25),color_,0.5,0.12)
+    if not healing: arc(host,point+Vector3.UP,color_,true)
+   elif label.contains(" · ") and actor!=target:
     var color_=Color("e6b575") if label.contains("Ember") else (Color("b4e8ee") if label.contains("Wind") else Color("b8d8b0"))
     for i in range(6): mote(host,actor.position+Vector3.UP,point+Vector3(sin(i)*0.3,1.1,cos(i)*0.3),color_,0.3,0.13)
     arc(host,point+Vector3.UP,color_,false)

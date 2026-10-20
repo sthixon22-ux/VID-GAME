@@ -1,5 +1,7 @@
 # Demo 0.6 — the complete opening loop
 
+Historical release report. The three-class limit and compressed demo skill gates below are superseded by [demo 0.7](DEMO_0_7.md).
+
 This release expands the existing introductory quest into a representative game loop. It is a **release candidate**, not a claim that the final art quality, Windows performance or 15–20-minute first-player pacing has been established. Automated scene traversal uses accelerated playback and teleports; it cannot measure that target. The main story is unchanged.
 
 ## New-player route

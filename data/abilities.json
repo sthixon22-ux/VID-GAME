@@ -68,29 +68,29 @@
   "dawn_avatar": {
     "name": "Dawn Avatar",
     "kind": "mythic",
-    "mp": 15,
+    "mp": 25,
     "effect": "damage",
-    "power": 32,
-    "class_id": "paladin",
-    "description": "Paladin mythic; only usable with Paladin primary and its mythic node learned."
+    "power": 55,
+    "description": "Paladin mythic. Learn its level-50 capstone and make Paladin primary.",
+    "class_id": "paladin"
   },
   "wild_hunt": {
     "name": "Wild Hunt",
     "kind": "mythic",
-    "mp": 15,
+    "mp": 25,
     "effect": "damage",
-    "power": 32,
-    "class_id": "ranger",
-    "description": "Ranger mythic; only usable with Ranger primary and its mythic node learned."
+    "power": 55,
+    "description": "Ranger mythic. Learn its level-50 capstone and make Ranger primary.",
+    "class_id": "ranger"
   },
   "ancient_grove": {
     "name": "Ancient Grove",
     "kind": "mythic",
-    "mp": 15,
+    "mp": 25,
     "effect": "heal",
-    "power": 75,
-    "class_id": "druid",
-    "description": "Druid mythic; only usable with Druid primary and its mythic node learned."
+    "power": 160,
+    "description": "Druid mythic. Learn its level-50 capstone and make Druid primary.",
+    "class_id": "druid"
   },
   "items": {
     "name": "Items",
@@ -105,5 +105,873 @@
     "mp": 0,
     "effect": "guard",
     "description": "Halve incoming damage this round. With a shield, a block primes Guardian of the Wild."
+  },
+  "power_strike": {
+    "name": "Power Strike",
+    "kind": "technique",
+    "mp": 5,
+    "effect": "damage",
+    "power": 14,
+    "description": "A deliberate heavy weapon strike.",
+    "weapon_types": [
+      "sword",
+      "greatsword",
+      "spear",
+      "axe",
+      "mace"
+    ]
+  },
+  "rally": {
+    "name": "Rally",
+    "kind": "spell",
+    "mp": 4,
+    "effect": "buff",
+    "power": 6,
+    "description": "Attack +6 for the next three rounds.",
+    "stat": "attack",
+    "duration": 3
+  },
+  "raging_blow": {
+    "name": "Raging Blow",
+    "kind": "technique",
+    "mp": 5,
+    "effect": "rage",
+    "power": 22,
+    "description": "Heavy damage; costs 6 HP as well as MP.",
+    "weapon_types": [
+      "axe",
+      "greatsword",
+      "hammer"
+    ],
+    "self_damage": 6
+  },
+  "battle_fury": {
+    "name": "Battle Fury",
+    "kind": "spell",
+    "mp": 5,
+    "effect": "buff",
+    "power": 8,
+    "description": "Attack +8 for three rounds.",
+    "stat": "attack",
+    "duration": 3
+  },
+  "arcane_bolt": {
+    "name": "Arcane Bolt",
+    "kind": "spell",
+    "mp": 6,
+    "effect": "magic",
+    "power": 14,
+    "description": "Arcane damage scales with maximum MP and hero level."
+  },
+  "aether_ward": {
+    "name": "Aether Ward",
+    "kind": "spell",
+    "mp": 5,
+    "effect": "buff",
+    "power": 6,
+    "description": "Defense +6 for three rounds.",
+    "stat": "defense",
+    "duration": 3
+  },
+  "firebolt": {
+    "name": "Firebolt",
+    "kind": "spell",
+    "mp": 6,
+    "effect": "magic",
+    "power": 17,
+    "description": "Fire damage, scaling with maximum MP and level.",
+    "element": "fire"
+  },
+  "frostbind": {
+    "name": "Frostbind",
+    "kind": "spell",
+    "mp": 7,
+    "effect": "frost",
+    "power": 9,
+    "description": "Cold damage; 50% chance to deny one enemy turn.",
+    "chance": 0.5
+  },
+  "healing_light": {
+    "name": "Healing Light",
+    "kind": "spell",
+    "mp": 7,
+    "effect": "heal",
+    "power": 40,
+    "description": "Restore 40 HP plus learned healing bonuses."
+  },
+  "purifying_light": {
+    "name": "Purifying Light",
+    "kind": "spell",
+    "mp": 5,
+    "effect": "renewal",
+    "power": 12,
+    "description": "Restore 12 HP now; renew health for three rounds.",
+    "duration": 3
+  },
+  "quickshot": {
+    "name": "Quickshot",
+    "kind": "technique",
+    "mp": 4,
+    "effect": "damage",
+    "power": 9,
+    "description": "A precise bow shot. Requires a bow.",
+    "weapon_types": [
+      "bow"
+    ]
+  },
+  "feint": {
+    "name": "Feint",
+    "kind": "spell",
+    "mp": 3,
+    "effect": "buff",
+    "power": 10,
+    "description": "Dexterity +10 for three rounds, improving dodge chance during battle.",
+    "stat": "dexterity",
+    "duration": 3
+  },
+  "venom_cut": {
+    "name": "Venom Cut",
+    "kind": "technique",
+    "mp": 4,
+    "effect": "poison",
+    "power": 7,
+    "description": "A blade strike that poisons for 5 damage over three rounds.",
+    "weapon_types": [
+      "dagger",
+      "sword"
+    ],
+    "duration": 3
+  },
+  "shadowstrike": {
+    "name": "Shadowstrike",
+    "kind": "technique",
+    "mp": 6,
+    "effect": "execute",
+    "power": 10,
+    "description": "Deals +12 damage against marked or poisoned targets.",
+    "weapon_types": [
+      "dagger",
+      "sword"
+    ]
+  },
+  "venom_edge": {
+    "name": "Venom Edge",
+    "kind": "technique",
+    "mp": 4,
+    "effect": "poison",
+    "power": 8,
+    "description": "Poisoned blade; 5 damage over three rounds.",
+    "weapon_types": [
+      "dagger",
+      "sword"
+    ],
+    "duration": 3
+  },
+  "palm_strike": {
+    "name": "Palm Strike",
+    "kind": "technique",
+    "mp": 4,
+    "effect": "pierce",
+    "power": 10,
+    "description": "A palm technique that ignores half the enemy\u2019s defense.",
+    "weapon_types": [
+      "unarmed",
+      "claws",
+      "staff"
+    ]
+  },
+  "meditation": {
+    "name": "Meditation",
+    "kind": "spell",
+    "mp": 0,
+    "effect": "meditate",
+    "power": 8,
+    "description": "Recover 8 MP and 5 HP. Three-round cooldown.",
+    "cooldown": 3
+  },
+  "life_drain": {
+    "name": "Life Drain",
+    "kind": "spell",
+    "mp": 8,
+    "effect": "drain",
+    "power": 12,
+    "description": "Shadow damage; restore half the damage dealt as HP."
+  },
+  "wither": {
+    "name": "Wither",
+    "kind": "spell",
+    "mp": 5,
+    "effect": "weaken",
+    "power": 5,
+    "description": "Enemy attack and defense -5 for three rounds.",
+    "duration": 3
+  },
+  "legendary_onslaught": {
+    "name": "Legendary Onslaught",
+    "kind": "mythic",
+    "mp": 25,
+    "effect": "damage",
+    "power": 55,
+    "description": "Warrior mythic. Learn its level-50 capstone and make Warrior primary.",
+    "class_id": "warrior"
+  },
+  "warrior_adept": {
+    "name": "Cleave",
+    "kind": "technique",
+    "mp": 9,
+    "effect": "damage",
+    "power": 24,
+    "description": "An advanced class ability learned from the level-10 branch. Requires a matching proficient weapon.",
+    "weapon_types": [
+      "sword",
+      "greatsword",
+      "spear",
+      "axe",
+      "mace"
+    ]
+  },
+  "warrior_master": {
+    "name": "Veteran Assault",
+    "kind": "technique",
+    "mp": 14,
+    "effect": "damage",
+    "power": 36,
+    "description": "A master class ability learned from the level-35 branch. Requires a matching proficient weapon.",
+    "weapon_types": [
+      "sword",
+      "greatsword",
+      "spear",
+      "axe",
+      "mace"
+    ]
+  },
+  "worldbreaker": {
+    "name": "Worldbreaker",
+    "kind": "mythic",
+    "mp": 25,
+    "effect": "damage",
+    "power": 65,
+    "description": "Barbarian mythic. Learn its level-50 capstone and make Barbarian primary.",
+    "class_id": "barbarian"
+  },
+  "barbarian_adept": {
+    "name": "Sundering Roar",
+    "kind": "technique",
+    "mp": 9,
+    "effect": "damage",
+    "power": 24,
+    "description": "An advanced class ability learned from the level-10 branch. Requires a matching proficient weapon.",
+    "weapon_types": [
+      "axe",
+      "greatsword",
+      "hammer"
+    ]
+  },
+  "barbarian_master": {
+    "name": "Titan Swing",
+    "kind": "technique",
+    "mp": 14,
+    "effect": "damage",
+    "power": 36,
+    "description": "A master class ability learned from the level-35 branch. Requires a matching proficient weapon.",
+    "weapon_types": [
+      "axe",
+      "greatsword",
+      "hammer"
+    ]
+  },
+  "paladin_adept": {
+    "name": "Radiant Lance",
+    "kind": "spell",
+    "mp": 9,
+    "effect": "damage",
+    "power": 24,
+    "description": "An advanced class ability learned from the level-10 branch."
+  },
+  "paladin_master": {
+    "name": "Judgment",
+    "kind": "spell",
+    "mp": 14,
+    "effect": "damage",
+    "power": 36,
+    "description": "A master class ability learned from the level-35 branch."
+  },
+  "arcane_cataclysm": {
+    "name": "Arcane Cataclysm",
+    "kind": "mythic",
+    "mp": 25,
+    "effect": "magic",
+    "power": 60,
+    "description": "Wizard mythic. Learn its level-50 capstone and make Wizard primary.",
+    "class_id": "wizard"
+  },
+  "wizard_adept": {
+    "name": "Arcane Barrage",
+    "kind": "spell",
+    "mp": 9,
+    "effect": "magic",
+    "power": 24,
+    "description": "An advanced class ability learned from the level-10 branch."
+  },
+  "wizard_master": {
+    "name": "Astral Rupture",
+    "kind": "spell",
+    "mp": 14,
+    "effect": "magic",
+    "power": 36,
+    "description": "A master class ability learned from the level-35 branch."
+  },
+  "elemental_tempest": {
+    "name": "Elemental Tempest",
+    "kind": "mythic",
+    "mp": 25,
+    "effect": "magic",
+    "power": 65,
+    "description": "Sorcerer mythic. Learn its level-50 capstone and make Sorcerer primary.",
+    "class_id": "sorcerer"
+  },
+  "sorcerer_adept": {
+    "name": "Lightning Lance",
+    "kind": "spell",
+    "mp": 9,
+    "effect": "magic",
+    "power": 24,
+    "description": "An advanced class ability learned from the level-10 branch."
+  },
+  "sorcerer_master": {
+    "name": "Inferno",
+    "kind": "spell",
+    "mp": 14,
+    "effect": "magic",
+    "power": 36,
+    "description": "A master class ability learned from the level-35 branch."
+  },
+  "miracle": {
+    "name": "Miracle",
+    "kind": "mythic",
+    "mp": 25,
+    "effect": "heal",
+    "power": 180,
+    "description": "Healer mythic. Learn its level-50 capstone and make Healer primary.",
+    "class_id": "healer"
+  },
+  "healer_adept": {
+    "name": "Greater Mending",
+    "kind": "spell",
+    "mp": 9,
+    "effect": "heal",
+    "power": 65,
+    "description": "An advanced class ability learned from the level-10 branch."
+  },
+  "healer_master": {
+    "name": "Sanctuary",
+    "kind": "spell",
+    "mp": 14,
+    "effect": "heal",
+    "power": 100,
+    "description": "A master class ability learned from the level-35 branch."
+  },
+  "ranger_adept": {
+    "name": "Seeking Arrow",
+    "kind": "technique",
+    "mp": 9,
+    "effect": "damage",
+    "power": 24,
+    "description": "An advanced class ability learned from the level-10 branch. Requires a matching proficient weapon.",
+    "weapon_types": [
+      "bow"
+    ]
+  },
+  "ranger_master": {
+    "name": "Hawkstrike",
+    "kind": "technique",
+    "mp": 14,
+    "effect": "damage",
+    "power": 36,
+    "description": "A master class ability learned from the level-35 branch. Requires a matching proficient weapon.",
+    "weapon_types": [
+      "bow"
+    ]
+  },
+  "phantom_dance": {
+    "name": "Phantom Dance",
+    "kind": "mythic",
+    "mp": 25,
+    "effect": "damage",
+    "power": 58,
+    "description": "Rogue mythic. Learn its level-50 capstone and make Rogue primary.",
+    "class_id": "rogue"
+  },
+  "rogue_adept": {
+    "name": "Opportunist Strike",
+    "kind": "technique",
+    "mp": 9,
+    "effect": "damage",
+    "power": 24,
+    "description": "An advanced class ability learned from the level-10 branch. Requires a matching proficient weapon.",
+    "weapon_types": [
+      "dagger",
+      "sword",
+      "bow"
+    ]
+  },
+  "rogue_master": {
+    "name": "Dancing Blades",
+    "kind": "technique",
+    "mp": 14,
+    "effect": "damage",
+    "power": 36,
+    "description": "A master class ability learned from the level-35 branch. Requires a matching proficient weapon.",
+    "weapon_types": [
+      "dagger",
+      "sword",
+      "bow"
+    ]
+  },
+  "nightfall": {
+    "name": "Nightfall",
+    "kind": "mythic",
+    "mp": 25,
+    "effect": "execute",
+    "power": 65,
+    "description": "Assassin mythic. Learn its level-50 capstone and make Assassin primary.",
+    "class_id": "assassin"
+  },
+  "assassin_adept": {
+    "name": "Deathmark",
+    "kind": "technique",
+    "mp": 9,
+    "effect": "damage",
+    "power": 24,
+    "description": "An advanced class ability learned from the level-10 branch. Requires a matching proficient weapon.",
+    "weapon_types": [
+      "dagger",
+      "sword"
+    ]
+  },
+  "assassin_master": {
+    "name": "Eclipse Cut",
+    "kind": "technique",
+    "mp": 14,
+    "effect": "damage",
+    "power": 36,
+    "description": "A master class ability learned from the level-35 branch. Requires a matching proficient weapon.",
+    "weapon_types": [
+      "dagger",
+      "sword"
+    ]
+  },
+  "enlightenment": {
+    "name": "Enlightenment",
+    "kind": "mythic",
+    "mp": 25,
+    "effect": "pierce",
+    "power": 55,
+    "description": "Monk mythic. Learn its level-50 capstone and make Monk primary.",
+    "class_id": "monk"
+  },
+  "monk_adept": {
+    "name": "Rising Palm",
+    "kind": "technique",
+    "mp": 9,
+    "effect": "damage",
+    "power": 24,
+    "description": "An advanced class ability learned from the level-10 branch. Requires a matching proficient weapon.",
+    "weapon_types": [
+      "unarmed",
+      "claws",
+      "staff"
+    ]
+  },
+  "monk_master": {
+    "name": "Hundred Fists",
+    "kind": "technique",
+    "mp": 14,
+    "effect": "damage",
+    "power": 36,
+    "description": "A master class ability learned from the level-35 branch. Requires a matching proficient weapon.",
+    "weapon_types": [
+      "unarmed",
+      "claws",
+      "staff"
+    ]
+  },
+  "druid_adept": {
+    "name": "Briarstorm",
+    "kind": "spell",
+    "mp": 9,
+    "effect": "magic",
+    "power": 24,
+    "description": "An advanced class ability learned from the level-10 branch."
+  },
+  "druid_master": {
+    "name": "Grove Renewal",
+    "kind": "spell",
+    "mp": 14,
+    "effect": "heal",
+    "power": 100,
+    "description": "A master class ability learned from the level-35 branch."
+  },
+  "requiem": {
+    "name": "Requiem",
+    "kind": "mythic",
+    "mp": 25,
+    "effect": "drain",
+    "power": 60,
+    "description": "Necromancer mythic. Learn its level-50 capstone and make Necromancer primary.",
+    "class_id": "necromancer"
+  },
+  "necromancer_adept": {
+    "name": "Soul Rend",
+    "kind": "spell",
+    "mp": 9,
+    "effect": "magic",
+    "power": 24,
+    "description": "An advanced class ability learned from the level-10 branch."
+  },
+  "necromancer_master": {
+    "name": "Grave Harvest",
+    "kind": "spell",
+    "mp": 14,
+    "effect": "drain",
+    "power": 36,
+    "description": "A master class ability learned from the level-35 branch."
+  },
+  "axe_technique": {
+    "name": "Rending Chop",
+    "kind": "weapon",
+    "mp": 3,
+    "effect": "damage",
+    "power": 7,
+    "description": "A axe technique. Requires axe proficiency and the matching weapon.",
+    "weapon_types": [
+      "axe"
+    ]
+  },
+  "greatsword_technique": {
+    "name": "Sweeping Cleave",
+    "kind": "weapon",
+    "mp": 3,
+    "effect": "damage",
+    "power": 7,
+    "description": "A greatsword technique. Requires greatsword proficiency and the matching weapon.",
+    "weapon_types": [
+      "greatsword"
+    ]
+  },
+  "hammer_technique": {
+    "name": "Crushing Blow",
+    "kind": "weapon",
+    "mp": 3,
+    "effect": "damage",
+    "power": 7,
+    "description": "A hammer technique. Requires hammer proficiency and the matching weapon.",
+    "weapon_types": [
+      "hammer"
+    ]
+  },
+  "spear_technique": {
+    "name": "Piercing Thrust",
+    "kind": "weapon",
+    "mp": 3,
+    "effect": "damage",
+    "power": 7,
+    "description": "A spear technique. Requires spear proficiency and the matching weapon.",
+    "weapon_types": [
+      "spear"
+    ]
+  },
+  "bow_technique": {
+    "name": "Aimed Shot",
+    "kind": "weapon",
+    "mp": 3,
+    "effect": "damage",
+    "power": 7,
+    "description": "A bow technique. Requires bow proficiency and the matching weapon.",
+    "weapon_types": [
+      "bow"
+    ]
+  },
+  "dagger_technique": {
+    "name": "Twin Fang",
+    "kind": "weapon",
+    "mp": 3,
+    "effect": "damage",
+    "power": 7,
+    "description": "A dagger technique. Requires dagger proficiency and the matching weapon.",
+    "weapon_types": [
+      "dagger"
+    ]
+  },
+  "staff_technique": {
+    "name": "Runic Sweep",
+    "kind": "weapon",
+    "mp": 3,
+    "effect": "damage",
+    "power": 7,
+    "description": "A staff technique. Requires staff proficiency and the matching weapon.",
+    "weapon_types": [
+      "staff"
+    ]
+  },
+  "wand_technique": {
+    "name": "Focused Spark",
+    "kind": "weapon",
+    "mp": 3,
+    "effect": "damage",
+    "power": 7,
+    "description": "A wand technique. Requires wand proficiency and the matching weapon.",
+    "weapon_types": [
+      "wand"
+    ]
+  },
+  "scythe_technique": {
+    "name": "Reaping Arc",
+    "kind": "weapon",
+    "mp": 3,
+    "effect": "damage",
+    "power": 7,
+    "description": "A scythe technique. Requires scythe proficiency and the matching weapon.",
+    "weapon_types": [
+      "scythe"
+    ]
+  },
+  "claws_technique": {
+    "name": "Raking Flurry",
+    "kind": "weapon",
+    "mp": 3,
+    "effect": "damage",
+    "power": 7,
+    "description": "A claws technique. Requires claws proficiency and the matching weapon.",
+    "weapon_types": [
+      "claws"
+    ]
+  },
+  "unarmed_technique": {
+    "name": "Jab Combination",
+    "kind": "weapon",
+    "mp": 3,
+    "effect": "damage",
+    "power": 7,
+    "description": "A unarmed technique. Requires unarmed proficiency and the matching weapon.",
+    "weapon_types": [
+      "unarmed"
+    ]
+  },
+  "windstep": {
+    "name": "Windstep",
+    "kind": "spell",
+    "mp": 4,
+    "effect": "buff",
+    "stat": "agility",
+    "power": 8,
+    "duration": 3,
+    "description": "Agility +8 for three rounds. Turn order is recalculated each round."
+  },
+  "sword_master_technique": {
+    "name": "Tempest Slash",
+    "kind": "weapon",
+    "mp": 8,
+    "effect": "pierce",
+    "power": 20,
+    "description": "Advanced sword technique; requires the level-35 weapon node.",
+    "weapon_node": {
+      "family": "sword",
+      "id": "technique"
+    },
+    "chance": 0.45,
+    "weapon_types": [
+      "sword"
+    ]
+  },
+  "shield_master_technique": {
+    "name": "Guardian Reprisal",
+    "kind": "weapon",
+    "mp": 8,
+    "effect": "bash",
+    "power": 20,
+    "description": "Advanced shield technique; requires the level-35 weapon node.",
+    "weapon_node": {
+      "family": "shield",
+      "id": "technique"
+    },
+    "chance": 0.45,
+    "shield": true
+  },
+  "axe_master_technique": {
+    "name": "Rupturing Cleave",
+    "kind": "weapon",
+    "mp": 8,
+    "effect": "pierce",
+    "power": 20,
+    "description": "Advanced axe technique; requires the level-35 weapon node.",
+    "weapon_node": {
+      "family": "axe",
+      "id": "technique"
+    },
+    "chance": 0.45,
+    "weapon_types": [
+      "axe"
+    ]
+  },
+  "greatsword_master_technique": {
+    "name": "Cyclone Blade",
+    "kind": "weapon",
+    "mp": 8,
+    "effect": "pierce",
+    "power": 20,
+    "description": "Advanced greatsword technique; requires the level-35 weapon node.",
+    "weapon_node": {
+      "family": "greatsword",
+      "id": "technique"
+    },
+    "chance": 0.45,
+    "weapon_types": [
+      "greatsword"
+    ]
+  },
+  "hammer_master_technique": {
+    "name": "Seismic Smash",
+    "kind": "weapon",
+    "mp": 8,
+    "effect": "pierce",
+    "power": 20,
+    "description": "Advanced hammer technique; requires the level-35 weapon node.",
+    "weapon_node": {
+      "family": "hammer",
+      "id": "technique"
+    },
+    "chance": 0.45,
+    "weapon_types": [
+      "hammer"
+    ]
+  },
+  "spear_master_technique": {
+    "name": "Dragon Thrust",
+    "kind": "weapon",
+    "mp": 8,
+    "effect": "pierce",
+    "power": 20,
+    "description": "Advanced spear technique; requires the level-35 weapon node.",
+    "weapon_node": {
+      "family": "spear",
+      "id": "technique"
+    },
+    "chance": 0.45,
+    "weapon_types": [
+      "spear"
+    ]
+  },
+  "bow_master_technique": {
+    "name": "Piercing Volley",
+    "kind": "weapon",
+    "mp": 8,
+    "effect": "pierce",
+    "power": 20,
+    "description": "Advanced bow technique; requires the level-35 weapon node.",
+    "weapon_node": {
+      "family": "bow",
+      "id": "technique"
+    },
+    "chance": 0.45,
+    "weapon_types": [
+      "bow"
+    ]
+  },
+  "dagger_master_technique": {
+    "name": "Twin Crescents",
+    "kind": "weapon",
+    "mp": 8,
+    "effect": "pierce",
+    "power": 20,
+    "description": "Advanced dagger technique; requires the level-35 weapon node.",
+    "weapon_node": {
+      "family": "dagger",
+      "id": "technique"
+    },
+    "chance": 0.45,
+    "weapon_types": [
+      "dagger"
+    ]
+  },
+  "staff_master_technique": {
+    "name": "Runic Rupture",
+    "kind": "weapon",
+    "mp": 8,
+    "effect": "pierce",
+    "power": 20,
+    "description": "Advanced staff technique; requires the level-35 weapon node.",
+    "weapon_node": {
+      "family": "staff",
+      "id": "technique"
+    },
+    "chance": 0.45,
+    "weapon_types": [
+      "staff"
+    ]
+  },
+  "wand_master_technique": {
+    "name": "Prismatic Ray",
+    "kind": "weapon",
+    "mp": 8,
+    "effect": "pierce",
+    "power": 20,
+    "description": "Advanced wand technique; requires the level-35 weapon node.",
+    "weapon_node": {
+      "family": "wand",
+      "id": "technique"
+    },
+    "chance": 0.45,
+    "weapon_types": [
+      "wand"
+    ]
+  },
+  "scythe_master_technique": {
+    "name": "Soul Reaping",
+    "kind": "weapon",
+    "mp": 8,
+    "effect": "pierce",
+    "power": 20,
+    "description": "Advanced scythe technique; requires the level-35 weapon node.",
+    "weapon_node": {
+      "family": "scythe",
+      "id": "technique"
+    },
+    "chance": 0.45,
+    "weapon_types": [
+      "scythe"
+    ]
+  },
+  "claws_master_technique": {
+    "name": "Tiger Flurry",
+    "kind": "weapon",
+    "mp": 8,
+    "effect": "pierce",
+    "power": 20,
+    "description": "Advanced claws technique; requires the level-35 weapon node.",
+    "weapon_node": {
+      "family": "claws",
+      "id": "technique"
+    },
+    "chance": 0.45,
+    "weapon_types": [
+      "claws"
+    ]
+  },
+  "unarmed_master_technique": {
+    "name": "Rising Knee",
+    "kind": "weapon",
+    "mp": 8,
+    "effect": "pierce",
+    "power": 20,
+    "description": "Advanced unarmed technique; requires the level-35 weapon node.",
+    "weapon_node": {
+      "family": "unarmed",
+      "id": "technique"
+    },
+    "chance": 0.45,
+    "weapon_types": [
+      "unarmed"
+    ]
   }
 }

@@ -31,7 +31,7 @@ func main_menu():
  if not FileAccess.file_exists(State.SAVE): State.new_adventure()
  var title=UI.label(menu,"VERDANT OATH")
  title.add_theme_font_size_override("font_size",36)
- UI.label(menu,"The Bell Beneath the Woods\nDemo 0.6 · Target playtime 15–20 minutes\n")
+ UI.label(menu,"The Bell Beneath the Woods\nDemo 0.7 · Target playtime 15–20 minutes\n")
  UI.button(menu,"Continue adventure",func(): get_tree().change_scene_to_file(State.travel_scene())).disabled=State.save_blocked
  if not State.save_notice.is_empty(): UI.label(menu,State.save_notice)
  UI.button(menu,"Settings",options.open)
