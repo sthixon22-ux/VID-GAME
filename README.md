@@ -1,6 +1,6 @@
 # Verdant Oath — The Bell Beneath the Woods
 
-**Demo 0.7 · Godot 4.6+ · GDScript · CC0 assets + original art/story/effects**
+**Demo 0.7.1 · Godot 4.6+ · GDScript · CC0 assets + original art/story/effects**
 
 A short 3D turn-based fantasy adventure built around the Project Mythic overview: create a hero, choose classes, buy your first equipment, help Willowbrook, cleanse the sanctuary and choose a permanent companion. **15–20 minutes is the intended first-play target, not a measured guarantee.** This is a playable release candidate; production art and human playtesting remain unfinished.
 
@@ -12,6 +12,10 @@ A short 3D turn-based fantasy adventure built around the Project Mythic overview
 4. Choose **New adventure** to experience the new creation/shop progression. Your old save is backed up before a new adventure starts. **Continue adventure** preserves an existing character and its old progress/balance; it does not strip equipment to recreate the new opening.
 
 The internal application name remains unchanged so Godot finds the existing user-data directory. No paid assets, online accounts, external services or plugins are required. This is a desktop Godot project, not a browser build.
+
+## 0.7.1 display fix
+
+Long save-migration/error messages now wrap inside bounded menu panels. They cannot stretch the title past the game window. The shared UI helper also bounds long menu buttons; vertical overflow stays scrollable. Verified with the reported migration text at 1280×720 and a rendered 960×540 window. Saves and gameplay are unchanged.
 
 ## Controls
 
@@ -77,9 +81,10 @@ XDG_DATA_HOME=/tmp/verdant-presentation godot --headless --path . res://tests/pr
 XDG_DATA_HOME=/tmp/verdant-reliability godot --headless --path . res://tests/reliability.tscn
 XDG_DATA_HOME=/tmp/verdant-demo godot --headless --path . res://tests/demo.tscn
 XDG_DATA_HOME=/tmp/verdant-progression godot --headless --path . res://tests/progression.tscn
+XDG_DATA_HOME=/tmp/verdant-layout godot --headless --path . res://tests/layout.tscn
 ```
 
-**597 automated checks pass in Godot 4.6.3** across five regression suites, including the twelve-class/stat/level-50 progression suite. Validation includes legacy full-story flow, character/presentation integration, camera/movement/save reliability and the new creation-to-postgame suite. Tests check all twelve class starts, shopping/ownership/reserve safety, equipment legality, timed effects, chemistry, mastery gates, all six companion models/behaviors, permanent-choice limits, actual new-playthrough scene transitions, the Warden echo and saved second-bond state. Tests accelerate time and use scene teleports; they do not establish a 15–20-minute playtime or final visual quality.
+**603 automated checks pass in Godot 4.6.3** across six regression suites, including the twelve-class/stat/level-50 progression suite. Validation includes legacy full-story flow, character/presentation integration, camera/movement/save reliability and the new creation-to-postgame suite. Tests check all twelve class starts, shopping/ownership/reserve safety, equipment legality, timed effects, chemistry, mastery gates, all six companion models/behaviors, permanent-choice limits, actual new-playthrough scene transitions, the Warden echo and saved second-bond state. Tests accelerate time and use scene teleports; they do not establish a 15–20-minute playtime or final visual quality.
 
 ```bash
 # Requires a display; use a separate data directory for captures too.
