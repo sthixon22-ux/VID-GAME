@@ -1,0 +1,37 @@
+{
+  "Paladin": {
+    "skills": [
+      "Shield Bash",
+      "Sacred Strike"
+    ],
+    "mythic": "Dawn Avatar",
+    "tree": [
+      "Sword Discipline",
+      "Shield Discipline",
+      "Dawn Avatar"
+    ]
+  },
+  "Ranger": {
+    "skills": [
+      "Hunter's Mark"
+    ],
+    "mythic": "Wild Hunt",
+    "tree": [
+      "Tracker Training",
+      "Predator Training",
+      "Wild Hunt"
+    ]
+  },
+  "Druid": {
+    "skills": [
+      "Thornbind",
+      "Regrowth"
+    ],
+    "mythic": "Ancient Grove",
+    "tree": [
+      "Root Wisdom",
+      "Grove Wisdom",
+      "Ancient Grove"
+    ]
+  }
+}
