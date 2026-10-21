@@ -15,20 +15,20 @@ func run():
  State.reset()
  State.hero.points=20
  check(not State.invest_skill("Paladin","mythic") and State.hero.points==20,"Mythic prerequisites cannot be bypassed")
- check(State.invest_skill("Paladin","oath"),"Root node learns with one point")
- var attack=State.stats().attack
- check(attack==GameRules.combined_stats(State.classes,"Paladin",State.hero.secondary,1).attack+8+2,"Learned attack node changes blended derived stats")
- check(not State.invest_skill("Paladin","oath") and State.hero.points==19,"Duplicate investment rejected")
- check(not State.invest_skill("Paladin","shield"),"Level-one hero cannot buy level-five branch")
+ check(State.invest_skill("Paladin","oath"),"Root node learns with two points")
+ var attack=State.stats().max_hp
+ check(attack==GameRules.combined_stats(State.classes,"Paladin",State.hero.secondary,1).max_hp+15,"Learned HP passive changes blended derived stats")
+ check(not State.invest_skill("Paladin","oath") and State.hero.points==18,"Duplicate investment rejected")
+ check(State.invest_skill("Paladin","shield"),"Level-one hero can buy a branch with points and prerequisites")
  State.hero.level=50
  State.hero.class_mastery.Paladin=100
  State.hero.points=99
- check(State.invest_skill("Paladin","shield"),"Eligible first branch can be learned")
+ check(not State.invest_skill("Paladin","shield"),"Already learned branch cannot be purchased twice")
  check(not State.invest_skill("Paladin","mythic"),"Mythic still requires its entire prerequisite path")
  for node in State.classes.Paladin.nodes:
   if node.id not in ["oath","shield","mythic"]: State.invest_skill("Paladin",node.id)
- check(State.invest_skill("Paladin","mythic"),"Level-50 prerequisite path unlocks mythic")
- check(State.hero.points==50 and State.can_mythic("Paladin"),"Full tree costs fifty points and primary mythic activates")
+ check(State.invest_skill("Paladin","mythic"),"Purchased prerequisite path unlocks mythic")
+ check(State.hero.points==44 and State.can_mythic("Paladin"),"Full tree costs sixty points and primary mythic activates")
  check(not State.set_class_slot("primary","Ranger"),"Classes remain locked even at the village camp")
  State.hero.primary="Ranger" # Independently exercise the primary-only mythic rule.
  check(not State.can_mythic("Paladin") and State.hero.skills.Paladin.has("mythic"),"Switching primary preserves but disables secondary mythic")
@@ -83,7 +83,7 @@ func run():
  State.equip("Helmet","Ranger Hood")
  var hooded=Art.actor("Hero",State.hero.equipment)
  add_child(hooded)
- check(GearVisual.bounds(hooded.find_child("EquippedHelmet",true,false)).size.x>0.4,"Ranger hood has an open-face model sized for the revised hero")
+ check(GearVisual.bounds(hooded.find_child("EquippedHelmet",true,false)).size.x>0.2,"Ranger hood has an open-face model sized for the revised hero")
  hooded.queue_free()
  hero.queue_free()
  State.reset()
@@ -97,7 +97,7 @@ func run():
  var learn=find_button(menu.info,"Learn skill")
  check(learn!=null and not learn.disabled,"Root node has an enabled Learn button")
  learn.pressed.emit()
- check(State.hero.skills.Paladin.has("oath") and State.hero.points==1,"UI investment spends exactly one point")
+ check(State.hero.skills.Paladin.has("oath") and State.hero.points==0,"UI investment spends exactly two points")
  menu.graph.buttons.mythic.pressed.emit()
  learn=find_button(menu.info,"Learn skill")
  check(learn.disabled,"UI prevents learning locked mythic")

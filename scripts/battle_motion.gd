@@ -79,12 +79,18 @@ static func roots(host: Node3D, point: Vector3, count: int=9):
   tween.tween_property(thorn,"scale",Vector3.ONE*0.01,0.3)
   tween.tween_callback(thorn.queue_free)
 static func present(host: Node3D, actor: Node3D, target: Node3D, label: String) -> float:
+ label=label.trim_suffix(" · Critical!")
  var duration=0.95
  if actor.has_method("play_action") and (STYLES.has(label) or not AbilityBook.entry(label).is_empty() or label in ["Victory","Defeat"]): duration=actor.play_action(label)
  elif not STYLES.has(label): duration=0.4
  var origin=actor.position
  var forward=(target.position-origin).normalized() if actor!=target else Vector3.ZERO
  var body=actor.get_node_or_null("Body")
+ var companion_art=CompanionRules.ability_by_name(label)
+ if not companion_art.is_empty() and actor!=target:
+  var charge=UserSettings.tween(host)
+  charge.tween_property(actor,"position",origin+forward*.85,.18)
+  charge.tween_property(actor,"position",origin,.3)
  if label in ["Attack","Sword Slash","Shield Bash","Sacred Strike","Dawn Avatar","Wild Hunt","Wolf bite","Goblin club","Briar lash"]:
   var lunge=UserSettings.tween(host)
   lunge.tween_property(actor,"position",origin+forward*(1.0 if label=="Wolf bite" else 0.6),duration*0.35)
@@ -112,6 +118,12 @@ static func present(host: Node3D, actor: Node3D, target: Node3D, label: String) 
   "Shield Bash":
    var wave=ring(host,point+Vector3.UP,Color("93d5f3"))
    wave.rotation.x=PI/2
+  "Thunder Strike":
+   arc(host,point+Vector3.UP,Color("b5d8ff"),true)
+   for index in range(8):mote(host,point+Vector3(sin(index)*.4,3-index*.3,cos(index)*.25),point+Vector3(sin(index+1)*.3,2.5-index*.3,cos(index+1)*.3),Color("9dc7ff"),.25,.08)
+  "Holy Light":
+   ring(host,point+Vector3.UP*.1,Color("ffe6b1"),1.1)
+   for index in range(8):mote(host,point+Vector3(sin(index)*.4,.3,cos(index)*.4),point+Vector3(0,2.4,0),Color("ffe7ad"),.6,.08)
   "Sacred Strike":
    arc(host,point+Vector3.UP,Color("ffdb80"),true)
    for i in range(9): mote(host,point+Vector3(sin(i)*0.3,3.5,cos(i)*0.3),point+Vector3(sin(i)*0.4,0.2,cos(i)*0.4),Color("ffe19c"),0.5,0.16)
@@ -166,9 +178,10 @@ static func present(host: Node3D, actor: Node3D, target: Node3D, label: String) 
    for i in range(8): mote(host,point+Vector3.UP,point+Vector3(sin(i),1.5,cos(i)),Color("c9ad85"),0.45)
   _:
    var ability=AbilityBook.entry(label)
+   if ability.is_empty():ability=companion_art
    if not ability.is_empty():
     var effect=ability.effect
-    var healing=effect in ["heal","buff","renewal","meditate"]
+    var healing=effect in ["heal","buff","renewal","meditate","mana","ward"] or effect.begins_with("buff_")
     var color_=Color("a7e2ac") if healing else (Color("a3b5ee") if effect in ["magic","drain","frost"] else Color("e4bc89"))
     if effect=="drain": color_=Color("b69cce")
     if effect=="frost": color_=Color("a3ddeb")

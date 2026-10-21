@@ -15,7 +15,7 @@ func settle():
 func run():
  State.new_adventure()
  State.save_game()
- State.save_notice="Progression updated: skills reset to 4 unspent points for the new level-50 trees. Previous investments are archived; level, quests, equipment and companions are kept."
+ State.save_notice="Progression updated: skills reset to 4 unspent points for the point-based trees. Previous investments are archived; level, quests, equipment and companions are kept."
  get_tree().change_scene_to_file("res://scenes/title.tscn")
  await settle()
  var title=get_tree().current_scene

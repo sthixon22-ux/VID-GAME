@@ -1,0 +1,17 @@
+{
+  "willowbrook": {
+    "name": "Willowbrook Outfitter",
+    "equipment": [
+      "Iron Sword",
+      "Twin Daggers",
+      "Oak Staff",
+      "Traveler's Clothing",
+      "Traveler's Pendant"
+    ],
+    "supplies": [
+      "potion",
+      "ether",
+      "treat"
+    ]
+  }
+}

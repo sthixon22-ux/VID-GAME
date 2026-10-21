@@ -53,6 +53,15 @@ The agreed target is a polished short adventure with a village, forest route, du
 - Original companion/enemy meshes, proportion-adjusted heroes, metal/leather detail, textured terrain and cutout foliage.
 - Schema-four migration/backups; see the [0.8 report](docs/DEMO_0_8.md).
 
+## Delivered in 0.9 — points, permanent passives and companion arts
+
+- Starter shop reduced to sword/daggers/staff, traveler clothing/pendant and consumables; compatible weapon coverage across all 1,320 class combinations.
+- Twelve-node/60-SP class and weapon trees, gated by shared points and prerequisites only; full tree consumes the level-30 earned budget.
+- Thematic permanent class passives, equipped weapon passives and combat arts; Freedom capstones grant class-independent weapon proficiency.
+- Six distinct hero bond stat bonuses and eight-node companion trees with 18 automated learned abilities, cooldowns and saved investments.
+- Natural human hero geometry from credited CC0 MakeHuman topology, retargeted to the existing CC0 animation rig; layered background ridgelines.
+- See [the 0.9 validation and limitations report](docs/DEMO_0_9.md).
+
 ## Next: verify the public-release bar
 
 Run fresh, timed Windows playthroughs without test teleports. Check whether the complete opening reaches the 15–20-minute target, tune costs/MP/encounter difficulty and verify everyone finds the shop, trees and companion endpoint. Review audio, keyboard/controller focus and readability. Bring remaining creature/companion art and animation to a consistent quality bar; the procedural additions demonstrate function, not final production quality.

@@ -44,3 +44,14 @@ Demo 0.7 adds original procedural weapon geometry in `scripts/gear_visual.gd` fo
 `models/gear/` contains original designed weapon, shield, armor and accessory meshes with metal/leather/enamel materials. `models/companions/` contains sculpted bodies, articulated limb groups and distinct horns, wings, manes, feathers or tails for all six companions, the temporary wolf and meadow bristlebacks. `models/enemies/` contains the original goblin, mossling and guardian. `textures/rpg/` supplies original albedo, normal and roughness maps plus cutout leaf branches. These are project art created for this demo, with no external service or paid content.
 
 `models/heroes/` contains proportion-adjusted derivatives of the credited CC0 KayKit Knight, Rogue and Mage, retaining their skeletal clips. They still use the credited source palette textures. Rebuild meshes with `blender --background --factory-startup --python tools/build_rpg_art.py`. Rebuild surface maps with `python3 tools/build_surface_textures.py` (Pillow and NumPy). Blender/Python are development tools; opening or playing the shipped project only requires Godot. Hashes and source distinctions are recorded in `vendor/SOURCES.json`.
+
+## Demo 0.9 natural-proportion hero replacement
+
+The active hero meshes in `models/heroes/` now replace the KayKit body geometry with clothed human topology derived from MakeHuman’s CC0 base mesh. The face and hands use anatomical surfaces; fitted clothed torso/legs/boots use its helper topology. Original eye/hair assembly, skinning and retargeting are implemented in `tools/build_natural_hero.py`. KayKit’s credited skeleton and animation clips remain. The original vendor assets remain unmodified for reproducibility.
+
+- Source: https://github.com/makehumancommunity/makehuman/blob/master/makehuman/data/3dobjs/base.obj
+- MakeHuman base-mesh header explicitly declares CC0 release in September 2020; copyright holders: Data Collection AB, Joel Palmius and Jonas Hauquier.
+- Vendored source: `vendor/makehuman/base.obj.txt`; full CC0 legal text: `vendor/makehuman/LICENSE-CC0.txt`. Source and derivative SHA-256 hashes are recorded in `vendor/SOURCES.json`.
+- Rebuild the active hero meshes with `blender --background --factory-startup --python tools/build_natural_hero.py`. If rebuilding every original art asset, run this **after** `build_rpg_art.py`, which produces the older hero variants. No source geometry download or Blender installation is needed to play.
+
+The 0.8 hero description above documents the previous release; these new hero GLBs supersede its proportions and palette material. Companions and enemies remain the 0.8 original meshes with simpler segmented motion.

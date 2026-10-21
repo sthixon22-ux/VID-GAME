@@ -23,7 +23,7 @@ func dismiss(dialogue: Dialogue):
 func kit(primary: String):
  State.new_adventure()
  State.create_hero("Aster",primary,1,2,1)
- for item in ["Iron Sword","Oak Shield",{"Paladin":"Steel Cuirass","Ranger":"Leather Vest","Druid":"Verdant Robe"}[primary]]:
+ for item in ["Iron Sword","Traveler's Clothing","Traveler's Pendant"]:
   State.buy(item)
   State.equip(State.equipment_data[item].slot,item)
 func tactical(sim: Combat) -> String:
@@ -55,6 +55,8 @@ func run():
   check(State.starter_ready() and State.hero.gold>=25,"Starter kit affordable for "+primary)
   var gold=State.hero.gold
   check(not State.buy("Iron Sword") and State.hero.gold==gold,"Duplicate purchase cannot spend gold")
+  State.grant_item("Oak Shield") # Fixture for the shield-specific combat mechanic.
+  State.equip("Shield","Oak Shield")
   var sim=Combat.new(State.hero,State.stats())
   check(sim.legal("sword_slash") and sim.legal("shield_bash"),"Stable ability IDs and equipped techniques work")
   State.equip("Shield","None")
@@ -77,23 +79,23 @@ func run():
   check(sim.nature_blessing>0,"Shield block primes data-defined class chemistry")
   sim.round_("Hunter's Mark")
   check(sim.nature_blessing==0 and sim.events.any(func(event): return event.text.contains("empowered")),"Ranger ability consumes nature blessing exactly once")
-  check(not State.invest_skill(primary,"mythic"),"Advanced skills cannot bypass prerequisites/mastery")
+  check(not State.invest_skill(primary,"mythic"),"Advanced skills cannot bypass prerequisites")
   State.hero.points=20
   for node in ["oath","shield","light"]: State.invest_skill(primary,node)
-  check(not State.invest_skill(primary,"mythic"),"Mythic requires independent class mastery")
+  check(not State.invest_skill(primary,"mythic"),"Mythic still needs its full prerequisite path")
   for index in range(3): State.reward(true)
-  check(not State.invest_skill(primary,"mythic"),"Three demo victories cannot unlock the level-fifty capstone")
+  check(not State.invest_skill(primary,"mythic"),"Three victories cannot bypass missing prerequisite nodes")
   State.hero.level=50
   State.hero.class_mastery[primary]=100
   State.hero.points=100
   for node in State.classes[primary].nodes:
    if node.id!="mythic" and not State.hero.skills[primary].has(node.id): State.invest_skill(primary,node.id)
-  check(State.invest_skill(primary,"mythic") and State.can_mythic(primary),"Level fifty, mastery and prerequisites unlock primary mythic")
+  check(State.invest_skill(primary,"mythic") and State.can_mythic(primary),"Purchased prerequisite path unlocks primary mythic")
   var next: String=State.hero.secondary[0]
   State.set_primary(next)
   check(State.hero.primary==primary and State.can_mythic(primary),"Created primary designation cannot be changed")
   State.learn_weapon("sword","edge")
-  check(State.learn_weapon("sword","flow"),"Weapon mastery unlocks separate weapon tree")
+  check(State.learn_weapon("sword","flow"),"Shared points unlock the separate weapon tree")
   State.save_game()
   var owned=State.hero.inventory.duplicate()
   State.reset()
@@ -118,14 +120,14 @@ func run():
  check(direct.h==auto.h and direct.enemy_hp==auto.enemy_hp,"New normal and Auto-Battle use identical deterministic rules")
  State.new_adventure()
  State.create_hero("Reserve","Paladin",0,0,0)
- check(State.buy("Steel Helm"),"Optional purchase allowed when starter funds remain")
- State.buy("Steel Gauntlets")
+ check(State.buy("Traveler's Pendant"),"Optional starter accessory can be purchased")
+ State.buy("Traveler's Clothing")
  check(not State.buy("Trail Boots"),"Starter reserve protects the first weapon budget")
  var previous_gold=State.hero.gold
  State.hero.gold=25
  check(not State.buy_potion(),"Potions cannot spend reserved weapon funds")
  State.hero.gold=previous_gold
- for item in ["Oak Staff","Leather Vest"]:
+ for item in ["Oak Staff"]:
   check(State.buy(item),"Reserved budget still buys essential equipment: "+item)
  # All six companion definitions have a functioning model and three combat behaviors.
  for id in State.companions:
@@ -169,7 +171,7 @@ func run():
  await get_tree().process_frame
  await get_tree().process_frame
  check(get_tree().current_scene.page=="shop","Visible outfitter opens shop page")
- for item in ["Iron Sword","Oak Shield","Verdant Robe"]:
+ for item in ["Iron Sword","Traveler's Clothing","Traveler's Pendant"]:
   State.buy(item)
   State.equip(State.equipment_data[item].slot,item)
  get_tree().current_scene.leave()

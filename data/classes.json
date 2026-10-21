@@ -41,16 +41,17 @@
       {
         "id": "oath",
         "name": "Oathkeeper",
-        "description": "Attack +2.",
+        "description": "HP +10, defense +1. Permanent once learned.",
         "requires": [],
         "bonus": {
-          "attack": 2
+          "max_hp": 10,
+          "defense": 1
         },
         "position": [
           0.15,
           0.87
         ],
-        "cost": 1,
+        "cost": 2,
         "level_required": 1,
         "mastery_required": 0,
         "grants": [],
@@ -58,40 +59,40 @@
       },
       {
         "id": "shield",
-        "name": "Guard Training",
-        "description": "Defense +2.",
+        "name": "Paladin Discipline",
+        "description": "defense +3. Permanent once learned.",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "defense": 2
+          "defense": 3
         },
         "position": [
           0.5,
           0.87
         ],
-        "cost": 2,
-        "level_required": 5,
+        "cost": 3,
+        "level_required": 1,
         "mastery_required": 0,
         "grants": [],
         "rarity": "Common"
       },
       {
         "id": "light",
-        "name": "Focused Practice",
-        "description": "Agility +2. Unlocks Radiant Lance.",
+        "name": "Paladin Arts",
+        "description": "healing power +3. Permanent once learned. Unlocks Radiant Lance. Learns Holy Light.",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "agility": 2
+          "healing": 3
         },
         "position": [
           0.85,
           0.87
         ],
         "cost": 3,
-        "level_required": 10,
+        "level_required": 1,
         "mastery_required": 0,
         "grants": [
           "paladin_adept"
@@ -100,28 +101,28 @@
       },
       {
         "id": "vigor",
-        "name": "Vitality",
-        "description": "HP +18.",
+        "name": "Stalwart Heart",
+        "description": "HP +20. Permanent once learned.",
         "requires": [
           "shield"
         ],
         "bonus": {
-          "max_hp": 18
+          "max_hp": 20
         },
         "position": [
           0.15,
           0.62
         ],
-        "cost": 3,
-        "level_required": 15,
-        "mastery_required": 7,
+        "cost": 4,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Uncommon"
       },
       {
         "id": "grace",
-        "name": "Inner Reserve",
-        "description": "MP +10.",
+        "name": "Consecrated Resolve",
+        "description": "MP +10. Permanent once learned.",
         "requires": [
           "light"
         ],
@@ -133,68 +134,68 @@
           0.62
         ],
         "cost": 4,
-        "level_required": 20,
-        "mastery_required": 10,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Uncommon"
       },
       {
         "id": "insight",
-        "name": "Deft Hands",
-        "description": "Dexterity +3.",
+        "name": "Shield Discipline",
+        "description": "defense +3. Permanent once learned.",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "dexterity": 3
+          "defense": 3
         },
         "position": [
           0.85,
           0.62
         ],
-        "cost": 4,
-        "level_required": 25,
-        "mastery_required": 12,
+        "cost": 5,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Uncommon"
       },
       {
         "id": "resolve",
-        "name": "Resolute",
-        "description": "Defense +4.",
+        "name": "Adamant Faith",
+        "description": "defense +5. Permanent once learned.",
         "requires": [
           "vigor"
         ],
         "bonus": {
-          "defense": 4
+          "defense": 5
         },
         "position": [
           0.15,
           0.37
         ],
         "cost": 5,
-        "level_required": 30,
-        "mastery_required": 15,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Rare"
       },
       {
         "id": "precision",
-        "name": "Master Technique",
-        "description": "Attack +4. Unlocks Judgment.",
+        "name": "Radiant Discipline",
+        "description": "healing power +5. Permanent once learned. Learns Judgment.",
         "requires": [
           "grace"
         ],
         "bonus": {
-          "attack": 4
+          "healing": 5
         },
         "position": [
           0.5,
           0.37
         ],
-        "cost": 5,
-        "level_required": 35,
-        "mastery_required": 17,
+        "cost": 6,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [
           "paladin_master"
         ],
@@ -202,70 +203,71 @@
       },
       {
         "id": "mobility",
-        "name": "Fleet Foot",
-        "description": "Agility +4.",
+        "name": "Vigilant Step",
+        "description": "agility +3. Permanent once learned.",
         "requires": [
           "insight"
         ],
         "bonus": {
-          "agility": 4
+          "agility": 3
         },
         "position": [
           0.85,
           0.37
         ],
-        "cost": 5,
-        "level_required": 40,
-        "mastery_required": 20,
+        "cost": 6,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Rare"
       },
       {
         "id": "veteran",
-        "name": "Veteran Instinct",
-        "description": "Dexterity +5.",
+        "name": "Guardian Insight",
+        "description": "defense +3, HP +10. Permanent once learned.",
         "requires": [
           "resolve"
         ],
         "bonus": {
-          "dexterity": 5
+          "defense": 3,
+          "max_hp": 10
         },
         "position": [
           0.15,
           0.12
         ],
-        "cost": 6,
-        "level_required": 45,
-        "mastery_required": 22,
+        "cost": 7,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Legendary"
       },
       {
         "id": "legend",
-        "name": "Legendary Discipline",
-        "description": "HP +30, MP +15.",
+        "name": "Living Bulwark",
+        "description": "HP +30, defense +5. Permanent once learned.",
         "requires": [
           "precision",
           "mobility"
         ],
         "bonus": {
           "max_hp": 30,
-          "max_mp": 15
+          "defense": 5
         },
         "position": [
           0.5,
           0.12
         ],
-        "cost": 6,
-        "level_required": 48,
-        "mastery_required": 24,
+        "cost": 7,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Legendary"
       },
       {
         "id": "mythic",
         "name": "Dawn Avatar",
-        "description": "Primary-class mythic ability. Unlocks Dawn Avatar.",
+        "description": "A signature active ability for this class. Unlocks Dawn Avatar. Only usable while this class is primary.",
         "requires": [
           "veteran",
           "legend"
@@ -275,9 +277,9 @@
           0.85,
           0.12
         ],
-        "cost": 6,
-        "level_required": 50,
-        "mastery_required": 25,
+        "cost": 8,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [
           "dawn_avatar"
         ],
@@ -336,16 +338,17 @@
       {
         "id": "oath",
         "name": "Trail Sense",
-        "description": "Agility +1.",
+        "description": "agility +2, dexterity +1. Permanent once learned.",
         "requires": [],
         "bonus": {
-          "agility": 1
+          "agility": 2,
+          "dexterity": 1
         },
         "position": [
           0.15,
           0.87
         ],
-        "cost": 1,
+        "cost": 2,
         "level_required": 1,
         "mastery_required": 0,
         "grants": [],
@@ -353,40 +356,40 @@
       },
       {
         "id": "shield",
-        "name": "Guard Training",
-        "description": "Defense +2.",
+        "name": "Ranger Discipline",
+        "description": "dexterity +3. Permanent once learned.",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "defense": 2
+          "dexterity": 3
         },
         "position": [
           0.5,
           0.87
         ],
-        "cost": 2,
-        "level_required": 5,
+        "cost": 3,
+        "level_required": 1,
         "mastery_required": 0,
         "grants": [],
         "rarity": "Common"
       },
       {
         "id": "light",
-        "name": "Focused Practice",
-        "description": "Agility +2. Unlocks Seeking Arrow.",
+        "name": "Ranger Arts",
+        "description": "attack +2. Permanent once learned. Unlocks Seeking Arrow. Learns Seeking Arrow.",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "agility": 2
+          "attack": 2
         },
         "position": [
           0.85,
           0.87
         ],
         "cost": 3,
-        "level_required": 10,
+        "level_required": 1,
         "mastery_required": 0,
         "grants": [
           "ranger_adept"
@@ -395,101 +398,101 @@
       },
       {
         "id": "vigor",
-        "name": "Vitality",
-        "description": "HP +18.",
+        "name": "Trail Endurance",
+        "description": "HP +15. Permanent once learned.",
         "requires": [
           "shield"
         ],
         "bonus": {
-          "max_hp": 18
+          "max_hp": 15
         },
         "position": [
           0.15,
           0.62
         ],
-        "cost": 3,
-        "level_required": 15,
-        "mastery_required": 7,
+        "cost": 4,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Uncommon"
       },
       {
         "id": "grace",
-        "name": "Inner Reserve",
-        "description": "MP +10.",
+        "name": "Woodland Focus",
+        "description": "MP +8. Permanent once learned.",
         "requires": [
           "light"
         ],
         "bonus": {
-          "max_mp": 10
+          "max_mp": 8
         },
         "position": [
           0.5,
           0.62
         ],
         "cost": 4,
-        "level_required": 20,
-        "mastery_required": 10,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Uncommon"
       },
       {
         "id": "insight",
-        "name": "Deft Hands",
-        "description": "Dexterity +3.",
+        "name": "Eagle Eye",
+        "description": "dexterity +4. Permanent once learned.",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "dexterity": 3
+          "dexterity": 4
         },
         "position": [
           0.85,
           0.62
         ],
-        "cost": 4,
-        "level_required": 25,
-        "mastery_required": 12,
+        "cost": 5,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Uncommon"
       },
       {
         "id": "resolve",
-        "name": "Resolute",
-        "description": "Defense +4.",
+        "name": "Barkskin Training",
+        "description": "defense +3. Permanent once learned.",
         "requires": [
           "vigor"
         ],
         "bonus": {
-          "defense": 4
+          "defense": 3
         },
         "position": [
           0.15,
           0.37
         ],
         "cost": 5,
-        "level_required": 30,
-        "mastery_required": 15,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Rare"
       },
       {
         "id": "precision",
-        "name": "Master Technique",
-        "description": "Attack +4. Unlocks Hawkstrike.",
+        "name": "Hunter Precision",
+        "description": "critical chance (%) +5. Permanent once learned. Learns Hawkstrike.",
         "requires": [
           "grace"
         ],
         "bonus": {
-          "attack": 4
+          "critical": 5
         },
         "position": [
           0.5,
           0.37
         ],
-        "cost": 5,
-        "level_required": 35,
-        "mastery_required": 17,
+        "cost": 6,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [
           "ranger_master"
         ],
@@ -497,70 +500,70 @@
       },
       {
         "id": "mobility",
-        "name": "Fleet Foot",
-        "description": "Agility +4.",
+        "name": "Pathfinder",
+        "description": "agility +5. Permanent once learned.",
         "requires": [
           "insight"
         ],
         "bonus": {
-          "agility": 4
+          "agility": 5
         },
         "position": [
           0.85,
           0.37
         ],
-        "cost": 5,
-        "level_required": 40,
-        "mastery_required": 20,
+        "cost": 6,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Rare"
       },
       {
         "id": "veteran",
-        "name": "Veteran Instinct",
-        "description": "Dexterity +5.",
+        "name": "Keen Senses",
+        "description": "dexterity +6. Permanent once learned.",
         "requires": [
           "resolve"
         ],
         "bonus": {
-          "dexterity": 5
+          "dexterity": 6
         },
         "position": [
           0.15,
           0.12
         ],
-        "cost": 6,
-        "level_required": 45,
-        "mastery_required": 22,
+        "cost": 7,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Legendary"
       },
       {
         "id": "legend",
-        "name": "Legendary Discipline",
-        "description": "HP +30, MP +15.",
+        "name": "Master Tracker",
+        "description": "agility +5, dexterity +7. Permanent once learned.",
         "requires": [
           "precision",
           "mobility"
         ],
         "bonus": {
-          "max_hp": 30,
-          "max_mp": 15
+          "agility": 5,
+          "dexterity": 7
         },
         "position": [
           0.5,
           0.12
         ],
-        "cost": 6,
-        "level_required": 48,
-        "mastery_required": 24,
+        "cost": 7,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Legendary"
       },
       {
         "id": "mythic",
         "name": "Wild Hunt",
-        "description": "Primary-class mythic ability. Unlocks Wild Hunt.",
+        "description": "A signature active ability for this class. Unlocks Wild Hunt. Only usable while this class is primary.",
         "requires": [
           "veteran",
           "legend"
@@ -570,9 +573,9 @@
           0.85,
           0.12
         ],
-        "cost": 6,
-        "level_required": 50,
-        "mastery_required": 25,
+        "cost": 8,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [
           "wild_hunt"
         ],
@@ -630,16 +633,17 @@
       {
         "id": "oath",
         "name": "Root Wisdom",
-        "description": "MP +3.",
+        "description": "MP +5, HP +5. Permanent once learned.",
         "requires": [],
         "bonus": {
-          "max_mp": 3
+          "max_mp": 5,
+          "max_hp": 5
         },
         "position": [
           0.15,
           0.87
         ],
-        "cost": 1,
+        "cost": 2,
         "level_required": 1,
         "mastery_required": 0,
         "grants": [],
@@ -647,40 +651,41 @@
       },
       {
         "id": "shield",
-        "name": "Guard Training",
-        "description": "Defense +2.",
+        "name": "Druid Discipline",
+        "description": "defense +2, healing power +1. Permanent once learned.",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "defense": 2
+          "defense": 2,
+          "healing": 1
         },
         "position": [
           0.5,
           0.87
         ],
-        "cost": 2,
-        "level_required": 5,
+        "cost": 3,
+        "level_required": 1,
         "mastery_required": 0,
         "grants": [],
         "rarity": "Common"
       },
       {
         "id": "light",
-        "name": "Focused Practice",
-        "description": "Agility +2. Unlocks Briarstorm.",
+        "name": "Druid Arts",
+        "description": "healing power +4. Permanent once learned. Unlocks Briarstorm. Learns Briarstorm.",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "agility": 2
+          "healing": 4
         },
         "position": [
           0.85,
           0.87
         ],
         "cost": 3,
-        "level_required": 10,
+        "level_required": 1,
         "mastery_required": 0,
         "grants": [
           "druid_adept"
@@ -689,8 +694,8 @@
       },
       {
         "id": "vigor",
-        "name": "Vitality",
-        "description": "HP +18.",
+        "name": "Oakheart",
+        "description": "HP +18. Permanent once learned.",
         "requires": [
           "shield"
         ],
@@ -701,56 +706,56 @@
           0.15,
           0.62
         ],
-        "cost": 3,
-        "level_required": 15,
-        "mastery_required": 7,
+        "cost": 4,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Uncommon"
       },
       {
         "id": "grace",
-        "name": "Inner Reserve",
-        "description": "MP +10.",
+        "name": "Grove Reservoir",
+        "description": "MP +12. Permanent once learned.",
         "requires": [
           "light"
         ],
         "bonus": {
-          "max_mp": 10
+          "max_mp": 12
         },
         "position": [
           0.5,
           0.62
         ],
         "cost": 4,
-        "level_required": 20,
-        "mastery_required": 10,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Uncommon"
       },
       {
         "id": "insight",
-        "name": "Deft Hands",
-        "description": "Dexterity +3.",
+        "name": "Herbal Wisdom",
+        "description": "healing power +4. Permanent once learned.",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "dexterity": 3
+          "healing": 4
         },
         "position": [
           0.85,
           0.62
         ],
-        "cost": 4,
-        "level_required": 25,
-        "mastery_required": 12,
+        "cost": 5,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Uncommon"
       },
       {
         "id": "resolve",
-        "name": "Resolute",
-        "description": "Defense +4.",
+        "name": "Living Bark",
+        "description": "defense +4. Permanent once learned.",
         "requires": [
           "vigor"
         ],
@@ -762,15 +767,15 @@
           0.37
         ],
         "cost": 5,
-        "level_required": 30,
-        "mastery_required": 15,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Rare"
       },
       {
         "id": "precision",
-        "name": "Master Technique",
-        "description": "Healing +6. Unlocks Grove Renewal.",
+        "name": "Wild Renewal",
+        "description": "healing power +6. Permanent once learned. Learns Grove Renewal.",
         "requires": [
           "grace"
         ],
@@ -781,9 +786,9 @@
           0.5,
           0.37
         ],
-        "cost": 5,
-        "level_required": 35,
-        "mastery_required": 17,
+        "cost": 6,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [
           "druid_master"
         ],
@@ -791,8 +796,8 @@
       },
       {
         "id": "mobility",
-        "name": "Fleet Foot",
-        "description": "Agility +4.",
+        "name": "Forest Stride",
+        "description": "agility +4. Permanent once learned.",
         "requires": [
           "insight"
         ],
@@ -803,58 +808,59 @@
           0.85,
           0.37
         ],
-        "cost": 5,
-        "level_required": 40,
-        "mastery_required": 20,
+        "cost": 6,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Rare"
       },
       {
         "id": "veteran",
-        "name": "Veteran Instinct",
-        "description": "Dexterity +5.",
+        "name": "Ancient Sap",
+        "description": "HP +15, MP +8. Permanent once learned.",
         "requires": [
           "resolve"
         ],
         "bonus": {
-          "dexterity": 5
+          "max_hp": 15,
+          "max_mp": 8
         },
         "position": [
           0.15,
           0.12
         ],
-        "cost": 6,
-        "level_required": 45,
-        "mastery_required": 22,
+        "cost": 7,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Legendary"
       },
       {
         "id": "legend",
-        "name": "Legendary Discipline",
-        "description": "HP +30, MP +15.",
+        "name": "Heart of the Grove",
+        "description": "HP +25, healing power +7. Permanent once learned.",
         "requires": [
           "precision",
           "mobility"
         ],
         "bonus": {
-          "max_hp": 30,
-          "max_mp": 15
+          "max_hp": 25,
+          "healing": 7
         },
         "position": [
           0.5,
           0.12
         ],
-        "cost": 6,
-        "level_required": 48,
-        "mastery_required": 24,
+        "cost": 7,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Legendary"
       },
       {
         "id": "mythic",
         "name": "Ancient Grove",
-        "description": "Primary-class mythic ability. Unlocks Ancient Grove.",
+        "description": "A signature active ability for this class. Unlocks Ancient Grove. Only usable while this class is primary.",
         "requires": [
           "veteran",
           "legend"
@@ -864,9 +870,9 @@
           0.85,
           0.12
         ],
-        "cost": 6,
-        "level_required": 50,
-        "mastery_required": 25,
+        "cost": 8,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [
           "ancient_grove"
         ],
@@ -924,17 +930,18 @@
     "nodes": [
       {
         "id": "oath",
-        "name": "Warrior Initiate",
-        "description": "Attack +2.",
+        "name": "Soldier\u2019s Resolve",
+        "description": "attack +2, HP +6. Permanent once learned.",
         "requires": [],
         "bonus": {
-          "attack": 2
+          "attack": 2,
+          "max_hp": 6
         },
         "position": [
           0.15,
           0.87
         ],
-        "cost": 1,
+        "cost": 2,
         "level_required": 1,
         "mastery_required": 0,
         "grants": [],
@@ -942,40 +949,40 @@
       },
       {
         "id": "shield",
-        "name": "Guard Training",
-        "description": "Defense +2.",
+        "name": "Warrior Discipline",
+        "description": "defense +3. Permanent once learned.",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "defense": 2
+          "defense": 3
         },
         "position": [
           0.5,
           0.87
         ],
-        "cost": 2,
-        "level_required": 5,
+        "cost": 3,
+        "level_required": 1,
         "mastery_required": 0,
         "grants": [],
         "rarity": "Common"
       },
       {
         "id": "light",
-        "name": "Focused Practice",
-        "description": "Agility +2. Unlocks Cleave.",
+        "name": "Warrior Arts",
+        "description": "attack +3. Permanent once learned. Unlocks Cleave. Learns Cleave.",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "agility": 2
+          "attack": 3
         },
         "position": [
           0.85,
           0.87
         ],
         "cost": 3,
-        "level_required": 10,
+        "level_required": 1,
         "mastery_required": 0,
         "grants": [
           "warrior_adept"
@@ -984,101 +991,101 @@
       },
       {
         "id": "vigor",
-        "name": "Vitality",
-        "description": "HP +18.",
+        "name": "Battle-Hardened",
+        "description": "HP +20. Permanent once learned.",
         "requires": [
           "shield"
         ],
         "bonus": {
-          "max_hp": 18
+          "max_hp": 20
         },
         "position": [
           0.15,
           0.62
         ],
-        "cost": 3,
-        "level_required": 15,
-        "mastery_required": 7,
+        "cost": 4,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Uncommon"
       },
       {
         "id": "grace",
-        "name": "Inner Reserve",
-        "description": "MP +10.",
+        "name": "Second Wind",
+        "description": "HP +12. Permanent once learned.",
         "requires": [
           "light"
         ],
         "bonus": {
-          "max_mp": 10
+          "max_hp": 12
         },
         "position": [
           0.5,
           0.62
         ],
         "cost": 4,
-        "level_required": 20,
-        "mastery_required": 10,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Uncommon"
       },
       {
         "id": "insight",
-        "name": "Deft Hands",
-        "description": "Dexterity +3.",
+        "name": "Sure Grip",
+        "description": "attack +3. Permanent once learned.",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "dexterity": 3
+          "attack": 3
         },
         "position": [
           0.85,
           0.62
         ],
-        "cost": 4,
-        "level_required": 25,
-        "mastery_required": 12,
+        "cost": 5,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Uncommon"
       },
       {
         "id": "resolve",
-        "name": "Resolute",
-        "description": "Defense +4.",
+        "name": "Steel Resolve",
+        "description": "defense +5. Permanent once learned.",
         "requires": [
           "vigor"
         ],
         "bonus": {
-          "defense": 4
+          "defense": 5
         },
         "position": [
           0.15,
           0.37
         ],
         "cost": 5,
-        "level_required": 30,
-        "mastery_required": 15,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Rare"
       },
       {
         "id": "precision",
-        "name": "Master Technique",
-        "description": "Attack +4. Unlocks Veteran Assault.",
+        "name": "Veteran Strength",
+        "description": "attack +5. Permanent once learned. Learns Veteran Assault.",
         "requires": [
           "grace"
         ],
         "bonus": {
-          "attack": 4
+          "attack": 5
         },
         "position": [
           0.5,
           0.37
         ],
-        "cost": 5,
-        "level_required": 35,
-        "mastery_required": 17,
+        "cost": 6,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [
           "warrior_master"
         ],
@@ -1086,70 +1093,70 @@
       },
       {
         "id": "mobility",
-        "name": "Fleet Foot",
-        "description": "Agility +4.",
+        "name": "Battlefield Pace",
+        "description": "agility +3. Permanent once learned.",
         "requires": [
           "insight"
         ],
         "bonus": {
-          "agility": 4
+          "agility": 3
         },
         "position": [
           0.85,
           0.37
         ],
-        "cost": 5,
-        "level_required": 40,
-        "mastery_required": 20,
+        "cost": 6,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Rare"
       },
       {
         "id": "veteran",
-        "name": "Veteran Instinct",
-        "description": "Dexterity +5.",
+        "name": "Weapon Instinct",
+        "description": "critical chance (%) +4. Permanent once learned.",
         "requires": [
           "resolve"
         ],
         "bonus": {
-          "dexterity": 5
+          "critical": 4
         },
         "position": [
           0.15,
           0.12
         ],
-        "cost": 6,
-        "level_required": 45,
-        "mastery_required": 22,
+        "cost": 7,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Legendary"
       },
       {
         "id": "legend",
-        "name": "Legendary Discipline",
-        "description": "HP +30, MP +15.",
+        "name": "Unbroken Veteran",
+        "description": "HP +25, attack +5. Permanent once learned.",
         "requires": [
           "precision",
           "mobility"
         ],
         "bonus": {
-          "max_hp": 30,
-          "max_mp": 15
+          "max_hp": 25,
+          "attack": 5
         },
         "position": [
           0.5,
           0.12
         ],
-        "cost": 6,
-        "level_required": 48,
-        "mastery_required": 24,
+        "cost": 7,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Legendary"
       },
       {
         "id": "mythic",
         "name": "Legendary Onslaught",
-        "description": "Primary-class mythic ability. Unlocks Legendary Onslaught.",
+        "description": "A signature active ability for this class. Unlocks Legendary Onslaught. Only usable while this class is primary.",
         "requires": [
           "veteran",
           "legend"
@@ -1159,9 +1166,9 @@
           0.85,
           0.12
         ],
-        "cost": 6,
-        "level_required": 50,
-        "mastery_required": 25,
+        "cost": 8,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [
           "legendary_onslaught"
         ],
@@ -1216,17 +1223,18 @@
     "nodes": [
       {
         "id": "oath",
-        "name": "Barbarian Initiate",
-        "description": "Attack +2.",
+        "name": "Iron Blood",
+        "description": "HP +12, attack +1. Permanent once learned.",
         "requires": [],
         "bonus": {
-          "attack": 2
+          "max_hp": 12,
+          "attack": 1
         },
         "position": [
           0.15,
           0.87
         ],
-        "cost": 1,
+        "cost": 2,
         "level_required": 1,
         "mastery_required": 0,
         "grants": [],
@@ -1234,40 +1242,40 @@
       },
       {
         "id": "shield",
-        "name": "Guard Training",
-        "description": "Defense +2.",
+        "name": "Barbarian Discipline",
+        "description": "attack +3. Permanent once learned.",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "defense": 2
+          "attack": 3
         },
         "position": [
           0.5,
           0.87
         ],
-        "cost": 2,
-        "level_required": 5,
+        "cost": 3,
+        "level_required": 1,
         "mastery_required": 0,
         "grants": [],
         "rarity": "Common"
       },
       {
         "id": "light",
-        "name": "Focused Practice",
-        "description": "Agility +2. Unlocks Sundering Roar.",
+        "name": "Barbarian Arts",
+        "description": "critical chance (%) +3. Permanent once learned. Unlocks Sundering Roar. Learns Sundering Roar.",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "agility": 2
+          "critical": 3
         },
         "position": [
           0.85,
           0.87
         ],
         "cost": 3,
-        "level_required": 10,
+        "level_required": 1,
         "mastery_required": 0,
         "grants": [
           "barbarian_adept"
@@ -1276,68 +1284,68 @@
       },
       {
         "id": "vigor",
-        "name": "Vitality",
-        "description": "HP +18.",
+        "name": "Thick Hide",
+        "description": "HP +24. Permanent once learned.",
         "requires": [
           "shield"
         ],
         "bonus": {
-          "max_hp": 18
+          "max_hp": 24
         },
         "position": [
           0.15,
           0.62
         ],
-        "cost": 3,
-        "level_required": 15,
-        "mastery_required": 7,
+        "cost": 4,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Uncommon"
       },
       {
         "id": "grace",
-        "name": "Inner Reserve",
-        "description": "MP +10.",
+        "name": "Savage Endurance",
+        "description": "HP +16. Permanent once learned.",
         "requires": [
           "light"
         ],
         "bonus": {
-          "max_mp": 10
+          "max_hp": 16
         },
         "position": [
           0.5,
           0.62
         ],
         "cost": 4,
-        "level_required": 20,
-        "mastery_required": 10,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Uncommon"
       },
       {
         "id": "insight",
-        "name": "Deft Hands",
-        "description": "Dexterity +3.",
+        "name": "Heavy Hands",
+        "description": "attack +4. Permanent once learned.",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "dexterity": 3
+          "attack": 4
         },
         "position": [
           0.85,
           0.62
         ],
-        "cost": 4,
-        "level_required": 25,
-        "mastery_required": 12,
+        "cost": 5,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Uncommon"
       },
       {
         "id": "resolve",
-        "name": "Resolute",
-        "description": "Defense +4.",
+        "name": "Pain Tolerance",
+        "description": "defense +4. Permanent once learned.",
         "requires": [
           "vigor"
         ],
@@ -1349,28 +1357,28 @@
           0.37
         ],
         "cost": 5,
-        "level_required": 30,
-        "mastery_required": 15,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Rare"
       },
       {
         "id": "precision",
-        "name": "Master Technique",
-        "description": "Attack +4. Unlocks Titan Swing.",
+        "name": "Blood Fury",
+        "description": "critical chance (%) +5. Permanent once learned. Learns Titan Swing.",
         "requires": [
           "grace"
         ],
         "bonus": {
-          "attack": 4
+          "critical": 5
         },
         "position": [
           0.5,
           0.37
         ],
-        "cost": 5,
-        "level_required": 35,
-        "mastery_required": 17,
+        "cost": 6,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [
           "barbarian_master"
         ],
@@ -1378,8 +1386,8 @@
       },
       {
         "id": "mobility",
-        "name": "Fleet Foot",
-        "description": "Agility +4.",
+        "name": "Relentless Charge",
+        "description": "agility +4. Permanent once learned.",
         "requires": [
           "insight"
         ],
@@ -1390,58 +1398,58 @@
           0.85,
           0.37
         ],
-        "cost": 5,
-        "level_required": 40,
-        "mastery_required": 20,
+        "cost": 6,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Rare"
       },
       {
         "id": "veteran",
-        "name": "Veteran Instinct",
-        "description": "Dexterity +5.",
+        "name": "Ravager Strength",
+        "description": "attack +5. Permanent once learned.",
         "requires": [
           "resolve"
         ],
         "bonus": {
-          "dexterity": 5
+          "attack": 5
         },
         "position": [
           0.15,
           0.12
         ],
-        "cost": 6,
-        "level_required": 45,
-        "mastery_required": 22,
+        "cost": 7,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Legendary"
       },
       {
         "id": "legend",
-        "name": "Legendary Discipline",
-        "description": "HP +30, MP +15.",
+        "name": "Titan Blood",
+        "description": "HP +35, attack +6. Permanent once learned.",
         "requires": [
           "precision",
           "mobility"
         ],
         "bonus": {
-          "max_hp": 30,
-          "max_mp": 15
+          "max_hp": 35,
+          "attack": 6
         },
         "position": [
           0.5,
           0.12
         ],
-        "cost": 6,
-        "level_required": 48,
-        "mastery_required": 24,
+        "cost": 7,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Legendary"
       },
       {
         "id": "mythic",
         "name": "Worldbreaker",
-        "description": "Primary-class mythic ability. Unlocks Worldbreaker.",
+        "description": "A signature active ability for this class. Unlocks Worldbreaker. Only usable while this class is primary.",
         "requires": [
           "veteran",
           "legend"
@@ -1451,9 +1459,9 @@
           0.85,
           0.12
         ],
-        "cost": 6,
-        "level_required": 50,
-        "mastery_required": 25,
+        "cost": 8,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [
           "worldbreaker"
         ],
@@ -1507,17 +1515,17 @@
     "nodes": [
       {
         "id": "oath",
-        "name": "Wizard Initiate",
-        "description": "MP +4.",
+        "name": "Arcane Study",
+        "description": "MP +8. Permanent once learned.",
         "requires": [],
         "bonus": {
-          "max_mp": 4
+          "max_mp": 8
         },
         "position": [
           0.15,
           0.87
         ],
-        "cost": 1,
+        "cost": 2,
         "level_required": 1,
         "mastery_required": 0,
         "grants": [],
@@ -1525,40 +1533,40 @@
       },
       {
         "id": "shield",
-        "name": "Guard Training",
-        "description": "Defense +2.",
+        "name": "Wizard Discipline",
+        "description": "MP +8. Permanent once learned.",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "defense": 2
+          "max_mp": 8
         },
         "position": [
           0.5,
           0.87
         ],
-        "cost": 2,
-        "level_required": 5,
+        "cost": 3,
+        "level_required": 1,
         "mastery_required": 0,
         "grants": [],
         "rarity": "Common"
       },
       {
         "id": "light",
-        "name": "Focused Practice",
-        "description": "Agility +2. Unlocks Arcane Barrage.",
+        "name": "Wizard Arts",
+        "description": "healing power +2. Permanent once learned. Unlocks Arcane Barrage. Learns Arcane Barrage.",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "agility": 2
+          "healing": 2
         },
         "position": [
           0.85,
           0.87
         ],
         "cost": 3,
-        "level_required": 10,
+        "level_required": 1,
         "mastery_required": 0,
         "grants": [
           "wizard_adept"
@@ -1567,68 +1575,68 @@
       },
       {
         "id": "vigor",
-        "name": "Vitality",
-        "description": "HP +18.",
+        "name": "Warded Vitality",
+        "description": "HP +12. Permanent once learned.",
         "requires": [
           "shield"
         ],
         "bonus": {
-          "max_hp": 18
+          "max_hp": 12
         },
         "position": [
           0.15,
           0.62
         ],
-        "cost": 3,
-        "level_required": 15,
-        "mastery_required": 7,
+        "cost": 4,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Uncommon"
       },
       {
         "id": "grace",
-        "name": "Inner Reserve",
-        "description": "MP +10.",
+        "name": "Arcane Reservoir",
+        "description": "MP +15. Permanent once learned.",
         "requires": [
           "light"
         ],
         "bonus": {
-          "max_mp": 10
+          "max_mp": 15
         },
         "position": [
           0.5,
           0.62
         ],
         "cost": 4,
-        "level_required": 20,
-        "mastery_required": 10,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Uncommon"
       },
       {
         "id": "insight",
-        "name": "Deft Hands",
-        "description": "Dexterity +3.",
+        "name": "Runic Insight",
+        "description": "MP +10. Permanent once learned.",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "dexterity": 3
+          "max_mp": 10
         },
         "position": [
           0.85,
           0.62
         ],
-        "cost": 4,
-        "level_required": 25,
-        "mastery_required": 12,
+        "cost": 5,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Uncommon"
       },
       {
         "id": "resolve",
-        "name": "Resolute",
-        "description": "Defense +4.",
+        "name": "Mana Ward",
+        "description": "defense +4. Permanent once learned.",
         "requires": [
           "vigor"
         ],
@@ -1640,28 +1648,28 @@
           0.37
         ],
         "cost": 5,
-        "level_required": 30,
-        "mastery_required": 15,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Rare"
       },
       {
         "id": "precision",
-        "name": "Master Technique",
-        "description": "Healing +6. Unlocks Astral Rupture.",
+        "name": "Spell Scholar",
+        "description": "MP +12. Permanent once learned. Learns Astral Rupture.",
         "requires": [
           "grace"
         ],
         "bonus": {
-          "healing": 6
+          "max_mp": 12
         },
         "position": [
           0.5,
           0.37
         ],
-        "cost": 5,
-        "level_required": 35,
-        "mastery_required": 17,
+        "cost": 6,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [
           "wizard_master"
         ],
@@ -1669,8 +1677,8 @@
       },
       {
         "id": "mobility",
-        "name": "Fleet Foot",
-        "description": "Agility +4.",
+        "name": "Swift Incantation",
+        "description": "agility +4. Permanent once learned.",
         "requires": [
           "insight"
         ],
@@ -1681,58 +1689,58 @@
           0.85,
           0.37
         ],
-        "cost": 5,
-        "level_required": 40,
-        "mastery_required": 20,
+        "cost": 6,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Rare"
       },
       {
         "id": "veteran",
-        "name": "Veteran Instinct",
-        "description": "Dexterity +5.",
+        "name": "Elder Runes",
+        "description": "MP +15. Permanent once learned.",
         "requires": [
           "resolve"
         ],
         "bonus": {
-          "dexterity": 5
+          "max_mp": 15
         },
         "position": [
           0.15,
           0.12
         ],
-        "cost": 6,
-        "level_required": 45,
-        "mastery_required": 22,
+        "cost": 7,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Legendary"
       },
       {
         "id": "legend",
-        "name": "Legendary Discipline",
-        "description": "HP +30, MP +15.",
+        "name": "Archmage Mind",
+        "description": "MP +30, defense +3. Permanent once learned.",
         "requires": [
           "precision",
           "mobility"
         ],
         "bonus": {
-          "max_hp": 30,
-          "max_mp": 15
+          "max_mp": 30,
+          "defense": 3
         },
         "position": [
           0.5,
           0.12
         ],
-        "cost": 6,
-        "level_required": 48,
-        "mastery_required": 24,
+        "cost": 7,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Legendary"
       },
       {
         "id": "mythic",
         "name": "Arcane Cataclysm",
-        "description": "Primary-class mythic ability. Unlocks Arcane Cataclysm.",
+        "description": "A signature active ability for this class. Unlocks Arcane Cataclysm. Only usable while this class is primary.",
         "requires": [
           "veteran",
           "legend"
@@ -1742,9 +1750,9 @@
           0.85,
           0.12
         ],
-        "cost": 6,
-        "level_required": 50,
-        "mastery_required": 25,
+        "cost": 8,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [
           "arcane_cataclysm"
         ],
@@ -1798,17 +1806,17 @@
     "nodes": [
       {
         "id": "oath",
-        "name": "Sorcerer Initiate",
-        "description": "MP +4.",
+        "name": "Innate Magic",
+        "description": "MP +8. Permanent once learned.",
         "requires": [],
         "bonus": {
-          "max_mp": 4
+          "max_mp": 8
         },
         "position": [
           0.15,
           0.87
         ],
-        "cost": 1,
+        "cost": 2,
         "level_required": 1,
         "mastery_required": 0,
         "grants": [],
@@ -1816,40 +1824,41 @@
       },
       {
         "id": "shield",
-        "name": "Guard Training",
-        "description": "Defense +2.",
+        "name": "Sorcerer Discipline",
+        "description": "MP +6, attack +1. Permanent once learned.",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "defense": 2
+          "max_mp": 6,
+          "attack": 1
         },
         "position": [
           0.5,
           0.87
         ],
-        "cost": 2,
-        "level_required": 5,
+        "cost": 3,
+        "level_required": 1,
         "mastery_required": 0,
         "grants": [],
         "rarity": "Common"
       },
       {
         "id": "light",
-        "name": "Focused Practice",
-        "description": "Agility +2. Unlocks Lightning Lance.",
+        "name": "Sorcerer Arts",
+        "description": "MP +10. Permanent once learned. Unlocks Lightning Lance. Learns Lightning Lance.",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "agility": 2
+          "max_mp": 10
         },
         "position": [
           0.85,
           0.87
         ],
         "cost": 3,
-        "level_required": 10,
+        "level_required": 1,
         "mastery_required": 0,
         "grants": [
           "sorcerer_adept"
@@ -1858,68 +1867,68 @@
       },
       {
         "id": "vigor",
-        "name": "Vitality",
-        "description": "HP +18.",
+        "name": "Arcane Resilience",
+        "description": "HP +12. Permanent once learned.",
         "requires": [
           "shield"
         ],
         "bonus": {
-          "max_hp": 18
+          "max_hp": 12
         },
         "position": [
           0.15,
           0.62
         ],
-        "cost": 3,
-        "level_required": 15,
-        "mastery_required": 7,
+        "cost": 4,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Uncommon"
       },
       {
         "id": "grace",
-        "name": "Inner Reserve",
-        "description": "MP +10.",
+        "name": "Font of Power",
+        "description": "MP +15. Permanent once learned.",
         "requires": [
           "light"
         ],
         "bonus": {
-          "max_mp": 10
+          "max_mp": 15
         },
         "position": [
           0.5,
           0.62
         ],
         "cost": 4,
-        "level_required": 20,
-        "mastery_required": 10,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Uncommon"
       },
       {
         "id": "insight",
-        "name": "Deft Hands",
-        "description": "Dexterity +3.",
+        "name": "Elemental Affinity",
+        "description": "MP +10. Permanent once learned.",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "dexterity": 3
+          "max_mp": 10
         },
         "position": [
           0.85,
           0.62
         ],
-        "cost": 4,
-        "level_required": 25,
-        "mastery_required": 12,
+        "cost": 5,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Uncommon"
       },
       {
         "id": "resolve",
-        "name": "Resolute",
-        "description": "Defense +4.",
+        "name": "Prismatic Ward",
+        "description": "defense +4. Permanent once learned.",
         "requires": [
           "vigor"
         ],
@@ -1931,28 +1940,28 @@
           0.37
         ],
         "cost": 5,
-        "level_required": 30,
-        "mastery_required": 15,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Rare"
       },
       {
         "id": "precision",
-        "name": "Master Technique",
-        "description": "Healing +6. Unlocks Inferno.",
+        "name": "Wild Magic",
+        "description": "MP +14. Permanent once learned. Learns Inferno.",
         "requires": [
           "grace"
         ],
         "bonus": {
-          "healing": 6
+          "max_mp": 14
         },
         "position": [
           0.5,
           0.37
         ],
-        "cost": 5,
-        "level_required": 35,
-        "mastery_required": 17,
+        "cost": 6,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [
           "sorcerer_master"
         ],
@@ -1960,70 +1969,70 @@
       },
       {
         "id": "mobility",
-        "name": "Fleet Foot",
-        "description": "Agility +4.",
+        "name": "Surging Tempo",
+        "description": "agility +5. Permanent once learned.",
         "requires": [
           "insight"
         ],
         "bonus": {
-          "agility": 4
+          "agility": 5
         },
         "position": [
           0.85,
           0.37
         ],
-        "cost": 5,
-        "level_required": 40,
-        "mastery_required": 20,
+        "cost": 6,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Rare"
       },
       {
         "id": "veteran",
-        "name": "Veteran Instinct",
-        "description": "Dexterity +5.",
+        "name": "Unbound Essence",
+        "description": "MP +15. Permanent once learned.",
         "requires": [
           "resolve"
         ],
         "bonus": {
-          "dexterity": 5
+          "max_mp": 15
         },
         "position": [
           0.15,
           0.12
         ],
-        "cost": 6,
-        "level_required": 45,
-        "mastery_required": 22,
+        "cost": 7,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Legendary"
       },
       {
         "id": "legend",
-        "name": "Legendary Discipline",
-        "description": "HP +30, MP +15.",
+        "name": "Living Conduit",
+        "description": "MP +30, HP +15. Permanent once learned.",
         "requires": [
           "precision",
           "mobility"
         ],
         "bonus": {
-          "max_hp": 30,
-          "max_mp": 15
+          "max_mp": 30,
+          "max_hp": 15
         },
         "position": [
           0.5,
           0.12
         ],
-        "cost": 6,
-        "level_required": 48,
-        "mastery_required": 24,
+        "cost": 7,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Legendary"
       },
       {
         "id": "mythic",
         "name": "Elemental Tempest",
-        "description": "Primary-class mythic ability. Unlocks Elemental Tempest.",
+        "description": "A signature active ability for this class. Unlocks Elemental Tempest. Only usable while this class is primary.",
         "requires": [
           "veteran",
           "legend"
@@ -2033,9 +2042,9 @@
           0.85,
           0.12
         ],
-        "cost": 6,
-        "level_required": 50,
-        "mastery_required": 25,
+        "cost": 8,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [
           "elemental_tempest"
         ],
@@ -2090,17 +2099,18 @@
     "nodes": [
       {
         "id": "oath",
-        "name": "Healer Initiate",
-        "description": "MP +4.",
+        "name": "Mercy",
+        "description": "MP +6, healing power +2. Permanent once learned.",
         "requires": [],
         "bonus": {
-          "max_mp": 4
+          "max_mp": 6,
+          "healing": 2
         },
         "position": [
           0.15,
           0.87
         ],
-        "cost": 1,
+        "cost": 2,
         "level_required": 1,
         "mastery_required": 0,
         "grants": [],
@@ -2108,40 +2118,40 @@
       },
       {
         "id": "shield",
-        "name": "Guard Training",
-        "description": "Defense +2.",
+        "name": "Healer Discipline",
+        "description": "healing power +3. Permanent once learned.",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "defense": 2
+          "healing": 3
         },
         "position": [
           0.5,
           0.87
         ],
-        "cost": 2,
-        "level_required": 5,
+        "cost": 3,
+        "level_required": 1,
         "mastery_required": 0,
         "grants": [],
         "rarity": "Common"
       },
       {
         "id": "light",
-        "name": "Focused Practice",
-        "description": "Agility +2. Unlocks Greater Mending.",
+        "name": "Healer Arts",
+        "description": "MP +8. Permanent once learned. Unlocks Greater Mending. Learns Greater Mending.",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "agility": 2
+          "max_mp": 8
         },
         "position": [
           0.85,
           0.87
         ],
         "cost": 3,
-        "level_required": 10,
+        "level_required": 1,
         "mastery_required": 0,
         "grants": [
           "healer_adept"
@@ -2150,68 +2160,68 @@
       },
       {
         "id": "vigor",
-        "name": "Vitality",
-        "description": "HP +18.",
+        "name": "Gentle Heart",
+        "description": "HP +15. Permanent once learned.",
         "requires": [
           "shield"
         ],
         "bonus": {
-          "max_hp": 18
+          "max_hp": 15
         },
         "position": [
           0.15,
           0.62
         ],
-        "cost": 3,
-        "level_required": 15,
-        "mastery_required": 7,
+        "cost": 4,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Uncommon"
       },
       {
         "id": "grace",
-        "name": "Inner Reserve",
-        "description": "MP +10.",
+        "name": "Merciful Reserve",
+        "description": "MP +12. Permanent once learned.",
         "requires": [
           "light"
         ],
         "bonus": {
-          "max_mp": 10
+          "max_mp": 12
         },
         "position": [
           0.5,
           0.62
         ],
         "cost": 4,
-        "level_required": 20,
-        "mastery_required": 10,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Uncommon"
       },
       {
         "id": "insight",
-        "name": "Deft Hands",
-        "description": "Dexterity +3.",
+        "name": "Mending Hands",
+        "description": "healing power +4. Permanent once learned.",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "dexterity": 3
+          "healing": 4
         },
         "position": [
           0.85,
           0.62
         ],
-        "cost": 4,
-        "level_required": 25,
-        "mastery_required": 12,
+        "cost": 5,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Uncommon"
       },
       {
         "id": "resolve",
-        "name": "Resolute",
-        "description": "Defense +4.",
+        "name": "Sanctuary Ward",
+        "description": "defense +4. Permanent once learned.",
         "requires": [
           "vigor"
         ],
@@ -2223,15 +2233,15 @@
           0.37
         ],
         "cost": 5,
-        "level_required": 30,
-        "mastery_required": 15,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Rare"
       },
       {
         "id": "precision",
-        "name": "Master Technique",
-        "description": "Healing +6. Unlocks Sanctuary.",
+        "name": "Restorative Grace",
+        "description": "healing power +6. Permanent once learned. Learns Sanctuary.",
         "requires": [
           "grace"
         ],
@@ -2242,9 +2252,9 @@
           0.5,
           0.37
         ],
-        "cost": 5,
-        "level_required": 35,
-        "mastery_required": 17,
+        "cost": 6,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [
           "healer_master"
         ],
@@ -2252,8 +2262,8 @@
       },
       {
         "id": "mobility",
-        "name": "Fleet Foot",
-        "description": "Agility +4.",
+        "name": "Urgent Care",
+        "description": "agility +4. Permanent once learned.",
         "requires": [
           "insight"
         ],
@@ -2264,58 +2274,58 @@
           0.85,
           0.37
         ],
-        "cost": 5,
-        "level_required": 40,
-        "mastery_required": 20,
+        "cost": 6,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Rare"
       },
       {
         "id": "veteran",
-        "name": "Veteran Instinct",
-        "description": "Dexterity +5.",
+        "name": "Renewing Spirit",
+        "description": "MP +15. Permanent once learned.",
         "requires": [
           "resolve"
         ],
         "bonus": {
-          "dexterity": 5
+          "max_mp": 15
         },
         "position": [
           0.15,
           0.12
         ],
-        "cost": 6,
-        "level_required": 45,
-        "mastery_required": 22,
+        "cost": 7,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Legendary"
       },
       {
         "id": "legend",
-        "name": "Legendary Discipline",
-        "description": "HP +30, MP +15.",
+        "name": "Saintly Devotion",
+        "description": "healing power +8, MP +20. Permanent once learned.",
         "requires": [
           "precision",
           "mobility"
         ],
         "bonus": {
-          "max_hp": 30,
-          "max_mp": 15
+          "healing": 8,
+          "max_mp": 20
         },
         "position": [
           0.5,
           0.12
         ],
-        "cost": 6,
-        "level_required": 48,
-        "mastery_required": 24,
+        "cost": 7,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Legendary"
       },
       {
         "id": "mythic",
         "name": "Miracle",
-        "description": "Primary-class mythic ability. Unlocks Miracle.",
+        "description": "A signature active ability for this class. Unlocks Miracle. Only usable while this class is primary.",
         "requires": [
           "veteran",
           "legend"
@@ -2325,9 +2335,9 @@
           0.85,
           0.12
         ],
-        "cost": 6,
-        "level_required": 50,
-        "mastery_required": 25,
+        "cost": 8,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [
           "miracle"
         ],
@@ -2382,17 +2392,17 @@
     "nodes": [
       {
         "id": "oath",
-        "name": "Rogue Initiate",
-        "description": "Attack +2.",
+        "name": "Light Fingers",
+        "description": "dexterity +3. Permanent once learned.",
         "requires": [],
         "bonus": {
-          "attack": 2
+          "dexterity": 3
         },
         "position": [
           0.15,
           0.87
         ],
-        "cost": 1,
+        "cost": 2,
         "level_required": 1,
         "mastery_required": 0,
         "grants": [],
@@ -2400,40 +2410,40 @@
       },
       {
         "id": "shield",
-        "name": "Guard Training",
-        "description": "Defense +2.",
+        "name": "Rogue Discipline",
+        "description": "agility +3. Permanent once learned.",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "defense": 2
+          "agility": 3
         },
         "position": [
           0.5,
           0.87
         ],
-        "cost": 2,
-        "level_required": 5,
+        "cost": 3,
+        "level_required": 1,
         "mastery_required": 0,
         "grants": [],
         "rarity": "Common"
       },
       {
         "id": "light",
-        "name": "Focused Practice",
-        "description": "Agility +2. Unlocks Opportunist Strike.",
+        "name": "Rogue Arts",
+        "description": "critical chance (%) +4. Permanent once learned. Unlocks Opportunist Strike. Learns Opportunist Strike.",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "agility": 2
+          "critical": 4
         },
         "position": [
           0.85,
           0.87
         ],
         "cost": 3,
-        "level_required": 10,
+        "level_required": 1,
         "mastery_required": 0,
         "grants": [
           "rogue_adept"
@@ -2442,101 +2452,101 @@
       },
       {
         "id": "vigor",
-        "name": "Vitality",
-        "description": "HP +18.",
+        "name": "Street Survivor",
+        "description": "HP +12. Permanent once learned.",
         "requires": [
           "shield"
         ],
         "bonus": {
-          "max_hp": 18
+          "max_hp": 12
         },
         "position": [
           0.15,
           0.62
         ],
-        "cost": 3,
-        "level_required": 15,
-        "mastery_required": 7,
+        "cost": 4,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Uncommon"
       },
       {
         "id": "grace",
-        "name": "Inner Reserve",
-        "description": "MP +10.",
+        "name": "Quick Thinking",
+        "description": "MP +8. Permanent once learned.",
         "requires": [
           "light"
         ],
         "bonus": {
-          "max_mp": 10
+          "max_mp": 8
         },
         "position": [
           0.5,
           0.62
         ],
         "cost": 4,
-        "level_required": 20,
-        "mastery_required": 10,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Uncommon"
       },
       {
         "id": "insight",
-        "name": "Deft Hands",
-        "description": "Dexterity +3.",
+        "name": "Nimble Fingers",
+        "description": "dexterity +5. Permanent once learned.",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "dexterity": 3
+          "dexterity": 5
         },
         "position": [
           0.85,
           0.62
         ],
-        "cost": 4,
-        "level_required": 25,
-        "mastery_required": 12,
+        "cost": 5,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Uncommon"
       },
       {
         "id": "resolve",
-        "name": "Resolute",
-        "description": "Defense +4.",
+        "name": "Evasive Guard",
+        "description": "agility +4. Permanent once learned.",
         "requires": [
           "vigor"
         ],
         "bonus": {
-          "defense": 4
+          "agility": 4
         },
         "position": [
           0.15,
           0.37
         ],
         "cost": 5,
-        "level_required": 30,
-        "mastery_required": 15,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Rare"
       },
       {
         "id": "precision",
-        "name": "Master Technique",
-        "description": "Attack +4. Unlocks Dancing Blades.",
+        "name": "Opportunist",
+        "description": "critical chance (%) +5. Permanent once learned. Learns Dancing Blades.",
         "requires": [
           "grace"
         ],
         "bonus": {
-          "attack": 4
+          "critical": 5
         },
         "position": [
           0.5,
           0.37
         ],
-        "cost": 5,
-        "level_required": 35,
-        "mastery_required": 17,
+        "cost": 6,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [
           "rogue_master"
         ],
@@ -2544,70 +2554,70 @@
       },
       {
         "id": "mobility",
-        "name": "Fleet Foot",
-        "description": "Agility +4.",
+        "name": "Lightfoot",
+        "description": "agility +5. Permanent once learned.",
         "requires": [
           "insight"
         ],
         "bonus": {
-          "agility": 4
+          "agility": 5
         },
         "position": [
           0.85,
           0.37
         ],
-        "cost": 5,
-        "level_required": 40,
-        "mastery_required": 20,
+        "cost": 6,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Rare"
       },
       {
         "id": "veteran",
-        "name": "Veteran Instinct",
-        "description": "Dexterity +5.",
+        "name": "Fortune Finder",
+        "description": "dexterity +7. Permanent once learned.",
         "requires": [
           "resolve"
         ],
         "bonus": {
-          "dexterity": 5
+          "dexterity": 7
         },
         "position": [
           0.15,
           0.12
         ],
-        "cost": 6,
-        "level_required": 45,
-        "mastery_required": 22,
+        "cost": 7,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Legendary"
       },
       {
         "id": "legend",
-        "name": "Legendary Discipline",
-        "description": "HP +30, MP +15.",
+        "name": "Shadow Savant",
+        "description": "dexterity +8, critical chance (%) +4. Permanent once learned.",
         "requires": [
           "precision",
           "mobility"
         ],
         "bonus": {
-          "max_hp": 30,
-          "max_mp": 15
+          "dexterity": 8,
+          "critical": 4
         },
         "position": [
           0.5,
           0.12
         ],
-        "cost": 6,
-        "level_required": 48,
-        "mastery_required": 24,
+        "cost": 7,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Legendary"
       },
       {
         "id": "mythic",
         "name": "Phantom Dance",
-        "description": "Primary-class mythic ability. Unlocks Phantom Dance.",
+        "description": "A signature active ability for this class. Unlocks Phantom Dance. Only usable while this class is primary.",
         "requires": [
           "veteran",
           "legend"
@@ -2617,9 +2627,9 @@
           0.85,
           0.12
         ],
-        "cost": 6,
-        "level_required": 50,
-        "mastery_required": 25,
+        "cost": 8,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [
           "phantom_dance"
         ],
@@ -2673,17 +2683,17 @@
     "nodes": [
       {
         "id": "oath",
-        "name": "Assassin Initiate",
-        "description": "Attack +2.",
+        "name": "Killer Instinct",
+        "description": "critical chance (%) +3. Permanent once learned.",
         "requires": [],
         "bonus": {
-          "attack": 2
+          "critical": 3
         },
         "position": [
           0.15,
           0.87
         ],
-        "cost": 1,
+        "cost": 2,
         "level_required": 1,
         "mastery_required": 0,
         "grants": [],
@@ -2691,40 +2701,40 @@
       },
       {
         "id": "shield",
-        "name": "Guard Training",
-        "description": "Defense +2.",
+        "name": "Assassin Discipline",
+        "description": "dexterity +3. Permanent once learned.",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "defense": 2
+          "dexterity": 3
         },
         "position": [
           0.5,
           0.87
         ],
-        "cost": 2,
-        "level_required": 5,
+        "cost": 3,
+        "level_required": 1,
         "mastery_required": 0,
         "grants": [],
         "rarity": "Common"
       },
       {
         "id": "light",
-        "name": "Focused Practice",
-        "description": "Agility +2. Unlocks Deathmark.",
+        "name": "Assassin Arts",
+        "description": "attack +3. Permanent once learned. Unlocks Deathmark. Learns Deathmark.",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "agility": 2
+          "attack": 3
         },
         "position": [
           0.85,
           0.87
         ],
         "cost": 3,
-        "level_required": 10,
+        "level_required": 1,
         "mastery_required": 0,
         "grants": [
           "assassin_adept"
@@ -2733,101 +2743,101 @@
       },
       {
         "id": "vigor",
-        "name": "Vitality",
-        "description": "HP +18.",
+        "name": "Patient Hunter",
+        "description": "HP +12. Permanent once learned.",
         "requires": [
           "shield"
         ],
         "bonus": {
-          "max_hp": 18
+          "max_hp": 12
         },
         "position": [
           0.15,
           0.62
         ],
-        "cost": 3,
-        "level_required": 15,
-        "mastery_required": 7,
+        "cost": 4,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Uncommon"
       },
       {
         "id": "grace",
-        "name": "Inner Reserve",
-        "description": "MP +10.",
+        "name": "Deadly Focus",
+        "description": "MP +8. Permanent once learned.",
         "requires": [
           "light"
         ],
         "bonus": {
-          "max_mp": 10
+          "max_mp": 8
         },
         "position": [
           0.5,
           0.62
         ],
         "cost": 4,
-        "level_required": 20,
-        "mastery_required": 10,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Uncommon"
       },
       {
         "id": "insight",
-        "name": "Deft Hands",
-        "description": "Dexterity +3.",
+        "name": "Pressure Points",
+        "description": "critical chance (%) +4. Permanent once learned.",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "dexterity": 3
+          "critical": 4
         },
         "position": [
           0.85,
           0.62
         ],
-        "cost": 4,
-        "level_required": 25,
-        "mastery_required": 12,
+        "cost": 5,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Uncommon"
       },
       {
         "id": "resolve",
-        "name": "Resolute",
-        "description": "Defense +4.",
+        "name": "Shadow Guard",
+        "description": "dexterity +4. Permanent once learned.",
         "requires": [
           "vigor"
         ],
         "bonus": {
-          "defense": 4
+          "dexterity": 4
         },
         "position": [
           0.15,
           0.37
         ],
         "cost": 5,
-        "level_required": 30,
-        "mastery_required": 15,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Rare"
       },
       {
         "id": "precision",
-        "name": "Master Technique",
-        "description": "Attack +4. Unlocks Eclipse Cut.",
+        "name": "Lethal Precision",
+        "description": "attack +5. Permanent once learned. Learns Eclipse Cut.",
         "requires": [
           "grace"
         ],
         "bonus": {
-          "attack": 4
+          "attack": 5
         },
         "position": [
           0.5,
           0.37
         ],
-        "cost": 5,
-        "level_required": 35,
-        "mastery_required": 17,
+        "cost": 6,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [
           "assassin_master"
         ],
@@ -2835,70 +2845,70 @@
       },
       {
         "id": "mobility",
-        "name": "Fleet Foot",
-        "description": "Agility +4.",
+        "name": "Silent Step",
+        "description": "agility +5. Permanent once learned.",
         "requires": [
           "insight"
         ],
         "bonus": {
-          "agility": 4
+          "agility": 5
         },
         "position": [
           0.85,
           0.37
         ],
-        "cost": 5,
-        "level_required": 40,
-        "mastery_required": 20,
+        "cost": 6,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Rare"
       },
       {
         "id": "veteran",
-        "name": "Veteran Instinct",
-        "description": "Dexterity +5.",
+        "name": "Cold Calculation",
+        "description": "critical chance (%) +5. Permanent once learned.",
         "requires": [
           "resolve"
         ],
         "bonus": {
-          "dexterity": 5
+          "critical": 5
         },
         "position": [
           0.15,
           0.12
         ],
-        "cost": 6,
-        "level_required": 45,
-        "mastery_required": 22,
+        "cost": 7,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Legendary"
       },
       {
         "id": "legend",
-        "name": "Legendary Discipline",
-        "description": "HP +30, MP +15.",
+        "name": "Perfect Killer",
+        "description": "attack +6, critical chance (%) +5. Permanent once learned.",
         "requires": [
           "precision",
           "mobility"
         ],
         "bonus": {
-          "max_hp": 30,
-          "max_mp": 15
+          "attack": 6,
+          "critical": 5
         },
         "position": [
           0.5,
           0.12
         ],
-        "cost": 6,
-        "level_required": 48,
-        "mastery_required": 24,
+        "cost": 7,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Legendary"
       },
       {
         "id": "mythic",
         "name": "Nightfall",
-        "description": "Primary-class mythic ability. Unlocks Nightfall.",
+        "description": "A signature active ability for this class. Unlocks Nightfall. Only usable while this class is primary.",
         "requires": [
           "veteran",
           "legend"
@@ -2908,9 +2918,9 @@
           0.85,
           0.12
         ],
-        "cost": 6,
-        "level_required": 50,
-        "mastery_required": 25,
+        "cost": 8,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [
           "nightfall"
         ],
@@ -2965,17 +2975,18 @@
     "nodes": [
       {
         "id": "oath",
-        "name": "Monk Initiate",
-        "description": "Attack +2.",
+        "name": "Inner Strength",
+        "description": "HP +8, agility +1. Permanent once learned.",
         "requires": [],
         "bonus": {
-          "attack": 2
+          "max_hp": 8,
+          "agility": 1
         },
         "position": [
           0.15,
           0.87
         ],
-        "cost": 1,
+        "cost": 2,
         "level_required": 1,
         "mastery_required": 0,
         "grants": [],
@@ -2983,40 +2994,41 @@
       },
       {
         "id": "shield",
-        "name": "Guard Training",
-        "description": "Defense +2.",
+        "name": "Monk Discipline",
+        "description": "defense +2, agility +1. Permanent once learned.",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "defense": 2
+          "defense": 2,
+          "agility": 1
         },
         "position": [
           0.5,
           0.87
         ],
-        "cost": 2,
-        "level_required": 5,
+        "cost": 3,
+        "level_required": 1,
         "mastery_required": 0,
         "grants": [],
         "rarity": "Common"
       },
       {
         "id": "light",
-        "name": "Focused Practice",
-        "description": "Agility +2. Unlocks Rising Palm.",
+        "name": "Monk Arts",
+        "description": "critical chance (%) +3. Permanent once learned. Unlocks Rising Palm. Learns Rising Palm.",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "agility": 2
+          "critical": 3
         },
         "position": [
           0.85,
           0.87
         ],
         "cost": 3,
-        "level_required": 10,
+        "level_required": 1,
         "mastery_required": 0,
         "grants": [
           "monk_adept"
@@ -3025,28 +3037,28 @@
       },
       {
         "id": "vigor",
-        "name": "Vitality",
-        "description": "HP +18.",
+        "name": "Tempered Body",
+        "description": "HP +20. Permanent once learned.",
         "requires": [
           "shield"
         ],
         "bonus": {
-          "max_hp": 18
+          "max_hp": 20
         },
         "position": [
           0.15,
           0.62
         ],
-        "cost": 3,
-        "level_required": 15,
-        "mastery_required": 7,
+        "cost": 4,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Uncommon"
       },
       {
         "id": "grace",
-        "name": "Inner Reserve",
-        "description": "MP +10.",
+        "name": "Deep Breath",
+        "description": "MP +10. Permanent once learned.",
         "requires": [
           "light"
         ],
@@ -3058,35 +3070,35 @@
           0.62
         ],
         "cost": 4,
-        "level_required": 20,
-        "mastery_required": 10,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Uncommon"
       },
       {
         "id": "insight",
-        "name": "Deft Hands",
-        "description": "Dexterity +3.",
+        "name": "Perfect Balance",
+        "description": "dexterity +4. Permanent once learned.",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "dexterity": 3
+          "dexterity": 4
         },
         "position": [
           0.85,
           0.62
         ],
-        "cost": 4,
-        "level_required": 25,
-        "mastery_required": 12,
+        "cost": 5,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Uncommon"
       },
       {
         "id": "resolve",
-        "name": "Resolute",
-        "description": "Defense +4.",
+        "name": "Iron Palm",
+        "description": "defense +4. Permanent once learned.",
         "requires": [
           "vigor"
         ],
@@ -3098,28 +3110,28 @@
           0.37
         ],
         "cost": 5,
-        "level_required": 30,
-        "mastery_required": 15,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Rare"
       },
       {
         "id": "precision",
-        "name": "Master Technique",
-        "description": "Attack +4. Unlocks Hundred Fists.",
+        "name": "Focused Fist",
+        "description": "attack +5. Permanent once learned. Learns Hundred Fists.",
         "requires": [
           "grace"
         ],
         "bonus": {
-          "attack": 4
+          "attack": 5
         },
         "position": [
           0.5,
           0.37
         ],
-        "cost": 5,
-        "level_required": 35,
-        "mastery_required": 17,
+        "cost": 6,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [
           "monk_master"
         ],
@@ -3127,70 +3139,70 @@
       },
       {
         "id": "mobility",
-        "name": "Fleet Foot",
-        "description": "Agility +4.",
+        "name": "Flowing Step",
+        "description": "agility +5. Permanent once learned.",
         "requires": [
           "insight"
         ],
         "bonus": {
-          "agility": 4
+          "agility": 5
         },
         "position": [
           0.85,
           0.37
         ],
-        "cost": 5,
-        "level_required": 40,
-        "mastery_required": 20,
+        "cost": 6,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Rare"
       },
       {
         "id": "veteran",
-        "name": "Veteran Instinct",
-        "description": "Dexterity +5.",
+        "name": "Mindful Strike",
+        "description": "critical chance (%) +4. Permanent once learned.",
         "requires": [
           "resolve"
         ],
         "bonus": {
-          "dexterity": 5
+          "critical": 4
         },
         "position": [
           0.15,
           0.12
         ],
-        "cost": 6,
-        "level_required": 45,
-        "mastery_required": 22,
+        "cost": 7,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Legendary"
       },
       {
         "id": "legend",
-        "name": "Legendary Discipline",
-        "description": "HP +30, MP +15.",
+        "name": "Body and Spirit",
+        "description": "HP +25, agility +5. Permanent once learned.",
         "requires": [
           "precision",
           "mobility"
         ],
         "bonus": {
-          "max_hp": 30,
-          "max_mp": 15
+          "max_hp": 25,
+          "agility": 5
         },
         "position": [
           0.5,
           0.12
         ],
-        "cost": 6,
-        "level_required": 48,
-        "mastery_required": 24,
+        "cost": 7,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Legendary"
       },
       {
         "id": "mythic",
         "name": "Enlightenment",
-        "description": "Primary-class mythic ability. Unlocks Enlightenment.",
+        "description": "A signature active ability for this class. Unlocks Enlightenment. Only usable while this class is primary.",
         "requires": [
           "veteran",
           "legend"
@@ -3200,9 +3212,9 @@
           0.85,
           0.12
         ],
-        "cost": 6,
-        "level_required": 50,
-        "mastery_required": 25,
+        "cost": 8,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [
           "enlightenment"
         ],
@@ -3257,17 +3269,18 @@
     "nodes": [
       {
         "id": "oath",
-        "name": "Necromancer Initiate",
-        "description": "MP +4.",
+        "name": "Grave Wisdom",
+        "description": "MP +7, HP +4. Permanent once learned.",
         "requires": [],
         "bonus": {
-          "max_mp": 4
+          "max_mp": 7,
+          "max_hp": 4
         },
         "position": [
           0.15,
           0.87
         ],
-        "cost": 1,
+        "cost": 2,
         "level_required": 1,
         "mastery_required": 0,
         "grants": [],
@@ -3275,40 +3288,41 @@
       },
       {
         "id": "shield",
-        "name": "Guard Training",
-        "description": "Defense +2.",
+        "name": "Necromancer Discipline",
+        "description": "attack +2, MP +3. Permanent once learned.",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "defense": 2
+          "attack": 2,
+          "max_mp": 3
         },
         "position": [
           0.5,
           0.87
         ],
-        "cost": 2,
-        "level_required": 5,
+        "cost": 3,
+        "level_required": 1,
         "mastery_required": 0,
         "grants": [],
         "rarity": "Common"
       },
       {
         "id": "light",
-        "name": "Focused Practice",
-        "description": "Agility +2. Unlocks Soul Rend.",
+        "name": "Necromancer Arts",
+        "description": "HP +12. Permanent once learned. Unlocks Soul Rend. Learns Soul Rend.",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "agility": 2
+          "max_hp": 12
         },
         "position": [
           0.85,
           0.87
         ],
         "cost": 3,
-        "level_required": 10,
+        "level_required": 1,
         "mastery_required": 0,
         "grants": [
           "necromancer_adept"
@@ -3317,8 +3331,8 @@
       },
       {
         "id": "vigor",
-        "name": "Vitality",
-        "description": "HP +18.",
+        "name": "Grave Endurance",
+        "description": "HP +18. Permanent once learned.",
         "requires": [
           "shield"
         ],
@@ -3329,56 +3343,56 @@
           0.15,
           0.62
         ],
-        "cost": 3,
-        "level_required": 15,
-        "mastery_required": 7,
+        "cost": 4,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Uncommon"
       },
       {
         "id": "grace",
-        "name": "Inner Reserve",
-        "description": "MP +10.",
+        "name": "Soul Reservoir",
+        "description": "MP +12. Permanent once learned.",
         "requires": [
           "light"
         ],
         "bonus": {
-          "max_mp": 10
+          "max_mp": 12
         },
         "position": [
           0.5,
           0.62
         ],
         "cost": 4,
-        "level_required": 20,
-        "mastery_required": 10,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Uncommon"
       },
       {
         "id": "insight",
-        "name": "Deft Hands",
-        "description": "Dexterity +3.",
+        "name": "Occult Insight",
+        "description": "MP +10. Permanent once learned.",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "dexterity": 3
+          "max_mp": 10
         },
         "position": [
           0.85,
           0.62
         ],
-        "cost": 4,
-        "level_required": 25,
-        "mastery_required": 12,
+        "cost": 5,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Uncommon"
       },
       {
         "id": "resolve",
-        "name": "Resolute",
-        "description": "Defense +4.",
+        "name": "Bone Ward",
+        "description": "defense +4. Permanent once learned.",
         "requires": [
           "vigor"
         ],
@@ -3390,28 +3404,28 @@
           0.37
         ],
         "cost": 5,
-        "level_required": 30,
-        "mastery_required": 15,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Rare"
       },
       {
         "id": "precision",
-        "name": "Master Technique",
-        "description": "Healing +6. Unlocks Grave Harvest.",
+        "name": "Deathless Study",
+        "description": "MP +14. Permanent once learned. Learns Grave Harvest.",
         "requires": [
           "grace"
         ],
         "bonus": {
-          "healing": 6
+          "max_mp": 14
         },
         "position": [
           0.5,
           0.37
         ],
-        "cost": 5,
-        "level_required": 35,
-        "mastery_required": 17,
+        "cost": 6,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [
           "necromancer_master"
         ],
@@ -3419,8 +3433,8 @@
       },
       {
         "id": "mobility",
-        "name": "Fleet Foot",
-        "description": "Agility +4.",
+        "name": "Spectral Step",
+        "description": "agility +4. Permanent once learned.",
         "requires": [
           "insight"
         ],
@@ -3431,58 +3445,59 @@
           0.85,
           0.37
         ],
-        "cost": 5,
-        "level_required": 40,
-        "mastery_required": 20,
+        "cost": 6,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Rare"
       },
       {
         "id": "veteran",
-        "name": "Veteran Instinct",
-        "description": "Dexterity +5.",
+        "name": "Soul Vessel",
+        "description": "HP +18, MP +8. Permanent once learned.",
         "requires": [
           "resolve"
         ],
         "bonus": {
-          "dexterity": 5
+          "max_hp": 18,
+          "max_mp": 8
         },
         "position": [
           0.15,
           0.12
         ],
-        "cost": 6,
-        "level_required": 45,
-        "mastery_required": 22,
+        "cost": 7,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Legendary"
       },
       {
         "id": "legend",
-        "name": "Legendary Discipline",
-        "description": "HP +30, MP +15.",
+        "name": "Undying Scholar",
+        "description": "HP +25, MP +22. Permanent once learned.",
         "requires": [
           "precision",
           "mobility"
         ],
         "bonus": {
-          "max_hp": 30,
-          "max_mp": 15
+          "max_hp": 25,
+          "max_mp": 22
         },
         "position": [
           0.5,
           0.12
         ],
-        "cost": 6,
-        "level_required": 48,
-        "mastery_required": 24,
+        "cost": 7,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [],
         "rarity": "Legendary"
       },
       {
         "id": "mythic",
         "name": "Requiem",
-        "description": "Primary-class mythic ability. Unlocks Requiem.",
+        "description": "A signature active ability for this class. Unlocks Requiem. Only usable while this class is primary.",
         "requires": [
           "veteran",
           "legend"
@@ -3492,9 +3507,9 @@
           0.85,
           0.12
         ],
-        "cost": 6,
-        "level_required": 50,
-        "mastery_required": 25,
+        "cost": 8,
+        "level_required": 1,
+        "mastery_required": 0,
         "grants": [
           "requiem"
         ],

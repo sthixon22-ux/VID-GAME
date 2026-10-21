@@ -19,7 +19,8 @@ func _ready():
   for i in range(12):
    var angle=i*TAU/12
    Art.tree(self,Vector3(sin(angle)*12,0,cos(angle)*12),1.2)
-  Art.shape(self,Vector3(0,0,0),Vector3(13,0.05,10),Color("a29465"),"cylinder")
+  var clearing=Art.shape(self,Vector3(0,0,0),Vector3(13,0.05,10),Color("a29465"),"cylinder")
+  clearing.material_override=Art.surface(Color("b3a480"),"dirt",5)
  else:
   sanctuary_arena()
  sim=Combat.new(State.hero,State.stats(),State.enemy_id)
@@ -107,6 +108,11 @@ func submenu(actions: Array):
  UI.button(commands,"Back",main_menu)
 func companion_menu():
  clear_menu()
+ if sim.h.companion.current!="intro_wolf":
+  UI.label(commands,State.companions[sim.h.companion.current].role)
+  for id in CompanionRules.learned_abilities(sim.h):
+   var entry:Dictionary=State.companions[sim.h.companion.current].abilities[id]
+   UI.label(commands,"%s · %s · cooldown %s" % [entry.name,entry.behavior,sim.companion_cooldowns.get(id,0)])
  for behavior in ["Attack","Support","Defend"]:
   var selected: String=behavior
   UI.button(commands,behavior,func():

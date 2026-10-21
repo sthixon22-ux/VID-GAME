@@ -1,5 +1,5 @@
 extends Node
-var out="/tmp/demo8-review"
+var out="/tmp/demo9-review"
 func _ready():
  get_tree().current_scene=null
  call_deferred("run")
@@ -21,20 +21,23 @@ func run():
  await scene("res://scenes/create.tscn")
  await shot("creation")
  State.create_hero("Aster","Paladin",0,0,1,["Ranger","Druid"])
- for item in ["Iron Sword","Steel Cuirass","Oak Shield"]:
+ for item in ["Iron Sword","Traveler's Clothing","Traveler's Pendant"]:
   State.buy(item)
   State.equip(State.equipment_data[item].slot,item)
  State.menu_page="equipment"
  var menu=await scene("res://scenes/character.tscn")
  await shot("armor")
  menu.show_page("shop")
- for item in ["Iron Sword","Steel Cuirass","Oak Shield","Steel Helm","Trail Boots"]:
+ for item in ["Iron Sword","Twin Daggers","Oak Staff","Traveler's Clothing","Traveler's Pendant"]:
   menu.preview_shop_weapon(item)
   await shot("shop_"+item.replace(" ","_"))
  menu.preview_supply("ether")
  await shot("shop_ether")
  menu.show_page("inventory")
  await shot("inventory")
+ menu.companion_tree_id="dragon"
+ menu.show_page("companion_tree")
+ await shot("companion_tree")
  var world=await scene("res://scenes/world.tscn")
  world.contact_grace=999
  await shot("town")
@@ -46,6 +49,13 @@ func run():
  world.yaw=-1.3
  await get_tree().create_timer(.4).timeout
  await shot("plains")
+ State.enemy_id="goblin"
+ var battle=await scene("res://scenes/battle.tscn")
+ await shot("battle")
+ battle.act("Sword Slash")
+ await get_tree().create_timer(.25).timeout
+ await shot("battle_attack")
+ while battle.busy:await get_tree().process_frame
  State.hero.journey.region="dungeon"
  State.hero.journey.entered=true
  State.remember_position(Vector3(0,0,-10))

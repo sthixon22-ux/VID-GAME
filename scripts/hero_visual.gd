@@ -33,7 +33,7 @@ func _init(equipment: Dictionary={}, appearance: Dictionary={}):
  body.name="Body"
  add_child(body)
  var outfit="Knight"
- if gear.get("Chest")=="Leather Vest" or gear.get("Chest")=="None": outfit="Rogue"
+ if gear.get("Chest") in ["Leather Vest","Traveler's Clothing","None"]: outfit="Rogue"
  elif gear.get("Chest")=="Verdant Robe": outfit="Mage"
  model=load("res://assets/models/heroes/%s.glb" % outfit).instantiate()
  body.add_child(model)
@@ -59,14 +59,15 @@ func _init(equipment: Dictionary={}, appearance: Dictionary={}):
  if helmet!="None":
   var helm=GearVisual.item(helmet)
   helm.name="EquippedHelmet"
-  helm.position.y=0.24
+  helm.position.y=0.06
+  helm.scale=Vector3.ONE*.52
   helm.rotation.y=PI
   socket("head").add_child(helm)
  var chest_name:String=gear.get("Chest","None")
  if chest_name!="None":
   var armor=GearVisual.item(chest_name)
   armor.name="EquippedChest"
-  armor.scale=Vector3(1.0,0.9,1.75)
+  armor.scale=Vector3(.72,.78,1.12)
   armor.position.z=0.06
   armor.rotation.y=PI
   socket("chest").add_child(armor)
@@ -89,32 +90,23 @@ func _init(equipment: Dictionary={}, appearance: Dictionary={}):
     var trim=Art.shape(attachment,Vector3(0,0.16,0),Vector3(0.245,0.035,0.245),Color("a68a53"),"cylinder")
     trim.material_override.metallic=0.7
     trim.material_override.roughness=0.32
- if not appearance.is_empty():
-  var skins=[Color("f3c59f"),Color("b67b56"),Color("70452f")]
-  var hairs=[Color("473028"),Color("d1ad68"),Color("b9c3d2")]
-  var dyes=[Color("496f98"),Color("65865b"),Color("a05e68")]
-  for mesh in model.find_children("*","MeshInstance3D",true,false):
-   if mesh.get_parent() is BoneAttachment3D or not str(mesh.name).begins_with(outfit+"_"): continue
-   var material=ShaderMaterial.new()
-   material.shader=load("res://assets/shaders/hero_palette.gdshader")
-   material.set_shader_parameter("palette",load("res://assets/vendor/kaykit/%s_%s_texture.png" % [outfit,outfit.to_lower()]))
-   material.set_shader_parameter("skin_tone",skins[int(appearance.get("skin",0))])
-   material.set_shader_parameter("hair_tone",hairs[int(appearance.get("hair",0))])
-   material.set_shader_parameter("cloth_tone",dyes[int(appearance.get("dye",0))])
-   material.set_shader_parameter("head",str(mesh.name).ends_with("Head"))
-   material.set_shader_parameter("plain_clothes",gear.get("Chest")=="None")
-   mesh.material_override=material
-  if gear.get("Chest")=="None":
-   var cape=model.find_child("Rogue_Cape",true,false)
-   if cape: cape.hide()
- if helmet=="None":
-  var tones=[Color("35271f"),Color("9d713e"),Color("808d99")]
-  var hair_color:Color=tones[int(appearance.get("hair",0))]
-  var cap=Art.shape(socket("head"),Vector3(0,.52,0),Vector3(.70,.36,.74),hair_color)
-  cap.name="HairCap"
-  for index in range(5):
-   var fringe=Art.shape(socket("head"),Vector3((index-2)*.1,.38,.31),Vector3(.15,.16,.13),hair_color)
-   fringe.rotation.z=(index-2)*.15
+ var skins=[Color("b98d70"),Color("95664b"),Color("60412e")]
+ var hairs=[Color("302117"),Color("9f7947"),Color("737f89")]
+ var dyes=[Color("516778"),Color("626b4b"),Color("79504b")]
+ for mesh in model.find_children("*","MeshInstance3D",true,false):
+  if str(mesh.name) not in ["Skin","Hair","Tunic","Trousers","Boots"]:continue
+  var material=StandardMaterial3D.new()
+  material.roughness=.82
+  match str(mesh.name):
+   "Skin":material.albedo_color=skins[int(appearance.get("skin",0))];material.roughness=.62
+   "Hair":material.albedo_color=hairs[int(appearance.get("hair",0))]
+   "Tunic":
+    material.albedo_color=dyes[int(appearance.get("dye",0))]
+    material.albedo_texture=load("res://assets/textures/rpg/cloth_albedo.png")
+    material.uv1_scale=Vector3(5,5,5)
+   "Trousers":material.albedo_color=Color("343e43")
+   "Boots":material.albedo_color=Color("49382a");material.roughness=.65
+  mesh.material_override=material
  for clip in player.get_animation_list():
   var animation=player.get_animation(clip)
   if clip in ["Idle","2H_Melee_Idle","Walking_A","Running_A","Blocking"]: animation.loop_mode=Animation.LOOP_LINEAR
@@ -136,6 +128,7 @@ func motion(moving: bool, sprint=false):
   player.speed_scale=1
   player.play(clip,0.15)
 func play_action(action: String) -> float:
+ action=action.trim_suffix(" · Critical!")
  if action=="Defeat": locked_pose=true
  last_action=action
  var clip: String=ACTION_CLIPS.get(action,"")

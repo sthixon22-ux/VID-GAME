@@ -67,8 +67,8 @@
   },
   "rpg_demo_original": {
     "author": "Project Mythic demo",
-    "source": "tools/build_rpg_art.py and tools/build_surface_textures.py",
-    "license": "Original project geometry/textures; hero variants derive from the CC0 KayKit source credited above",
+    "source": "tools/build_rpg_art.py, tools/build_surface_textures.py and tools/build_natural_hero.py",
+    "license": "Original project geometry/textures; hero derivatives combine CC0 MakeHuman topology with CC0 KayKit rig/animations, credited above",
     "files": {
       "assets/models/companions/bristleback.glb": "4dcdac2e9c11127b76c030262f1860a7ccc58e1f43ec3538c71a927c0378c335",
       "assets/models/companions/dire_wolf.glb": "c284bf9c09b92cec1509583fad3dd62335cf48be7101dcf205c65b43a53351a9",
@@ -111,11 +111,11 @@
       "assets/models/gear/verdant_robe.glb": "7541a07045ed1e3696144fcbcf382be1c9f4d0bf2437e6772938cecf8dbd56ee",
       "assets/models/gear/war_hammer.glb": "1e0ff6d87d979d69bc31502651ffca62a7bbd5a8ba1d2c8d6734b7588570c7b8",
       "assets/models/gear/woodland_bow.glb": "e6068953e1d15af77e0101e72ce9724789f38bb47ced5e28a8e80c031314c3f0",
-      "assets/models/heroes/Knight.glb": "79dbe0f10bfeb7032ec90995e30893334d8f15b675b757bc728b87e0dc91ad71",
+      "assets/models/heroes/Knight.glb": "8b963c1604fb6f5ed82ee12e7dfce49102c6b786eed42cb90b9d62aca7029ed1",
       "assets/models/heroes/Knight_knight_texture.png": "5d250ccc5da020e6126bfa3839f83bd9a465a951ed223e4d13c08b1925e154d4",
-      "assets/models/heroes/Mage.glb": "6382322bbc15d029dd454dadcc268d8d7287a2b2a7295314ae8d61e7d226e2bf",
+      "assets/models/heroes/Mage.glb": "234fbfa5e272ac0f96bcede5dcdb6a58dd2e04474b68a60d1755ddd0349cac20",
       "assets/models/heroes/Mage_mage_texture.png": "ea49f094b960402635fe51db9f1864960c97271b17f2e3554e5aca1b2bbba144",
-      "assets/models/heroes/Rogue.glb": "8299ca1f712d9dc4728ec708fd0b9ef0e82d6c404b4f4a6679b81572d34ab406",
+      "assets/models/heroes/Rogue.glb": "434d69ed01509f96e65d6ea47a203947063c614f0ddb95c5d5d1a760e866f48e",
       "assets/models/heroes/Rogue_rogue_texture.png": "a4032e877c3b91939f5cdbb630349c1998fdbc3211bbd587c111125500fe4cc5",
       "assets/textures/rpg/canopy.png": "abd940798fb24d6442afd965963deec0e4cbd19b01ea0ae2f06cac3b082d8a85",
       "assets/textures/rpg/cloth_albedo.png": "b7d6fc711f968617e29a6dc51254df25e547acf270ca61419ead1a605ce7bea4",
@@ -127,6 +127,17 @@
       "assets/textures/rpg/grass_albedo.png": "8045a8630f4f5bfc9db0fa5c91428684f62fc1e40776e97fe0a8acc785332f67",
       "assets/textures/rpg/grass_normal.png": "020e9254828ecf4a6dd1b46622b72947b74fd68d727e2bb772c2c0242f71860f",
       "assets/textures/rpg/grass_roughness.png": "bab223ac9e0c5f65ba6fb4be597bb0ac92459ee4fcb26cdd8af07b21d9ea67da"
+    }
+  },
+  "makehuman": {
+    "author": "MakeHuman; Data Collection AB, Joel Palmius, Jonas Hauquier",
+    "license": "CC0-1.0",
+    "source": "https://github.com/makehumancommunity/makehuman/blob/master/makehuman/data/3dobjs/base.obj",
+    "retrieved": "2026-10-21",
+    "use": "Clothed hero face, hands and fitted clothing topology, retargeted to credited KayKit animation skeleton. Only clothed character geometry is exported.",
+    "files": {
+      "base.obj.txt": "8e761e6624b8f54536409135d1636da63b32486a90d4897f84e121d144f6fb4c",
+      "LICENSE-CC0.txt": "a2010f343487d3f7618affe54f789f5487602331c0a8d03f49e9a7c547cf0499"
     }
   }
 }

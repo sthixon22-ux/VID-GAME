@@ -49,18 +49,15 @@ func run():
   State.hero.level=50
   var grown=State.stats()
   check(GameRules.STAT_KEYS.all(func(key): return grown[key]>base[key]),"All six stats grow naturally through level fifty: "+name_)
-  check(State.classes[name_].nodes.size()==12 and State.classes[name_].nodes.reduce(func(total,node): return total+int(node.cost),0)==50,"Class tree has twelve nodes costing fifty points: "+name_)
+  check(State.classes[name_].nodes.size()==12 and State.classes[name_].nodes.reduce(func(total,node): return total+int(node.cost),0)==60,"Class tree has twelve nodes costing sixty points: "+name_)
   State.hero.level=1
   State.hero.points=999
   State.hero.class_mastery[name_]=999
   State.invest_skill(name_,"oath")
-  check(not State.invest_skill(name_,"shield") and not State.invest_skill(name_,"mythic"),"Banked points/mastery cannot bypass hero-level gates: "+name_)
-  State.hero.level=49
+  check(State.invest_skill(name_,"shield") and not State.invest_skill(name_,"mythic"),"Points unlock branches at level one but prerequisites remain: "+name_)
   for node in State.classes[name_].nodes:
    if node.id!="mythic" and not State.hero.skills[name_].has(node.id): State.invest_skill(name_,node.id)
-  check(not State.invest_skill(name_,"mythic"),"Full prerequisite path still cannot finish before level fifty: "+name_)
-  State.hero.level=50
-  check(State.invest_skill(name_,"mythic") and State.can_mythic(name_),"Level-fifty primary capstone becomes usable: "+name_)
+  check(State.invest_skill(name_,"mythic") and State.can_mythic(name_) and State.hero.points==939,"Full sixty-point primary tree can complete at level one with banked points: "+name_)
   State.hero.profile.economy=true
   State.restore()
   var sim=Combat.new(State.hero,State.stats())
@@ -71,16 +68,15 @@ func run():
   State.hero.primary=State.hero.secondary[0] # Simulate a future chapter to test mythic availability independently.
   check(State.hero.skills[name_].has("mythic") and not State.can_mythic(name_),"Secondary mythic remains saved but unavailable: "+name_)
  # Each class can afford its own matching kit and complete the existing battle sequence.
- var starters={"Warrior":"Iron Sword","Barbarian":"Iron Axe","Paladin":"Iron Sword","Wizard":"Oak Staff","Sorcerer":"Bone Wand","Healer":"Oak Staff","Ranger":"Woodland Bow","Rogue":"Twin Daggers","Assassin":"Twin Daggers","Monk":"Traveler Claws","Druid":"Oak Staff","Necromancer":"Field Scythe"}
  for class_ in expected:
   prepare(class_)
-  var chest="Steel Cuirass" if class_ in ["Warrior","Paladin"] else ("Verdant Robe" if class_ in ["Wizard","Sorcerer","Healer","Druid","Necromancer"] else "Leather Vest")
-  var kit_ok=true
-  var kit_items=[starters[class_],chest]
-  if not GameRules.two_handed(State.equipment_data[starters[class_]]): kit_items.append("Oak Shield")
-  for item in kit_items:
+  var weapon=""
+  for item in ShopBook.stock():
+   if State.equipment_data[item].slot=="Weapon" and State.compatible(item):weapon=item;break
+  var kit_ok=not weapon.is_empty()
+  for item in [weapon,"Traveler's Clothing","Traveler's Pendant"]:
    if not State.buy(item) or not State.equip(State.equipment_data[item].slot,item): kit_ok=false
-  check(kit_ok and State.starter_ready(),"Matching starter kit is affordable and equippable: "+class_)
+  check(kit_ok and State.starter_ready(),"Simple starter kit is affordable and equippable: "+class_)
   State.restore()
   var battles_ok=true
   for index in range(6):
@@ -114,24 +110,21 @@ func run():
     if AbilityBook.available(State.hero).is_empty(): combos_ok=false
     combinations+=1
  check(combos_ok and combinations==1320,"All 1,320 ordered three-class combinations have stats and usable class books")
- # Every weapon tree has a complete, guarded level-50 path, not a two-node demo stub.
+ # Every weapon tree has a complete, point-gated path, not a two-node demo stub.
  for family in State.weapon_trees:
   prepare("Monk",["Warrior","Necromancer"])
   if family=="hammer": State.hero.secondary=["Barbarian","Necromancer"]
   if family in ["bow","dagger"]: State.hero.secondary=["Ranger","Warrior"]
   var nodes: Array=State.weapon_trees[family]
-  check(nodes.size()==12 and nodes.reduce(func(total,node): return total+int(node.cost),0)==50,"Weapon tree totals fifty points: "+family)
+  check(nodes.size()==12 and nodes.reduce(func(total,node): return total+int(node.cost),0)==60,"Weapon tree totals sixty points: "+family)
   State.hero.points=100
   State.hero.weapon_mastery[family]=100
   var first: String=nodes[0].id
   check(State.learn_weapon(family,first),"Proficient class can learn weapon root: "+family)
-  check(not State.learn_weapon(family,nodes[1].id),"Weapon tier cannot be rushed at level one: "+family)
-  State.hero.level=49
+  check(State.learn_weapon(family,nodes[1].id),"Weapon branch can be learned at level one: "+family)
   for node in nodes:
-   if node.id not in [first,"master"]: State.learn_weapon(family,node.id)
-  check(not State.learn_weapon(family,"master"),"Weapon capstone is locked before level fifty: "+family)
-  State.hero.level=50
-  check(State.learn_weapon(family,"master") and State.hero.points==50,"Entire weapon tree costs fifty and completes at fifty: "+family)
+   if not State.hero.weapon_skills[family].has(node.id): State.learn_weapon(family,node.id)
+  check(State.hero.weapon_skills[family].has("master") and State.hero.points==40,"Entire weapon tree costs sixty points without level gates: "+family)
  # Advanced weapon actions require the learned tier; direct calls cannot bypass it.
  prepare("Warrior",["Paladin","Druid"])
  State.grant_item("Iron Sword")
@@ -142,12 +135,12 @@ func run():
  State.hero.points=100
  for node in State.weapon_trees.sword:
   if node.id!="master": State.learn_weapon("sword",node.id)
- check(Combat.new(State.hero,State.stats()).legal("sword_master_technique"),"Learned level-35 weapon tier unlocks its active technique")
+ check(Combat.new(State.hero,State.stats()).legal("sword_master_technique"),"Learned weapon tier unlocks its active technique")
  State.equip("Weapon","None")
  check(not Combat.new(State.hero,State.stats()).legal("sword_master_technique"),"Advanced weapon technique disables when the matching weapon is removed")
  prepare("Wizard",["Sorcerer","Necromancer"])
  State.grant_item("Iron Sword")
- check(not State.equip("Weapon","Iron Sword") and not State.learn_weapon("sword","edge"),"Class proficiencies enforce both gear and weapon-tree eligibility")
+ check(not State.equip("Weapon","Iron Sword") and State.learn_weapon("sword","edge"),"Untrained sword cannot be equipped but its tree can be studied")
  check(not State.set_class_slot("secondary_1","Warrior") and not State.equip("Weapon","Iron Sword") and State.hero.secondary==["Sorcerer","Necromancer"],"Secondary roles remain locked and incompatible weapons stay unavailable")
  # Gear bonuses affect the actual six-stat block, not only menu text.
  prepare("Paladin")

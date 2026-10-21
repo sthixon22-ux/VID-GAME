@@ -119,10 +119,29 @@ func build(root:Node3D):
    for blade in range(3):
     var tuft=Art.shape(root,pos+Vector3(blade*0.12,0.2,0),Vector3(0.09,0.65,0.16),Color("728256"),"cone")
     tuft.rotation.z=(blade-1)*0.3
- for i in range(22):
-  var angle=i*TAU/22
-  var center=Vector3(25+sin(angle)*94,-5,-32+cos(angle)*91)
-  Art.shape(root,center,Vector3(34,23+i%4*4,33),Color("657c75"))
+ # Continuous, layered ridgelines replace the old round backdrop hills.
+ for layer in range(3):
+  var surface=SurfaceTool.new()
+  surface.begin(Mesh.PRIMITIVE_TRIANGLES)
+  var points:Array[Vector3]=[]
+  for index in range(129):
+   var angle=index*TAU/128
+   var radius=102.0+layer*24
+   var height=12+layer*5+sin(angle*5+.7)*5+sin(angle*11+layer)*2.5
+   points.append(Vector3(25+sin(angle)*radius,height,-32+cos(angle)*radius))
+  for index in range(128):
+   var a:Vector3=points[index]
+   var b:Vector3=points[index+1]
+   for vertex in [Vector3(a.x,-8,a.z),a,b,Vector3(a.x,-8,a.z),b,Vector3(b.x,-8,b.z)]:surface.add_vertex(vertex)
+  surface.generate_normals()
+  var ridge=MeshInstance3D.new()
+  ridge.mesh=surface.commit()
+  var material=StandardMaterial3D.new()
+  material.albedo_color=[Color("647b72"),Color("82978a"),Color("a1b2a0")][layer]
+  material.cull_mode=BaseMaterial3D.CULL_DISABLED
+  material.roughness=1
+  ridge.material_override=material
+  root.add_child(ridge)
 func can_walk(pos:Vector3)->bool:
  if pos.x< -27 or pos.x>78 or pos.z< -81 or pos.z>17: return false
  if pos.z> -31 and pos.x>18: return false
