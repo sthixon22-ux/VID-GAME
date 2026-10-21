@@ -14,4 +14,3 @@ static func model_path(sex:String,outfit:String)->String:
  return "res://assets/vendor/quaternius/characters/%s_%s.glb" % [sex.to_lower(),"peasant" if outfit=="traveler" else "ranger"]
 static func texture_path(id:String,outfit:String)->String:
  return "res://assets/textures/class_skins/%s_%s.webp" % [id,outfit]
-
