@@ -1,0 +1,242 @@
+{
+  "Paladin": {
+    "outfit": "ranger",
+    "hood": false,
+    "pauldrons": true,
+    "motif": "sun",
+    "Male": {
+      "id": "paladin_male",
+      "title": "Ivory Oath",
+      "cloth": "e9dfbf",
+      "accent": "b9903e",
+      "dark": "3a4659"
+    },
+    "Female": {
+      "id": "paladin_female",
+      "title": "Dawn Guardian",
+      "cloth": "b9a77d",
+      "accent": "b9903e",
+      "dark": "3a4659"
+    }
+  },
+  "Ranger": {
+    "outfit": "ranger",
+    "hood": true,
+    "pauldrons": true,
+    "motif": "arrow",
+    "Male": {
+      "id": "ranger_male",
+      "title": "Woodland Scout",
+      "cloth": "497e45",
+      "accent": "ac7147",
+      "dark": "263b31"
+    },
+    "Female": {
+      "id": "ranger_female",
+      "title": "Wildwood Warden",
+      "cloth": "639257",
+      "accent": "ac7147",
+      "dark": "263b31"
+    }
+  },
+  "Druid": {
+    "outfit": "ranger",
+    "hood": true,
+    "pauldrons": false,
+    "motif": "leaf",
+    "Male": {
+      "id": "druid_male",
+      "title": "Grovekeeper",
+      "cloth": "77945c",
+      "accent": "d0b270",
+      "dark": "374c47"
+    },
+    "Female": {
+      "id": "druid_female",
+      "title": "Thorn Oracle",
+      "cloth": "9aac69",
+      "accent": "d0b270",
+      "dark": "374c47"
+    }
+  },
+  "Warrior": {
+    "outfit": "ranger",
+    "hood": false,
+    "pauldrons": true,
+    "motif": "crossed",
+    "Male": {
+      "id": "warrior_male",
+      "title": "Iron Vanguard",
+      "cloth": "5d7eaa",
+      "accent": "b15a44",
+      "dark": "303f55"
+    },
+    "Female": {
+      "id": "warrior_female",
+      "title": "Steel Sentinel",
+      "cloth": "7496b8",
+      "accent": "b15a44",
+      "dark": "303f55"
+    }
+  },
+  "Barbarian": {
+    "outfit": "peasant",
+    "hood": false,
+    "pauldrons": false,
+    "motif": "fang",
+    "Male": {
+      "id": "barbarian_male",
+      "title": "Ashland Reaver",
+      "cloth": "a66a3e",
+      "accent": "e0c39a",
+      "dark": "343037"
+    },
+    "Female": {
+      "id": "barbarian_female",
+      "title": "Ember Marauder",
+      "cloth": "bc8254",
+      "accent": "e0c39a",
+      "dark": "343037"
+    }
+  },
+  "Wizard": {
+    "outfit": "peasant",
+    "hood": false,
+    "pauldrons": false,
+    "motif": "star",
+    "Male": {
+      "id": "wizard_male",
+      "title": "Astral Scholar",
+      "cloth": "5756a0",
+      "accent": "c0c5df",
+      "dark": "2d304a"
+    },
+    "Female": {
+      "id": "wizard_female",
+      "title": "Starweaver",
+      "cloth": "7773bd",
+      "accent": "c0c5df",
+      "dark": "2d304a"
+    }
+  },
+  "Sorcerer": {
+    "outfit": "peasant",
+    "hood": false,
+    "pauldrons": false,
+    "motif": "flame",
+    "Male": {
+      "id": "sorcerer_male",
+      "title": "Crimson Arcanist",
+      "cloth": "943d57",
+      "accent": "d0a14f",
+      "dark": "392b43"
+    },
+    "Female": {
+      "id": "sorcerer_female",
+      "title": "Ruby Spellbinder",
+      "cloth": "b9506c",
+      "accent": "d0a14f",
+      "dark": "392b43"
+    }
+  },
+  "Healer": {
+    "outfit": "peasant",
+    "hood": false,
+    "pauldrons": false,
+    "motif": "cross",
+    "Male": {
+      "id": "healer_male",
+      "title": "Dawn Medic",
+      "cloth": "e0e1cc",
+      "accent": "6eac9c",
+      "dark": "4c6a6e"
+    },
+    "Female": {
+      "id": "healer_female",
+      "title": "Sanctuary Keeper",
+      "cloth": "f0e7d5",
+      "accent": "6eac9c",
+      "dark": "4c6a6e"
+    }
+  },
+  "Rogue": {
+    "outfit": "ranger",
+    "hood": false,
+    "pauldrons": false,
+    "motif": "diamond",
+    "Male": {
+      "id": "rogue_male",
+      "title": "Dusk Vagabond",
+      "cloth": "784957",
+      "accent": "b59e75",
+      "dark": "302e45"
+    },
+    "Female": {
+      "id": "rogue_female",
+      "title": "Velvet Shadow",
+      "cloth": "96566d",
+      "accent": "b59e75",
+      "dark": "302e45"
+    }
+  },
+  "Assassin": {
+    "outfit": "ranger",
+    "hood": true,
+    "pauldrons": false,
+    "motif": "crescent",
+    "Male": {
+      "id": "assassin_male",
+      "title": "Nightblade",
+      "cloth": "363c50",
+      "accent": "8d7cb2",
+      "dark": "232834"
+    },
+    "Female": {
+      "id": "assassin_female",
+      "title": "Moonveil",
+      "cloth": "474057",
+      "accent": "8d7cb2",
+      "dark": "232834"
+    }
+  },
+  "Monk": {
+    "outfit": "peasant",
+    "hood": false,
+    "pauldrons": false,
+    "motif": "lotus",
+    "Male": {
+      "id": "monk_male",
+      "title": "Saffron Disciple",
+      "cloth": "d29c48",
+      "accent": "944c47",
+      "dark": "4d3944"
+    },
+    "Female": {
+      "id": "monk_female",
+      "title": "Golden Lotus",
+      "cloth": "e5b05c",
+      "accent": "944c47",
+      "dark": "4d3944"
+    }
+  },
+  "Necromancer": {
+    "outfit": "ranger",
+    "hood": true,
+    "pauldrons": true,
+    "motif": "rune",
+    "Male": {
+      "id": "necromancer_male",
+      "title": "Gravebound",
+      "cloth": "49475f",
+      "accent": "80bbae",
+      "dark": "252e3b"
+    },
+    "Female": {
+      "id": "necromancer_female",
+      "title": "Veilkeeper",
+      "cloth": "615574",
+      "accent": "80bbae",
+      "dark": "252e3b"
+    }
+  }
+}

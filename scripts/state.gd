@@ -33,7 +33,7 @@ func reset():
  hero.progression_version=GameRules.PROGRESSION_VERSION
  hero.progression_archive={}
  hero.points=GameRules.POINTS_PER_LEVEL
- hero.profile={"created":false,"economy":false,"name":"Traveler","skin":0,"hair":0,"dye":0}
+ hero.profile={"created":false,"economy":false,"name":"Traveler","sex":"Female","skin":0,"hair":0,"dye":0}
  hero.inventory=[]
  hero.class_mastery={"Paladin":0,"Ranger":0,"Druid":0}
  hero.weapon_mastery={}
@@ -251,13 +251,13 @@ func new_adventure():
  for slot in hero.equipment: hero.equipment[slot]="None"
  hero.gold=120
  hero.potions=3
-func create_hero(name_: String, primary: String, skin: int, hair: int, dye: int, secondary: Array=[]) -> bool:
- if hero.profile.created or not classes.has(primary): return false
+func create_hero(name_: String, primary: String, skin: int, hair: int, dye: int, secondary: Array=[], sex: String="Female") -> bool:
+ if hero.profile.created or not classes.has(primary) or sex not in ["Male","Female"]: return false
  if secondary.is_empty(): secondary=classes[primary].recommended_secondary.duplicate()
  if secondary.size()!=2 or secondary[0]==secondary[1] or secondary.has(primary): return false
  for value in secondary:
   if not classes.has(value): return false
- hero.profile.merge({"created":true,"name":name_.strip_edges().left(20) if not name_.strip_edges().is_empty() else "Traveler","skin":clampi(skin,0,2),"hair":clampi(hair,0,2),"dye":clampi(dye,0,2)},true)
+ hero.profile.merge({"created":true,"sex":sex,"name":name_.strip_edges().left(20) if not name_.strip_edges().is_empty() else "Traveler","skin":clampi(skin,0,2),"hair":clampi(hair,0,2),"dye":clampi(dye,0,2)},true)
  hero.primary=primary
  hero.secondary=secondary.duplicate()
  restore()

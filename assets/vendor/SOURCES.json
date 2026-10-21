@@ -166,6 +166,14 @@
       "assets/vendor/quaternius/characters/SOURCE-README.md": {
         "sha256": "59f0e9b7078beb2be3c1200deffb424ab151a2b0349d2ebbe8234c90106388e3",
         "source_url": "https://raw.githubusercontent.com/ibra-kdbra/Generate_infinite/027491fa5d30788d26fc707bddf6c8cdb48ad1f4/README.md"
+      },
+      "assets/vendor/quaternius/characters/male_ranger.glb": {
+        "sha256": "ddac5a1a98bb282de084e0f8da84b208a9e37379ed4af3c9f5db2109c69ded5e",
+        "source_url": "https://raw.githubusercontent.com/ibra-kdbra/Generate_infinite/027491fa5d30788d26fc707bddf6c8cdb48ad1f4/public/models/characters/male_ranger.glb"
+      },
+      "assets/vendor/quaternius/characters/male_peasant.glb": {
+        "sha256": "5dc36eba08e6b8387966a6d2a22d9117965480ec7d0a99cd919a74a181aa708a",
+        "source_url": "https://raw.githubusercontent.com/ibra-kdbra/Generate_infinite/027491fa5d30788d26fc707bddf6c8cdb48ad1f4/public/models/characters/male_peasant.glb"
       }
     }
   },

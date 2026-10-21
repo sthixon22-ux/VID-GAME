@@ -5,7 +5,9 @@ const SOURCES=["res://assets/vendor/quaternius/animation/AnimationLibrary_Godot_
 static var libraries:Dictionary={}
 static func build(target:Skeleton3D)->AnimationLibrary:
  var height=target.get_bone_rest(target.find_bone("Hips")).origin.y
- if libraries.has(height):return libraries[height]
+ var signature=str(height)
+ for index in range(target.get_bone_count()):signature+="|"+String(target.get_bone_name(index))
+ if libraries.has(signature):return libraries[signature]
  var cached=AnimationLibrary.new()
  for path in SOURCES:
   var source=load(path).instantiate()
@@ -29,5 +31,5 @@ static func build(target:Skeleton3D)->AnimationLibrary:
    anim.loop_mode=Animation.LOOP_LINEAR if clip in ["Idle","Walk","Sprint","Sword_Idle","Idle_Shield","Spell_Simple_Idle"] else Animation.LOOP_NONE
    cached.add_animation(clip,anim)
   source.free()
- libraries[height]=cached
+ libraries[signature]=cached
  return cached

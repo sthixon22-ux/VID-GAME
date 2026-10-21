@@ -129,3 +129,7 @@ Open `art_lab/comparison.tscn` and press **F6** to compare the current hero agai
 ## Approved Quaternius hero
 
 The selected Quaternius character is now the playable hero. Open `project.godot` and press **F5** for the game; use **F6** on `art_lab/comparison.tscn` only for the comparison. All 12 primary classes and any two distinct secondary classes remain selectable. Existing saves keep their class, equipment and progression data. The current free wardrobe has two authored outfits; fitted plate/robe sets and weapon-specific animation polish remain future work. See [integration details and licenses](docs/QUATERNIUS_HERO.md).
+
+## Male/female class appearance
+
+**New Adventure → Create Your Hero → Character: Male / Female.** Choose any of the 12 primary classes to preview its matching look; your two secondary classes remain unrestricted. There are 24 class looks using shared authored Quaternius bodies/outfits with custom class textures and crests. Body choice saves with the hero and does not change stats. [View all looks and details](docs/CLASS_SKINS.md).

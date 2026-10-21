@@ -47,3 +47,7 @@ godot --headless --path . res://art_lab/validate.tscn
 Use isolated Godot user-data directories for automated suites: tests intentionally exercise save/reset and should not share a player's save location. Windows-specific GPU rendering has not been tested here.
 
 Final results: fresh-cache import passed without errors; nine gameplay suites passed **985 checks**, the new hero integration suite passed **136 checks**, and the preserved comparison suite passed **75 checks**: **1,196 checks, zero failures**. The 136 hero checks also passed on the fresh-import copy. Actual rendered game and close-up captures showed sword attacks, blocking, spells, death, traveler/ranger outfits and equipment; selected captures are in `docs/screenshots/quaternius/`. Existing generated helmet/limb gear remains visibly provisional.
+
+### Subsequent male/female class skins
+
+The single-body limitation above is superseded by `docs/CLASS_SKINS.md`: both authored male/female ranger and peasant models now support 24 class looks with original class texture derivatives and crests. The earlier 1,196-check count describes the first integration, before this addition. Shared outfit geometry and the need for more fitted armor/robe sets remain limitations.

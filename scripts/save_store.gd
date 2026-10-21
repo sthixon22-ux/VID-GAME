@@ -52,6 +52,7 @@ static func valid_nested(data: Dictionary) -> bool:
  if data.has("profile"):
   var profile: Dictionary=data.profile
   if profile.has("name") and not profile.name is String: return false
+  if profile.has("sex") and (not profile.sex is String or profile.sex not in ["Male","Female"]): return false
   for key in ["skin","hair","dye"]:
    if profile.has(key) and (not numeric(profile[key]) or float(profile[key])<0 or float(profile[key])>2): return false
  for key in ["primary"]:

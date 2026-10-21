@@ -1,0 +1,338 @@
+{
+  "assets/textures/class_skins/paladin_male_ranger.webp": {
+    "source_model": "male_ranger.glb",
+    "sha256": "e8dd74db77dd79fa1de4756c8285e18a05ba3a5d08a1ce4fe2333df4ceff5912",
+    "class": "Paladin",
+    "sex": "Male",
+    "outfit": "ranger"
+  },
+  "assets/textures/class_skins/ranger_male_ranger.webp": {
+    "source_model": "male_ranger.glb",
+    "sha256": "c225ad1bc5f1fa94e3e14fe0aca24fd9380056370e665e4bc315fee24132aa25",
+    "class": "Ranger",
+    "sex": "Male",
+    "outfit": "ranger"
+  },
+  "assets/textures/class_skins/druid_male_ranger.webp": {
+    "source_model": "male_ranger.glb",
+    "sha256": "222a980e8c87e4aa9d27080facd3f624a3506e8e7ea6b2597eb8ca57e8c62e98",
+    "class": "Druid",
+    "sex": "Male",
+    "outfit": "ranger"
+  },
+  "assets/textures/class_skins/warrior_male_ranger.webp": {
+    "source_model": "male_ranger.glb",
+    "sha256": "38cc2d88b6cfff3e8e5764f7a1824df227ddfcbbc1b8977e40ee3a61ee18b5ef",
+    "class": "Warrior",
+    "sex": "Male",
+    "outfit": "ranger"
+  },
+  "assets/textures/class_skins/barbarian_male_ranger.webp": {
+    "source_model": "male_ranger.glb",
+    "sha256": "c5661c0a15a0906efb5fba3872d41ccf7a310f9078b25f87bee698a7695443fd",
+    "class": "Barbarian",
+    "sex": "Male",
+    "outfit": "ranger"
+  },
+  "assets/textures/class_skins/wizard_male_ranger.webp": {
+    "source_model": "male_ranger.glb",
+    "sha256": "2fef6a52d581efa6abd62d0c5a6b38ca59926f52e541575ec0e43a6c799c25c3",
+    "class": "Wizard",
+    "sex": "Male",
+    "outfit": "ranger"
+  },
+  "assets/textures/class_skins/sorcerer_male_ranger.webp": {
+    "source_model": "male_ranger.glb",
+    "sha256": "65e8a1b7f9cfa5460bb0de16ce3b99a2727f95f25f3d50fc0293244d0f614b6e",
+    "class": "Sorcerer",
+    "sex": "Male",
+    "outfit": "ranger"
+  },
+  "assets/textures/class_skins/healer_male_ranger.webp": {
+    "source_model": "male_ranger.glb",
+    "sha256": "b5db4f82db31c15ef81f5ed133d2bb880098c7a6baa7d2e5a9037b1833e005f4",
+    "class": "Healer",
+    "sex": "Male",
+    "outfit": "ranger"
+  },
+  "assets/textures/class_skins/rogue_male_ranger.webp": {
+    "source_model": "male_ranger.glb",
+    "sha256": "fc3392eabb420d8cc89072c9bcab6d4ba9527704185a27d5a857c9bd263553c7",
+    "class": "Rogue",
+    "sex": "Male",
+    "outfit": "ranger"
+  },
+  "assets/textures/class_skins/assassin_male_ranger.webp": {
+    "source_model": "male_ranger.glb",
+    "sha256": "364b72531e67ad041769f206b8b939e59274cf83170212baf04b27d0ce86db2d",
+    "class": "Assassin",
+    "sex": "Male",
+    "outfit": "ranger"
+  },
+  "assets/textures/class_skins/monk_male_ranger.webp": {
+    "source_model": "male_ranger.glb",
+    "sha256": "f0d90264b4c51eaef3e8fd83a4026a0cf4467065edcb92f6ee16dd8ca984549e",
+    "class": "Monk",
+    "sex": "Male",
+    "outfit": "ranger"
+  },
+  "assets/textures/class_skins/necromancer_male_ranger.webp": {
+    "source_model": "male_ranger.glb",
+    "sha256": "33814b674743724b04795fa2f082a9e76ba64a696c62f7a0688c94af9553395c",
+    "class": "Necromancer",
+    "sex": "Male",
+    "outfit": "ranger"
+  },
+  "assets/textures/class_skins/paladin_male_traveler.webp": {
+    "source_model": "male_peasant.glb",
+    "sha256": "87bfc8c7f24ba1827fd332b56261f4ed9bea589007af40588448fce59d24f7c5",
+    "class": "Paladin",
+    "sex": "Male",
+    "outfit": "traveler"
+  },
+  "assets/textures/class_skins/ranger_male_traveler.webp": {
+    "source_model": "male_peasant.glb",
+    "sha256": "398d3c9bab568b646f3f61ca61bd22c5becfa18546ddf230cfbbbad2e1b649d2",
+    "class": "Ranger",
+    "sex": "Male",
+    "outfit": "traveler"
+  },
+  "assets/textures/class_skins/druid_male_traveler.webp": {
+    "source_model": "male_peasant.glb",
+    "sha256": "a9ee404f85e9841034b367feb4793083d3cecbe4485df66ec612f6593314c875",
+    "class": "Druid",
+    "sex": "Male",
+    "outfit": "traveler"
+  },
+  "assets/textures/class_skins/warrior_male_traveler.webp": {
+    "source_model": "male_peasant.glb",
+    "sha256": "d0a10e322f13c9da4e9a924fbfe1a7a01c4788c5370e80d0fb9b724856bcb208",
+    "class": "Warrior",
+    "sex": "Male",
+    "outfit": "traveler"
+  },
+  "assets/textures/class_skins/barbarian_male_traveler.webp": {
+    "source_model": "male_peasant.glb",
+    "sha256": "f517d3a7937e7051912c16d03ac9ac58c32745677c33cfad2f409701feff1aee",
+    "class": "Barbarian",
+    "sex": "Male",
+    "outfit": "traveler"
+  },
+  "assets/textures/class_skins/wizard_male_traveler.webp": {
+    "source_model": "male_peasant.glb",
+    "sha256": "1cc45be85cf71dc6caec75ffb020e30efea53e08c4377c341f99d86ec6516056",
+    "class": "Wizard",
+    "sex": "Male",
+    "outfit": "traveler"
+  },
+  "assets/textures/class_skins/sorcerer_male_traveler.webp": {
+    "source_model": "male_peasant.glb",
+    "sha256": "c6a8aa92d18a97498cfbdaae8de7a3bd42117085b40362a8024025fddff7673e",
+    "class": "Sorcerer",
+    "sex": "Male",
+    "outfit": "traveler"
+  },
+  "assets/textures/class_skins/healer_male_traveler.webp": {
+    "source_model": "male_peasant.glb",
+    "sha256": "b4338e74cac9bcdc4b3d552797bc526ac11219d18bcf392b8a7ab82305d84582",
+    "class": "Healer",
+    "sex": "Male",
+    "outfit": "traveler"
+  },
+  "assets/textures/class_skins/rogue_male_traveler.webp": {
+    "source_model": "male_peasant.glb",
+    "sha256": "36e09cce45370b5725ce6a68805c3e0f5cc40c765edbc89982b8da91f54c3240",
+    "class": "Rogue",
+    "sex": "Male",
+    "outfit": "traveler"
+  },
+  "assets/textures/class_skins/assassin_male_traveler.webp": {
+    "source_model": "male_peasant.glb",
+    "sha256": "5878375b3978c6fc8f085f105cf73f6f9dce9d11ace97a4774dc47bf1ac3aad8",
+    "class": "Assassin",
+    "sex": "Male",
+    "outfit": "traveler"
+  },
+  "assets/textures/class_skins/monk_male_traveler.webp": {
+    "source_model": "male_peasant.glb",
+    "sha256": "d8db46a0295305c2c723b9180b1c124b96f432e92279e120c006b0e6b52856c4",
+    "class": "Monk",
+    "sex": "Male",
+    "outfit": "traveler"
+  },
+  "assets/textures/class_skins/necromancer_male_traveler.webp": {
+    "source_model": "male_peasant.glb",
+    "sha256": "88c1dfacbb8ac6d610e812706820bdaacb958e951538c6c11755c06baefbdce9",
+    "class": "Necromancer",
+    "sex": "Male",
+    "outfit": "traveler"
+  },
+  "assets/textures/class_skins/paladin_female_ranger.webp": {
+    "source_model": "female_ranger.glb",
+    "sha256": "6478f29c7607208364a2c740068b39ea8fa745edcebe8f5451f4be5c1f32fa46",
+    "class": "Paladin",
+    "sex": "Female",
+    "outfit": "ranger"
+  },
+  "assets/textures/class_skins/ranger_female_ranger.webp": {
+    "source_model": "female_ranger.glb",
+    "sha256": "8f555947f1610f9f3492f9160558bcc0f553cf2f572a45a89c5572ba25598a46",
+    "class": "Ranger",
+    "sex": "Female",
+    "outfit": "ranger"
+  },
+  "assets/textures/class_skins/druid_female_ranger.webp": {
+    "source_model": "female_ranger.glb",
+    "sha256": "fde3a0493bdb1647ad9176b3ca2f1bda6ddce971a2ef71d6474283bab1bbd420",
+    "class": "Druid",
+    "sex": "Female",
+    "outfit": "ranger"
+  },
+  "assets/textures/class_skins/warrior_female_ranger.webp": {
+    "source_model": "female_ranger.glb",
+    "sha256": "cde473193552896221a7b6603f6001fff7537b989800d2633e82a5e14dae88cb",
+    "class": "Warrior",
+    "sex": "Female",
+    "outfit": "ranger"
+  },
+  "assets/textures/class_skins/barbarian_female_ranger.webp": {
+    "source_model": "female_ranger.glb",
+    "sha256": "5ce6c0c02f5003e722dbe895149878fdf027632cd8a499a3328aaebd2c03b461",
+    "class": "Barbarian",
+    "sex": "Female",
+    "outfit": "ranger"
+  },
+  "assets/textures/class_skins/wizard_female_ranger.webp": {
+    "source_model": "female_ranger.glb",
+    "sha256": "ab5149b9e8b8190c03fb0ab70c15fc8e5cc49d4a54589b8cb0d04a5be6ffcd96",
+    "class": "Wizard",
+    "sex": "Female",
+    "outfit": "ranger"
+  },
+  "assets/textures/class_skins/sorcerer_female_ranger.webp": {
+    "source_model": "female_ranger.glb",
+    "sha256": "d31c5e345c111acd9fabdd9f8a5ed8d5fc2cd6ab62bb359a44c2ace00c35435d",
+    "class": "Sorcerer",
+    "sex": "Female",
+    "outfit": "ranger"
+  },
+  "assets/textures/class_skins/healer_female_ranger.webp": {
+    "source_model": "female_ranger.glb",
+    "sha256": "6e5a5e44e5a02f38a45b1ff88701f09c64f6d2c7fc2eb35e1d873adb4cdf610b",
+    "class": "Healer",
+    "sex": "Female",
+    "outfit": "ranger"
+  },
+  "assets/textures/class_skins/rogue_female_ranger.webp": {
+    "source_model": "female_ranger.glb",
+    "sha256": "ff59a9ebaaa4d18d752f25cde9af3dc8c7d174b7cf341ebee637aa7a21d349b2",
+    "class": "Rogue",
+    "sex": "Female",
+    "outfit": "ranger"
+  },
+  "assets/textures/class_skins/assassin_female_ranger.webp": {
+    "source_model": "female_ranger.glb",
+    "sha256": "171b5335c6bb52112ee42980144b94de35a2ef405999fd745d2b4a7d75b46c28",
+    "class": "Assassin",
+    "sex": "Female",
+    "outfit": "ranger"
+  },
+  "assets/textures/class_skins/monk_female_ranger.webp": {
+    "source_model": "female_ranger.glb",
+    "sha256": "0b1a8a54b5a2225c05d88755fb4be31e12e4195ad04ec4a2edac479d78e9687d",
+    "class": "Monk",
+    "sex": "Female",
+    "outfit": "ranger"
+  },
+  "assets/textures/class_skins/necromancer_female_ranger.webp": {
+    "source_model": "female_ranger.glb",
+    "sha256": "7a04311729976087fca60399d2cbb0e1909f9781dfbca274919733bea5069e92",
+    "class": "Necromancer",
+    "sex": "Female",
+    "outfit": "ranger"
+  },
+  "assets/textures/class_skins/paladin_female_traveler.webp": {
+    "source_model": "female_peasant.glb",
+    "sha256": "29da6c97ed7d9cea40516a86ccedf76cd4806643907511c0cbba9018993384ac",
+    "class": "Paladin",
+    "sex": "Female",
+    "outfit": "traveler"
+  },
+  "assets/textures/class_skins/ranger_female_traveler.webp": {
+    "source_model": "female_peasant.glb",
+    "sha256": "b60a17734ae13f8045bcbc73f5839b1ed774dbd6bc617cae0ab5e117620f1927",
+    "class": "Ranger",
+    "sex": "Female",
+    "outfit": "traveler"
+  },
+  "assets/textures/class_skins/druid_female_traveler.webp": {
+    "source_model": "female_peasant.glb",
+    "sha256": "bd56215919dfe380febfff3226dd1a37c2ed55c026a07eafe4119ec457497dcb",
+    "class": "Druid",
+    "sex": "Female",
+    "outfit": "traveler"
+  },
+  "assets/textures/class_skins/warrior_female_traveler.webp": {
+    "source_model": "female_peasant.glb",
+    "sha256": "bff4fa8ee1610a1815d8f9edaba7f5fea7198e09e3e0471ab399154eb5f0c7e5",
+    "class": "Warrior",
+    "sex": "Female",
+    "outfit": "traveler"
+  },
+  "assets/textures/class_skins/barbarian_female_traveler.webp": {
+    "source_model": "female_peasant.glb",
+    "sha256": "b89c147ae14dc824f441b557ae5595916f78ac5b6d42c4c626fbce803310f431",
+    "class": "Barbarian",
+    "sex": "Female",
+    "outfit": "traveler"
+  },
+  "assets/textures/class_skins/wizard_female_traveler.webp": {
+    "source_model": "female_peasant.glb",
+    "sha256": "78798f9f79541c10e61d073eba9eab16b567c96e035ba9b6c148032e03a28df2",
+    "class": "Wizard",
+    "sex": "Female",
+    "outfit": "traveler"
+  },
+  "assets/textures/class_skins/sorcerer_female_traveler.webp": {
+    "source_model": "female_peasant.glb",
+    "sha256": "3acf940528c43d2a2522af0403826dd7f113bca181e843256ef42b2327f29d3f",
+    "class": "Sorcerer",
+    "sex": "Female",
+    "outfit": "traveler"
+  },
+  "assets/textures/class_skins/healer_female_traveler.webp": {
+    "source_model": "female_peasant.glb",
+    "sha256": "ab7ea8cecedb384b7dd1e7e98c4fea7e4176651c769526dfe944898e8f534cea",
+    "class": "Healer",
+    "sex": "Female",
+    "outfit": "traveler"
+  },
+  "assets/textures/class_skins/rogue_female_traveler.webp": {
+    "source_model": "female_peasant.glb",
+    "sha256": "d7c995dd17236d52073b5ebcd21b04137dfecb6aa7d4593d7935a03fe7a96f82",
+    "class": "Rogue",
+    "sex": "Female",
+    "outfit": "traveler"
+  },
+  "assets/textures/class_skins/assassin_female_traveler.webp": {
+    "source_model": "female_peasant.glb",
+    "sha256": "81f81545a481f91f583cf42af2a463ec76363f26f0337eca16a8757c29abdef1",
+    "class": "Assassin",
+    "sex": "Female",
+    "outfit": "traveler"
+  },
+  "assets/textures/class_skins/monk_female_traveler.webp": {
+    "source_model": "female_peasant.glb",
+    "sha256": "4aecd6d2d0c42f4c0092b1a00ba54cfdec7f893501f6298beb255499804f4689",
+    "class": "Monk",
+    "sex": "Female",
+    "outfit": "traveler"
+  },
+  "assets/textures/class_skins/necromancer_female_traveler.webp": {
+    "source_model": "female_peasant.glb",
+    "sha256": "e252cd1866a91c7389fde94eaa43b485d3fca82e48aa75cc7619a0504ce83d91",
+    "class": "Necromancer",
+    "sex": "Female",
+    "outfit": "traveler"
+  }
+}

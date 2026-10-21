@@ -50,7 +50,7 @@ func run():
   check(hero.play_action(action)>0 and hero.player.has_animation(hero.player.current_animation),"Mapped action plays: "+action)
  var traveler=HeroVisual.new({"Weapon":"None","Shield":"None","Chest":"None"})
  add_child(traveler)
- check(traveler.outfit_id=="traveler" and traveler.find_child("EquippedWeapon",true,false)==null,"New adventure is visibly unequipped in authored traveler clothing")
+ check(traveler.skin_id=="paladin_female" and traveler.find_child("EquippedWeapon",true,false)==null,"New adventure is visibly unequipped in authored traveler clothing")
  for item in State.equipment_data:
   if State.equipment_data[item].slot!="Weapon":continue
   var equipped=gear.duplicate()

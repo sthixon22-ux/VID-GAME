@@ -22,15 +22,22 @@ var guarding=false
 var last_action=""
 var current_motion=""
 var outfit_id=""
+var skin_id=""
+var skin_profile:Dictionary
+var sex="Female"
 func _init(equipment:Dictionary={},appearance:Dictionary={}):
  gear=equipment.duplicate(true)
  body=Node3D.new()
  body.name="Body"
  add_child(body)
  var chest:String=gear.get("Chest","None")
- outfit_id="traveler" if chest in ["None","Traveler's Clothing"] else "ranger"
- var path="res://assets/vendor/quaternius/characters/female_peasant.glb" if outfit_id=="traveler" else "res://assets/vendor/quaternius/characters/female_ranger.glb"
- model=load(path).instantiate()
+ skin_profile=HeroSkinBook.profile(str(appearance.get("class","Paladin")),str(appearance.get("sex","Female")))
+ sex=skin_profile.sex
+ skin_id=skin_profile.id
+ outfit_id="traveler" if skin_profile.outfit=="peasant" else "ranger"
+ if chest in ["Steel Cuirass","Leather Vest"]:outfit_id="ranger"
+ elif chest=="Verdant Robe":outfit_id="traveler"
+ model=load(HeroSkinBook.model_path(sex,outfit_id)).instantiate()
  model.name="QuaterniusTraveler" if outfit_id=="traveler" else "QuaterniusRanger"
  body.add_child(model)
  # Source faces +Z; game movement/look_at uses -Z. Same world height in every scene.
@@ -47,24 +54,28 @@ func _init(equipment:Dictionary={},appearance:Dictionary={}):
 func configure_appearance(appearance:Dictionary,chest:String):
  var skin_colors=[Color.WHITE,Color("cfa985"),Color("906951")]
  var hair_colors=[Color("493022"),Color("bc9455"),Color("bbc3cc")]
- var cloth_colors=[Color("859eb8"),Color.WHITE,Color("b58291")]
+ var cloth_colors=[Color.WHITE,Color("b1c7ae"),Color("d2a5b3")]
+ var cloth_texture=load(HeroSkinBook.texture_path(skin_id,outfit_id))
  for mesh in model.find_children("*","MeshInstance3D",true,false):
   var name_=String(mesh.name)
-  # Ranger hood is a real authored skinned part, controlled by the helmet slot.
-  if name_.contains("Head_Hood"):mesh.visible=gear.get("Helmet","None")=="Ranger Hood"
+  var helmet:String=gear.get("Helmet","None")
+  if name_.contains("Head_Hood"):
+   mesh.visible=helmet=="Ranger Hood" or (helmet=="None" and skin_profile.hood)
+  if name_.contains("Acc_Pauldron"):mesh.visible=skin_profile.pauldrons or chest=="Steel Cuirass"
   for surface in range(mesh.mesh.get_surface_count()):
    var original=mesh.get_active_material(surface)
    if not original is StandardMaterial3D:continue
    var material:StandardMaterial3D=original.duplicate()
-   if name_=="Superhero_Female" or name_.ends_with("_Arms"):
+   var material_name=String(original.resource_name)
+   if material_name.contains("Superhero") or material_name.contains("Regular"):
     material.albedo_color*=skin_colors[clampi(int(appearance.get("skin",0)),0,2)]
-   elif name_.contains("Hair") or name_=="Eyebrows":
+   elif material_name.contains("Hair"):
     material.albedo_color=hair_colors[clampi(int(appearance.get("hair",0)),0,2)]
-   elif not name_ in ["Eyes","Eyebrows"]:
-    material.albedo_color*=cloth_colors[clampi(int(appearance.get("dye",1)),0,2)]
-    if chest=="Verdant Robe":material.albedo_color*=Color("8db6b0")
-    elif chest=="Steel Cuirass" and name_.contains("Body"):
-     material.albedo_color=Color("9aabb6");material.metallic=.65;material.roughness=.38
+   elif material_name in ["MI_Ranger","MI_Peasant"]:
+    material.albedo_texture=cloth_texture
+    material.albedo_color=cloth_colors[clampi(int(appearance.get("dye",0)),0,2)]
+    if chest=="Steel Cuirass" and name_.contains("Body"):
+     material.metallic=.55;material.roughness=.4
    mesh.set_surface_override_material(surface,material)
 func attach_equipment():
  var weapon:String=gear.get("Weapon","None")
