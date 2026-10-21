@@ -55,3 +55,7 @@ The active hero meshes in `models/heroes/` now replace the KayKit body geometry 
 - Rebuild the active hero meshes with `blender --background --factory-startup --python tools/build_natural_hero.py`. If rebuilding every original art asset, run this **after** `build_rpg_art.py`, which produces the older hero variants. No source geometry download or Blender installation is needed to play.
 
 The 0.8 hero description above documents the previous release; these new hero GLBs supersede its proportions and palette material. Companions and enemies remain the 0.8 original meshes with simpler segmented motion.
+
+## Art-development review assets (not production replacements)
+
+The optional comparison scene in `art_lab/` vendors separately licensed Quaternius Standard derivatives/animations, a 2021 CC0 animated wolf, two official VRM sample avatars, and the MIT Godot VRM/MToon addon. See [the complete pinned source and permission manifest](../art_lab/SOURCES.json), [required attribution and controls](../art_lab/README.md) and [audit](../art_lab/reports/VISUAL_AUDIT.md). These models are not used by production hero, enemy or companion factories. Seed-san requires credit to VirtualCast, Inc.; VRM content is not blanket CC0. Bestiary models were excluded after inspecting their QAL license rather than accepting a mirror's general CC0 claim.

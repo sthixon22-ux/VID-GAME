@@ -121,3 +121,7 @@ Combat lives in `combat.gd`, data/rules in `data/` and `game_rules.gd`, persiste
 This is an expanded playable demo, not a finished commercial release. The art pass replaces primitive companions/enemies/weapons and adds armor detail, natural human hero proportions and facial topology, cutout foliage, layered ridgelines and material maps, but remains a work in progress. Hero geometry derives from the credited CC0 MakeHuman base and motion uses the credited CC0 KayKit rig; companions use simpler segmented animation. Terrain is mostly flat, followers can cut corners, armor may clip in some poses, and portraits do not match customization dynamically.
 
 A timed Windows playtest, audio listening, deeper balance/accessibility review and controller support remain outstanding. There is no level-50 campaign, mounted/flight traversal, crafting/selling, multi-enemy battle system, voice acting or full-game postgame campaign. Desktop UI uses a 1280×720 logical canvas with scaling and scrollable overflow.
+
+## Art-development comparison (review only)
+
+Open `art_lab/comparison.tscn` and press **F6** to compare the current hero against the downloaded Quaternius and anime VRM pipelines. F5 still runs the game. The lab includes six motion previews, facial-expression controls, outfit parts and an animated wolf comparison; production art and all twelve class choices remain unchanged. See [the lab instructions](art_lab/README.md) and [visual audit/recommendation](art_lab/reports/VISUAL_AUDIT.md).

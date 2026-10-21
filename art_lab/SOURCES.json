@@ -1,0 +1,1265 @@
+{
+  "review_date": "2026-10-20",
+  "timezone": "America/Phoenix",
+  "scope": "Separate art-development review only; no production asset replacements",
+  "sources": [
+    {
+      "id": "quaternius_characters",
+      "author": "Quaternius; derivative assembly in ibra-kdbra/Generate_infinite",
+      "license": "CC0-1.0 (named original Standard packs, declared by source attribution)",
+      "official_source": "https://quaternius.com/packs/universalbasecharacters.html",
+      "notes": "Third-party assembled derivatives: Universal Base Characters Standard head/eyes/brows/hair + Modular Character Outfits Fantasy Standard clothes, one skeleton, WebP textures. No Source/Pro archive downloaded. Explicit original-pack attribution is preserved; not represented as pristine upstream exports.",
+      "files": {
+        "art_lab/assets/quaternius_characters/female_ranger.glb": {
+          "sha256": "09ca05f995326decd7aada64fbaa8ca0292d20efacdfb1cc5f317181816d2f55",
+          "source_url": "https://raw.githubusercontent.com/ibra-kdbra/Generate_infinite/027491fa5d30788d26fc707bddf6c8cdb48ad1f4/public/models/characters/female_ranger.glb"
+        },
+        "art_lab/assets/quaternius_characters/female_peasant.glb": {
+          "sha256": "068df761750b42dd81ad85ac1498445edc5daa360a9a76633869fdbde2d38cf0",
+          "source_url": "https://raw.githubusercontent.com/ibra-kdbra/Generate_infinite/027491fa5d30788d26fc707bddf6c8cdb48ad1f4/public/models/characters/female_peasant.glb"
+        },
+        "art_lab/assets/quaternius_characters/SOURCE-README.md": {
+          "sha256": "59f0e9b7078beb2be3c1200deffb424ab151a2b0349d2ebbe8234c90106388e3",
+          "source_url": "https://raw.githubusercontent.com/ibra-kdbra/Generate_infinite/027491fa5d30788d26fc707bddf6c8cdb48ad1f4/README.md"
+        }
+      },
+      "license_evidence": [
+        "art_lab/assets/quaternius_characters/SOURCE-README.md",
+        "art_lab/assets/quaternius_characters/LICENSE-OUTFITS-STANDARD.txt",
+        "art_lab/assets/quaternius_characters/LICENSE-CC0.txt"
+      ],
+      "modifications": [
+        "Godot humanoid bone-map import settings only; source GLBs unchanged"
+      ]
+    },
+    {
+      "id": "outfit_license",
+      "author": "Quaternius",
+      "license": "CC0-1.0",
+      "official_source": "https://quaternius.com/packs/modularcharacteroutfitsfantasy.html",
+      "notes": "Exact original free Standard notice: subset only; remaining outfits/parts require paid Source edition. No paid files used.",
+      "files": {
+        "art_lab/assets/quaternius_characters/LICENSE-OUTFITS-STANDARD.txt": {
+          "sha256": "2202cc2f608c4210790b112e5f121bc2e7f8dced7b5b1c7f4be6203461bdebbb",
+          "source_url": "https://raw.githubusercontent.com/agentkaerf/FreeModels/db3df04d1e4714298a09510b26fb6de6645138a2/Modular%20Character%20Outfits%20-%20Fantasy%5BStandard%5D/License_Standard.txt"
+        }
+      }
+    },
+    {
+      "id": "ual1_standard",
+      "author": "Quaternius",
+      "license": "CC0-1.0",
+      "official_source": "https://quaternius.itch.io/universal-animation-library",
+      "notes": "46 actual source clips; source README explicitly identifies free Standard subset. Source assets unmodified; bone map configured only in Godot .import.",
+      "files": {
+        "art_lab/assets/quaternius_animation/AnimationLibrary_Godot_Standard.gltf": {
+          "sha256": "0ff075c7ad6855c5c2c37a171592ee8f0d6ab2f58259e2be77a9b63dd8027765",
+          "source_url": "https://raw.githubusercontent.com/J-Ponzo/gltf-universal-animation-library/e24c23cf2a1323488a3faa226ea7ea21f644b73e/glTF/AnimationLibrary_Godot_Standard.gltf"
+        },
+        "art_lab/assets/quaternius_animation/AnimationLibrary_Godot_Standard.bin": {
+          "sha256": "6e65377d81558333c4093dbb144a48fd19019343d82b1a3a7992a98ec0e0543c",
+          "source_url": "https://raw.githubusercontent.com/J-Ponzo/gltf-universal-animation-library/e24c23cf2a1323488a3faa226ea7ea21f644b73e/glTF/AnimationLibrary_Godot_Standard.bin"
+        },
+        "art_lab/assets/quaternius_animation/LICENSE": {
+          "sha256": "a2010f343487d3f7618affe54f789f5487602331c0a8d03f49e9a7c547cf0499",
+          "source_url": "https://raw.githubusercontent.com/J-Ponzo/gltf-universal-animation-library/e24c23cf2a1323488a3faa226ea7ea21f644b73e/LICENSE"
+        },
+        "art_lab/assets/quaternius_animation/README.md": {
+          "sha256": "370e6ff244ef43b269f936be7d630a77a3eb7ed8bbc3315ffcae5b327b814fcb",
+          "source_url": "https://raw.githubusercontent.com/J-Ponzo/gltf-universal-animation-library/e24c23cf2a1323488a3faa226ea7ea21f644b73e/README.md"
+        }
+      }
+    },
+    {
+      "id": "ual2_standard",
+      "author": "Quaternius",
+      "license": "CC0-1.0",
+      "official_source": "https://quaternius.com/packs/universalanimationlibrary2.html",
+      "notes": "43 actual source clips; free Standard path and included CC0 notice verified. Source GLB unchanged; separate humanoid bone map configured.",
+      "files": {
+        "art_lab/assets/quaternius_animation2/UAL2_Standard.glb": {
+          "sha256": "9a0ffda4931f934f13fb584002c51673723b03f9655a581167e7e5dae744f086",
+          "source_url": "https://raw.githubusercontent.com/agentkaerf/FreeModels/db3df04d1e4714298a09510b26fb6de6645138a2/Universal%20Animation%20Library%202%5BStandard%5D/Unreal-Godot/UAL2_Standard.glb"
+        },
+        "art_lab/assets/quaternius_animation2/LICENSE.txt": {
+          "sha256": "f9b1de4e8feff135555ac1c7d2eec65035a05fd74e4d632a3f826ac985c3f22c",
+          "source_url": "https://raw.githubusercontent.com/agentkaerf/FreeModels/db3df04d1e4714298a09510b26fb6de6645138a2/Universal%20Animation%20Library%202%5BStandard%5D/License.txt"
+        }
+      }
+    },
+    {
+      "id": "animated_wolf_2021",
+      "author": "Quaternius",
+      "license": "CC0-1.0",
+      "official_source": "https://quaternius.com/packs/ultimateanimatedanimals.html",
+      "notes": "2021 distribution with original CC0 notice. Twelve native actions. Self-contained embedded buffers; no source changes.",
+      "files": {
+        "art_lab/assets/quaternius_wolf/Wolf.gltf": {
+          "sha256": "09621fb810de6a3896fc392ac315b288d97960f9682f4d21e14b5809febdaa9e",
+          "source_url": "https://raw.githubusercontent.com/Tekh-ops/Ultimate-Animated-Animals-July-2021/ac2dbc3fcf82dd915b7fe1a8437efcca1618a311/glTF/Wolf.gltf"
+        },
+        "art_lab/assets/quaternius_wolf/License.txt": {
+          "sha256": "20b983ae0e2e555817495a65c37519bfcb2231825269db6a57d72c51ed6006e3",
+          "source_url": "https://raw.githubusercontent.com/Tekh-ops/Ultimate-Animated-Animals-July-2021/ac2dbc3fcf82dd915b7fe1a8437efcca1618a311/License.txt"
+        }
+      }
+    },
+    {
+      "id": "seed_san",
+      "author": "VirtualCast, Inc.",
+      "license": "VRM Public License 1.0",
+      "official_source": "https://github.com/vrm-c/vrm-specification/tree/94e82dd346fa6cf0337c4421728640e5252dd38e/samples/Seed-san",
+      "notes": "Embedded per-model permissions inspected before bundling; all source VRM bytes unchanged. Preview retargeting/visibility operates on scene instances only. Seed robot-arm accessory hidden by default, user-toggleable; Twist retained as known constraint diagnostic.",
+      "files": {
+        "art_lab/assets/vrm/seed/Seed-san.vrm": {
+          "sha256": "624d0d554bc205bbdc33e22a68a2c3c20edebb3e573011ead8878a65e5329b23",
+          "source_url": "https://raw.githubusercontent.com/vrm-c/vrm-specification/94e82dd346fa6cf0337c4421728640e5252dd38e/samples/Seed-san/vrm/Seed-san.vrm"
+        },
+        "art_lab/assets/vrm/seed/SOURCE.md": {
+          "sha256": "f0fdc21cf26437d9becd90a64d350bc0307fcfa172e1caea5aa39c52a5b3b9b6",
+          "source_url": "https://raw.githubusercontent.com/vrm-c/vrm-specification/94e82dd346fa6cf0337c4421728640e5252dd38e/samples/Seed-san/README.md"
+        }
+      },
+      "embedded_permissions": {
+        "allowAntisocialOrHateUsage": true,
+        "allowExcessivelySexualUsage": true,
+        "allowExcessivelyViolentUsage": true,
+        "allowPoliticalOrReligiousUsage": true,
+        "allowRedistribution": true,
+        "authors": [
+          "VirtualCast, Inc."
+        ],
+        "avatarPermission": "everyone",
+        "commercialUsage": "corporation",
+        "copyrightInformation": "VirtualCast, Inc.",
+        "creditNotation": "required",
+        "licenseUrl": "https://vrm.dev/licenses/1.0/",
+        "modification": "allowModificationRedistribution",
+        "name": "Seed-san",
+        "thumbnailImage": 14,
+        "version": "1"
+      },
+      "license_file": "art_lab/assets/vrm/LICENSE-VRM-PUBLIC-1.0.html",
+      "metadata_file": "art_lab/assets/vrm/seed/LICENSE-METADATA.json"
+    },
+    {
+      "id": "twist_sample",
+      "author": "pixiv Inc. (c) 2022",
+      "license": "VRM Public License 1.0",
+      "official_source": "https://github.com/vrm-c/vrm-specification/tree/94e82dd346fa6cf0337c4421728640e5252dd38e/samples/VRM1_Constraint_Twist_Sample",
+      "notes": "Embedded per-model permissions inspected before bundling; all source VRM bytes unchanged. Preview retargeting/visibility operates on scene instances only. Seed robot-arm accessory hidden by default, user-toggleable; Twist retained as known constraint diagnostic.",
+      "files": {
+        "art_lab/assets/vrm/VRM1_Constraint_Twist_Sample.vrm": {
+          "sha256": "12c2b97e95e700783a6a550dc0eee2d7880aeedccef9ae67bc4c5a2f0f2631a2",
+          "source_url": "https://raw.githubusercontent.com/vrm-c/vrm-specification/94e82dd346fa6cf0337c4421728640e5252dd38e/samples/VRM1_Constraint_Twist_Sample/vrm/VRM1_Constraint_Twist_Sample.vrm"
+        },
+        "art_lab/assets/vrm/SOURCE.md": {
+          "sha256": "079d48f0b8f15852e9b28b197c5c87c92c3fe7a614524a0afa939c74f649cc5a",
+          "source_url": "https://raw.githubusercontent.com/vrm-c/vrm-specification/94e82dd346fa6cf0337c4421728640e5252dd38e/samples/VRM1_Constraint_Twist_Sample/README.md"
+        }
+      },
+      "embedded_permissions": {
+        "allowAntisocialOrHateUsage": false,
+        "allowExcessivelySexualUsage": true,
+        "allowExcessivelyViolentUsage": true,
+        "allowPoliticalOrReligiousUsage": true,
+        "allowRedistribution": true,
+        "authors": [
+          "pixiv Inc."
+        ],
+        "avatarPermission": "everyone",
+        "commercialUsage": "corporation",
+        "copyrightInformation": "(c) 2022 pixiv Inc.",
+        "creditNotation": "unnecessary",
+        "licenseUrl": "https://vrm.dev/licenses/1.0/",
+        "modification": "allowModificationRedistribution",
+        "name": "VRM1_Constraint_Twist_Sample",
+        "thumbnailImage": 18,
+        "version": "v1.0.1"
+      },
+      "license_file": "art_lab/assets/vrm/LICENSE-VRM-PUBLIC-1.0.html",
+      "metadata_file": "art_lab/assets/vrm/LICENSE-METADATA.json"
+    },
+    {
+      "id": "vrm_license_document",
+      "author": "VRM Consortium",
+      "license": "VRM Public License 1.0",
+      "official_source": "https://vrm.dev/licenses/1.0/",
+      "notes": "Full official license document, retained together with the exact model permission fields.",
+      "files": {
+        "art_lab/assets/vrm/LICENSE-VRM-PUBLIC-1.0.html": {
+          "sha256": "3b7172907033476ecf66ab42d2bca93a641bf578708c4ce1569a4b025c5a0502",
+          "source_url": "https://raw.githubusercontent.com/vrm-c/vrm.dev/1b75c130374ccb891fa3e63cf6a644daa109144e/static/licenses/1.0/index.html"
+        }
+      }
+    },
+    {
+      "id": "godot_vrm_and_mtoon",
+      "author": "V-Sekai contributors; VRM Consortium; Masataka SUMI; Godot contributors, see licenses",
+      "license": "MIT",
+      "official_source": "https://github.com/V-Sekai/godot-vrm",
+      "commit": "e15199f980064028bfa4fbee5e70dddb82dd55c3",
+      "license_files": [
+        "addons/vrm/LICENSE",
+        "addons/Godot-MToon-Shader/LICENSE"
+      ],
+      "modifications": [
+        "Only already_processed guard in addons/vrm/1.0/VRMC_vrm.gd and addons/vrm/vrm_extension.gd; see addons/VERDANT_PATCHES.md"
+      ],
+      "files": {
+        "addons/vrm/.gitrepo": {
+          "sha256": "e0bdaa172b34b374afdc2fe405438c8acecaaf6a1f5acb3e7652538422584667",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/.gitrepo",
+          "upstream_sha256": "e0bdaa172b34b374afdc2fe405438c8acecaaf6a1f5acb3e7652538422584667"
+        },
+        "addons/vrm/1.0/VRMC_materials_hdr_emissiveMultiplier.gd": {
+          "sha256": "3e0882b31c6eb49e3702e32edaafc5c7dce85547ffe62c6eca10b3a686fee240",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/1.0/VRMC_materials_hdr_emissiveMultiplier.gd",
+          "upstream_sha256": "3e0882b31c6eb49e3702e32edaafc5c7dce85547ffe62c6eca10b3a686fee240"
+        },
+        "addons/vrm/1.0/VRMC_materials_hdr_emissiveMultiplier.gd.uid": {
+          "sha256": "2c495978e8185c29c112213d80a59a8a8b085be23add39f78e6e0b371bac4400",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/1.0/VRMC_materials_hdr_emissiveMultiplier.gd.uid",
+          "upstream_sha256": "2c495978e8185c29c112213d80a59a8a8b085be23add39f78e6e0b371bac4400"
+        },
+        "addons/vrm/1.0/VRMC_materials_mtoon.gd": {
+          "sha256": "75527e71162e08022e1309ea344e2d020596349f70a752d1acee0d09ed929cf6",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/1.0/VRMC_materials_mtoon.gd",
+          "upstream_sha256": "75527e71162e08022e1309ea344e2d020596349f70a752d1acee0d09ed929cf6"
+        },
+        "addons/vrm/1.0/VRMC_materials_mtoon.gd.uid": {
+          "sha256": "afbf7723ac8cf3aeeeb801297ab3ceb725d46fceecee77e84ee5d6e4cbbd60f8",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/1.0/VRMC_materials_mtoon.gd.uid",
+          "upstream_sha256": "afbf7723ac8cf3aeeeb801297ab3ceb725d46fceecee77e84ee5d6e4cbbd60f8"
+        },
+        "addons/vrm/1.0/VRMC_node_constraint.gd": {
+          "sha256": "c19424e89fae50046f6de82c629fb62d63f6ecc49ab14d0002d2de943175a017",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/1.0/VRMC_node_constraint.gd",
+          "upstream_sha256": "c19424e89fae50046f6de82c629fb62d63f6ecc49ab14d0002d2de943175a017"
+        },
+        "addons/vrm/1.0/VRMC_node_constraint.gd.uid": {
+          "sha256": "09d05707b73d8d78acce8a6ce88f102a2d274060b576474d18e604e00566f9f1",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/1.0/VRMC_node_constraint.gd.uid",
+          "upstream_sha256": "09d05707b73d8d78acce8a6ce88f102a2d274060b576474d18e604e00566f9f1"
+        },
+        "addons/vrm/1.0/VRMC_springBone.gd": {
+          "sha256": "38c14bb58bfcee902ef94f319abab672bb46db059c277e15b1e5852a61961539",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/1.0/VRMC_springBone.gd",
+          "upstream_sha256": "38c14bb58bfcee902ef94f319abab672bb46db059c277e15b1e5852a61961539"
+        },
+        "addons/vrm/1.0/VRMC_springBone.gd.uid": {
+          "sha256": "2348ba6bf86d75880299496ab7ee3b7d0692295db5d7d2f0ef5c33cf0569de66",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/1.0/VRMC_springBone.gd.uid",
+          "upstream_sha256": "2348ba6bf86d75880299496ab7ee3b7d0692295db5d7d2f0ef5c33cf0569de66"
+        },
+        "addons/vrm/1.0/VRMC_vrm.gd": {
+          "sha256": "9be3cf6d0065d3e465ad4221b8ebb4a94caed26f186742661622e945faf14251",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/1.0/VRMC_vrm.gd",
+          "upstream_sha256": "0b83917224828e286d2f0d23c8dc7b4ff40b0f9409845a46b6ba2e3610c233e0"
+        },
+        "addons/vrm/1.0/VRMC_vrm.gd.uid": {
+          "sha256": "72a187f5f7961ef0c6b8887efdf5a90851ea1af92e0be3421afafc42ffabcee9",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/1.0/VRMC_vrm.gd.uid",
+          "upstream_sha256": "72a187f5f7961ef0c6b8887efdf5a90851ea1af92e0be3421afafc42ffabcee9"
+        },
+        "addons/vrm/1.0/VRMC_vrm_animation.gd": {
+          "sha256": "6def6f56c6c9329890c76fb66d1364aa641b5b9729cf269be8b4018504735d46",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/1.0/VRMC_vrm_animation.gd",
+          "upstream_sha256": "6def6f56c6c9329890c76fb66d1364aa641b5b9729cf269be8b4018504735d46"
+        },
+        "addons/vrm/1.0/VRMC_vrm_animation.gd.uid": {
+          "sha256": "37256bf3463f9d6359850a1d97cc2072530545b4738dd77bfb02c30b187c5e67",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/1.0/VRMC_vrm_animation.gd.uid",
+          "upstream_sha256": "37256bf3463f9d6359850a1d97cc2072530545b4738dd77bfb02c30b187c5e67"
+        },
+        "addons/vrm/LICENSE": {
+          "sha256": "d39666c721f8453445364e66a08d0edec6fbc5b8e30ee1d9d710e84a3094c101",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/LICENSE",
+          "upstream_sha256": "d39666c721f8453445364e66a08d0edec6fbc5b8e30ee1d9d710e84a3094c101"
+        },
+        "addons/vrm/README.ja.md": {
+          "sha256": "348bab67462467c27025bf118d49180d23e70d364b5efda28b74f246aaa756dc",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/README.ja.md",
+          "upstream_sha256": "348bab67462467c27025bf118d49180d23e70d364b5efda28b74f246aaa756dc"
+        },
+        "addons/vrm/README.md": {
+          "sha256": "b36e994103d3bc1aa65c30c84f35d8662ae73f26515fda0953e54de878d91047",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/README.md",
+          "upstream_sha256": "b36e994103d3bc1aa65c30c84f35d8662ae73f26515fda0953e54de878d91047"
+        },
+        "addons/vrm/import_vrm.gd": {
+          "sha256": "877b876f02f77028a8ecb62021e6b54f44741716486fbac84058046e3246d79c",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/import_vrm.gd",
+          "upstream_sha256": "877b876f02f77028a8ecb62021e6b54f44741716486fbac84058046e3246d79c"
+        },
+        "addons/vrm/import_vrm.gd.uid": {
+          "sha256": "436b4563ed874b01d2d5ee6cd1ffc591214d1fba332df5ece198826682b5a835",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/import_vrm.gd.uid",
+          "upstream_sha256": "436b4563ed874b01d2d5ee6cd1ffc591214d1fba332df5ece198826682b5a835"
+        },
+        "addons/vrm/importer_mesh_attributes.gd": {
+          "sha256": "b059894ed16849043b7cd1d0504881384d633f101593f3913a7fd3b19f57b1bb",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/importer_mesh_attributes.gd",
+          "upstream_sha256": "b059894ed16849043b7cd1d0504881384d633f101593f3913a7fd3b19f57b1bb"
+        },
+        "addons/vrm/importer_mesh_attributes.gd.uid": {
+          "sha256": "7a4469f8268842fab01bb411cb96cf13db550ec94a2e2e8972bc2e479d25c1de",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/importer_mesh_attributes.gd.uid",
+          "upstream_sha256": "7a4469f8268842fab01bb411cb96cf13db550ec94a2e2e8972bc2e479d25c1de"
+        },
+        "addons/vrm/node_constraint/bone_node_constraint.gd": {
+          "sha256": "6850f86ac910b47c9f82a0fa983821c8c5e065fb0122cdee9ffcedf88aebdc08",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/node_constraint/bone_node_constraint.gd",
+          "upstream_sha256": "6850f86ac910b47c9f82a0fa983821c8c5e065fb0122cdee9ffcedf88aebdc08"
+        },
+        "addons/vrm/node_constraint/bone_node_constraint.gd.uid": {
+          "sha256": "49282e9b8cef415c0174aa11fa2612fffa78a57e0d45f5d07d8907c733f6c9d0",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/node_constraint/bone_node_constraint.gd.uid",
+          "upstream_sha256": "49282e9b8cef415c0174aa11fa2612fffa78a57e0d45f5d07d8907c733f6c9d0"
+        },
+        "addons/vrm/node_constraint/bone_node_constraint_applier.gd": {
+          "sha256": "c81b69a229646567ba884b8446073fc34228636740bfdc1ca334a9590c75fc3f",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/node_constraint/bone_node_constraint_applier.gd",
+          "upstream_sha256": "c81b69a229646567ba884b8446073fc34228636740bfdc1ca334a9590c75fc3f"
+        },
+        "addons/vrm/node_constraint/bone_node_constraint_applier.gd.uid": {
+          "sha256": "3d822922e3f67569bb7ea1d7d1d5eeb11052f2d75eb9ecc6b881b5ec946d2e8e",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/node_constraint/bone_node_constraint_applier.gd.uid",
+          "upstream_sha256": "3d822922e3f67569bb7ea1d7d1d5eeb11052f2d75eb9ecc6b881b5ec946d2e8e"
+        },
+        "addons/vrm/node_constraint/icons/bone_node_constraint.svg": {
+          "sha256": "faaa00d7121c0f4a3cbd07dfcc51bf215f3d0e48d7162f8fa1ffd94597307eff",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/node_constraint/icons/bone_node_constraint.svg",
+          "upstream_sha256": "faaa00d7121c0f4a3cbd07dfcc51bf215f3d0e48d7162f8fa1ffd94597307eff"
+        },
+        "addons/vrm/node_constraint/icons/bone_node_constraint_applier.svg": {
+          "sha256": "aaa4a4b99655dd34ac147ebba9bf2813c186263a5efb2fe3c76374171a811f6d",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/node_constraint/icons/bone_node_constraint_applier.svg",
+          "upstream_sha256": "aaa4a4b99655dd34ac147ebba9bf2813c186263a5efb2fe3c76374171a811f6d"
+        },
+        "addons/vrm/plugin.cfg": {
+          "sha256": "90f17fc16a8c0498835c4db2e8b94e1c3a7bd4aa81a4b51fd504a60b69b29ca0",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/plugin.cfg",
+          "upstream_sha256": "90f17fc16a8c0498835c4db2e8b94e1c3a7bd4aa81a4b51fd504a60b69b29ca0"
+        },
+        "addons/vrm/plugin.gd": {
+          "sha256": "813eaebcde77992b983191b7ad9ca6e950c00856e94b53ffcc55bafd882b58a7",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/plugin.gd",
+          "upstream_sha256": "813eaebcde77992b983191b7ad9ca6e950c00856e94b53ffcc55bafd882b58a7"
+        },
+        "addons/vrm/plugin.gd.uid": {
+          "sha256": "a3dc69adcb3a20e9a71c28355985746aa99c85bff88736d6bdb6a94132528ca6",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/plugin.gd.uid",
+          "upstream_sha256": "a3dc69adcb3a20e9a71c28355985746aa99c85bff88736d6bdb6a94132528ca6"
+        },
+        "addons/vrm/vrm_collider.gd": {
+          "sha256": "bf6fd5f0ee81d84423080aea4fb915f1bd1588aebc2f325ca07ccd65b7451087",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/vrm_collider.gd",
+          "upstream_sha256": "bf6fd5f0ee81d84423080aea4fb915f1bd1588aebc2f325ca07ccd65b7451087"
+        },
+        "addons/vrm/vrm_collider.gd.uid": {
+          "sha256": "dab188c8ba732a3c884d11909d71b86d23f700d5ed54ec2b667871155d75464b",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/vrm_collider.gd.uid",
+          "upstream_sha256": "dab188c8ba732a3c884d11909d71b86d23f700d5ed54ec2b667871155d75464b"
+        },
+        "addons/vrm/vrm_collider_group.gd": {
+          "sha256": "c4b16cda0156416574de7fc4004b689ff6558b84ff309a4a6e2f788cd4118bec",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/vrm_collider_group.gd",
+          "upstream_sha256": "c4b16cda0156416574de7fc4004b689ff6558b84ff309a4a6e2f788cd4118bec"
+        },
+        "addons/vrm/vrm_collider_group.gd.uid": {
+          "sha256": "657ae8a0bfd6d6ac0013e5d5369b98b05325f4dc2692e60b151ca37a202d10b0",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/vrm_collider_group.gd.uid",
+          "upstream_sha256": "657ae8a0bfd6d6ac0013e5d5369b98b05325f4dc2692e60b151ca37a202d10b0"
+        },
+        "addons/vrm/vrm_constants.gd": {
+          "sha256": "e65b98b8ae4a74111bf15e345ca62334ebc5fa04e9ee08feed8c916a61f9f9f1",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/vrm_constants.gd",
+          "upstream_sha256": "e65b98b8ae4a74111bf15e345ca62334ebc5fa04e9ee08feed8c916a61f9f9f1"
+        },
+        "addons/vrm/vrm_constants.gd.uid": {
+          "sha256": "b618af6c89fe38f668ac17e676a456abf4aa5e04843586dd0a87f5be348a37c3",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/vrm_constants.gd.uid",
+          "upstream_sha256": "b618af6c89fe38f668ac17e676a456abf4aa5e04843586dd0a87f5be348a37c3"
+        },
+        "addons/vrm/vrm_extension.gd": {
+          "sha256": "a16fde9102830a920afe710b94fa903f29cfc0a15a262d76949fa00591526ab0",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/vrm_extension.gd",
+          "upstream_sha256": "0d0a4a72b1b89716143b2b45b00e898f90f8de08cb7b022a112240da55e3983b"
+        },
+        "addons/vrm/vrm_extension.gd.uid": {
+          "sha256": "b7e2684c6bb3d493fc6a586dbe0bacfde29557160b855c011f3f1f8093cc8e8e",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/vrm_extension.gd.uid",
+          "upstream_sha256": "b7e2684c6bb3d493fc6a586dbe0bacfde29557160b855c011f3f1f8093cc8e8e"
+        },
+        "addons/vrm/vrm_meta.gd": {
+          "sha256": "8ddafa2146be2d8c28f01ba9723b042619b480c0bce0ec597aee5cb7bdfe76a5",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/vrm_meta.gd",
+          "upstream_sha256": "8ddafa2146be2d8c28f01ba9723b042619b480c0bce0ec597aee5cb7bdfe76a5"
+        },
+        "addons/vrm/vrm_meta.gd.uid": {
+          "sha256": "0bcc2a00b0283fadd4d08a235583d8fe58e377ceff7ac1214ea39e1514ca76f9",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/vrm_meta.gd.uid",
+          "upstream_sha256": "0bcc2a00b0283fadd4d08a235583d8fe58e377ceff7ac1214ea39e1514ca76f9"
+        },
+        "addons/vrm/vrm_options_post_import_plugin.gd": {
+          "sha256": "2f105a47c9b525dfb207134ad260be9219d6d5ea29e7b1109df2b0f6e32e8673",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/vrm_options_post_import_plugin.gd",
+          "upstream_sha256": "2f105a47c9b525dfb207134ad260be9219d6d5ea29e7b1109df2b0f6e32e8673"
+        },
+        "addons/vrm/vrm_options_post_import_plugin.gd.uid": {
+          "sha256": "1c1c6b07f54db62ccff874e9febfaf14c759da6a1426364a6641f9ecc04fa761",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/vrm_options_post_import_plugin.gd.uid",
+          "upstream_sha256": "1c1c6b07f54db62ccff874e9febfaf14c759da6a1426364a6641f9ecc04fa761"
+        },
+        "addons/vrm/vrm_secondary.gd": {
+          "sha256": "cc5b78de0523a372fa93f5f28685542aa3348caef35c8a43e838f6c2b367756e",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/vrm_secondary.gd",
+          "upstream_sha256": "cc5b78de0523a372fa93f5f28685542aa3348caef35c8a43e838f6c2b367756e"
+        },
+        "addons/vrm/vrm_secondary.gd.uid": {
+          "sha256": "5ea5c6226c3b9d13762f9cf335951a5cc70b742937d2000592b5ab0850f0b7be",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/vrm_secondary.gd.uid",
+          "upstream_sha256": "5ea5c6226c3b9d13762f9cf335951a5cc70b742937d2000592b5ab0850f0b7be"
+        },
+        "addons/vrm/vrm_spring_bone.gd": {
+          "sha256": "f6200c07441b10a70269c3e1e51b664dedd56d5b2a0e279f66e9c03a38b24b8f",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/vrm_spring_bone.gd",
+          "upstream_sha256": "f6200c07441b10a70269c3e1e51b664dedd56d5b2a0e279f66e9c03a38b24b8f"
+        },
+        "addons/vrm/vrm_spring_bone.gd.uid": {
+          "sha256": "c557fa0e767891c572dbc7dde204b32c98ac590bd7944762429f801e8900eb34",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/vrm_spring_bone.gd.uid",
+          "upstream_sha256": "c557fa0e767891c572dbc7dde204b32c98ac590bd7944762429f801e8900eb34"
+        },
+        "addons/vrm/vrm_spring_bone_logic.gd": {
+          "sha256": "ae1a2b7e88c761139c6b78b1564830f378972f722b82f4b1378891671df7e392",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/vrm_spring_bone_logic.gd",
+          "upstream_sha256": "ae1a2b7e88c761139c6b78b1564830f378972f722b82f4b1378891671df7e392"
+        },
+        "addons/vrm/vrm_spring_bone_logic.gd.uid": {
+          "sha256": "2c546f543c3aea343c8e22de4da7309666dc2cba388d5d1526065e1d9f2aaccf",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/vrm_spring_bone_logic.gd.uid",
+          "upstream_sha256": "2c546f543c3aea343c8e22de4da7309666dc2cba388d5d1526065e1d9f2aaccf"
+        },
+        "addons/vrm/vrm_toplevel.gd": {
+          "sha256": "f0670c0b797e0db6ab5082797d350cbc797f509333c2104e3bf7ec2e5dabc927",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/vrm_toplevel.gd",
+          "upstream_sha256": "f0670c0b797e0db6ab5082797d350cbc797f509333c2104e3bf7ec2e5dabc927"
+        },
+        "addons/vrm/vrm_toplevel.gd.uid": {
+          "sha256": "397eb27ad54604dac7d6e702509d5f920da110fb0398315ee18970d9080ddca5",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/vrm_toplevel.gd.uid",
+          "upstream_sha256": "397eb27ad54604dac7d6e702509d5f920da110fb0398315ee18970d9080ddca5"
+        },
+        "addons/vrm/vrm_utils.gd": {
+          "sha256": "0750c9411fb2857d85896c2285037d227005c4195bb7c8066b81d5ece4f6235c",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/vrm_utils.gd",
+          "upstream_sha256": "0750c9411fb2857d85896c2285037d227005c4195bb7c8066b81d5ece4f6235c"
+        },
+        "addons/vrm/vrm_utils.gd.uid": {
+          "sha256": "b35dfd290542262614320c8bf594a6dc842528f8bcfb2e07faf243d380d9e678",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/vrm_utils.gd.uid",
+          "upstream_sha256": "b35dfd290542262614320c8bf594a6dc842528f8bcfb2e07faf243d380d9e678"
+        },
+        "addons/Godot-MToon-Shader/.gitattributes": {
+          "sha256": "21b01a606c9f85f18bb9230245f00ab104df7409cbb2fe9423f6751ca72ba754",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/Godot-MToon-Shader/.gitattributes",
+          "upstream_sha256": "21b01a606c9f85f18bb9230245f00ab104df7409cbb2fe9423f6751ca72ba754"
+        },
+        "addons/Godot-MToon-Shader/.gitignore": {
+          "sha256": "e1fc11d29dcc472966ceac63c4e0b1a0bb2b7e81922c38fa891e29ceaab152ff",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/Godot-MToon-Shader/.gitignore",
+          "upstream_sha256": "e1fc11d29dcc472966ceac63c4e0b1a0bb2b7e81922c38fa891e29ceaab152ff"
+        },
+        "addons/Godot-MToon-Shader/.gitrepo": {
+          "sha256": "4ecd2c14537e34a7e17542f603b89856b4bb420b2764a92a38e7d45019f0e9b3",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/Godot-MToon-Shader/.gitrepo",
+          "upstream_sha256": "4ecd2c14537e34a7e17542f603b89856b4bb420b2764a92a38e7d45019f0e9b3"
+        },
+        "addons/Godot-MToon-Shader/LICENSE": {
+          "sha256": "fd0a82d7d32ad7e39948363114587a3290252ee9a57da0da1582f1e9f0e602f5",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/Godot-MToon-Shader/LICENSE",
+          "upstream_sha256": "fd0a82d7d32ad7e39948363114587a3290252ee9a57da0da1582f1e9f0e602f5"
+        },
+        "addons/Godot-MToon-Shader/inspector_mtoon.gd": {
+          "sha256": "514ac79c15dbc2b748a1e4ca95c60274ebb8eec1eb99bdbd133adb8a5c1e14a5",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/Godot-MToon-Shader/inspector_mtoon.gd",
+          "upstream_sha256": "514ac79c15dbc2b748a1e4ca95c60274ebb8eec1eb99bdbd133adb8a5c1e14a5"
+        },
+        "addons/Godot-MToon-Shader/inspector_mtoon.gd.uid": {
+          "sha256": "1ada0572473187d40f9942458663ccb81a2918a1baf6cb84c4d5ed72ee747f97",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/Godot-MToon-Shader/inspector_mtoon.gd.uid",
+          "upstream_sha256": "1ada0572473187d40f9942458663ccb81a2918a1baf6cb84c4d5ed72ee747f97"
+        },
+        "addons/Godot-MToon-Shader/mtoon.gdshader": {
+          "sha256": "acf669dda65a3dd4ec2f9369e7f67bec77b3b499c480a295fb9cb71d1c54c800",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/Godot-MToon-Shader/mtoon.gdshader",
+          "upstream_sha256": "acf669dda65a3dd4ec2f9369e7f67bec77b3b499c480a295fb9cb71d1c54c800"
+        },
+        "addons/Godot-MToon-Shader/mtoon.gdshader.uid": {
+          "sha256": "3e8d879e97376583e83942b6d482710744f3fc70fc8bedbba73768b877f92b4a",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/Godot-MToon-Shader/mtoon.gdshader.uid",
+          "upstream_sha256": "3e8d879e97376583e83942b6d482710744f3fc70fc8bedbba73768b877f92b4a"
+        },
+        "addons/Godot-MToon-Shader/mtoon_common.gdshaderinc": {
+          "sha256": "3341ff7bc2bd6658c4bb3538965e5ae8d5b5396ea5438d2bbd7b05abda09ae78",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/Godot-MToon-Shader/mtoon_common.gdshaderinc",
+          "upstream_sha256": "3341ff7bc2bd6658c4bb3538965e5ae8d5b5396ea5438d2bbd7b05abda09ae78"
+        },
+        "addons/Godot-MToon-Shader/mtoon_common.gdshaderinc.uid": {
+          "sha256": "3e4bf5739abe890907f637996c5b85062a87a3bccd56a02224bc737fbcc2145a",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/Godot-MToon-Shader/mtoon_common.gdshaderinc.uid",
+          "upstream_sha256": "3e4bf5739abe890907f637996c5b85062a87a3bccd56a02224bc737fbcc2145a"
+        },
+        "addons/Godot-MToon-Shader/mtoon_cull_off.gdshader": {
+          "sha256": "aac226499408af896ffbdcc4b61b8796145a5fd83d6f855988b2a14edce78dd0",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/Godot-MToon-Shader/mtoon_cull_off.gdshader",
+          "upstream_sha256": "aac226499408af896ffbdcc4b61b8796145a5fd83d6f855988b2a14edce78dd0"
+        },
+        "addons/Godot-MToon-Shader/mtoon_cull_off.gdshader.uid": {
+          "sha256": "f5c2235b5f733887c126d2552072c66517bfddf9b64a06cda50d8e233807e791",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/Godot-MToon-Shader/mtoon_cull_off.gdshader.uid",
+          "upstream_sha256": "f5c2235b5f733887c126d2552072c66517bfddf9b64a06cda50d8e233807e791"
+        },
+        "addons/Godot-MToon-Shader/mtoon_cutout.gdshader": {
+          "sha256": "aa3f11b71f9889977ac2678af184782b48eda0635663a8baecdc62ae911aade8",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/Godot-MToon-Shader/mtoon_cutout.gdshader",
+          "upstream_sha256": "aa3f11b71f9889977ac2678af184782b48eda0635663a8baecdc62ae911aade8"
+        },
+        "addons/Godot-MToon-Shader/mtoon_cutout.gdshader.uid": {
+          "sha256": "fac10890ca016976c25528be3f3d1e715bd8ce27fe3b7046bb14ecb006302900",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/Godot-MToon-Shader/mtoon_cutout.gdshader.uid",
+          "upstream_sha256": "fac10890ca016976c25528be3f3d1e715bd8ce27fe3b7046bb14ecb006302900"
+        },
+        "addons/Godot-MToon-Shader/mtoon_cutout_cull_off.gdshader": {
+          "sha256": "318881525c8c9cac616cbe3c01244537098e554a1a1680a8b6c9384ff90f5f6f",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/Godot-MToon-Shader/mtoon_cutout_cull_off.gdshader",
+          "upstream_sha256": "318881525c8c9cac616cbe3c01244537098e554a1a1680a8b6c9384ff90f5f6f"
+        },
+        "addons/Godot-MToon-Shader/mtoon_cutout_cull_off.gdshader.uid": {
+          "sha256": "d6eb8f6ed6eb5395d538c02b20f256550d139720e1a9ff04623bef08974079d3",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/Godot-MToon-Shader/mtoon_cutout_cull_off.gdshader.uid",
+          "upstream_sha256": "d6eb8f6ed6eb5395d538c02b20f256550d139720e1a9ff04623bef08974079d3"
+        },
+        "addons/Godot-MToon-Shader/mtoon_outline.gdshader": {
+          "sha256": "e7fb813de2e0ec0fc165cb51dc261a8dd256d9c99d9e1a2b1e3dba7b3df454aa",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/Godot-MToon-Shader/mtoon_outline.gdshader",
+          "upstream_sha256": "e7fb813de2e0ec0fc165cb51dc261a8dd256d9c99d9e1a2b1e3dba7b3df454aa"
+        },
+        "addons/Godot-MToon-Shader/mtoon_outline.gdshader.uid": {
+          "sha256": "85d36f6e5d2cca801022d55556d82516728d2f075e5ee47f2f8ae0f948d5968d",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/Godot-MToon-Shader/mtoon_outline.gdshader.uid",
+          "upstream_sha256": "85d36f6e5d2cca801022d55556d82516728d2f075e5ee47f2f8ae0f948d5968d"
+        },
+        "addons/Godot-MToon-Shader/mtoon_outline_cutout.gdshader": {
+          "sha256": "11fba7b5a320d252192823ed475aaf5ddecaea4c47356733a692a81a39d6b4d9",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/Godot-MToon-Shader/mtoon_outline_cutout.gdshader",
+          "upstream_sha256": "11fba7b5a320d252192823ed475aaf5ddecaea4c47356733a692a81a39d6b4d9"
+        },
+        "addons/Godot-MToon-Shader/mtoon_outline_cutout.gdshader.uid": {
+          "sha256": "e17118f46aa01091e3e7112498775f92d4f1c08f498f1514f5fbec9266313d75",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/Godot-MToon-Shader/mtoon_outline_cutout.gdshader.uid",
+          "upstream_sha256": "e17118f46aa01091e3e7112498775f92d4f1c08f498f1514f5fbec9266313d75"
+        },
+        "addons/Godot-MToon-Shader/mtoon_outline_trans.gdshader": {
+          "sha256": "4135f904ba7760f7946bcf9b16b6a91021128e64e9cf3cc61dddaf27a74879db",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/Godot-MToon-Shader/mtoon_outline_trans.gdshader",
+          "upstream_sha256": "4135f904ba7760f7946bcf9b16b6a91021128e64e9cf3cc61dddaf27a74879db"
+        },
+        "addons/Godot-MToon-Shader/mtoon_outline_trans.gdshader.uid": {
+          "sha256": "42a09567c32dc0afd8256f04aa384829001e3ad819dfaf92805aadf8183005a0",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/Godot-MToon-Shader/mtoon_outline_trans.gdshader.uid",
+          "upstream_sha256": "42a09567c32dc0afd8256f04aa384829001e3ad819dfaf92805aadf8183005a0"
+        },
+        "addons/Godot-MToon-Shader/mtoon_outline_trans_zwrite.gdshader": {
+          "sha256": "6582f5f48848c5f75f2b3af247570c190a94bf9d33bc52240de2e4933a93a039",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/Godot-MToon-Shader/mtoon_outline_trans_zwrite.gdshader",
+          "upstream_sha256": "6582f5f48848c5f75f2b3af247570c190a94bf9d33bc52240de2e4933a93a039"
+        },
+        "addons/Godot-MToon-Shader/mtoon_outline_trans_zwrite.gdshader.uid": {
+          "sha256": "b70450cd4e1603c82a4918f3c8f9717a9d88dd703a4cbaaae63e62cae4908813",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/Godot-MToon-Shader/mtoon_outline_trans_zwrite.gdshader.uid",
+          "upstream_sha256": "b70450cd4e1603c82a4918f3c8f9717a9d88dd703a4cbaaae63e62cae4908813"
+        },
+        "addons/Godot-MToon-Shader/mtoon_trans.gdshader": {
+          "sha256": "5afa7c7367635cd0fb0d6e181f11a6d965df49ff76d0b5e8abdc1e244c6eeca0",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/Godot-MToon-Shader/mtoon_trans.gdshader",
+          "upstream_sha256": "5afa7c7367635cd0fb0d6e181f11a6d965df49ff76d0b5e8abdc1e244c6eeca0"
+        },
+        "addons/Godot-MToon-Shader/mtoon_trans.gdshader.uid": {
+          "sha256": "12567318c3bd82b6ad699e7c5e47a91416b1f3c0001b2e80689caae99548e637",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/Godot-MToon-Shader/mtoon_trans.gdshader.uid",
+          "upstream_sha256": "12567318c3bd82b6ad699e7c5e47a91416b1f3c0001b2e80689caae99548e637"
+        },
+        "addons/Godot-MToon-Shader/mtoon_trans_cull_off.gdshader": {
+          "sha256": "c1005929a221d8f4802850173bc812cafa419b798f9a3fb09dfe81dc230175e1",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/Godot-MToon-Shader/mtoon_trans_cull_off.gdshader",
+          "upstream_sha256": "c1005929a221d8f4802850173bc812cafa419b798f9a3fb09dfe81dc230175e1"
+        },
+        "addons/Godot-MToon-Shader/mtoon_trans_cull_off.gdshader.uid": {
+          "sha256": "e0ff2fa543ff7d1fdb7e4893ad1e9ed33481129a0731145bc477174b0a45019d",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/Godot-MToon-Shader/mtoon_trans_cull_off.gdshader.uid",
+          "upstream_sha256": "e0ff2fa543ff7d1fdb7e4893ad1e9ed33481129a0731145bc477174b0a45019d"
+        },
+        "addons/Godot-MToon-Shader/mtoon_trans_zwrite.gdshader": {
+          "sha256": "25c391960e313a311fddb810a34f8b0cb443df99f3ba572d78ae4658e6590156",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/Godot-MToon-Shader/mtoon_trans_zwrite.gdshader",
+          "upstream_sha256": "25c391960e313a311fddb810a34f8b0cb443df99f3ba572d78ae4658e6590156"
+        },
+        "addons/Godot-MToon-Shader/mtoon_trans_zwrite.gdshader.uid": {
+          "sha256": "f56bb7893d4e39b0df8e5546dc8df1dbd6ad0edf18b73a4e6daaae5509373481",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/Godot-MToon-Shader/mtoon_trans_zwrite.gdshader.uid",
+          "upstream_sha256": "f56bb7893d4e39b0df8e5546dc8df1dbd6ad0edf18b73a4e6daaae5509373481"
+        },
+        "addons/Godot-MToon-Shader/mtoon_trans_zwrite_cull_off.gdshader": {
+          "sha256": "215a16af090300fff0be040c851927aeef96da91f14fa10c31102efcc43b03f3",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/Godot-MToon-Shader/mtoon_trans_zwrite_cull_off.gdshader",
+          "upstream_sha256": "215a16af090300fff0be040c851927aeef96da91f14fa10c31102efcc43b03f3"
+        },
+        "addons/Godot-MToon-Shader/mtoon_trans_zwrite_cull_off.gdshader.uid": {
+          "sha256": "73c552b3fa0c5e6e902c5bd7c8fe579eef7306236a0cf1088cc41f07d2e2e4fd",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/Godot-MToon-Shader/mtoon_trans_zwrite_cull_off.gdshader.uid",
+          "upstream_sha256": "73c552b3fa0c5e6e902c5bd7c8fe579eef7306236a0cf1088cc41f07d2e2e4fd"
+        },
+        "addons/Godot-MToon-Shader/plugin.cfg": {
+          "sha256": "e337c5dded72e92a10d9fdd1b23c832864be20ba6e399783a79acd73c9d7b908",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/Godot-MToon-Shader/plugin.cfg",
+          "upstream_sha256": "e337c5dded72e92a10d9fdd1b23c832864be20ba6e399783a79acd73c9d7b908"
+        },
+        "addons/Godot-MToon-Shader/plugin.gd": {
+          "sha256": "b1a1f76fbdba0b391bdb9a181e7b66595aec745d77b73919872454a8c28131f8",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/Godot-MToon-Shader/plugin.gd",
+          "upstream_sha256": "b1a1f76fbdba0b391bdb9a181e7b66595aec745d77b73919872454a8c28131f8"
+        },
+        "addons/Godot-MToon-Shader/plugin.gd.uid": {
+          "sha256": "8e5e5156959117cbb3f9c0f3b2f27732bdb556cafc34a194c6318dfb44e5c922",
+          "source_url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/Godot-MToon-Shader/plugin.gd.uid",
+          "upstream_sha256": "8e5e5156959117cbb3f9c0f3b2f27732bdb556cafc34a194c6318dfb44e5c922"
+        }
+      }
+    }
+  ],
+  "downloads": [
+    {
+      "path": "art_lab/assets/quaternius_characters/female_ranger.glb",
+      "url": "https://raw.githubusercontent.com/ibra-kdbra/Generate_infinite/027491fa5d30788d26fc707bddf6c8cdb48ad1f4/public/models/characters/female_ranger.glb",
+      "sha256": "09ca05f995326decd7aada64fbaa8ca0292d20efacdfb1cc5f317181816d2f55"
+    },
+    {
+      "path": "art_lab/assets/quaternius_characters/female_peasant.glb",
+      "url": "https://raw.githubusercontent.com/ibra-kdbra/Generate_infinite/027491fa5d30788d26fc707bddf6c8cdb48ad1f4/public/models/characters/female_peasant.glb",
+      "sha256": "068df761750b42dd81ad85ac1498445edc5daa360a9a76633869fdbde2d38cf0"
+    },
+    {
+      "path": "art_lab/assets/quaternius_characters/SOURCE-README.md",
+      "url": "https://raw.githubusercontent.com/ibra-kdbra/Generate_infinite/027491fa5d30788d26fc707bddf6c8cdb48ad1f4/README.md",
+      "sha256": "59f0e9b7078beb2be3c1200deffb424ab151a2b0349d2ebbe8234c90106388e3"
+    },
+    {
+      "path": "art_lab/assets/quaternius_characters/LICENSE-OUTFITS-STANDARD.txt",
+      "url": "https://raw.githubusercontent.com/agentkaerf/FreeModels/db3df04d1e4714298a09510b26fb6de6645138a2/Modular%20Character%20Outfits%20-%20Fantasy%5BStandard%5D/License_Standard.txt",
+      "sha256": "2202cc2f608c4210790b112e5f121bc2e7f8dced7b5b1c7f4be6203461bdebbb"
+    },
+    {
+      "path": "art_lab/assets/quaternius_animation/AnimationLibrary_Godot_Standard.gltf",
+      "url": "https://raw.githubusercontent.com/J-Ponzo/gltf-universal-animation-library/e24c23cf2a1323488a3faa226ea7ea21f644b73e/glTF/AnimationLibrary_Godot_Standard.gltf",
+      "sha256": "0ff075c7ad6855c5c2c37a171592ee8f0d6ab2f58259e2be77a9b63dd8027765"
+    },
+    {
+      "path": "art_lab/assets/quaternius_animation/AnimationLibrary_Godot_Standard.bin",
+      "url": "https://raw.githubusercontent.com/J-Ponzo/gltf-universal-animation-library/e24c23cf2a1323488a3faa226ea7ea21f644b73e/glTF/AnimationLibrary_Godot_Standard.bin",
+      "sha256": "6e65377d81558333c4093dbb144a48fd19019343d82b1a3a7992a98ec0e0543c"
+    },
+    {
+      "path": "art_lab/assets/quaternius_animation/LICENSE",
+      "url": "https://raw.githubusercontent.com/J-Ponzo/gltf-universal-animation-library/e24c23cf2a1323488a3faa226ea7ea21f644b73e/LICENSE",
+      "sha256": "a2010f343487d3f7618affe54f789f5487602331c0a8d03f49e9a7c547cf0499"
+    },
+    {
+      "path": "art_lab/assets/quaternius_animation/README.md",
+      "url": "https://raw.githubusercontent.com/J-Ponzo/gltf-universal-animation-library/e24c23cf2a1323488a3faa226ea7ea21f644b73e/README.md",
+      "sha256": "370e6ff244ef43b269f936be7d630a77a3eb7ed8bbc3315ffcae5b327b814fcb"
+    },
+    {
+      "path": "art_lab/assets/quaternius_characters/LICENSE-CC0.txt",
+      "url": "https://raw.githubusercontent.com/J-Ponzo/gltf-universal-animation-library/e24c23cf2a1323488a3faa226ea7ea21f644b73e/LICENSE",
+      "sha256": "a2010f343487d3f7618affe54f789f5487602331c0a8d03f49e9a7c547cf0499"
+    },
+    {
+      "path": "art_lab/assets/quaternius_animation2/UAL2_Standard.glb",
+      "url": "https://raw.githubusercontent.com/agentkaerf/FreeModels/db3df04d1e4714298a09510b26fb6de6645138a2/Universal%20Animation%20Library%202%5BStandard%5D/Unreal-Godot/UAL2_Standard.glb",
+      "sha256": "9a0ffda4931f934f13fb584002c51673723b03f9655a581167e7e5dae744f086"
+    },
+    {
+      "path": "art_lab/assets/quaternius_animation2/LICENSE.txt",
+      "url": "https://raw.githubusercontent.com/agentkaerf/FreeModels/db3df04d1e4714298a09510b26fb6de6645138a2/Universal%20Animation%20Library%202%5BStandard%5D/License.txt",
+      "sha256": "f9b1de4e8feff135555ac1c7d2eec65035a05fd74e4d632a3f826ac985c3f22c"
+    },
+    {
+      "path": "art_lab/assets/quaternius_wolf/Wolf.gltf",
+      "url": "https://raw.githubusercontent.com/Tekh-ops/Ultimate-Animated-Animals-July-2021/ac2dbc3fcf82dd915b7fe1a8437efcca1618a311/glTF/Wolf.gltf",
+      "sha256": "09621fb810de6a3896fc392ac315b288d97960f9682f4d21e14b5809febdaa9e"
+    },
+    {
+      "path": "art_lab/assets/quaternius_wolf/License.txt",
+      "url": "https://raw.githubusercontent.com/Tekh-ops/Ultimate-Animated-Animals-July-2021/ac2dbc3fcf82dd915b7fe1a8437efcca1618a311/License.txt",
+      "sha256": "20b983ae0e2e555817495a65c37519bfcb2231825269db6a57d72c51ed6006e3"
+    },
+    {
+      "path": "art_lab/assets/vrm/seed/Seed-san.vrm",
+      "url": "https://raw.githubusercontent.com/vrm-c/vrm-specification/94e82dd346fa6cf0337c4421728640e5252dd38e/samples/Seed-san/vrm/Seed-san.vrm",
+      "sha256": "624d0d554bc205bbdc33e22a68a2c3c20edebb3e573011ead8878a65e5329b23"
+    },
+    {
+      "path": "art_lab/assets/vrm/seed/SOURCE.md",
+      "url": "https://raw.githubusercontent.com/vrm-c/vrm-specification/94e82dd346fa6cf0337c4421728640e5252dd38e/samples/Seed-san/README.md",
+      "sha256": "f0fdc21cf26437d9becd90a64d350bc0307fcfa172e1caea5aa39c52a5b3b9b6"
+    },
+    {
+      "path": "art_lab/assets/vrm/VRM1_Constraint_Twist_Sample.vrm",
+      "url": "https://raw.githubusercontent.com/vrm-c/vrm-specification/94e82dd346fa6cf0337c4421728640e5252dd38e/samples/VRM1_Constraint_Twist_Sample/vrm/VRM1_Constraint_Twist_Sample.vrm",
+      "sha256": "12c2b97e95e700783a6a550dc0eee2d7880aeedccef9ae67bc4c5a2f0f2631a2"
+    },
+    {
+      "path": "art_lab/assets/vrm/SOURCE.md",
+      "url": "https://raw.githubusercontent.com/vrm-c/vrm-specification/94e82dd346fa6cf0337c4421728640e5252dd38e/samples/VRM1_Constraint_Twist_Sample/README.md",
+      "sha256": "079d48f0b8f15852e9b28b197c5c87c92c3fe7a614524a0afa939c74f649cc5a"
+    },
+    {
+      "path": "art_lab/assets/vrm/LICENSE-VRM-PUBLIC-1.0.html",
+      "url": "https://raw.githubusercontent.com/vrm-c/vrm.dev/1b75c130374ccb891fa3e63cf6a644daa109144e/static/licenses/1.0/index.html",
+      "sha256": "3b7172907033476ecf66ab42d2bca93a641bf578708c4ce1569a4b025c5a0502"
+    },
+    {
+      "path": "addons/vrm/.gitrepo",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/.gitrepo",
+      "sha256": "e0bdaa172b34b374afdc2fe405438c8acecaaf6a1f5acb3e7652538422584667",
+      "installed_sha256": "e0bdaa172b34b374afdc2fe405438c8acecaaf6a1f5acb3e7652538422584667"
+    },
+    {
+      "path": "addons/vrm/1.0/VRMC_materials_hdr_emissiveMultiplier.gd",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/1.0/VRMC_materials_hdr_emissiveMultiplier.gd",
+      "sha256": "3e0882b31c6eb49e3702e32edaafc5c7dce85547ffe62c6eca10b3a686fee240",
+      "installed_sha256": "3e0882b31c6eb49e3702e32edaafc5c7dce85547ffe62c6eca10b3a686fee240"
+    },
+    {
+      "path": "addons/vrm/1.0/VRMC_materials_hdr_emissiveMultiplier.gd.uid",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/1.0/VRMC_materials_hdr_emissiveMultiplier.gd.uid",
+      "sha256": "2c495978e8185c29c112213d80a59a8a8b085be23add39f78e6e0b371bac4400",
+      "installed_sha256": "2c495978e8185c29c112213d80a59a8a8b085be23add39f78e6e0b371bac4400"
+    },
+    {
+      "path": "addons/vrm/1.0/VRMC_materials_mtoon.gd",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/1.0/VRMC_materials_mtoon.gd",
+      "sha256": "75527e71162e08022e1309ea344e2d020596349f70a752d1acee0d09ed929cf6",
+      "installed_sha256": "75527e71162e08022e1309ea344e2d020596349f70a752d1acee0d09ed929cf6"
+    },
+    {
+      "path": "addons/vrm/1.0/VRMC_materials_mtoon.gd.uid",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/1.0/VRMC_materials_mtoon.gd.uid",
+      "sha256": "afbf7723ac8cf3aeeeb801297ab3ceb725d46fceecee77e84ee5d6e4cbbd60f8",
+      "installed_sha256": "afbf7723ac8cf3aeeeb801297ab3ceb725d46fceecee77e84ee5d6e4cbbd60f8"
+    },
+    {
+      "path": "addons/vrm/1.0/VRMC_node_constraint.gd",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/1.0/VRMC_node_constraint.gd",
+      "sha256": "c19424e89fae50046f6de82c629fb62d63f6ecc49ab14d0002d2de943175a017",
+      "installed_sha256": "c19424e89fae50046f6de82c629fb62d63f6ecc49ab14d0002d2de943175a017"
+    },
+    {
+      "path": "addons/vrm/1.0/VRMC_node_constraint.gd.uid",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/1.0/VRMC_node_constraint.gd.uid",
+      "sha256": "09d05707b73d8d78acce8a6ce88f102a2d274060b576474d18e604e00566f9f1",
+      "installed_sha256": "09d05707b73d8d78acce8a6ce88f102a2d274060b576474d18e604e00566f9f1"
+    },
+    {
+      "path": "addons/vrm/1.0/VRMC_springBone.gd",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/1.0/VRMC_springBone.gd",
+      "sha256": "38c14bb58bfcee902ef94f319abab672bb46db059c277e15b1e5852a61961539",
+      "installed_sha256": "38c14bb58bfcee902ef94f319abab672bb46db059c277e15b1e5852a61961539"
+    },
+    {
+      "path": "addons/vrm/1.0/VRMC_springBone.gd.uid",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/1.0/VRMC_springBone.gd.uid",
+      "sha256": "2348ba6bf86d75880299496ab7ee3b7d0692295db5d7d2f0ef5c33cf0569de66",
+      "installed_sha256": "2348ba6bf86d75880299496ab7ee3b7d0692295db5d7d2f0ef5c33cf0569de66"
+    },
+    {
+      "path": "addons/vrm/1.0/VRMC_vrm.gd",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/1.0/VRMC_vrm.gd",
+      "sha256": "0b83917224828e286d2f0d23c8dc7b4ff40b0f9409845a46b6ba2e3610c233e0",
+      "installed_sha256": "9be3cf6d0065d3e465ad4221b8ebb4a94caed26f186742661622e945faf14251"
+    },
+    {
+      "path": "addons/vrm/1.0/VRMC_vrm.gd.uid",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/1.0/VRMC_vrm.gd.uid",
+      "sha256": "72a187f5f7961ef0c6b8887efdf5a90851ea1af92e0be3421afafc42ffabcee9",
+      "installed_sha256": "72a187f5f7961ef0c6b8887efdf5a90851ea1af92e0be3421afafc42ffabcee9"
+    },
+    {
+      "path": "addons/vrm/1.0/VRMC_vrm_animation.gd",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/1.0/VRMC_vrm_animation.gd",
+      "sha256": "6def6f56c6c9329890c76fb66d1364aa641b5b9729cf269be8b4018504735d46",
+      "installed_sha256": "6def6f56c6c9329890c76fb66d1364aa641b5b9729cf269be8b4018504735d46"
+    },
+    {
+      "path": "addons/vrm/1.0/VRMC_vrm_animation.gd.uid",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/1.0/VRMC_vrm_animation.gd.uid",
+      "sha256": "37256bf3463f9d6359850a1d97cc2072530545b4738dd77bfb02c30b187c5e67",
+      "installed_sha256": "37256bf3463f9d6359850a1d97cc2072530545b4738dd77bfb02c30b187c5e67"
+    },
+    {
+      "path": "addons/vrm/LICENSE",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/LICENSE",
+      "sha256": "d39666c721f8453445364e66a08d0edec6fbc5b8e30ee1d9d710e84a3094c101",
+      "installed_sha256": "d39666c721f8453445364e66a08d0edec6fbc5b8e30ee1d9d710e84a3094c101"
+    },
+    {
+      "path": "addons/vrm/README.ja.md",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/README.ja.md",
+      "sha256": "348bab67462467c27025bf118d49180d23e70d364b5efda28b74f246aaa756dc",
+      "installed_sha256": "348bab67462467c27025bf118d49180d23e70d364b5efda28b74f246aaa756dc"
+    },
+    {
+      "path": "addons/vrm/README.md",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/README.md",
+      "sha256": "b36e994103d3bc1aa65c30c84f35d8662ae73f26515fda0953e54de878d91047",
+      "installed_sha256": "b36e994103d3bc1aa65c30c84f35d8662ae73f26515fda0953e54de878d91047"
+    },
+    {
+      "path": "addons/vrm/import_vrm.gd",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/import_vrm.gd",
+      "sha256": "877b876f02f77028a8ecb62021e6b54f44741716486fbac84058046e3246d79c",
+      "installed_sha256": "877b876f02f77028a8ecb62021e6b54f44741716486fbac84058046e3246d79c"
+    },
+    {
+      "path": "addons/vrm/import_vrm.gd.uid",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/import_vrm.gd.uid",
+      "sha256": "436b4563ed874b01d2d5ee6cd1ffc591214d1fba332df5ece198826682b5a835",
+      "installed_sha256": "436b4563ed874b01d2d5ee6cd1ffc591214d1fba332df5ece198826682b5a835"
+    },
+    {
+      "path": "addons/vrm/importer_mesh_attributes.gd",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/importer_mesh_attributes.gd",
+      "sha256": "b059894ed16849043b7cd1d0504881384d633f101593f3913a7fd3b19f57b1bb",
+      "installed_sha256": "b059894ed16849043b7cd1d0504881384d633f101593f3913a7fd3b19f57b1bb"
+    },
+    {
+      "path": "addons/vrm/importer_mesh_attributes.gd.uid",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/importer_mesh_attributes.gd.uid",
+      "sha256": "7a4469f8268842fab01bb411cb96cf13db550ec94a2e2e8972bc2e479d25c1de",
+      "installed_sha256": "7a4469f8268842fab01bb411cb96cf13db550ec94a2e2e8972bc2e479d25c1de"
+    },
+    {
+      "path": "addons/vrm/node_constraint/bone_node_constraint.gd",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/node_constraint/bone_node_constraint.gd",
+      "sha256": "6850f86ac910b47c9f82a0fa983821c8c5e065fb0122cdee9ffcedf88aebdc08",
+      "installed_sha256": "6850f86ac910b47c9f82a0fa983821c8c5e065fb0122cdee9ffcedf88aebdc08"
+    },
+    {
+      "path": "addons/vrm/node_constraint/bone_node_constraint.gd.uid",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/node_constraint/bone_node_constraint.gd.uid",
+      "sha256": "49282e9b8cef415c0174aa11fa2612fffa78a57e0d45f5d07d8907c733f6c9d0",
+      "installed_sha256": "49282e9b8cef415c0174aa11fa2612fffa78a57e0d45f5d07d8907c733f6c9d0"
+    },
+    {
+      "path": "addons/vrm/node_constraint/bone_node_constraint_applier.gd",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/node_constraint/bone_node_constraint_applier.gd",
+      "sha256": "c81b69a229646567ba884b8446073fc34228636740bfdc1ca334a9590c75fc3f",
+      "installed_sha256": "c81b69a229646567ba884b8446073fc34228636740bfdc1ca334a9590c75fc3f"
+    },
+    {
+      "path": "addons/vrm/node_constraint/bone_node_constraint_applier.gd.uid",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/node_constraint/bone_node_constraint_applier.gd.uid",
+      "sha256": "3d822922e3f67569bb7ea1d7d1d5eeb11052f2d75eb9ecc6b881b5ec946d2e8e",
+      "installed_sha256": "3d822922e3f67569bb7ea1d7d1d5eeb11052f2d75eb9ecc6b881b5ec946d2e8e"
+    },
+    {
+      "path": "addons/vrm/node_constraint/icons/bone_node_constraint.svg",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/node_constraint/icons/bone_node_constraint.svg",
+      "sha256": "faaa00d7121c0f4a3cbd07dfcc51bf215f3d0e48d7162f8fa1ffd94597307eff",
+      "installed_sha256": "faaa00d7121c0f4a3cbd07dfcc51bf215f3d0e48d7162f8fa1ffd94597307eff"
+    },
+    {
+      "path": "addons/vrm/node_constraint/icons/bone_node_constraint_applier.svg",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/node_constraint/icons/bone_node_constraint_applier.svg",
+      "sha256": "aaa4a4b99655dd34ac147ebba9bf2813c186263a5efb2fe3c76374171a811f6d",
+      "installed_sha256": "aaa4a4b99655dd34ac147ebba9bf2813c186263a5efb2fe3c76374171a811f6d"
+    },
+    {
+      "path": "addons/vrm/plugin.cfg",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/plugin.cfg",
+      "sha256": "90f17fc16a8c0498835c4db2e8b94e1c3a7bd4aa81a4b51fd504a60b69b29ca0",
+      "installed_sha256": "90f17fc16a8c0498835c4db2e8b94e1c3a7bd4aa81a4b51fd504a60b69b29ca0"
+    },
+    {
+      "path": "addons/vrm/plugin.gd",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/plugin.gd",
+      "sha256": "813eaebcde77992b983191b7ad9ca6e950c00856e94b53ffcc55bafd882b58a7",
+      "installed_sha256": "813eaebcde77992b983191b7ad9ca6e950c00856e94b53ffcc55bafd882b58a7"
+    },
+    {
+      "path": "addons/vrm/plugin.gd.uid",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/plugin.gd.uid",
+      "sha256": "a3dc69adcb3a20e9a71c28355985746aa99c85bff88736d6bdb6a94132528ca6",
+      "installed_sha256": "a3dc69adcb3a20e9a71c28355985746aa99c85bff88736d6bdb6a94132528ca6"
+    },
+    {
+      "path": "addons/vrm/vrm_collider.gd",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/vrm_collider.gd",
+      "sha256": "bf6fd5f0ee81d84423080aea4fb915f1bd1588aebc2f325ca07ccd65b7451087",
+      "installed_sha256": "bf6fd5f0ee81d84423080aea4fb915f1bd1588aebc2f325ca07ccd65b7451087"
+    },
+    {
+      "path": "addons/vrm/vrm_collider.gd.uid",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/vrm_collider.gd.uid",
+      "sha256": "dab188c8ba732a3c884d11909d71b86d23f700d5ed54ec2b667871155d75464b",
+      "installed_sha256": "dab188c8ba732a3c884d11909d71b86d23f700d5ed54ec2b667871155d75464b"
+    },
+    {
+      "path": "addons/vrm/vrm_collider_group.gd",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/vrm_collider_group.gd",
+      "sha256": "c4b16cda0156416574de7fc4004b689ff6558b84ff309a4a6e2f788cd4118bec",
+      "installed_sha256": "c4b16cda0156416574de7fc4004b689ff6558b84ff309a4a6e2f788cd4118bec"
+    },
+    {
+      "path": "addons/vrm/vrm_collider_group.gd.uid",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/vrm_collider_group.gd.uid",
+      "sha256": "657ae8a0bfd6d6ac0013e5d5369b98b05325f4dc2692e60b151ca37a202d10b0",
+      "installed_sha256": "657ae8a0bfd6d6ac0013e5d5369b98b05325f4dc2692e60b151ca37a202d10b0"
+    },
+    {
+      "path": "addons/vrm/vrm_constants.gd",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/vrm_constants.gd",
+      "sha256": "e65b98b8ae4a74111bf15e345ca62334ebc5fa04e9ee08feed8c916a61f9f9f1",
+      "installed_sha256": "e65b98b8ae4a74111bf15e345ca62334ebc5fa04e9ee08feed8c916a61f9f9f1"
+    },
+    {
+      "path": "addons/vrm/vrm_constants.gd.uid",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/vrm_constants.gd.uid",
+      "sha256": "b618af6c89fe38f668ac17e676a456abf4aa5e04843586dd0a87f5be348a37c3",
+      "installed_sha256": "b618af6c89fe38f668ac17e676a456abf4aa5e04843586dd0a87f5be348a37c3"
+    },
+    {
+      "path": "addons/vrm/vrm_extension.gd",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/vrm_extension.gd",
+      "sha256": "0d0a4a72b1b89716143b2b45b00e898f90f8de08cb7b022a112240da55e3983b",
+      "installed_sha256": "a16fde9102830a920afe710b94fa903f29cfc0a15a262d76949fa00591526ab0"
+    },
+    {
+      "path": "addons/vrm/vrm_extension.gd.uid",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/vrm_extension.gd.uid",
+      "sha256": "b7e2684c6bb3d493fc6a586dbe0bacfde29557160b855c011f3f1f8093cc8e8e",
+      "installed_sha256": "b7e2684c6bb3d493fc6a586dbe0bacfde29557160b855c011f3f1f8093cc8e8e"
+    },
+    {
+      "path": "addons/vrm/vrm_meta.gd",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/vrm_meta.gd",
+      "sha256": "8ddafa2146be2d8c28f01ba9723b042619b480c0bce0ec597aee5cb7bdfe76a5",
+      "installed_sha256": "8ddafa2146be2d8c28f01ba9723b042619b480c0bce0ec597aee5cb7bdfe76a5"
+    },
+    {
+      "path": "addons/vrm/vrm_meta.gd.uid",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/vrm_meta.gd.uid",
+      "sha256": "0bcc2a00b0283fadd4d08a235583d8fe58e377ceff7ac1214ea39e1514ca76f9",
+      "installed_sha256": "0bcc2a00b0283fadd4d08a235583d8fe58e377ceff7ac1214ea39e1514ca76f9"
+    },
+    {
+      "path": "addons/vrm/vrm_options_post_import_plugin.gd",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/vrm_options_post_import_plugin.gd",
+      "sha256": "2f105a47c9b525dfb207134ad260be9219d6d5ea29e7b1109df2b0f6e32e8673",
+      "installed_sha256": "2f105a47c9b525dfb207134ad260be9219d6d5ea29e7b1109df2b0f6e32e8673"
+    },
+    {
+      "path": "addons/vrm/vrm_options_post_import_plugin.gd.uid",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/vrm_options_post_import_plugin.gd.uid",
+      "sha256": "1c1c6b07f54db62ccff874e9febfaf14c759da6a1426364a6641f9ecc04fa761",
+      "installed_sha256": "1c1c6b07f54db62ccff874e9febfaf14c759da6a1426364a6641f9ecc04fa761"
+    },
+    {
+      "path": "addons/vrm/vrm_secondary.gd",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/vrm_secondary.gd",
+      "sha256": "cc5b78de0523a372fa93f5f28685542aa3348caef35c8a43e838f6c2b367756e",
+      "installed_sha256": "cc5b78de0523a372fa93f5f28685542aa3348caef35c8a43e838f6c2b367756e"
+    },
+    {
+      "path": "addons/vrm/vrm_secondary.gd.uid",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/vrm_secondary.gd.uid",
+      "sha256": "5ea5c6226c3b9d13762f9cf335951a5cc70b742937d2000592b5ab0850f0b7be",
+      "installed_sha256": "5ea5c6226c3b9d13762f9cf335951a5cc70b742937d2000592b5ab0850f0b7be"
+    },
+    {
+      "path": "addons/vrm/vrm_spring_bone.gd",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/vrm_spring_bone.gd",
+      "sha256": "f6200c07441b10a70269c3e1e51b664dedd56d5b2a0e279f66e9c03a38b24b8f",
+      "installed_sha256": "f6200c07441b10a70269c3e1e51b664dedd56d5b2a0e279f66e9c03a38b24b8f"
+    },
+    {
+      "path": "addons/vrm/vrm_spring_bone.gd.uid",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/vrm_spring_bone.gd.uid",
+      "sha256": "c557fa0e767891c572dbc7dde204b32c98ac590bd7944762429f801e8900eb34",
+      "installed_sha256": "c557fa0e767891c572dbc7dde204b32c98ac590bd7944762429f801e8900eb34"
+    },
+    {
+      "path": "addons/vrm/vrm_spring_bone_logic.gd",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/vrm_spring_bone_logic.gd",
+      "sha256": "ae1a2b7e88c761139c6b78b1564830f378972f722b82f4b1378891671df7e392",
+      "installed_sha256": "ae1a2b7e88c761139c6b78b1564830f378972f722b82f4b1378891671df7e392"
+    },
+    {
+      "path": "addons/vrm/vrm_spring_bone_logic.gd.uid",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/vrm_spring_bone_logic.gd.uid",
+      "sha256": "2c546f543c3aea343c8e22de4da7309666dc2cba388d5d1526065e1d9f2aaccf",
+      "installed_sha256": "2c546f543c3aea343c8e22de4da7309666dc2cba388d5d1526065e1d9f2aaccf"
+    },
+    {
+      "path": "addons/vrm/vrm_toplevel.gd",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/vrm_toplevel.gd",
+      "sha256": "f0670c0b797e0db6ab5082797d350cbc797f509333c2104e3bf7ec2e5dabc927",
+      "installed_sha256": "f0670c0b797e0db6ab5082797d350cbc797f509333c2104e3bf7ec2e5dabc927"
+    },
+    {
+      "path": "addons/vrm/vrm_toplevel.gd.uid",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/vrm_toplevel.gd.uid",
+      "sha256": "397eb27ad54604dac7d6e702509d5f920da110fb0398315ee18970d9080ddca5",
+      "installed_sha256": "397eb27ad54604dac7d6e702509d5f920da110fb0398315ee18970d9080ddca5"
+    },
+    {
+      "path": "addons/vrm/vrm_utils.gd",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/vrm_utils.gd",
+      "sha256": "0750c9411fb2857d85896c2285037d227005c4195bb7c8066b81d5ece4f6235c",
+      "installed_sha256": "0750c9411fb2857d85896c2285037d227005c4195bb7c8066b81d5ece4f6235c"
+    },
+    {
+      "path": "addons/vrm/vrm_utils.gd.uid",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/vrm/vrm_utils.gd.uid",
+      "sha256": "b35dfd290542262614320c8bf594a6dc842528f8bcfb2e07faf243d380d9e678",
+      "installed_sha256": "b35dfd290542262614320c8bf594a6dc842528f8bcfb2e07faf243d380d9e678"
+    },
+    {
+      "path": "addons/Godot-MToon-Shader/.gitattributes",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/Godot-MToon-Shader/.gitattributes",
+      "sha256": "21b01a606c9f85f18bb9230245f00ab104df7409cbb2fe9423f6751ca72ba754",
+      "installed_sha256": "21b01a606c9f85f18bb9230245f00ab104df7409cbb2fe9423f6751ca72ba754"
+    },
+    {
+      "path": "addons/Godot-MToon-Shader/.gitignore",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/Godot-MToon-Shader/.gitignore",
+      "sha256": "e1fc11d29dcc472966ceac63c4e0b1a0bb2b7e81922c38fa891e29ceaab152ff",
+      "installed_sha256": "e1fc11d29dcc472966ceac63c4e0b1a0bb2b7e81922c38fa891e29ceaab152ff"
+    },
+    {
+      "path": "addons/Godot-MToon-Shader/.gitrepo",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/Godot-MToon-Shader/.gitrepo",
+      "sha256": "4ecd2c14537e34a7e17542f603b89856b4bb420b2764a92a38e7d45019f0e9b3",
+      "installed_sha256": "4ecd2c14537e34a7e17542f603b89856b4bb420b2764a92a38e7d45019f0e9b3"
+    },
+    {
+      "path": "addons/Godot-MToon-Shader/LICENSE",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/Godot-MToon-Shader/LICENSE",
+      "sha256": "fd0a82d7d32ad7e39948363114587a3290252ee9a57da0da1582f1e9f0e602f5",
+      "installed_sha256": "fd0a82d7d32ad7e39948363114587a3290252ee9a57da0da1582f1e9f0e602f5"
+    },
+    {
+      "path": "addons/Godot-MToon-Shader/inspector_mtoon.gd",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/Godot-MToon-Shader/inspector_mtoon.gd",
+      "sha256": "514ac79c15dbc2b748a1e4ca95c60274ebb8eec1eb99bdbd133adb8a5c1e14a5",
+      "installed_sha256": "514ac79c15dbc2b748a1e4ca95c60274ebb8eec1eb99bdbd133adb8a5c1e14a5"
+    },
+    {
+      "path": "addons/Godot-MToon-Shader/inspector_mtoon.gd.uid",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/Godot-MToon-Shader/inspector_mtoon.gd.uid",
+      "sha256": "1ada0572473187d40f9942458663ccb81a2918a1baf6cb84c4d5ed72ee747f97",
+      "installed_sha256": "1ada0572473187d40f9942458663ccb81a2918a1baf6cb84c4d5ed72ee747f97"
+    },
+    {
+      "path": "addons/Godot-MToon-Shader/mtoon.gdshader",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/Godot-MToon-Shader/mtoon.gdshader",
+      "sha256": "acf669dda65a3dd4ec2f9369e7f67bec77b3b499c480a295fb9cb71d1c54c800",
+      "installed_sha256": "acf669dda65a3dd4ec2f9369e7f67bec77b3b499c480a295fb9cb71d1c54c800"
+    },
+    {
+      "path": "addons/Godot-MToon-Shader/mtoon.gdshader.uid",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/Godot-MToon-Shader/mtoon.gdshader.uid",
+      "sha256": "3e8d879e97376583e83942b6d482710744f3fc70fc8bedbba73768b877f92b4a",
+      "installed_sha256": "3e8d879e97376583e83942b6d482710744f3fc70fc8bedbba73768b877f92b4a"
+    },
+    {
+      "path": "addons/Godot-MToon-Shader/mtoon_common.gdshaderinc",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/Godot-MToon-Shader/mtoon_common.gdshaderinc",
+      "sha256": "3341ff7bc2bd6658c4bb3538965e5ae8d5b5396ea5438d2bbd7b05abda09ae78",
+      "installed_sha256": "3341ff7bc2bd6658c4bb3538965e5ae8d5b5396ea5438d2bbd7b05abda09ae78"
+    },
+    {
+      "path": "addons/Godot-MToon-Shader/mtoon_common.gdshaderinc.uid",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/Godot-MToon-Shader/mtoon_common.gdshaderinc.uid",
+      "sha256": "3e4bf5739abe890907f637996c5b85062a87a3bccd56a02224bc737fbcc2145a",
+      "installed_sha256": "3e4bf5739abe890907f637996c5b85062a87a3bccd56a02224bc737fbcc2145a"
+    },
+    {
+      "path": "addons/Godot-MToon-Shader/mtoon_cull_off.gdshader",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/Godot-MToon-Shader/mtoon_cull_off.gdshader",
+      "sha256": "aac226499408af896ffbdcc4b61b8796145a5fd83d6f855988b2a14edce78dd0",
+      "installed_sha256": "aac226499408af896ffbdcc4b61b8796145a5fd83d6f855988b2a14edce78dd0"
+    },
+    {
+      "path": "addons/Godot-MToon-Shader/mtoon_cull_off.gdshader.uid",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/Godot-MToon-Shader/mtoon_cull_off.gdshader.uid",
+      "sha256": "f5c2235b5f733887c126d2552072c66517bfddf9b64a06cda50d8e233807e791",
+      "installed_sha256": "f5c2235b5f733887c126d2552072c66517bfddf9b64a06cda50d8e233807e791"
+    },
+    {
+      "path": "addons/Godot-MToon-Shader/mtoon_cutout.gdshader",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/Godot-MToon-Shader/mtoon_cutout.gdshader",
+      "sha256": "aa3f11b71f9889977ac2678af184782b48eda0635663a8baecdc62ae911aade8",
+      "installed_sha256": "aa3f11b71f9889977ac2678af184782b48eda0635663a8baecdc62ae911aade8"
+    },
+    {
+      "path": "addons/Godot-MToon-Shader/mtoon_cutout.gdshader.uid",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/Godot-MToon-Shader/mtoon_cutout.gdshader.uid",
+      "sha256": "fac10890ca016976c25528be3f3d1e715bd8ce27fe3b7046bb14ecb006302900",
+      "installed_sha256": "fac10890ca016976c25528be3f3d1e715bd8ce27fe3b7046bb14ecb006302900"
+    },
+    {
+      "path": "addons/Godot-MToon-Shader/mtoon_cutout_cull_off.gdshader",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/Godot-MToon-Shader/mtoon_cutout_cull_off.gdshader",
+      "sha256": "318881525c8c9cac616cbe3c01244537098e554a1a1680a8b6c9384ff90f5f6f",
+      "installed_sha256": "318881525c8c9cac616cbe3c01244537098e554a1a1680a8b6c9384ff90f5f6f"
+    },
+    {
+      "path": "addons/Godot-MToon-Shader/mtoon_cutout_cull_off.gdshader.uid",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/Godot-MToon-Shader/mtoon_cutout_cull_off.gdshader.uid",
+      "sha256": "d6eb8f6ed6eb5395d538c02b20f256550d139720e1a9ff04623bef08974079d3",
+      "installed_sha256": "d6eb8f6ed6eb5395d538c02b20f256550d139720e1a9ff04623bef08974079d3"
+    },
+    {
+      "path": "addons/Godot-MToon-Shader/mtoon_outline.gdshader",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/Godot-MToon-Shader/mtoon_outline.gdshader",
+      "sha256": "e7fb813de2e0ec0fc165cb51dc261a8dd256d9c99d9e1a2b1e3dba7b3df454aa",
+      "installed_sha256": "e7fb813de2e0ec0fc165cb51dc261a8dd256d9c99d9e1a2b1e3dba7b3df454aa"
+    },
+    {
+      "path": "addons/Godot-MToon-Shader/mtoon_outline.gdshader.uid",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/Godot-MToon-Shader/mtoon_outline.gdshader.uid",
+      "sha256": "85d36f6e5d2cca801022d55556d82516728d2f075e5ee47f2f8ae0f948d5968d",
+      "installed_sha256": "85d36f6e5d2cca801022d55556d82516728d2f075e5ee47f2f8ae0f948d5968d"
+    },
+    {
+      "path": "addons/Godot-MToon-Shader/mtoon_outline_cutout.gdshader",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/Godot-MToon-Shader/mtoon_outline_cutout.gdshader",
+      "sha256": "11fba7b5a320d252192823ed475aaf5ddecaea4c47356733a692a81a39d6b4d9",
+      "installed_sha256": "11fba7b5a320d252192823ed475aaf5ddecaea4c47356733a692a81a39d6b4d9"
+    },
+    {
+      "path": "addons/Godot-MToon-Shader/mtoon_outline_cutout.gdshader.uid",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/Godot-MToon-Shader/mtoon_outline_cutout.gdshader.uid",
+      "sha256": "e17118f46aa01091e3e7112498775f92d4f1c08f498f1514f5fbec9266313d75",
+      "installed_sha256": "e17118f46aa01091e3e7112498775f92d4f1c08f498f1514f5fbec9266313d75"
+    },
+    {
+      "path": "addons/Godot-MToon-Shader/mtoon_outline_trans.gdshader",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/Godot-MToon-Shader/mtoon_outline_trans.gdshader",
+      "sha256": "4135f904ba7760f7946bcf9b16b6a91021128e64e9cf3cc61dddaf27a74879db",
+      "installed_sha256": "4135f904ba7760f7946bcf9b16b6a91021128e64e9cf3cc61dddaf27a74879db"
+    },
+    {
+      "path": "addons/Godot-MToon-Shader/mtoon_outline_trans.gdshader.uid",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/Godot-MToon-Shader/mtoon_outline_trans.gdshader.uid",
+      "sha256": "42a09567c32dc0afd8256f04aa384829001e3ad819dfaf92805aadf8183005a0",
+      "installed_sha256": "42a09567c32dc0afd8256f04aa384829001e3ad819dfaf92805aadf8183005a0"
+    },
+    {
+      "path": "addons/Godot-MToon-Shader/mtoon_outline_trans_zwrite.gdshader",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/Godot-MToon-Shader/mtoon_outline_trans_zwrite.gdshader",
+      "sha256": "6582f5f48848c5f75f2b3af247570c190a94bf9d33bc52240de2e4933a93a039",
+      "installed_sha256": "6582f5f48848c5f75f2b3af247570c190a94bf9d33bc52240de2e4933a93a039"
+    },
+    {
+      "path": "addons/Godot-MToon-Shader/mtoon_outline_trans_zwrite.gdshader.uid",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/Godot-MToon-Shader/mtoon_outline_trans_zwrite.gdshader.uid",
+      "sha256": "b70450cd4e1603c82a4918f3c8f9717a9d88dd703a4cbaaae63e62cae4908813",
+      "installed_sha256": "b70450cd4e1603c82a4918f3c8f9717a9d88dd703a4cbaaae63e62cae4908813"
+    },
+    {
+      "path": "addons/Godot-MToon-Shader/mtoon_trans.gdshader",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/Godot-MToon-Shader/mtoon_trans.gdshader",
+      "sha256": "5afa7c7367635cd0fb0d6e181f11a6d965df49ff76d0b5e8abdc1e244c6eeca0",
+      "installed_sha256": "5afa7c7367635cd0fb0d6e181f11a6d965df49ff76d0b5e8abdc1e244c6eeca0"
+    },
+    {
+      "path": "addons/Godot-MToon-Shader/mtoon_trans.gdshader.uid",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/Godot-MToon-Shader/mtoon_trans.gdshader.uid",
+      "sha256": "12567318c3bd82b6ad699e7c5e47a91416b1f3c0001b2e80689caae99548e637",
+      "installed_sha256": "12567318c3bd82b6ad699e7c5e47a91416b1f3c0001b2e80689caae99548e637"
+    },
+    {
+      "path": "addons/Godot-MToon-Shader/mtoon_trans_cull_off.gdshader",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/Godot-MToon-Shader/mtoon_trans_cull_off.gdshader",
+      "sha256": "c1005929a221d8f4802850173bc812cafa419b798f9a3fb09dfe81dc230175e1",
+      "installed_sha256": "c1005929a221d8f4802850173bc812cafa419b798f9a3fb09dfe81dc230175e1"
+    },
+    {
+      "path": "addons/Godot-MToon-Shader/mtoon_trans_cull_off.gdshader.uid",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/Godot-MToon-Shader/mtoon_trans_cull_off.gdshader.uid",
+      "sha256": "e0ff2fa543ff7d1fdb7e4893ad1e9ed33481129a0731145bc477174b0a45019d",
+      "installed_sha256": "e0ff2fa543ff7d1fdb7e4893ad1e9ed33481129a0731145bc477174b0a45019d"
+    },
+    {
+      "path": "addons/Godot-MToon-Shader/mtoon_trans_zwrite.gdshader",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/Godot-MToon-Shader/mtoon_trans_zwrite.gdshader",
+      "sha256": "25c391960e313a311fddb810a34f8b0cb443df99f3ba572d78ae4658e6590156",
+      "installed_sha256": "25c391960e313a311fddb810a34f8b0cb443df99f3ba572d78ae4658e6590156"
+    },
+    {
+      "path": "addons/Godot-MToon-Shader/mtoon_trans_zwrite.gdshader.uid",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/Godot-MToon-Shader/mtoon_trans_zwrite.gdshader.uid",
+      "sha256": "f56bb7893d4e39b0df8e5546dc8df1dbd6ad0edf18b73a4e6daaae5509373481",
+      "installed_sha256": "f56bb7893d4e39b0df8e5546dc8df1dbd6ad0edf18b73a4e6daaae5509373481"
+    },
+    {
+      "path": "addons/Godot-MToon-Shader/mtoon_trans_zwrite_cull_off.gdshader",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/Godot-MToon-Shader/mtoon_trans_zwrite_cull_off.gdshader",
+      "sha256": "215a16af090300fff0be040c851927aeef96da91f14fa10c31102efcc43b03f3",
+      "installed_sha256": "215a16af090300fff0be040c851927aeef96da91f14fa10c31102efcc43b03f3"
+    },
+    {
+      "path": "addons/Godot-MToon-Shader/mtoon_trans_zwrite_cull_off.gdshader.uid",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/Godot-MToon-Shader/mtoon_trans_zwrite_cull_off.gdshader.uid",
+      "sha256": "73c552b3fa0c5e6e902c5bd7c8fe579eef7306236a0cf1088cc41f07d2e2e4fd",
+      "installed_sha256": "73c552b3fa0c5e6e902c5bd7c8fe579eef7306236a0cf1088cc41f07d2e2e4fd"
+    },
+    {
+      "path": "addons/Godot-MToon-Shader/plugin.cfg",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/Godot-MToon-Shader/plugin.cfg",
+      "sha256": "e337c5dded72e92a10d9fdd1b23c832864be20ba6e399783a79acd73c9d7b908",
+      "installed_sha256": "e337c5dded72e92a10d9fdd1b23c832864be20ba6e399783a79acd73c9d7b908"
+    },
+    {
+      "path": "addons/Godot-MToon-Shader/plugin.gd",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/Godot-MToon-Shader/plugin.gd",
+      "sha256": "b1a1f76fbdba0b391bdb9a181e7b66595aec745d77b73919872454a8c28131f8",
+      "installed_sha256": "b1a1f76fbdba0b391bdb9a181e7b66595aec745d77b73919872454a8c28131f8"
+    },
+    {
+      "path": "addons/Godot-MToon-Shader/plugin.gd.uid",
+      "url": "https://raw.githubusercontent.com/V-Sekai/godot-vrm/e15199f980064028bfa4fbee5e70dddb82dd55c3/addons/Godot-MToon-Shader/plugin.gd.uid",
+      "sha256": "8e5e5156959117cbb3f9c0f3b2f27732bdb556cafc34a194c6318dfb44e5c922",
+      "installed_sha256": "8e5e5156959117cbb3f9c0f3b2f27732bdb556cafc34a194c6318dfb44e5c922"
+    }
+  ],
+  "excluded": [
+    {
+      "name": "Bestiary Dungeon Monsters Standard",
+      "status": "No model downloaded or bundled; QAL commercial Product permission does not establish clearance for raw standalone art-reference distribution. Exact goblin replacement not verified.",
+      "official_url": "https://quaternius.com/packs/bestiarydungeonmonsterskit.html",
+      "license_evidence_url": "https://raw.githubusercontent.com/naufaldi/echoes-below/54909ebf11635ebdb163c4f50ddf4d3111d28017/public/assets/quaternius/LICENSE-BESTIARY.txt",
+      "license_evidence_file": "art_lab/reports/BESTIARY-LICENSE-EVIDENCE.txt",
+      "license_evidence_sha256": "83533896cc3c55c45b4dfdf46d882c99a81b3250eede94212bfee8664524627e"
+    },
+    {
+      "name": "Quaternius paid Source/Pro editions",
+      "status": "Not downloaded; no free-content assumptions from promotion."
+    }
+  ]
+}

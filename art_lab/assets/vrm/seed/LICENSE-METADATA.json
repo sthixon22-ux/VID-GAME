@@ -1,0 +1,19 @@
+{
+  "allowAntisocialOrHateUsage": true,
+  "allowExcessivelySexualUsage": true,
+  "allowExcessivelyViolentUsage": true,
+  "allowPoliticalOrReligiousUsage": true,
+  "allowRedistribution": true,
+  "authors": [
+    "VirtualCast, Inc."
+  ],
+  "avatarPermission": "everyone",
+  "commercialUsage": "corporation",
+  "copyrightInformation": "VirtualCast, Inc.",
+  "creditNotation": "required",
+  "licenseUrl": "https://vrm.dev/licenses/1.0/",
+  "modification": "allowModificationRedistribution",
+  "name": "Seed-san",
+  "thumbnailImage": 14,
+  "version": "1"
+}
