@@ -125,3 +125,7 @@ A timed Windows playtest, audio listening, deeper balance/accessibility review a
 ## Art-development comparison (review only)
 
 Open `art_lab/comparison.tscn` and press **F6** to compare the current hero against the downloaded Quaternius and anime VRM pipelines. F5 still runs the game. The lab includes six motion previews, facial-expression controls, outfit parts and an animated wolf comparison; production art and all twelve class choices remain unchanged. See [the lab instructions](art_lab/README.md) and [visual audit/recommendation](art_lab/reports/VISUAL_AUDIT.md).
+
+## Approved Quaternius hero
+
+The selected Quaternius character is now the playable hero. Open `project.godot` and press **F5** for the game; use **F6** on `art_lab/comparison.tscn` only for the comparison. All 12 primary classes and any two distinct secondary classes remain selectable. Existing saves keep their class, equipment and progression data. The current free wardrobe has two authored outfits; fitted plate/robe sets and weapon-specific animation polish remain future work. See [integration details and licenses](docs/QUATERNIUS_HERO.md).

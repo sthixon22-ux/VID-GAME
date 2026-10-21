@@ -139,5 +139,89 @@
       "base.obj.txt": "8e761e6624b8f54536409135d1636da63b32486a90d4897f84e121d144f6fb4c",
       "LICENSE-CC0.txt": "a2010f343487d3f7618affe54f789f5487602331c0a8d03f49e9a7c547cf0499"
     }
+  },
+  "quaternius_characters_production": {
+    "id": "quaternius_characters",
+    "author": "Quaternius; derivative assembly in ibra-kdbra/Generate_infinite",
+    "license": "CC0-1.0 (named original Standard packs, declared by source attribution)",
+    "official_source": "https://quaternius.com/packs/universalbasecharacters.html",
+    "notes": "Third-party assembled derivatives: Universal Base Characters Standard head/eyes/brows/hair + Modular Character Outfits Fantasy Standard clothes, one skeleton, WebP textures. No Source/Pro archive downloaded. Explicit original-pack attribution is preserved; not represented as pristine upstream exports.",
+    "license_evidence": [
+      "art_lab/assets/quaternius_characters/SOURCE-README.md",
+      "art_lab/assets/quaternius_characters/LICENSE-OUTFITS-STANDARD.txt",
+      "art_lab/assets/quaternius_characters/LICENSE-CC0.txt"
+    ],
+    "modifications": [
+      "Godot humanoid bone-map import settings only; source GLBs unchanged"
+    ],
+    "files": {
+      "assets/vendor/quaternius/characters/female_ranger.glb": {
+        "sha256": "09ca05f995326decd7aada64fbaa8ca0292d20efacdfb1cc5f317181816d2f55",
+        "source_url": "https://raw.githubusercontent.com/ibra-kdbra/Generate_infinite/027491fa5d30788d26fc707bddf6c8cdb48ad1f4/public/models/characters/female_ranger.glb"
+      },
+      "assets/vendor/quaternius/characters/female_peasant.glb": {
+        "sha256": "068df761750b42dd81ad85ac1498445edc5daa360a9a76633869fdbde2d38cf0",
+        "source_url": "https://raw.githubusercontent.com/ibra-kdbra/Generate_infinite/027491fa5d30788d26fc707bddf6c8cdb48ad1f4/public/models/characters/female_peasant.glb"
+      },
+      "assets/vendor/quaternius/characters/SOURCE-README.md": {
+        "sha256": "59f0e9b7078beb2be3c1200deffb424ab151a2b0349d2ebbe8234c90106388e3",
+        "source_url": "https://raw.githubusercontent.com/ibra-kdbra/Generate_infinite/027491fa5d30788d26fc707bddf6c8cdb48ad1f4/README.md"
+      }
+    }
+  },
+  "outfit_license_production": {
+    "id": "outfit_license",
+    "author": "Quaternius",
+    "license": "CC0-1.0",
+    "official_source": "https://quaternius.com/packs/modularcharacteroutfitsfantasy.html",
+    "notes": "Exact original free Standard notice: subset only; remaining outfits/parts require paid Source edition. No paid files used.",
+    "files": {
+      "assets/vendor/quaternius/characters/LICENSE-OUTFITS-STANDARD.txt": {
+        "sha256": "2202cc2f608c4210790b112e5f121bc2e7f8dced7b5b1c7f4be6203461bdebbb",
+        "source_url": "https://raw.githubusercontent.com/agentkaerf/FreeModels/db3df04d1e4714298a09510b26fb6de6645138a2/Modular%20Character%20Outfits%20-%20Fantasy%5BStandard%5D/License_Standard.txt"
+      }
+    }
+  },
+  "ual1_standard_production": {
+    "id": "ual1_standard",
+    "author": "Quaternius",
+    "license": "CC0-1.0",
+    "official_source": "https://quaternius.itch.io/universal-animation-library",
+    "notes": "46 actual source clips; source README explicitly identifies free Standard subset. Source assets unmodified; bone map configured only in Godot .import.",
+    "files": {
+      "assets/vendor/quaternius/animation/AnimationLibrary_Godot_Standard.gltf": {
+        "sha256": "0ff075c7ad6855c5c2c37a171592ee8f0d6ab2f58259e2be77a9b63dd8027765",
+        "source_url": "https://raw.githubusercontent.com/J-Ponzo/gltf-universal-animation-library/e24c23cf2a1323488a3faa226ea7ea21f644b73e/glTF/AnimationLibrary_Godot_Standard.gltf"
+      },
+      "assets/vendor/quaternius/animation/AnimationLibrary_Godot_Standard.bin": {
+        "sha256": "6e65377d81558333c4093dbb144a48fd19019343d82b1a3a7992a98ec0e0543c",
+        "source_url": "https://raw.githubusercontent.com/J-Ponzo/gltf-universal-animation-library/e24c23cf2a1323488a3faa226ea7ea21f644b73e/glTF/AnimationLibrary_Godot_Standard.bin"
+      },
+      "assets/vendor/quaternius/animation/LICENSE": {
+        "sha256": "a2010f343487d3f7618affe54f789f5487602331c0a8d03f49e9a7c547cf0499",
+        "source_url": "https://raw.githubusercontent.com/J-Ponzo/gltf-universal-animation-library/e24c23cf2a1323488a3faa226ea7ea21f644b73e/LICENSE"
+      },
+      "assets/vendor/quaternius/animation/README.md": {
+        "sha256": "370e6ff244ef43b269f936be7d630a77a3eb7ed8bbc3315ffcae5b327b814fcb",
+        "source_url": "https://raw.githubusercontent.com/J-Ponzo/gltf-universal-animation-library/e24c23cf2a1323488a3faa226ea7ea21f644b73e/README.md"
+      }
+    }
+  },
+  "ual2_standard_production": {
+    "id": "ual2_standard",
+    "author": "Quaternius",
+    "license": "CC0-1.0",
+    "official_source": "https://quaternius.com/packs/universalanimationlibrary2.html",
+    "notes": "43 actual source clips; free Standard path and included CC0 notice verified. Source GLB unchanged; separate humanoid bone map configured.",
+    "files": {
+      "assets/vendor/quaternius/animation2/UAL2_Standard.glb": {
+        "sha256": "9a0ffda4931f934f13fb584002c51673723b03f9655a581167e7e5dae744f086",
+        "source_url": "https://raw.githubusercontent.com/agentkaerf/FreeModels/db3df04d1e4714298a09510b26fb6de6645138a2/Universal%20Animation%20Library%202%5BStandard%5D/Unreal-Godot/UAL2_Standard.glb"
+      },
+      "assets/vendor/quaternius/animation2/LICENSE.txt": {
+        "sha256": "f9b1de4e8feff135555ac1c7d2eec65035a05fd74e4d632a3f826ac985c3f22c",
+        "source_url": "https://raw.githubusercontent.com/agentkaerf/FreeModels/db3df04d1e4714298a09510b26fb6de6645138a2/Universal%20Animation%20Library%202%5BStandard%5D/License.txt"
+      }
+    }
   }
 }

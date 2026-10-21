@@ -102,3 +102,7 @@ The official Quaternius/itch hosts could not be reached from this environment. A
 The lab validates moving skeletal tracks, hand-attachment motion, expressions modifying actual morph weights, independent outfit pieces, all twelve definitions, and unchanged hero state. It verifies SHA-256 hashes of every production script, scene, gameplay-data file, model and texture captured before this work. Production models have not been replaced.
 
 The existing nine suites pass **985 checks** with the new import plugins installed, including the real creation-to-ending/postgame flow, all twelve class starts, all 1,320 ordered class combinations, equipment/hand rules, combat/Auto parity, companions and save behavior. Lab-specific checks and clean import/render results are recorded in [VALIDATION.md](VALIDATION.md).
+
+## User-selected direction after review
+
+The user selected Pipeline A's Quaternius ranger and authorized integration. This supersedes the earlier provisional recommendation of Pipeline B. Production now uses verified CC0 copies under `assets/vendor/quaternius/`, with the original hero retained for comparison. See `docs/QUATERNIUS_HERO.md` for the actual production mapping, limitations and validation.

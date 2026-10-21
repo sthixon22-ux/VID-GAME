@@ -59,3 +59,7 @@ The 0.8 hero description above documents the previous release; these new hero GL
 ## Art-development review assets (not production replacements)
 
 The optional comparison scene in `art_lab/` vendors separately licensed Quaternius Standard derivatives/animations, a 2021 CC0 animated wolf, two official VRM sample avatars, and the MIT Godot VRM/MToon addon. See [the complete pinned source and permission manifest](../art_lab/SOURCES.json), [required attribution and controls](../art_lab/README.md) and [audit](../art_lab/reports/VISUAL_AUDIT.md). These models are not used by production hero, enemy or companion factories. Seed-san requires credit to VirtualCast, Inc.; VRM content is not blanket CC0. Bestiary models were excluded after inspecting their QAL license rather than accepting a mirror's general CC0 claim.
+
+### Approved Quaternius production hero
+
+The user approved Pipeline A after art-lab review. Byte-identical verified CC0 character/animation copies now live in `assets/vendor/quaternius/`; `SOURCES.json` records their provenance. `HeroVisual` uses the authored ranger/traveler family independently of classes. See `docs/QUATERNIUS_HERO.md` for the equipment mapping, supported animation clips, verification and current wardrobe limitations. The existing Blender-generated hero remains available only as legacy/comparison content.

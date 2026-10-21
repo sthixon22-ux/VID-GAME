@@ -28,3 +28,7 @@ godot --headless --path . --editor --import --quit
 XDG_DATA_HOME=/tmp/verdant-art-test godot --headless --path . res://art_lab/validate.tscn
 python3 art_lab/fetch_assets.py
 ```
+
+## Subsequent approved production integration
+
+After this historical audit, the player selected Pipeline A (the Quaternius ranger) and approved production integration. The comparison retains its prior hero using `art_lab/legacy_hero_visual.gd`. The byte-integrity check now explicitly exempts the approved `scripts/hero_visual.gd` change; other captured gameplay files retain their original hashes. See `docs/QUATERNIUS_HERO.md` for the integration and newer test results. The earlier recommendation of VRM describes the initial investigation, not the player's final selection.

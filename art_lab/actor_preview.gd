@@ -20,7 +20,7 @@ var source_clips:Dictionary={}
 func setup(id:String):
  kind=id
  if id=="current":
-  visual=HeroVisual.new({"Weapon":"Iron Sword","Shield":"Oak Shield","Chest":"Traveler's Clothing","Helmet":"None","Gauntlets":"None","Pants":"None","Boots":"None","Accessory":"None"},{"skin":0,"hair":0,"dye":0})
+  visual=load("res://art_lab/legacy_hero_visual.gd").new({"Weapon":"Iron Sword","Shield":"Oak Shield","Chest":"Traveler's Clothing","Helmet":"None","Gauntlets":"None","Pants":"None","Boots":"None","Accessory":"None"},{"skin":0,"hair":0,"dye":0})
   visual.rotation.y=PI
   visual.locked_pose=true
   motion_player=visual.player

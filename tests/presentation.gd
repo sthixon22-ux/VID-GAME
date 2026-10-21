@@ -56,12 +56,12 @@ func run():
  for slot in items: check(State.equip(slot,items[slot]),"Equip independent slot: "+slot)
  var hero=Art.actor("Hero",State.hero.equipment)
  add_child(hero)
- check(hero.model.name=="Mage","Robe uses a designed, rigged outfit mesh")
+ check(hero.model.name=="QuaterniusRanger","Robe uses the authored Quaternius skinned outfit")
  check(hero.skeleton.get_bone_count()>30,"Hero has a real articulated skeleton")
  check(hero.find_child("EquippedWeapon",true,false)!=null and hero.find_child("EquippedShield",true,false)!=null,"Weapons and shield are attached to the rig")
  check(hero.find_child("EquippedHelmet",true,false)!=null,"Helmet appears independently of robe")
  for slot in ["Gauntlets","Pants","Boots","Accessory"]:
-  check(not hero.find_children("Equipped"+slot+"*","MeshInstance3D",true,false).is_empty(),"Visible modular piece: "+slot)
+  check(not hero.find_children("Equipped"+slot+"*","Node3D",true,false).is_empty(),"Visible modular piece: "+slot)
  var clips: Array=[]
  var actions=["Attack","Sword Slash","Shield Bash","Sacred Strike","Hunter's Mark","Thornbind","Regrowth","Dawn Avatar","Wild Hunt","Ancient Grove"]
  for action in actions:
@@ -73,17 +73,17 @@ func run():
   check(hero.last_action==action and hero.player.is_playing(),"Animation executes: "+action)
  hero.action_remaining=0
  hero.motion(true,true)
- check(hero.player.current_animation=="Running_A","Exploration uses a real run animation")
+ check(hero.player.current_animation=="Sprint","Exploration uses a real run animation")
  for chest in ["Steel Cuirass","Leather Vest"]:
   State.equip("Chest",chest)
   var outfit=Art.actor("Hero",State.hero.equipment)
   add_child(outfit)
-  check(outfit.model.name==("Knight" if chest=="Steel Cuirass" else "Rogue"),"Outfit changes full silhouette: "+chest)
+  check(outfit.model.name=="QuaterniusRanger","Equipment retains authored skinned outfit: "+chest)
   outfit.queue_free()
  State.equip("Helmet","Ranger Hood")
  var hooded=Art.actor("Hero",State.hero.equipment)
  add_child(hooded)
- check(GearVisual.bounds(hooded.find_child("EquippedHelmet",true,false)).size.x>0.2,"Ranger hood has an open-face model sized for the revised hero")
+ check(hooded.model.find_child("*Head_Hood*",true,false).visible,"Ranger hood uses the source skinned hood")
  hooded.queue_free()
  hero.queue_free()
  State.reset()
@@ -107,7 +107,7 @@ func run():
  menu.show_page("equipment")
  var robe=find_button(menu.body,"Verdant Robe",true)
  robe.pressed.emit()
- check(State.hero.equipment.Chest=="Verdant Robe" and menu.preview_actor.model.name=="Mage","Equipment button updates state and visible 3D outfit")
+ check(State.hero.equipment.Chest=="Verdant Robe" and menu.preview_actor.model.name=="QuaterniusRanger","Equipment button updates state and visible 3D outfit")
  menu.slot="Helmet"
  menu.show_page("equipment")
  find_button(menu.body,"Steel Helm",true).pressed.emit()
