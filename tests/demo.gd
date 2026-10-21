@@ -138,7 +138,7 @@ func run():
   var other: String=State.companions.keys().filter(func(value): return value!=id)[0]
   check(not State.choose_companion(other),"Cannot choose second companion before postgame")
   var model=CompanionVisual.build(id)
-  check(model.find_children("*","MeshInstance3D",true,false).size()>3,"Distinct companion model builds: "+id)
+  check(model is CompanionActor and model.skeleton.get_bone_count()>10,"Skinned companion model builds: "+id)
   model.free()
   check(State.train_companion("predator") and not State.train_companion("predator"),"Companion training spends points once")
   for behavior in ["Attack","Support","Defend"]:

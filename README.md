@@ -133,3 +133,7 @@ The selected Quaternius character is now the playable hero. Open `project.godot`
 ## Male/female class appearance
 
 **New Adventure → Create Your Hero → Character: Male / Female.** Choose any of the 12 primary classes to preview its matching look; your two secondary classes remain unrestricted. There are 24 class looks using shared authored Quaternius bodies/outfits with custom class textures and crests. Body choice saves with the hero and does not change stats. [View all looks and details](docs/CLASS_SKINS.md).
+
+## Companion art update
+
+The temporary wolf and all six permanent companions now have animated rigs and updated materials in exploration, menus and battles. Wolf/fox/horse/dragon use licensed Quaternius foundations; griffin and stone guardian include original derivative geometry. Existing saves and companion skill trees remain compatible. **F5 → Continue Adventure** shows your current companion's new model automatically. [Preview all six](docs/screenshots/companions/gallery.jpg) · [sources, implementation and limitations](docs/COMPANION_ART.md).

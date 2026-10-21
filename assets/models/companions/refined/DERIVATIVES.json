@@ -1,0 +1,38 @@
+{
+  "dire_wolf": {
+    "source": "animals/Wolf.gltf",
+    "runtime_model": "assets/models/companions/refined/dire_wolf.glb",
+    "geometry": "Refined licensed animal geometry and painted materials",
+    "sha256": "c005784c05728cefee05a7a43af2a6b14456c43499baeea6e66ae71989bea964"
+  },
+  "spirit_fox": {
+    "source": "animals/Fox.gltf",
+    "runtime_model": "assets/models/companions/refined/spirit_fox.glb",
+    "geometry": "Refined licensed animal geometry and painted materials",
+    "sha256": "844c590bde272efb7fb9a573e2a0cbf5801664dda5ccb1dc6272e077adb073b7"
+  },
+  "warhorse": {
+    "source": "animals/Horse.gltf",
+    "runtime_model": "assets/models/companions/refined/warhorse.glb",
+    "geometry": "Refined licensed animal geometry and painted materials",
+    "sha256": "66282617a6264e354d7cd160435121849f7d38566fd717f428d26b86b0f89470"
+  },
+  "griffin": {
+    "source": "animals/Wolf.gltf",
+    "runtime_model": "assets/models/companions/refined/griffin.glb",
+    "geometry": "Original avian anatomy/wing layer on licensed quadruped",
+    "sha256": "9ffbd13c7f4433062694e9e8cf4cf4406b7719426894447bc0d593e044d5cc60"
+  },
+  "dragon": {
+    "source": "monsters/Dragon_Evolved.glb",
+    "runtime_model": "assets/vendor/quaternius/companions/monsters/Dragon_Evolved.glb",
+    "geometry": "Original native rig/mesh; material overrides only",
+    "sha256": "9805d397f669d5e18041ddcb78a8877f58a685ae9cf4920799f623675eb25a99"
+  },
+  "golem": {
+    "source": "golem/Superhero_Male.glb",
+    "runtime_model": "assets/models/companions/refined/golem.glb",
+    "geometry": "Original stone-guardian derivative of licensed humanoid base",
+    "sha256": "bbb06585e5ada75f372f2d0414259f4287e9b8484f0997f0be088cd740557391"
+  }
+}

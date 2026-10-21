@@ -106,3 +106,7 @@ The existing nine suites pass **985 checks** with the new import plugins install
 ## User-selected direction after review
 
 The user selected Pipeline A's Quaternius ranger and authorized integration. This supersedes the earlier provisional recommendation of Pipeline B. Production now uses verified CC0 copies under `assets/vendor/quaternius/`, with the original hero retained for comparison. See `docs/QUATERNIUS_HERO.md` for the actual production mapping, limitations and validation.
+
+### Subsequent approved companion refresh
+
+The user requested companion art in the selected character style. Production companions now use the updated visual adapters and licensed/custom derivatives documented in `docs/COMPANION_ART.md`. The generated wolf is retained explicitly as Legacy Wolf in this historical comparison. The old inventory describes retained legacy files and must not be mistaken for the current active companion pipeline.

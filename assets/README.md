@@ -65,3 +65,7 @@ The optional comparison scene in `art_lab/` vendors separately licensed Quaterni
 The user approved Pipeline A after art-lab review. Byte-identical verified CC0 character/animation copies now live in `assets/vendor/quaternius/`; `SOURCES.json` records their provenance. `HeroVisual` uses the authored ranger/traveler family independently of classes. See `docs/QUATERNIUS_HERO.md` for the equipment mapping, supported animation clips, verification and current wardrobe limitations. The existing Blender-generated hero remains available only as legacy/comparison content.
 
 Male counterparts are now included from the same pinned CC0 source. `assets/textures/class_skins/` holds original class recolors and crests derived from the licensed outfit atlases. See `docs/CLASS_SKINS.md` and `DERIVATIVES.json`; there are 24 class looks using shared male/female body/outfit families, not 24 unrelated third-party character packs.
+
+### Companion refresh
+
+Active companion visuals now use `CompanionActor`, refined licensed animal meshes, an unchanged native dragon with material overrides, an original griffin derivative and an original stone-guardian derivative. Legacy generated companions remain for the historical comparison. See `docs/COMPANION_ART.md`; exact input grants/hashes are in `assets/vendor/SOURCES.json`, and actual output paths/hashes are in `assets/models/companions/refined/DERIVATIVES.json`. Blender inputs/sources are excluded from runtime import and Blender is not required to play.

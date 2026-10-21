@@ -76,6 +76,8 @@ func refresh(snapshot: Dictionary={}):
  var hp=int(snapshot.get("hp",sim.h.hp))
  var mp=int(snapshot.get("mp",sim.h.mp))
  var wolf_hp=int(snapshot.get("wolf_hp",sim.wolf_hp))
+ if wolf_hp<=0 and actors.has("Wolf") and actors.Wolf is CompanionActor and not actors.Wolf.locked_pose:
+  actors.Wolf.play_action("Defeat")
  var enemy_hp=int(snapshot.get("enemy_hp",sim.enemy_hp))
  hero_bar.value=hp
  enemy_bar.value=enemy_hp
@@ -127,7 +129,8 @@ func act(action: String):
  if actors.Hero.has_method("play_action"): actors.Hero.guarding=false
  var events=sim.round_(action)
  for event in events:
-  log_label.text="%s: %s" % [sim.enemy.name if event.actor=="Goblin" else event.actor,event.text]
+  var display_name:String=sim.enemy.name if event.actor=="Goblin" else (State.companion_name() if event.actor=="Wolf" else event.actor)
+  log_label.text="%s: %s" % [display_name,event.text]
   if event.amount!=0: Sound.cue("heal" if event.amount<0 else "hit")
   var actor: Node3D=actors[event.actor]
   var target: Node3D=actors[event.target]
@@ -168,6 +171,7 @@ func act(action: String):
 func finish():
  commands.get_parent().get_parent().show()
  if actors.Hero.has_method("play_action"): actors.Hero.play_action("Victory" if sim.outcome=="Victory" else "Defeat")
+ if sim.wolf_hp>0 and actors.Wolf is CompanionActor:actors.Wolf.play_action("Victory" if sim.outcome=="Victory" else "Defeat")
  State.hero=sim.h
  var previous=int(State.hero.potions)
  if sim.outcome=="Victory":

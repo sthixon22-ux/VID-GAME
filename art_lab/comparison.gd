@@ -27,7 +27,7 @@ var gear_visible=true
 var elapsed=0.0
 var creature_players:Array[AnimationPlayer]=[]
 var creature_models:Array[Node3D]=[]
-const TITLES=["CURRENT HERO","A · QUATERNIUS","B · ANIME / VRM"]
+const TITLES=["LEGACY HERO","A · QUATERNIUS","B · ANIME / VRM"]
 const CAPTIONS=["Custom MakeHuman/KayKit derivative\nCurrent production visuals, unchanged","Universal Base + Fantasy Standard derivative\nArtist-authored head, hair, outfit; CC0","Seed-san by VirtualCast, Inc.\nOfficial VRM sample; VRM Public License 1.0"]
 func _ready():
  build_ui()
@@ -233,8 +233,8 @@ func set_mode(which:String):
  mode=which
  if which=="Wolf comparison":
   for index in range(2):
-   var stage=make_stage("CURRENT WOLF" if index==0 else "QUATERNIUS · ANIMATED WOLF","Generated segmented meshes" if index==0 else "Ultimate Animated Animals · CC0 · real skinned rig")
-   var model=CompanionVisual.build("dire_wolf") if index==0 else load("res://art_lab/assets/quaternius_wolf/Wolf.gltf").instantiate()
+   var stage=make_stage("LEGACY WOLF" if index==0 else "QUATERNIUS · ANIMATED WOLF","Generated segmented meshes" if index==0 else "Ultimate Animated Animals · CC0 · real skinned rig")
+   var model=CompanionVisual.model("res://assets/models/companions/dire_wolf.glb") if index==0 else load("res://art_lab/assets/quaternius_wolf/Wolf.gltf").instantiate()
    stage.stage.add_child(model)
    var bounds=ArtLabActor.mesh_bounds(model)
    var ratio=1.3/bounds.size.y

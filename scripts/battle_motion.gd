@@ -12,6 +12,13 @@ const STYLES={
  "Goblin club":"club_swing", "Briar lash":"briar_whip",
  "Crushing Canopy":"canopy_slam"
 }
+const COMPANION_COLORS={
+ "Rending Fang":"d9be9b","Pack Howl":"accbd7","Moonfang Assault":"d7e6f2",
+ "Gale Talons":"e8ddba","Skyward Grace":"d7e8ca","Tempest Dive":"c8e3e8",
+ "Ember Breath":"ee9a63","Arcane Embers":"9ec8ef","Inferno Breath":"f4bc68",
+ "Thunderhoof":"d5c19c","Wind of the Road":"b3d7c2","Dawn Charge":"f1dca1",
+ "Spirit Spark":"becbff","Moonlit Renewal":"b9dce6","Sanctuary Bloom":"d1c4ed",
+ "Stonefist":"b6c0aa","Granite Shelter":"89c6ae","Mountain Ward":"a2dbc0"}
 static func effect_material(color_: Color, alpha: float=0.85) -> StandardMaterial3D:
  var material=StandardMaterial3D.new()
  material.shading_mode=BaseMaterial3D.SHADING_MODE_UNSHADED
@@ -81,13 +88,13 @@ static func roots(host: Node3D, point: Vector3, count: int=9):
 static func present(host: Node3D, actor: Node3D, target: Node3D, label: String) -> float:
  label=label.trim_suffix(" · Critical!")
  var duration=0.95
- if actor.has_method("play_action") and (STYLES.has(label) or not AbilityBook.entry(label).is_empty() or label in ["Victory","Defeat"]): duration=actor.play_action(label)
+ if actor.has_method("play_action") and (actor is CompanionActor or STYLES.has(label) or not AbilityBook.entry(label).is_empty() or label in ["Victory","Defeat"]): duration=actor.play_action(label)
  elif not STYLES.has(label): duration=0.4
  var origin=actor.position
  var forward=(target.position-origin).normalized() if actor!=target else Vector3.ZERO
  var body=actor.get_node_or_null("Body")
  var companion_art=CompanionRules.ability_by_name(label)
- if not companion_art.is_empty() and actor!=target:
+ if actor!=target and ((not companion_art.is_empty() and companion_art.get("behavior","")=="Attack") or (actor is CompanionActor and label.ends_with(" · strike"))):
   var charge=UserSettings.tween(host)
   charge.tween_property(actor,"position",origin+forward*.85,.18)
   charge.tween_property(actor,"position",origin,.3)
@@ -149,6 +156,7 @@ static func present(host: Node3D, actor: Node3D, target: Node3D, label: String) 
    for i in range(3):
     var wolf=Art.actor("Wolf")
     host.add_child(wolf)
+    if wolf.has_method("motion"):wolf.motion(true,true)
     wolf.position=actor.position+Vector3(0,0,i-1)
     for mesh in wolf.find_children("*","MeshInstance3D",true,false): mesh.material_override=effect_material(Color("a9e4d0"),0.6)
     wolf.look_at(target.position)
@@ -185,6 +193,7 @@ static func present(host: Node3D, actor: Node3D, target: Node3D, label: String) 
     var color_=Color("a7e2ac") if healing else (Color("a3b5ee") if effect in ["magic","drain","frost"] else Color("e4bc89"))
     if effect=="drain": color_=Color("b69cce")
     if effect=="frost": color_=Color("a3ddeb")
+    if COMPANION_COLORS.has(label):color_=Color(COMPANION_COLORS[label])
     ring(host,point+Vector3.UP*0.1,color_,1.1)
     for i in range(10): mote(host,point+Vector3(sin(i)*0.6,0.3,cos(i)*0.6) if healing else actor.position+Vector3.UP,point+Vector3(sin(i)*0.25,1.5,cos(i)*0.25),color_,0.5,0.12)
     if not healing: arc(host,point+Vector3.UP,color_,true)

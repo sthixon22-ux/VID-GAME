@@ -474,9 +474,29 @@ func companion_preview(parent: Node, id: String):
  var camera=Camera3D.new()
  root.add_child(camera)
  camera.fov=40
- camera.position=Vector3(2.3,2.0,4.3)
- camera.look_at(Vector3(0,1.15,0))
  camera.current=true
+ fit_companion_camera(camera,preview_actor,viewport)
+ viewport.size_changed.connect(fit_companion_camera.bind(camera,preview_actor,viewport))
+ call_deferred("fit_companion_camera",camera,preview_actor,viewport)
+
+func fit_companion_camera(camera:Camera3D,actor:Node3D,viewport:SubViewport):
+ if not is_instance_valid(camera) or not is_instance_valid(actor) or not is_instance_valid(viewport):return
+ var bounds=GearVisual.bounds(actor)
+ var center=bounds.get_center()
+ var direction=Vector3(2.3,1.3,4.3).normalized()
+ camera.position=center+direction
+ camera.look_at(center)
+ var inverse=camera.basis.inverse()
+ var tangent=tan(deg_to_rad(camera.fov*.5))
+ var aspect=float(viewport.size.x)/maxf(1,float(viewport.size.y))
+ var distance=1.0
+ for x in [0,1]:
+  for y in [0,1]:
+   for z in [0,1]:
+    var corner=bounds.position+Vector3(bounds.size.x*x,bounds.size.y*y,bounds.size.z*z)
+    var point=inverse*(corner-center)
+    distance=maxf(distance,maxf(absf(point.x)/(tangent*aspect),absf(point.y)/tangent)+point.z)
+ camera.position=center+direction*maxf(2.8,distance*1.16)
 
 func constrain_page(root: Node):
  for child in root.get_children():

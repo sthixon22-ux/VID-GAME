@@ -1,0 +1,9 @@
+{
+  "data/companions.json": "bc3f5feefeb32c92bdf9983fd9ee15ab7f2b787423552eae0d0d32ba1d2543bd",
+  "scripts/companion_rules.gd": "1e432fe0a31f2d75efac8c60176322989720796ae1ef0f7dac5ff804a6ce7ca0",
+  "scripts/combat.gd": "aedf822dd1dfb80cef3a93c65025d15fb6d9398db64dbe4939813213e4b81e5a",
+  "scripts/state.gd": "f2d5d042cf32601869bc0705824311f1bbf00a0b8d69a00e009d9b393a1b764f",
+  "data/classes.json": "c2e0b6144e8ba5368fcb103bc46187ed3bb72509b4c90996f0cdb1e362673145",
+  "data/hero_skins.json": "ee39f078f3ec69ea681a988edc5131b8b90bb36421168fdd1730b0d0c277151b",
+  "scripts/hero_visual.gd": "b0ee86a829fe94e646402a3c90980dab5f24b1878d8980657ad5daf038480b41"
+}

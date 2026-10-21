@@ -231,5 +231,58 @@
         "source_url": "https://raw.githubusercontent.com/agentkaerf/FreeModels/db3df04d1e4714298a09510b26fb6de6645138a2/Universal%20Animation%20Library%202%5BStandard%5D/License.txt"
       }
     }
+  },
+  "quaternius_companion_animals": {
+    "author": "Quaternius",
+    "license": "CC0-1.0",
+    "source": "https://quaternius.com/packs/ultimateanimatedanimals.html",
+    "commit": "ac2dbc3fcf82dd915b7fe1a8437efcca1618a311",
+    "notes": "Original included animal-pack CC0 notice retained. Native rigs and animations are preserved in project derivatives. Raw glTF authoring inputs are excluded from Godot import with .gdignore.",
+    "files": {
+      "assets/vendor/quaternius/companions/animals/Wolf.gltf": {
+        "source_url": "https://raw.githubusercontent.com/Tekh-ops/Ultimate-Animated-Animals-July-2021/ac2dbc3fcf82dd915b7fe1a8437efcca1618a311/glTF/Wolf.gltf",
+        "sha256": "09621fb810de6a3896fc392ac315b288d97960f9682f4d21e14b5809febdaa9e"
+      },
+      "assets/vendor/quaternius/companions/animals/Fox.gltf": {
+        "source_url": "https://raw.githubusercontent.com/Tekh-ops/Ultimate-Animated-Animals-July-2021/ac2dbc3fcf82dd915b7fe1a8437efcca1618a311/glTF/Fox.gltf",
+        "sha256": "8687f84fed8f1b46c544c1d1c98d7f3c243ae73f51cd52fb80e1bdd3fdc1a322"
+      },
+      "assets/vendor/quaternius/companions/animals/Horse.gltf": {
+        "source_url": "https://raw.githubusercontent.com/Tekh-ops/Ultimate-Animated-Animals-July-2021/ac2dbc3fcf82dd915b7fe1a8437efcca1618a311/glTF/Horse.gltf",
+        "sha256": "9c276f3452eb69600d5bb55d97f1c602737cd97a0618c5c5160bdba38814e79a"
+      },
+      "assets/vendor/quaternius/companions/animals/License.txt": {
+        "source_url": "https://raw.githubusercontent.com/Tekh-ops/Ultimate-Animated-Animals-July-2021/ac2dbc3fcf82dd915b7fe1a8437efcca1618a311/License.txt",
+        "sha256": "20b983ae0e2e555817495a65c37519bfcb2231825269db6a57d72c51ed6006e3"
+      }
+    }
+  },
+  "quaternius_companion_dragon_and_guardian_base": {
+    "author": "Quaternius; redistributed/processed by Dallolz/moorfall-assets",
+    "license": "CC0-1.0 as explicitly stated by source redistributor",
+    "commit": "1e83864f55ff8646e929ac9b73faa75df29161de",
+    "original_packs": [
+      "Ultimate Monsters (Dragon Evolved)",
+      "Universal Base Characters (Superhero Male)"
+    ],
+    "notes": "The source README explicitly licenses its model files CC0 and attributes the named Quaternius packs; the redistributor license and README are included unchanged. These are not represented as original Quaternius license notices. No Bestiary/QAL assets used. Dragon keeps its original bind transforms/native animation. Guardian derives from the licensed humanoid base. The unsuitable Goleling candidate is not included.",
+    "files": {
+      "assets/vendor/quaternius/companions/monsters/Dragon_Evolved.glb": {
+        "source_url": "https://raw.githubusercontent.com/Dallolz/moorfall-assets/1e83864f55ff8646e929ac9b73faa75df29161de/enemies/Dragon_Evolved.glb",
+        "sha256": "9805d397f669d5e18041ddcb78a8877f58a685ae9cf4920799f623675eb25a99"
+      },
+      "assets/vendor/quaternius/companions/golem/Superhero_Male.glb": {
+        "source_url": "https://raw.githubusercontent.com/Dallolz/moorfall-assets/1e83864f55ff8646e929ac9b73faa75df29161de/characters/Superhero_Male.glb",
+        "sha256": "5011951317431872ba7d9310b3bd953a9387e68f83e35c6f091395b8a49dc3ee"
+      },
+      "assets/vendor/quaternius/companions/SOURCE-MOORFALL.md": {
+        "source_url": "https://raw.githubusercontent.com/Dallolz/moorfall-assets/1e83864f55ff8646e929ac9b73faa75df29161de/README.md",
+        "sha256": "f51328be792c5b3aa2efc495b409c8d5c74b10e364f0b40fc320647a1252433b"
+      },
+      "assets/vendor/quaternius/companions/LICENSE-MOORFALL.md": {
+        "source_url": "https://raw.githubusercontent.com/Dallolz/moorfall-assets/1e83864f55ff8646e929ac9b73faa75df29161de/LICENSE.md",
+        "sha256": "a760fa13a70fd39cb9b90393a36335d463b7a90666b4172ab8518aafb009fa01"
+      }
+    }
   }
 }

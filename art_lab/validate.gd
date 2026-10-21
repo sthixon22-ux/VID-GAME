@@ -93,7 +93,7 @@ func run():
  var baseline:Dictionary=JSON.parse_string(FileAccess.get_file_as_string("res://art_lab/production_baseline.json"))
  var unmodified=true
  # Explicitly approved production visual changes; gameplay files retain their audit hashes.
- var approved=["scripts/hero_visual.gd","scripts/art.gd","scripts/character_create.gd","scripts/state.gd","scripts/save_store.gd"]
+ var approved=["scripts/hero_visual.gd","scripts/art.gd","scripts/character_create.gd","scripts/state.gd","scripts/save_store.gd","scripts/companion_visual.gd","scripts/battle_motion.gd","scripts/battle.gd","scripts/character_menu.gd"]
  for path in baseline:
   if path in approved:continue
   if FileAccess.get_sha256("res://"+path)!=baseline[path]:unmodified=false;push_error("Production changed: "+path)
