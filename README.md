@@ -22,6 +22,12 @@ Clothing now changes the visible outfit; weapons use corrected grips, two-handed
 
 [Update details, images and limitations](docs/EQUIPMENT_WORLD_TOWNS.md) · [Bow](docs/screenshots/equipment_towns/bow_attack.png) · [Shop interior](docs/screenshots/equipment_towns/forest_weapons.png)
 
+## Weapon stances and visible entrances
+
+Bows now rest in one hand at the side until attacking. Two-handed weapons use a diagonal guard across the body; the regular sword grip is preserved. Building doors face the default camera. **Arrow keys rotate and tilt the camera**, alongside right-mouse drag. Armor textures are unchanged in this pass.
+
+[Details and actual game captures](docs/STANCE_CAMERA_FIX.md)
+
 ## Launch
 
 1. Download **Code → Download ZIP** from this repository and extract into a new folder.
@@ -36,7 +42,7 @@ Godot is the only runtime dependency. No account, external API, paid asset or pl
 | Input | Action |
 |---|---|
 | WASD / Shift | Move / sprint |
-| Hold right mouse + move | Orbit camera |
+| Hold right mouse + move / Arrow keys | Orbit camera (arrows also tilt) |
 | Touch an enemy | Start an encounter; mastered species offer a mode choice first |
 | E | Talk, gather, shop, read puzzles, cleanse seals and enter/leave the shrine |
 | Tab | Inventory: healing potions, MP ether and companion rations |

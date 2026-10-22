@@ -94,3 +94,7 @@ for suite in run presentation reliability demo progression layout shop_flow adve
 done
 XDG_DATA_HOME=/tmp/verdant-lab godot --headless --path . res://art_lab/validate.tscn
 ```
+
+## Follow-up: relaxed stances and front doors
+
+The [stance and camera update](STANCE_CAMERA_FIX.md) supersedes the idle bow/two-handed poses shown above and moves town doors to the camera-facing façades. Its screenshots and validation are recorded separately. Armor materials remain unchanged.
