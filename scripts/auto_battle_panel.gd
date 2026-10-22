@@ -30,7 +30,7 @@ func open(species_: String="goblin", offer_normal:bool=false):
  UI.label(content,"AUTO-BATTLE / "+species.to_upper()).add_theme_font_size_override("font_size",25)
  var wins=State.species_wins(species)
  if species in ["warden","reliquary_keeper"] or wins<10:
-  UI.label(content,"Requires 10 normal victories for this species.\nThe Hollow Warden cannot be skipped.")
+  UI.label(content,"Requires 10 normal victories for this species.\nStory guardians must be fought normally.")
  else:
   var forecast=Combat.new(State.hero,State.stats(),species)
   forecast.auto_resolve()

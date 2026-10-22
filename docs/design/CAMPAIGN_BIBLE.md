@@ -89,3 +89,7 @@ Choice must be **explicit and reversible until confirmation**, made near #12. Br
 
 ## Scope discipline
 Build region-by-region after a playable transition from the current demo. Do not auto-populate 12 unfinished scenes and call the campaign done. Retain existing NPC names, dialogue and mechanics; avoid spoiling the ancestry in Act I UI or quest text.
+
+## Implemented Act I continuation (Chapter 2 alpha)
+
+Aldren is personally overseeing Reedcross’s relief effort after the forest guardian’s restoration. Messenger Elian introduces the hero; the king supplies a travel purse and asks the hero to listen to Warden Iona. Three causeway readings expose a trapped inward current, leading to the Sunken Reliquary. Draining the western basin and diverting the east flow frees the Keeper of the Drowned Oath. Iona identifies a damaged covenant tablet pointing toward the Emberglass archives. Aldren promises causeway repairs and rewards the hero. No parentage/bloodline reveal occurs here. Sella’s medicine gathering and Jory’s causeway patrol give the flood a local civilian cost. This establishes Act I’s playable continuation; the later desert region remains unimplemented.

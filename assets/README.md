@@ -69,3 +69,7 @@ Male counterparts are now included from the same pinned CC0 source. `assets/text
 ### Companion refresh
 
 Active companion visuals now use `CompanionActor`, refined licensed animal meshes, an unchanged native dragon with material overrides, an original griffin derivative and an original stone-guardian derivative. Legacy generated companions remain for the historical comparison. See `docs/COMPANION_ART.md`; exact input grants/hashes are in `assets/vendor/SOURCES.json`, and actual output paths/hashes are in `assets/models/companions/refined/DERIVATIVES.json`. Blender inputs/sources are excluded from runtime import and Blender is not required to play.
+
+## Mirefen chapter additions
+
+Regional equipment and marsh guardian/stalker variants reuse the existing credited CC0 mesh families and animation libraries. Their original upstream notices remain intact; no new third-party downloads were added in this chapter. `scripts/marsh_creature.gd` supplies original prototype leech/wisp geometry, crown/ward additions and action motion. `assets/audio/mirefen_ambience.wav` is an original seeded synthesized marsh ambience loop (water-like filtered noise and calls), not a field recording or purchased track. These additions are functional alpha presentation, not final professionally authored creature art.

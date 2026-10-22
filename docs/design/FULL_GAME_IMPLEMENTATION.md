@@ -74,3 +74,9 @@ Entrance from previous area, usable town and shops, a quest chain with save/resu
 
 ## Next Codex execution task
 Read both files in `docs/design/` and inspect current `scripts/state.gd`, `scripts/forest.gd`, `scripts/dungeon.gd`, `scripts/world.gd`, `scripts/save_store.gd` and test suites. First implement the **smallest stable campaign bridge** from completed opening to a *new* region; add tests and save migrations where necessary. Then build playable Mirefen/Reedcross/Dungeon #2 incrementally. Stop before introducing speculative changes to original combat formulas.
+
+## Gate 2 progress — tested Mirefen alpha
+
+The campaign scaffold is now a scene-tested Chapter 2 loop with Aldren’s regional audience, Iona’s three-survey investigation, differentiated Reedcross shops, two local errands, four regional species and a tide-telegraph Keeper. Water height, passage gating, treasure, reporting and rewards persist under additive schema-four campaign defaults. Approved hero/class/companion artwork is retained through a merge of the existing art branch. See [the milestone report](../MILESTONE_MIRFEN_ALPHA.md) for executed checks and explicit visual/playtest limits.
+
+Next gate: timed Windows fresh-start chapter playtest, environmental/creature refinement, water-puzzle depth, encounter/economy pacing and focus/accessibility review. Do not start Dungeon 3 until those Chapter 2 quality checks are reviewed. The Sahir clue is saved, but its route is deliberately unavailable.

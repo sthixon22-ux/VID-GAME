@@ -211,7 +211,7 @@ func finish():
  State.save_game()
  clear_menu()
  if sim.outcome=="Victory":
-  log_label.text="Victory! +%s XP · +%s gold · %s\n%s" % [sim.enemy.xp,State.last_reward.get("total",int(sim.enemy.gold)),"Potion found!" if State.hero.potions>previous else "No item drop.","The guardian is free. Bring the living ember to Mira." if sim.species=="warden" else ("The seal is now unguarded. Cleanse it with E." if sim.species=="mossling" else "Normal goblin victories: %s/10" % State.hero.mastery)]
+  log_label.text="Victory! +%s XP · +%s gold · %s\n%s" % [sim.enemy.xp,State.last_reward.get("total",int(sim.enemy.gold)),"Potion found!" if State.hero.potions>previous else "No item drop.","The guardian is free. Bring the living ember to Mira." if sim.species=="warden" else ("The seal is now unguarded. Cleanse it with E." if sim.species=="mossling" else ("The water covenant is restored." if sim.species=="reliquary_keeper" else "%s normal victories: %s/10" % [sim.enemy.name,State.species_wins(sim.species)]))]
  else: log_label.text="Defeat. Retreat to safety and rest at the inn or camp to recover."
  if sim.outcome=="Victory" and sim.species=="reliquary_keeper":log_label.text+="\nThe oath is quiet. Return to Iona in Reedcross."
  if sim.outcome=="Victory" and sim.species in ["mire_leech","bog_wisp","reed_stalker","drowned_sentinel"]:log_label.text+="\nSpecies mastery: %s/10" % State.species_wins(sim.species)

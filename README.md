@@ -8,6 +8,14 @@ A short, fully turn-based 3D RPG: create a three-class hero, buy your first weap
 
 [Equipment preview](docs/screenshots/0_9_equipment.png) · [Companion skill tree](docs/screenshots/0_9_companion_tree.png)
 
+## Chapter 2 alpha — Mirefen Marsh
+
+This branch adds a tested continuation after the opening. Restore the Warden, return to Mira, choose a companion, then press **E at Willowbrook’s southern road exit** to reach Reedcross. Meet King Aldren, investigate with Iona, visit the regional shops, help Sella and Jory, and clear the Sunken Reliquary. Existing saves and all twelve class choices remain supported.
+
+[Chapter guide, validation and limitations](docs/MILESTONE_MIRFEN_ALPHA.md) · [Reedcross](docs/screenshots/mirefen/reedcross.png) · [Reliquary](docs/screenshots/mirefen/reliquary_flooded.png)
+
+This is a playable second-chapter alpha; later campaign regions remain planning records. Dungeon 3 is not playable.
+
 ## Launch
 
 1. Download **Code → Download ZIP** from this repository and extract into a new folder.
