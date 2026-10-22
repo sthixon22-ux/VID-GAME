@@ -89,6 +89,10 @@ func walkable(pos:Vector3)->bool:
  if absf(pos.x)>3.2 and (pos.z< -2.5 or service=="inn"):return false
  return true
 func _process(delta:float):
+ if not options.active and not panel.get_parent().get_parent().visible:
+  var orbit=CameraOrbit.step(yaw,pitch,delta)
+  yaw=orbit.x
+  pitch=orbit.y
  elapsed+=delta
  var moving=false
  if not options.active and not panel.get_parent().get_parent().visible:
@@ -143,8 +147,7 @@ func rest():
 func leave():
  var visit=State.hero.town_visit
  State.hero.journey.region=visit.region
- var pos=visit.position
- State.remember_position(Vector3(pos[0],pos[1],pos[2]))
+ State.remember_position(TownServices.exit_position(visit))
  State.save_game()
  get_tree().change_scene_to_file(State.travel_scene())
 func character(page:String):

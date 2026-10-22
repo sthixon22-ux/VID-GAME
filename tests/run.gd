@@ -62,6 +62,8 @@ func run():
  check(State.hero.mastery==0,"Other species do not advance goblin mastery")
  for i in range(10): State.reward(true)
  check(State.hero.mastery==10 and State.hero.level>1,"Normal wins grant mastery and levels")
+ # Match the intentional floating-point position normalization used on load.
+ State.hero.town_visit.position=[0.0,0.0,0.0]
  State.save_game()
  var saved=State.hero.duplicate(true)
  State.reset()

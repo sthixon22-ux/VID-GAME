@@ -12,6 +12,7 @@ const ACTION_CLIPS={
 }
 var weapon_family="unarmed"
 var weapon_scale=.65
+var weapon_grip_y=-.08
 var grip_basis=Basis(Vector3.BACK,-PI/2)
 var palm_offset=Vector3(0,.075,0)
 var weapon_prop:Node3D
@@ -97,10 +98,11 @@ func attach_equipment():
   var prop=GearVisual.item(weapon)
   prop.name="EquippedWeapon"
   weapon_family=State.equipment_data.get(weapon,{}).get("weapon_type","unarmed")
+  if weapon_family in ["greatsword","axe","hammer","spear","scythe","staff"]:weapon_grip_y=-.25
   weapon_prop=prop
   prop.scale=Vector3.ONE*weapon_scale
   prop.basis=grip_basis.scaled(Vector3.ONE*weapon_scale)
-  prop.position=palm_offset-grip_basis*Vector3(0,-.08,0)*weapon_scale
+  prop.position=palm_offset-grip_basis*Vector3(0,weapon_grip_y,0)*weapon_scale
   if weapon_family=="bow":
    prop.basis=(grip_basis*Basis(Vector3.UP,PI)).scaled(Vector3.ONE*weapon_scale)
    prop.position=palm_offset
@@ -236,7 +238,7 @@ func update_bow(draw:float,phase:float):
  if not bow_arrow:return
  var nock=-.12-draw*.23/weapon_scale
  bow_arrow.position=Vector3(nock,0,0)
- bow_arrow.visible=not weapon_action or phase<.63
+ bow_arrow.visible=weapon_action and phase<.63
  var mesh=ImmediateMesh.new()
  mesh.surface_begin(Mesh.PRIMITIVE_LINE_STRIP)
  mesh.surface_add_vertex(Vector3(.18,-.98,0))

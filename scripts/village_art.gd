@@ -12,6 +12,7 @@ static func bounds(node: Node3D, parent: Transform3D=Transform3D.IDENTITY) -> AA
  return result
 static func piece(root: Node3D, model: String, point: Vector3, dimensions: Vector3, yaw: float=0) -> Node3D:
  var holder=Node3D.new()
+ holder.name=model
  root.add_child(holder)
  holder.position=point
  holder.rotation.y=yaw
@@ -37,15 +38,17 @@ static func cottage(root: Node3D, point: Vector3):
  house.position=point
  CameraObstacles.box(house,Vector3(0,2,0),Vector3(4.5,4,3.9))
  Art.box(house,Vector3(0,1.2,0),Vector3(3.55,2.4,3.0),Color.WHITE).material_override=Art.surface(Color("f2ddbb"),"plaster",2)
- piece(house,"Wall_Plaster_WoodGrid",Vector3(0,0,1.6),Vector3(3.7,2.5,0.15))
+ piece(house,"Wall_Plaster_WoodGrid",Vector3(0,0,-1.6),Vector3(3.7,2.5,0.15),PI)
  piece(house,"Wall_Plaster_WoodGrid",Vector3(-1.85,0,0),Vector3(3.2,2.5,0.15),PI/2)
  piece(house,"Wall_Plaster_WoodGrid",Vector3(1.85,0,0),Vector3(3.2,2.5,0.15),PI/2)
- piece(house,"Wall_Plaster_Door_Flat",Vector3(0,0,-1.6),Vector3(3.7,2.5,0.18),PI)
- piece(house,"Door_1_Flat",Vector3(0,0,-1.72),Vector3(0.95,1.85,0.08),PI)
+ piece(house,"Wall_Plaster_Door_Flat",Vector3(0,0,1.6),Vector3(3.7,2.5,0.18))
+ piece(house,"Door_1_Flat",Vector3(0,0,1.72),Vector3(0.95,1.85,0.08))
  piece(house,"Roof_2x4_RoundTile",Vector3(0,2.5,0),Vector3(4.5,1.5,3.9))
  piece(house,"Prop_Chimney2",Vector3(1.1,3.05,0.5),Vector3(0.55,1.25,0.65))
  for x in [-1.16,1.16]:
-  piece(house,"Window_Wide_Flat1",Vector3(x,0.9,-1.73),Vector3(0.65,0.8,0.1),PI)
-  piece(house,"WindowShutters_Wide_Flat_Open",Vector3(x,0.87,-1.78),Vector3(1.0,0.85,0.12),PI)
- piece(house,"Prop_Vine1",Vector3(-1.72,0.15,-1.85),Vector3(0.5,1.5,0.1),PI)
+  piece(house,"Window_Wide_Flat1",Vector3(x,0.9,1.73),Vector3(0.65,0.8,0.1))
+  piece(house,"WindowShutters_Wide_Flat_Open",Vector3(x,0.87,1.78),Vector3(1.0,0.85,0.12))
+ piece(house,"Prop_Vine1",Vector3(-1.72,0.15,1.85),Vector3(0.5,1.5,0.1))
  piece(house,"Prop_Crate",Vector3(2.4,0,0.5),Vector3(0.8,0.8,0.8))
+
+ return house

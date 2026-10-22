@@ -119,6 +119,10 @@ func _unhandled_input(event: InputEvent) -> void:
   KEY_ESCAPE: options.open()
 
 func _process(delta: float) -> void:
+ if not options.active and not auto_panel.active:
+  var orbit=CameraOrbit.step(yaw,pitch,delta)
+  yaw=orbit.x
+  pitch=orbit.y
  elapsed += delta
  grace=maxf(0,grace-delta)
  var direction := Vector3.ZERO

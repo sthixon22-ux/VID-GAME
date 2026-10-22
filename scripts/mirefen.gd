@@ -145,6 +145,10 @@ func _unhandled_input(event: InputEvent) -> void:
    _refresh_menu()
 
 func _process(delta: float) -> void:
+ if not dialogue.active and not options.active and not menu.get_parent().get_parent().visible and not auto_panel.active:
+  var orbit=CameraOrbit.step(yaw,pitch,delta)
+  yaw=orbit.x
+  pitch=orbit.y
  clock += delta
  grace = maxf(0, grace - delta)
  var direction := Vector3.ZERO

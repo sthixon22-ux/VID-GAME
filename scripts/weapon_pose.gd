@@ -17,7 +17,7 @@ func _process_modification():
  var family=hero.weapon_family
  if hero.action_remaining>0 and not hero.weapon_action:return
  if family not in ["unarmed","claws"]:
-  curl_fingers(rig,"Right",not (family=="bow" and phase()>.63))
+  curl_fingers(rig,"Right",family!="bow" or (hero.weapon_action and phase()<.63))
   if GameRules.TWO_HANDED.has(family) or hero.gear.get("Shield","None")!="None":curl_fingers(rig,"Left",true)
  if family=="bow":bow_pose(rig)
  elif family!="claws" and GameRules.TWO_HANDED.has(family):two_hand_pose(rig)
@@ -55,36 +55,53 @@ func phase()->float:
 func two_hand_pose(rig:Skeleton3D):
  var family=hero.weapon_family
  var t=phase()
- var attack=hero.weapon_action
- var stroke=smoothstep(.25,.65,t) if attack else 0.0
  var shoulders=(rig.get_bone_global_pose(rig.find_bone("RightUpperArm")).origin+rig.get_bone_global_pose(rig.find_bone("LeftUpperArm")).origin)*.5
- var grip=shoulders+Vector3(-.04,-.12,.20)
- var tilt=.20
- if attack:
-  tilt=lerpf(-.9,1.1,stroke)
-  grip.y=shoulders.y+lerpf(.16,-.12,stroke)
-  grip.z=shoulders.z+lerpf(.10,.23,stroke)
- var orientation=Basis(Vector3.RIGHT,tilt)
- var spacing=-.15
- if family in ["spear","scythe"]:
-  orientation=Basis(Vector3.RIGHT,PI/2)
-  if family=="scythe":orientation=Basis(Vector3.UP,lerpf(-.8,.8,stroke) if attack else -.2)*orientation
-  grip=shoulders+Vector3(-.04,-.12,.06+(.08*sin(stroke*PI) if attack else 0.0))
-  spacing=.29
- elif family in ["staff"]:
-  if not attack:orientation=Basis(Vector3.RIGHT,.25)
-  spacing=.22
+ var long_shaft=family in ["spear","scythe","staff"]
+ # Low diagonal guard: hilt by the right hip, blade/shaft across the body.
+ var rest_orientation=weapon_basis(Vector3(.91,.37,.12))
+ var rest_grip=shoulders+Vector3(-.16,-.24,.23)
+ var rest_spacing=.62 if long_shaft else (.34 if family in ["axe","hammer"] else .28)
+ var orientation=rest_orientation
+ var grip=rest_grip
+ var spacing=rest_spacing
+ if hero.weapon_action:
+  var stroke=smoothstep(.25,.65,t)
+  var attack_orientation=Basis(Vector3.RIGHT,lerpf(-.9,1.1,stroke))
+  var attack_grip=shoulders+Vector3(-.04,lerpf(.16,-.12,stroke),lerpf(.10,.23,stroke))
+  var attack_spacing=.22
+  if family in ["spear","scythe"]:
+   attack_orientation=Basis(Vector3.RIGHT,PI/2)
+   if family=="scythe":attack_orientation=Basis(Vector3.UP,lerpf(-.8,.8,stroke))*attack_orientation
+   attack_grip=shoulders+Vector3(-.04,-.12,.06+.08*sin(stroke*PI))
+   attack_spacing=.29
+  var blend=smoothstep(0,.18,t)*(1-smoothstep(.78,1,t))
+  orientation=Basis(rest_orientation.get_rotation_quaternion().slerp(attack_orientation.get_rotation_quaternion(),blend))
+  grip=rest_grip.lerp(attack_grip,blend)
+  spacing=lerpf(rest_spacing,attack_spacing,blend)
  var hand_rotation=orientation*hero.grip_basis.inverse()
  right_target=grip-hand_rotation*hero.palm_offset
  arm(rig,"Right",right_target,hand_rotation)
- # Left palm lies on a second, separate position on the real shaft/grip.
  var palm=grip+orientation*Vector3(0,spacing*hero.weapon_scale,0)
  var left_rotation=orientation*Basis(Vector3.UP,PI)*hero.grip_basis.inverse()
  left_target=palm-left_rotation*hero.palm_offset
  arm(rig,"Left",left_target,left_rotation)
  grip_error=rig.get_bone_global_pose(rig.find_bone("RightHand")).origin.distance_to(right_target)
  left_error=rig.get_bone_global_pose(rig.find_bone("LeftHand")).origin.distance_to(left_target)
+func bow_carry(rig:Skeleton3D):
+ # The free right arm retains its authored idle/walk/sprint motion.
+ var shoulder=rig.get_bone_global_pose(rig.find_bone("LeftUpperArm")).origin
+ var orientation=Basis(Vector3.UP,-PI/2)*Basis(Vector3.FORWARD,.12)
+ var left_rotation=orientation*Basis(Vector3.UP,PI)*hero.grip_basis.inverse()
+ var grip=shoulder+Vector3(.03,-.38,.04)
+ left_target=grip-left_rotation*hero.palm_offset
+ arm(rig,"Left",left_target,left_rotation)
+ left_error=rig.get_bone_global_pose(rig.find_bone("LeftHand")).origin.distance_to(left_target)
+ grip_error=0
+ hero.update_bow(0,0)
 func bow_pose(rig:Skeleton3D):
+ if not hero.weapon_action:
+  bow_carry(rig)
+  return
  var t=phase()
  var draw=smoothstep(.05,.48,t) if hero.weapon_action else .12
  if t>.62:draw=lerpf(1,0,smoothstep(.62,.76,t))

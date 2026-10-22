@@ -37,6 +37,15 @@ func run():
    var prop=hero.find_child("EquippedWeapon",true,false)
    check(prop.get_parent().bone_name==("LeftHand" if family=="bow" else "RightHand"),"Weapon uses correct hand: "+sex+" "+family)
    check((hero.find_child("EquippedShield",true,false)==null)==GameRules.TWO_HANDED.has(family),"Two-handed shield exclusion stays correct: "+family)
+   if family=="bow":
+    check(not hero.bow_arrow.visible and not hero.weapon_action,"Idle bow has no nocked arrow: "+sex)
+    check(hero.pose_modifier.left_target.y<1.15,"Idle bow rests one-handed beside the hip: "+sex)
+   elif family in ["greatsword","axe","hammer","staff","spear","scythe"]:
+    var axis=hero.skeleton.global_basis.inverse()*prop.global_basis.y.normalized()
+    check(absf(axis.x)>.7 and absf(axis.y)<.65,"Two-handed shaft lies diagonally across the body: "+sex+" "+family)
+    check(hero.pose_modifier.right_target.distance_to(hero.pose_modifier.left_target)>.15,"Two-hand guard has separated hands: "+sex+" "+family)
+   elif family=="sword":
+    check(prop.basis.is_equal_approx(Basis(Vector3.BACK,-PI/2).scaled(Vector3.ONE*.65)) and prop.position.is_equal_approx(Vector3(.052,.075,0)),"Approved regular sword grip stays unchanged: "+sex)
    hero.play_action("Attack")
    hero.set_process(false)
    var clip=hero.player.current_animation
@@ -51,6 +60,10 @@ func run():
    if family=="bow":
     check(hero.bow_arrow!=null and hero.bow_string.mesh!=null and hero.find_child("EquippedQuiver",true,false)!=null,"Bow has real arrow and changing string")
     check(hero.arrow_released and not hero.bow_arrow.visible,"Bow releases the arrow after drawing")
+    hero.weapon_action=false;hero.action_remaining=0
+    hero.motion(false)
+    await settle()
+    check(not hero.bow_arrow.visible and hero.pose_modifier.left_target.y<1.15,"Bow returns to relaxed carry after attack: "+sex)
    hero.queue_free();await settle()
  var host=Node3D.new();add_child(host)
  var archer=HeroVisual.new({"Weapon":"Woodland Bow","Chest":"Leather Vest","Shield":"None"},{"class":"Ranger","sex":"Male"})
@@ -65,6 +78,13 @@ func run():
  check(archer.weapon_action and archer.player.current_animation=="Idle","Learned class bow techniques also use draw/release instead of sword fallback")
  host.queue_free();await settle()
  check(JSON.stringify(State.hero)==before,"Equipment art and animation do not mutate gameplay data")
+ var building_root=Node3D.new();add_child(building_root)
+ var house=VillageArt.cottage(building_root,Vector3.ZERO)
+ var door_mesh=house.find_child("Door_1_Flat",true,false) as Node3D
+ check(door_mesh!=null and door_mesh.position.z>1.6 and absf(door_mesh.rotation.y)<.01,"Visible door geometry faces the default camera")
+ building_root.queue_free();await settle()
+ var old_visit={"region":"forest","service":"weapons","position":[-8,0,0]}
+ check(TownServices.exit_position(old_visit).is_equal_approx(Vector3(-8,0,9.1)),"Older interior saves exit at the new front door")
  check(Art.surface(Color.WHITE,"wood",1) is ShaderMaterial,"Wood uses world-scale atlas sampling")
  check(Art.surface(Color.WHITE,"grass",1) is ShaderMaterial,"Terrain uses continuous world-scale detail")
  State.new_adventure();State.create_hero("Town Tester","Wizard",0,0,0,["Monk","Assassin"],"Male")
@@ -109,5 +129,14 @@ func run():
    check(State.hero.journey.region==region and outside.scene_file_path==State.travel_scene(),"Exit returns to original town: "+region)
    var walk=outside.forest.can_walk(State.return_position) if region=="forest" else outside.walkable(State.return_position)
    check(walk,"Door exit position is outside building collision")
+ var area=get_tree().current_scene
+ var yaw_before=area.yaw
+ var position_before=area.hero.position
+ var key=InputEventKey.new();key.physical_keycode=KEY_RIGHT;key.keycode=KEY_RIGHT;key.pressed=true
+ Input.parse_input_event(key);Input.flush_buffered_events()
+ area._process(.25)
+ check(area.yaw>yaw_before+.1 and area.hero.position.is_equal_approx(position_before),"Arrow key rotates exploration camera without moving the hero")
+ var released=key.duplicate();released.pressed=false
+ Input.parse_input_event(released);Input.flush_buffered_events()
  print("Equipment/town checks: %s Failures: %s" % [checks,failures])
  get_tree().quit(1 if failures else 0)

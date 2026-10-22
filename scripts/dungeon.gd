@@ -162,6 +162,10 @@ func _unhandled_input(event):
    KEY_ESCAPE: pause_menu.get_parent().get_parent().visible=not pause_menu.get_parent().get_parent().visible
    KEY_F5: State.save_game()
 func _process(delta):
+ if not auto_panel.active and not options.active and not dialogue.active and not pause_menu.get_parent().get_parent().visible and not puzzle_panel.get_parent().get_parent().visible and not encounter_busy:
+  var orbit=CameraOrbit.step(yaw,pitch,delta)
+  yaw=orbit.x
+  pitch=orbit.y
  clock+=delta
  contact_grace=maxf(0,contact_grace-delta)
  var direction=Vector3.ZERO

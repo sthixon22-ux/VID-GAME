@@ -3,7 +3,8 @@ extends RefCounted
 const SHRINE=Vector3(64,0,-60)
 const ROUTE=[Vector3(0,0,5),Vector3(0,0,-20),Vector3(-5,0,-40),Vector3(8,0,-54),Vector3(40,0,-54),SHRINE]
 const CRYSTALS=[Vector3(28,0,-47),Vector3(44,0,-66),Vector3(57,0,-46)]
-const QUEST_NPCS=[Vector3(-5,0,8),Vector3(8,0,9),Vector3(-11,0,0)]
+# Nessa stands clear of the newly visible armor-shop entrance.
+const QUEST_NPCS=[Vector3(-5,0,8),Vector3(11,0,8),Vector3(-11,0,0)]
 var obstacles:Array[Vector3]=[]
 var herbs:Array[Node3D]=[]
 var crystals:Array[Node3D]=[]

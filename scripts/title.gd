@@ -39,7 +39,7 @@ func main_menu():
  UI.button(menu,"Music / sound: %s" % ("Off" if Sound.muted else "On"),func():
   Sound.toggle()
   main_menu())
- UI.label(menu,"\nWASD move · Right mouse orbit · E interact\nShift sprint · Escape menu\n\nA short original turn-based fantasy adventure.")
+ UI.label(menu,"\nWASD move · Arrow keys / Right mouse orbit · E interact\nShift sprint · Escape menu\n\nA short original turn-based fantasy adventure.")
 func confirm_new():
  clear()
  UI.label(menu,"Begin a new adventure?\nYour current save will be copied to hero.backup.json.")

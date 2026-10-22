@@ -131,6 +131,10 @@ func _unhandled_input(event):
      message="Rested at camp. Hero and companion restored."
     else: message="Return to the central clearing to rest."
 func _process(delta):
+ if not modal_active():
+  var orbit=CameraOrbit.step(yaw,pitch,delta)
+  yaw=orbit.x
+  pitch=orbit.y
  var contact_from=hero.position
  time_+=delta
  contact_grace=maxf(0,contact_grace-delta)
