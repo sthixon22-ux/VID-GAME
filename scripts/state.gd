@@ -29,6 +29,7 @@ func reset():
  hero.items={"ether":1,"treat":1}
  hero.side_quests={"goblin":0,"mossling":0,"started":[],"claimed":[],"crystals":[]}
  hero.puzzles={"dials":[0,0,0],"sequence":[],"solved":[]}
+ hero.campaign={"reliquary_west":false,"reliquary_east":false,"reliquary_cleared":false}
  hero.world_version=8
  hero.progression_version=GameRules.PROGRESSION_VERSION
  hero.progression_archive={}
