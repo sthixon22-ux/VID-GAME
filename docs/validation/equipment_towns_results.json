@@ -1,0 +1,122 @@
+{
+  "engine": "Godot 4.6.3 Linux",
+  "assertions": 1973,
+  "fresh_import": true,
+  "fresh_equipment_town_assertions": 213,
+  "studio_captures": 30,
+  "world_interior_captures": 11,
+  "suites": [
+    {
+      "suite": "run",
+      "assertions": 67,
+      "script_errors": 0,
+      "assertion_failures": 0,
+      "native_material_null": 0
+    },
+    {
+      "suite": "presentation",
+      "assertions": 63,
+      "script_errors": 0,
+      "assertion_failures": 0,
+      "native_material_null": 8
+    },
+    {
+      "suite": "reliability",
+      "assertions": 19,
+      "script_errors": 0,
+      "assertion_failures": 0,
+      "native_material_null": 0
+    },
+    {
+      "suite": "demo",
+      "assertions": 160,
+      "script_errors": 0,
+      "assertion_failures": 0,
+      "native_material_null": 1
+    },
+    {
+      "suite": "progression",
+      "assertions": 283,
+      "script_errors": 0,
+      "assertion_failures": 0,
+      "native_material_null": 0
+    },
+    {
+      "suite": "layout",
+      "assertions": 6,
+      "script_errors": 0,
+      "assertion_failures": 0,
+      "native_material_null": 0
+    },
+    {
+      "suite": "shop_flow",
+      "assertions": 174,
+      "script_errors": 0,
+      "assertion_failures": 0,
+      "native_material_null": 0
+    },
+    {
+      "suite": "adventure8",
+      "assertions": 132,
+      "script_errors": 0,
+      "assertion_failures": 0,
+      "native_material_null": 0
+    },
+    {
+      "suite": "progression9",
+      "assertions": 136,
+      "script_errors": 0,
+      "assertion_failures": 0,
+      "native_material_null": 0
+    },
+    {
+      "suite": "hero_quaternius",
+      "assertions": 141,
+      "script_errors": 0,
+      "assertion_failures": 0,
+      "native_material_null": 0
+    },
+    {
+      "suite": "class_skins",
+      "assertions": 209,
+      "script_errors": 0,
+      "assertion_failures": 0,
+      "native_material_null": 1
+    },
+    {
+      "suite": "companion_art",
+      "assertions": 205,
+      "script_errors": 0,
+      "assertion_failures": 0,
+      "native_material_null": 0
+    },
+    {
+      "suite": "campaign_expansion",
+      "assertions": 14,
+      "script_errors": 0,
+      "assertion_failures": 0,
+      "native_material_null": 0
+    },
+    {
+      "suite": "mirefen_chapter",
+      "assertions": 76,
+      "script_errors": 0,
+      "assertion_failures": 0,
+      "native_material_null": 0
+    },
+    {
+      "suite": "equipment_towns",
+      "assertions": 213,
+      "script_errors": 0,
+      "assertion_failures": 0,
+      "native_material_null": 0
+    },
+    {
+      "suite": "art_lab",
+      "assertions": 75,
+      "script_errors": 0,
+      "assertion_failures": 0,
+      "native_material_null": 0
+    }
+  ]
+}

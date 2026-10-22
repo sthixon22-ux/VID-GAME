@@ -16,6 +16,12 @@ This branch adds a tested continuation after the opening. Restore the Warden, re
 
 This is a playable second-chapter alpha; later campaign regions remain planning records. Dungeon 3 is not playable.
 
+## Equipment, materials and enterable towns
+
+Clothing now changes the visible outfit; weapons use corrected grips, two-handed arm placement and a bow draw/release with arrows. Both towns have separate weapon, armor, item and paid-inn interiors. Enter marked house doors with **E**, then approach the counter. Inn rooms cost **12 gold in Willowbrook** and **24 in Reedcross**. Existing saves continue normally.
+
+[Update details, images and limitations](docs/EQUIPMENT_WORLD_TOWNS.md) · [Bow](docs/screenshots/equipment_towns/bow_attack.png) · [Shop interior](docs/screenshots/equipment_towns/forest_weapons.png)
+
 ## Launch
 
 1. Download **Code → Download ZIP** from this repository and extract into a new folder.
@@ -49,13 +55,13 @@ All twelve classes are selectable, with distinct six-stat baselines and growth. 
 
 Weapon proficiencies are the union of all three classes. Plate armor still requires a Warrior or Paladin primary. Only the primary class's learned mythic is usable. Each class and each of thirteen weapon families has a separate twelve-node, **60-point tree** mixing thematic stat passives and learned combat arts. Earn two shared skill points per level (including two at creation), so completing one tree consumes all points earned through level 30. **Only points and prerequisite paths gate nodes; there are no level or victory gates.** Spending points on one tree limits the others. Class passives are permanent even after future class changes; weapon passives apply while the matching weapon is equipped. Weapon capstones grant permanent proficiency regardless of class. Class changes remain unavailable in this demo. Holy Light and Thunder Strike are examples of learned, MP-consuming combat arts.
 
-Begin with no equipment, 120 gold, three potions, one ether and one companion ration. Buy a compatible weapon at the outfitter east of camp. **Owning a weapon unlocks combat; speaking to Mira and buying armor are optional.** The shop equips purchases automatically and protects only the cheapest compatible first weapon's price from optional spending.
+Begin with no equipment, 120 gold, three potions, one ether and one companion ration. Enter the western weapon shop and buy a compatible weapon. The eastern house sells armor; the northern houses contain supplies and the inn. **Owning a weapon unlocks combat; speaking to Mira and buying armor are optional.** The shop equips purchases automatically and protects only the cheapest compatible first weapon's price from optional spending.
 
 Eight independent slots are owned permanently. Every shop item, including armor, accessories and supplies, has a rotating model preview on hover or keyboard focus. Inspecting an item never purchases or equips it. Gear changes update stats and visible equipment.
 
 **Greatswords, axes, spears, bows, staves, claws, scythes and warhammers use both hands.** Equipping one stows your shield without deleting it. Shield equipment and shield abilities stay unavailable until you switch back to a one-handed weapon. Their attack, agility, dexterity, HP or MP bonuses compensate for that tradeoff. These values remain subject to playtesting.
 
-The Willowbrook starter outfitter sells only **Iron Sword, Twin Daggers, Oak Staff, Traveler’s Clothing and Traveler’s Pendant**, plus potions, ethers and companion treats. All valid three-class combinations can use at least one of these weapons. Other equipment remains in the data for rewards, owned gear and future shops; it cannot be purchased here. Every shop item has a preview.
+Willowbrook’s weapon shop sells **Iron Sword, Twin Daggers and Oak Staff**; its armor shop sells **Traveler’s Clothing and Traveler’s Pendant**. Potions, ethers and companion treats are sold in the separate item shop. All valid three-class combinations can use at least one of these weapons. Other equipment remains in the data for rewards, owned gear and future shops; it cannot be purchased here. Every shop item has a preview.
 
 ## Adventure and side quests
 

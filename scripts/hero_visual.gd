@@ -177,7 +177,7 @@ func play_action(action:String)->float:
  action_elapsed=0
  arrow_released=false
  var entry=AbilityBook.entry(action)
- weapon_action=action=="Attack" or (entry.get("kind","")=="weapon" and entry.get("effect","") not in ["buff","heal"])
+ weapon_action=action=="Attack" or (entry.get("kind","") in ["weapon","technique"] and entry.get("effect","") not in ["buff","heal"])
  if action in ["Sword Slash","Sacred Strike","Wild Hunt","Dawn Avatar"]:weapon_action=true
  if action=="Defeat":locked_pose=true
  var clip:String=ACTION_CLIPS.get(action,"")

@@ -73,3 +73,7 @@ Active companion visuals now use `CompanionActor`, refined licensed animal meshe
 ## Mirefen chapter additions
 
 Regional equipment and marsh guardian/stalker variants reuse the existing credited CC0 mesh families and animation libraries. Their original upstream notices remain intact; no new third-party downloads were added in this chapter. `scripts/marsh_creature.gd` supplies original prototype leech/wisp geometry, crown/ward additions and action motion. `assets/audio/mirefen_ambience.wav` is an original seeded synthesized marsh ambience loop (water-like filtered noise and calls), not a field recording or purchased track. These additions are functional alpha presentation, not final professionally authored creature art.
+
+## Equipment/world/town material update
+
+No new third-party pack was downloaded for this pass: the public texture-host requests were blocked. Original world-space terrain/wood/water shader work reuses the existing verified CC0 Quaternius atlas surfaces and original terrain maps. Existing authored village floor, windows and crate pieces are reused inside enterable buildings. Skinned plate derives from the authored torso; robe/coat extensions, arrow/quiver geometry and post-animation weapon arm trajectories are original project additions. The remaining environmental art gap and exact validation are documented in [the update report](../docs/EQUIPMENT_WORLD_TOWNS.md).
