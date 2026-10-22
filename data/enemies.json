@@ -50,5 +50,18 @@
     "xp": 40,
     "gold": 20,
     "drop_chance": 3
+  },
+  "reliquary_keeper": {
+    "name": "Keeper of the Drowned Oath",
+    "model": "Mossling",
+    "hp": 430,
+    "attack": 39,
+    "defense": 13,
+    "speed": 10,
+    "xp": 235,
+    "gold": 170,
+    "drop_chance": 3,
+    "agility": 10,
+    "dexterity": 5
   }
 }
