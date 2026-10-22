@@ -174,6 +174,10 @@ func finish():
   if sim.species=="mossling":
    var guardian=State.encounter_id-100
    if not State.hero.journey.guards.has(guardian): State.hero.journey.guards.append(guardian)
+  if sim.species=="reliquary_keeper":
+   if not State.hero.has("campaign"): State.hero.campaign={}
+   State.hero.campaign.reliquary_cleared=true
+   State.notice="The Sunken Reliquary is restored. An ancient treaty fragment points toward the desert."
   if sim.species=="warden":
    State.hero.journey.boss=true
    State.grant_item("Sunsteel Sword")
