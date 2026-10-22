@@ -65,7 +65,7 @@ func _ready():
  appearance_choice(menu,"Skin tone",["Warm","Bronze","Deep"],func(index): skin=index; update_preview())
  appearance_choice(menu,"Hair color",["Chestnut","Golden","Silver"],func(index): hair=index; update_preview())
  appearance_choice(menu,"Outfit tint",["Class colors","Forest tint","Berry tint"],func(index): dye=index; update_preview())
- UI.label(menu,"You arrive unequipped with 120 gold and 3 potions.\nBuy compatible gear at the outfitter; shields are optional.\nMira lends you a wolf; choose your own after the quest.")
+ UI.label(menu,"You arrive unequipped with 120 gold and 3 potions.\nEnter the western weapon shop for your first gear.\nMira lends you a wolf; choose your own after the quest.")
  message=UI.label(menu,"")
  var footer=UI.panel(self,Vector2(36,630),Vector2(660,75))
  var actions=HBoxContainer.new()

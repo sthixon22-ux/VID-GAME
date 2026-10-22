@@ -94,11 +94,11 @@ func run():
  var unmodified=true
  # Historical audit exemptions: approved art integration and the requested Chapter 2 content changes.
  # Remaining source/assets retain their original hashes; gameplay regressions run in tests/*.tscn.
- var approved=["scripts/hero_visual.gd","scripts/art.gd","scripts/character_create.gd","scripts/state.gd","scripts/save_store.gd","scripts/companion_visual.gd","scripts/battle_motion.gd","scripts/battle.gd","scripts/character_menu.gd","scripts/combat.gd","scripts/auto_battle_panel.gd","scripts/quest_book.gd","scripts/world.gd","scripts/trail_map.gd","data/shops.json","data/enemies.json","data/equipment.json","data/dialogue.json"]
+ var approved=["scripts/hero_visual.gd","scripts/art.gd","scripts/character_create.gd","scripts/state.gd","scripts/save_store.gd","scripts/companion_visual.gd","scripts/battle_motion.gd","scripts/battle.gd","scripts/character_menu.gd","scripts/combat.gd","scripts/auto_battle_panel.gd","scripts/quest_book.gd","scripts/world.gd","scripts/trail_map.gd","data/shops.json","data/enemies.json","data/equipment.json","data/dialogue.json","scripts/village_art.gd","scripts/forest.gd","scripts/gear_visual.gd"]
  for path in baseline:
   if path in approved:continue
   if FileAccess.get_sha256("res://"+path)!=baseline[path]:unmodified=false;push_error("Production changed: "+path)
- check(unmodified,"Unchanged sources match historical audit hashes (documented art/campaign changes excluded)")
+ check(unmodified,"Unchanged sources match historical audit hashes (documented art/campaign/equipment changes excluded)")
  lab.queue_free()
  for i in range(3):await get_tree().process_frame
  print("Art lab checks: %s Failures: %s" % [checks,failures])

@@ -117,7 +117,10 @@ static func environment_(root: Node3D):
  env.environment.sky=sky
  env.environment.ambient_light_source=Environment.AMBIENT_SOURCE_COLOR
  env.environment.ambient_light_color=Color("c3d5db")
- env.environment.ambient_light_energy=0.4
+ env.environment.ambient_light_energy=0.6
+ env.environment.fog_enabled=true
+ env.environment.fog_density=.0025
+ env.environment.fog_light_color=Color("a2b9aa")
  env.environment.tonemap_mode=Environment.TONE_MAPPER_FILMIC
  env.environment.tonemap_exposure=1.0
  env.environment.adjustment_enabled=true
@@ -126,9 +129,26 @@ static func environment_(root: Node3D):
  box(root,Vector3(0,-0.25,0),Vector3(240,0.4,240),Color("537a43")).material_override=surface(Color("d4d5b6"),"grass",95)
 
 static var materials: Dictionary={}
-static func surface(color: Color, texture_: String, tiles: float=1.0) -> StandardMaterial3D:
+static func surface(color: Color, texture_: String, tiles: float=1.0) -> Material:
  var key="%s_%s_%s" % [color.to_html(),texture_,tiles]
  if materials.has(key): return materials[key]
+ if texture_ in ["grass","dirt"]:
+  var ground=ShaderMaterial.new()
+  ground.shader=load("res://assets/shaders/fantasy_ground.gdshader")
+  ground.set_shader_parameter("detail_color",load("res://assets/textures/rpg/%s_albedo.png" % texture_))
+  ground.set_shader_parameter("detail_normal",load("res://assets/textures/rpg/%s_normal.png" % texture_))
+  ground.set_shader_parameter("stone_color",load("res://assets/vendor/quaternius_village/T_UnevenBrick_BaseColor.png"))
+  ground.set_shader_parameter("tint",Color("667e44")*color if texture_=="grass" else Color("a38d65")*color)
+  ground.set_shader_parameter("path",texture_=="dirt")
+  materials[key]=ground
+  return ground
+ if texture_=="wood":
+  var wood=ShaderMaterial.new()
+  wood.shader=load("res://assets/shaders/fantasy_wood.gdshader")
+  wood.set_shader_parameter("atlas",load("res://assets/vendor/quaternius_village/T_WoodTrim_BaseColor.png"))
+  wood.set_shader_parameter("tint",color)
+  materials[key]=wood
+  return wood
  var mat=StandardMaterial3D.new()
  mat.albedo_color=color
  var mapped={"stone":"T_UnevenBrick","wood":"T_WoodTrim","tile":"T_RoundTiles","metal":"T_MetalOrnaments","plaster":"T_Plaster"}.get(texture_,"")
@@ -150,6 +170,12 @@ static func surface(color: Color, texture_: String, tiles: float=1.0) -> Standar
  else: mat.albedo_texture=load("res://assets/textures/%s.png" % texture_)
  mat.uv1_scale=Vector3(tiles,tiles,tiles)
  mat.roughness=0.9
+ mat.normal_scale=.25
+ mat.texture_filter=BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS_ANISOTROPIC
+ if texture_=="stone":
+  mat.uv1_triplanar=true
+  mat.uv1_world_triplanar=true
+  mat.uv1_scale=Vector3.ONE*.7
  if texture_=="wood":
   # Sample the wood-grain strip of the pack's trim atlas, not its stone/end-grain rows.
   mat.uv1_scale=Vector3(1,0.28,1)

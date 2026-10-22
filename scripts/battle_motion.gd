@@ -98,7 +98,7 @@ static func present(host: Node3D, actor: Node3D, target: Node3D, label: String) 
   var charge=UserSettings.tween(host)
   charge.tween_property(actor,"position",origin+forward*.85,.18)
   charge.tween_property(actor,"position",origin,.3)
- if label in ["Attack","Sword Slash","Shield Bash","Sacred Strike","Dawn Avatar","Wild Hunt","Wolf bite","Goblin club","Briar lash"]:
+ if (not actor is HeroVisual or actor.weapon_family not in ["bow","wand"]) and label in ["Attack","Sword Slash","Shield Bash","Sacred Strike","Dawn Avatar","Wild Hunt","Wolf bite","Goblin club","Briar lash"]:
   var lunge=UserSettings.tween(host)
   lunge.tween_property(actor,"position",origin+forward*(1.0 if label=="Wolf bite" else 0.6),duration*0.35)
   lunge.tween_property(actor,"position",origin,duration*0.6)
@@ -116,11 +116,15 @@ static func present(host: Node3D, actor: Node3D, target: Node3D, label: String) 
    pose.tween_property(body,"rotation:y",-0.65,0.25)
    pose.tween_property(body,"rotation:y",0.4,0.15)
    pose.tween_property(body,"rotation:y",0,0.3)
- # Impact is synchronized to the forward portion of the animation.
- await host.get_tree().create_timer(UserSettings.duration(duration*0.38)).timeout
+ # Bow damage follows draw, release and flight; melee keeps its authored impact phase.
+ var bow_shot=actor is HeroVisual and actor.weapon_family=="bow" and actor.weapon_action
+ if bow_shot:actor.set_meta("shot_target_world",target.global_position+Vector3.UP*1.2)
+ await host.get_tree().create_timer(UserSettings.duration(duration*(.82 if bow_shot else .38))).timeout
+ if bow_shot:return duration
  var point=target.position
  match label:
-  "Attack": arc(host,point+Vector3.UP,Color("d7edff"),false)
+  "Attack":
+   if not actor is HeroVisual or actor.weapon_family!="bow":arc(host,point+Vector3.UP,Color("d7edff"),false)
   "Sword Slash": arc(host,point+Vector3.UP,Color("f5b181"),true)
   "Shield Bash":
    var wave=ring(host,point+Vector3.UP,Color("93d5f3"))

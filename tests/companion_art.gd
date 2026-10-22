@@ -96,8 +96,8 @@ func run():
  check(JSON.stringify(State.hero)==before,"Visuals and presentations leave HP/MP, bonds, classes, items and skills unchanged")
  var baseline:Dictionary=JSON.parse_string(FileAccess.get_file_as_string("res://docs/validation/companion_gameplay_baseline.json"))
  for path in baseline:
-  # Campaign chapter intentionally extends simulator and state; companion data stays protected.
-  if path in ["scripts/state.gd","scripts/combat.gd"]:continue
+  # Campaign and requested equipment adapter work intentionally extend these sources; companion data stays protected.
+  if path in ["scripts/state.gd","scripts/combat.gd","scripts/hero_visual.gd"]:continue
   check(FileAccess.get_sha256("res://"+path)==baseline[path],"Gameplay/class/hero source unchanged: "+path)
  # Open the actual companion menu; previews must remain visible for wide wings and tall guardian.
  State.hero.journey.finished=true

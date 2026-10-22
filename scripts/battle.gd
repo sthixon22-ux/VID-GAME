@@ -168,7 +168,7 @@ func act(action: String):
    cam_tween.set_parallel(true)
    cam_tween.tween_property(camera,"position",shot,0.23).set_trans(Tween.TRANS_SINE)
    cam_tween.tween_method(func(weight: float): camera.look_at(Vector3(0,1.3,0).lerp(focus,weight)),0.0,1.0,0.23)
-  await get_tree().create_timer(UserSettings.duration(duration*0.62)).timeout
+  await get_tree().create_timer(UserSettings.duration(duration*(.18 if actor is HeroVisual and actor.weapon_family=="bow" and actor.weapon_action else .62))).timeout
  if not UserSettings.reduced_camera_motion and not UserSettings.minimal_animations:
   var reset_camera=UserSettings.tween(self)
   reset_camera.set_parallel(true)

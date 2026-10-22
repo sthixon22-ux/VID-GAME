@@ -32,6 +32,7 @@ func reset():
  hero.items={"ether":1,"treat":1}
  hero.side_quests={"goblin":0,"mossling":0,"started":[],"claimed":[],"crystals":[]}
  hero.puzzles={"dials":[0,0,0],"sequence":[],"solved":[]}
+ hero.town_visit={"region":"forest","service":"weapons","name":"Town service","position":[0,0,0]}
  hero.campaign=MirefenRules.defaults()
  hero.world_version=8
  hero.progression_version=GameRules.PROGRESSION_VERSION
@@ -188,12 +189,15 @@ func load_game():
   # Loading a legacy save must not inherit campaign flags from the running session.
   hero.campaign=MirefenRules.defaults()
   var legacy_skills=not data.has("skills")
+  var saved_visit:Array=[]
+  if data.get("town_visit") is Dictionary and data.town_visit.get("position") is Array:saved_visit=data.town_visit.position.duplicate()
   var saved_position: Array=[]
   if data.get("journey") is Dictionary and data.journey.get("position") is Array:
    saved_position=data.journey.position.duplicate()
   for key in hero:
    if data.has(key): hero[key]=merge_defaults(hero[key],normalize(data[key]))
   if saved_position.size()==3: hero.journey.position=[float(saved_position[0]),float(saved_position[1]),float(saved_position[2])]
+  if saved_visit.size()==3:hero.town_visit.position=[float(saved_visit[0]),float(saved_visit[1]),float(saved_visit[2])]
   if legacy_skills: migrate_skills()
   var legacy_gear={"Helmet":"Ranger Hood","Gauntlets":"Leather Gloves","Pants":"Ranger Trousers","Boots":"Trail Boots","Accessory":"Moonleaf Charm"}
   for slot in legacy_gear:
@@ -238,6 +242,7 @@ func merge_defaults(default, value):
 func travel_scene() -> String:
  if hero.profile.economy and not hero.profile.created: return "res://scenes/create.tscn"
  if hero.journey.region=="dungeon": return "res://scenes/dungeon.tscn"
+ if hero.journey.region=="interior":return "res://scenes/town_interior.tscn"
  if hero.journey.region=="mirefen": return "res://scenes/mirefen.tscn"
  if hero.journey.region=="reliquary": return "res://scenes/reliquary.tscn"
  return "res://scenes/world.tscn"

@@ -70,6 +70,7 @@ func _ready() -> void:
  MarshArt.ambience(self)
 
 func _build_marsh() -> void:
+ TownServices.signs(self,"mirefen")
  MarshArt.settlement(self)
  for entry in [[ROYAL,"King Aldren","Paladin","Male"],[IONA,"Warden Iona","Druid","Female"],[SELLA,"Healer Sella","Healer","Female"],[JORY,"Ferryman Jory","Ranger","Male"]]:
   MarshArt.npc(self,entry[0],entry[1],entry[2],entry[3])
@@ -106,9 +107,6 @@ func _build_marsh() -> void:
  for pos in [Vector3(-8, 0, -5), Vector3(8, 0, -5), Vector3(-8, 0, -12), Vector3(8, 0, -12)]:
   VillageArt.cottage(self, pos)
  Art.sign_(self, RETURN_GATE + Vector3(0, 2.6, 0), "Road to Willowbrook [E]")
- Art.sign_(self, SHOP_POS + Vector3(0, 2.7, 0), "Reedcross weapon trader [E]")
- Art.sign_(self, ARMOR_POS + Vector3(0, 2.7, 0), "Reedcross armorer [E]")
- Art.sign_(self, INN_POS + Vector3(0, 2.7, 0), "Reedcross inn [E]")
  Art.sign_(self, RELIQUARY_GATE + Vector3(0, 3.2, 0), "Sunken Reliquary [E]")
  for i in range(18):
   var z = -20.0 - i * 2.2
@@ -183,6 +181,8 @@ func walkable(pos:Vector3)->bool:
   if absf(pos.x-house.x)<2.5 and absf(pos.z-house.z)<2.4:return false
  return true
 func _prompt() -> String:
+ var door=TownServices.nearby("mirefen",hero.position)
+ if not door.is_empty():return "[E] Enter "+door[2]
  for entry in [[ROYAL,"Meet King Aldren"],[IONA,"Speak with Warden Iona"],[SELLA,"Healer Sella · silverreed"],[JORY,"Ferryman Jory · causeway patrol"]]:
   if hero.position.distance_to(entry[0])<2.5:return "[E] "+entry[1]
  for pos in SURVEYS:
@@ -192,7 +192,7 @@ func _prompt() -> String:
  if hero.position.distance_to(RETURN_GATE) < 3: return "[E] Travel to Willowbrook"
  if hero.position.distance_to(SHOP_POS) < 3: return "[E] Reedcross weapon trader"
  if hero.position.distance_to(ARMOR_POS) < 3: return "[E] Reedcross armorer"
- if hero.position.distance_to(INN_POS) < 3: return "[E] Rest at the inn"
+ if hero.position.distance_to(INN_POS) < 3: return "[E] Inn directions · marked northeast house"
  if hero.position.distance_to(RELIQUARY_GATE) < 4: return "[E] Enter the Sunken Reliquary"
  return "Reedcross Marsh — follow the raised wooden road"
 
@@ -202,6 +202,10 @@ func _done() -> bool:
 func interact() -> void:
  if dialogue.active or options.active or auto_panel.active or menu.get_parent().get_parent().visible:return
  var c=MirefenRules.campaign(State.hero)
+ var door=TownServices.nearby("mirefen",hero.position)
+ if not door.is_empty():
+  TownServices.enter(get_tree(),"mirefen",door)
+  return
  if hero.position.distance_to(ROYAL)<2.5:
   dialogue.show_id("marsh_royal",func():
    if not c.audience:
@@ -251,12 +255,9 @@ func interact() -> void:
  if hero.position.distance_to(RETURN_GATE) < 3:
   _travel("forest", "res://scenes/world.tscn", Vector3(0, 0, 1))
  elif hero.position.distance_to(SHOP_POS) < 3 or hero.position.distance_to(ARMOR_POS) < 3:
-  State.shop_id="reedcross_weapons" if hero.position.distance_to(SHOP_POS)<3 else "reedcross_armor"
-  _character("shop")
+  message="Visit the marked house doors for weapons and armor."
  elif hero.position.distance_to(INN_POS) < 3:
-  State.restore()
-  State.save_game()
-  message = "You rest at the Reedcross inn. HP and MP restored."
+  message="The Lantern Rest inn is in the northeastern house. Rooms cost 24 gold."
  elif hero.position.distance_to(RELIQUARY_GATE) < 4:
   if not c.sluice_key:
    message="The door needs Iona’s sluice key. Investigate the survey stones first."

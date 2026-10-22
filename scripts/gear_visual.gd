@@ -31,3 +31,27 @@ static func gather_bounds(node:Node3D,transform_:Transform3D,boxes:Array[AABB]):
  if node is MeshInstance3D and node.mesh: boxes.append(next*node.get_aabb())
  for child in node.get_children():
   if child is Node3D: gather_bounds(child,next,boxes)
+
+static func arrow()->Node3D:
+ var root=Node3D.new()
+ var shaft=Art.shape(root,Vector3(.43,0,0),Vector3(.012,.86,.012),Color("b18a55"),"cylinder")
+ shaft.rotation.z=-PI/2
+ var head=Art.shape(root,Vector3(.9,0,0),Vector3(.055,.14,.055),Color("c0d3dc"),"cone")
+ head.rotation.z=-PI/2
+ for i in 3:
+  var feather=Art.box(root,Vector3(.06,0,0),Vector3(.12,.055,.008),Color("e2ded0"))
+  feather.rotation.x=i*TAU/3
+ return root
+
+static func quiver()->Node3D:
+ var root=Node3D.new()
+ var leather=Art.shape(root,Vector3(0,.1,0),Vector3(.18,.5,.18),Color("68472f"),"cylinder")
+ leather.mesh.cap_top=false
+ Art.shape(root,Vector3(0,.34,0),Vector3(.20,.04,.20),Color("b59859"),"cylinder")
+ for i in 4:
+  var arrow_=arrow()
+  root.add_child(arrow_)
+  arrow_.position=Vector3((i%2-.5)*.065,.50+(i%2)*.04,(i/2-.5)*.065)
+  arrow_.rotation.z=-PI/2
+  arrow_.scale=Vector3.ONE*.5
+ return root

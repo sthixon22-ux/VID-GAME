@@ -25,6 +25,7 @@ func build(root:Node3D):
   for i in range(ceil(a.distance_to(b)*1.4)+1):
    var point=a.lerp(b,float(i)/maxf(1,ceil(a.distance_to(b)*1.4)))
    var path=Art.shape(root,point+Vector3(0,0.016,0),Vector3(3.1,0.025,3.1),Color("867855"),"cylinder")
+   path.cast_shadow=GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
    path.material_override=Art.surface(Color("b3a480"),"dirt",1.5)
  var water=Art.box(root,Vector3(18,0.04,-49),Vector3(3.0,0.06,62),Color("446b76"))
  var water_material=ShaderMaterial.new()
@@ -43,11 +44,8 @@ func build(root:Node3D):
   Art.shape(root,Vector3(x,1.7,-14),Vector3(0.5,3.4,0.5),Color("60675c"),"cylinder").material_override=Art.surface(Color("a5aa96"),"stone",2)
  for x in [-15,-11,-7,7,11,15]:
   Art.box(root,Vector3(x,0.65,-13),Vector3(3.6,1.3,0.25),Color("75624b")).material_override=Art.surface(Color("ab9778"),"wood",3)
- var merchant=Art.actor("Mira")
- root.add_child(merchant)
- merchant.position=Vector3(3.5,0,1)
- Art.box(root,Vector3(3.5,0.45,0),Vector3(1.6,0.9,0.7),Color("856341"))
- Art.sign_(root,Vector3(3.5,2.8,1),"Outfitter")
+ TownServices.signs(root,"forest")
+ Art.sign_(root,Vector3(3.5,2.8,1),"TOWN SERVICES\nWeapons · west house\nArmor · east house\nItems & inn · north lane")
  Art.box(root,Vector3(0,1.2,5),Vector3(1.8,1.3,0.15),Color("856341"))
  Art.sign_(root,Vector3(0,2.6,5),"Village board")
  var mira=Art.actor("Mira")

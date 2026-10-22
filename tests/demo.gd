@@ -166,18 +166,27 @@ func run():
  await get_tree().process_frame
  var world=get_tree().current_scene
  check(world.scene_file_path=="res://scenes/world.tscn" and State.hero.equipment.Weapon=="None","Creator enters village unequipped")
- world.hero.position=Vector3(3.5,0,1)
+ world.hero.position=TownServices.DOORS.forest[0][0]
  world.interact()
- await get_tree().process_frame
- await get_tree().process_frame
- check(get_tree().current_scene.page=="shop","Visible outfitter opens shop page")
- for item in ["Iron Sword","Traveler's Clothing","Traveler's Pendant"]:
+ for i in 6:await get_tree().process_frame
+ var interior=get_tree().current_scene
+ check(interior.scene_file_path=="res://scenes/town_interior.tscn","Weapon shop door enters an actual interior")
+ interior.hero.position=Vector3(0,0,-1)
+ interior.interact()
+ for i in 6:await get_tree().process_frame
+ check(get_tree().current_scene.page=="shop","Indoor merchant opens weapon shop page")
+ State.buy("Iron Sword")
+ State.equip("Weapon","Iron Sword")
+ get_tree().current_scene.leave()
+ for i in 6:await get_tree().process_frame
+ get_tree().current_scene.leave()
+ for i in 6:await get_tree().process_frame
+ world=get_tree().current_scene
+ # Armor and pendant are optional; the completed demo still permits the same build.
+ State.shop_id="willowbrook_armor"
+ for item in ["Traveler's Clothing","Traveler's Pendant"]:
   State.buy(item)
   State.equip(State.equipment_data[item].slot,item)
- get_tree().current_scene.leave()
- await get_tree().process_frame
- await get_tree().process_frame
- world=get_tree().current_scene
  world.hero.position=Vector3(-2.6,0,-0.8)
  world.interact()
  dismiss(world.dialogue)

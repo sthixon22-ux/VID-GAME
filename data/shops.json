@@ -23,10 +23,7 @@
       "Reed Bow",
       "Ferryman Spear"
     ],
-    "supplies": [
-      "potion",
-      "ether"
-    ]
+    "supplies": []
   },
   "reedcross_armor": {
     "name": "Reedcross \u00b7 Beren\u2019s Dry Thread",
@@ -35,6 +32,37 @@
       "Sluicekeeper Robe",
       "Fenwarden Pendant"
     ],
+    "supplies": []
+  },
+  "willowbrook_weapons": {
+    "name": "Willowbrook \u00b7 Reed & Steel",
+    "equipment": [
+      "Iron Sword",
+      "Twin Daggers",
+      "Oak Staff"
+    ],
+    "supplies": []
+  },
+  "willowbrook_armor": {
+    "name": "Willowbrook \u00b7 Stitch & Shield",
+    "equipment": [
+      "Traveler's Clothing",
+      "Traveler's Pendant"
+    ],
+    "supplies": []
+  },
+  "willowbrook_items": {
+    "name": "Willowbrook \u00b7 Mira\u2019s Supplies",
+    "equipment": [],
+    "supplies": [
+      "potion",
+      "ether",
+      "treat"
+    ]
+  },
+  "reedcross_items": {
+    "name": "Reedcross \u00b7 Sella\u2019s Supplies",
+    "equipment": [],
     "supplies": [
       "potion",
       "ether",

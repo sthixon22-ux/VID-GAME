@@ -70,7 +70,7 @@ func _ready():
  hud=hud_layer.status
  objective=hud_layer.objective
  prompt=hud_layer.prompt
- hud_layer.map.markers=[{"position":Vector3(3.5,0,1),"color":Color("dbbe7d")},{"position":Forest.SHRINE,"color":Color("8dc6ce")}]
+ hud_layer.map.markers=[{"position":Forest.SHRINE,"color":Color("8dc6ce")}]
  menu=UI.panel(self,Vector2(430,140),Vector2(420,460))
  menu.get_parent().get_parent().visible=false
  completion=UI.panel(self,Vector2(340,200),Vector2(600,340))
@@ -176,14 +176,15 @@ func _process(delta):
  if State.hero.exploration.quest_done: goal="Enter the shrine beyond Sunstream"
  if State.hero.journey.boss: goal="Return to Mira with the living ember"
  if State.hero.journey.finished: goal="Choose your permanent companion [C]" if State.hero.companion.owned.is_empty() else "Travel south to Reedcross [E] · Village board echo available"
- if State.hero.profile.economy and not State.starter_ready(): goal="Buy a weapon: outfitter east of camp"
+ if State.hero.profile.economy and not State.starter_ready(): goal="Buy a weapon: enter the western weapon shop"
  var region=Forest.region(hero.position)
  if region!=current_region:
   current_region=region
   message=region
- hud_layer.map.markers=[{"position":Vector3(3.5,0,1),"color":Color("dbbe7d")},{"position":Forest.SHRINE,"color":Color("8dc6ce")}]
+ hud_layer.map.markers=[{"position":Forest.SHRINE,"color":Color("8dc6ce")}]
  for herb in forest.herbs:
   if herb.visible: hud_layer.map.markers.append({"position":herb.position,"color":Color("c598d3")})
+ for door in TownServices.DOORS.forest:hud_layer.map.markers.append({"position":door[0],"color":Color("dbbe7d")})
  for npc in Forest.QUEST_NPCS: hud_layer.map.markers.append({"position":npc,"color":Color("dbbe7d")})
  for gob in goblins:
   if gob.visible: hud_layer.map.markers.append({"position":gob.position,"color":Color("ca7770")})
@@ -225,8 +226,10 @@ func start_normal_battle(species:String,id:int):
 func animate_actor(model: Node3D, moving: bool):
  Art.animate(model,time_,moving)
 func context_prompt() -> String:
+ var door=TownServices.nearby("forest",hero.position)
+ if not door.is_empty():return "[E] Enter "+door[2]
  if State.hero.journey.finished and not State.hero.companion.owned.is_empty() and hero.position.distance_to(Vector3(0,0,13))<3: return "[E] Travel to Reedcross and Mirefen Marsh"
- if hero.position.distance_to(Vector3(3.5,0,1))<2.2: return "[E] Willowbrook outfitter · Buy your first equipment"
+ if hero.position.distance_to(Vector3(3.5,0,1))<2.2:return "Weapons west · Armor east · Supplies and inn north"
  if hero.position.distance_to(Vector3(0,0,5))<2.2: return "[E] Village board · Training & postgame challenge"
  if hero.position.distance_to(Vector3(-2.6,0,-0.8))<2.4: return "[E] Talk to Mira · [R] Rest at camp"
  for i in range(Forest.QUEST_NPCS.size()):
@@ -243,6 +246,11 @@ func context_prompt() -> String:
  if hero.position.length()<3: return "[R] Rest and restore HP / MP · Follow the northern trail"
  return ""
 func interact():
+ if not modal_active():
+  var door=TownServices.nearby("forest",hero.position)
+  if not door.is_empty():
+   TownServices.enter(get_tree(),"forest",door)
+   return
  if State.hero.journey.finished and not State.hero.companion.owned.is_empty() and hero.position.distance_to(Vector3(0,0,13))<3:
   State.hero.journey.region="mirefen"
   State.remember_position(Vector3(0,0,4))
@@ -251,7 +259,7 @@ func interact():
   return
  if auto_panel.active or options.active or board.get_parent().get_parent().visible or menu.get_parent().get_parent().visible or dialogue.active: return
  if hero.position.distance_to(Vector3(3.5,0,1))<2.2:
-  open_character("shop")
+  message="Enter the western house for weapons or the eastern house for armor."
   return
  if hero.position.distance_to(Vector3(0,0,5))<2.2:
   show_board()
@@ -367,7 +375,7 @@ func refresh_menu():
 func ready_for_trail() -> bool:
  if not State.hero.profile.economy: return true
  if not State.starter_ready():
-  message="Buy a weapon from the outfitter near camp to start fighting. Armor and speaking to Mira are optional."
+  message="Enter the western weapon shop to buy your first weapon. Armor and speaking to Mira are optional."
   return false
  if State.hero.hp<=0:
   message="Return to camp and press R to recover."

@@ -1,6 +1,6 @@
 shader_type spatial;
 render_mode cull_disabled, depth_prepass_alpha;
-uniform sampler2D canopy : source_color, filter_linear_mipmap;
+uniform sampler2D canopy : source_color, filter_linear_mipmap_anisotropic;
 void vertex() {
  float breeze=sin(TIME*1.15+NODE_POSITION_WORLD.x*.3+NODE_POSITION_WORLD.z*.2);
  VERTEX.x+=breeze*.07*max(VERTEX.y+.5,0.0);

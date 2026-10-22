@@ -38,17 +38,6 @@ static func lantern(root:Node3D,pos:Vector3,label:String=""):
 static func settlement(root:Node3D):
  npc(root,Vector3(-3.5,0,0),"Messenger Elian","Ranger","Male")
  # Market awnings, stock tables, ferry landing and gathered civic square.
- for x in [-5.0,5.0]:
-  for z in [-9.0,-7.0]:
-   for dx in [-1.4,1.4]:Art.box(root,Vector3(x+dx,1.3,z),Vector3(.12,2.6,.12),Color("695945"))
-  var roof=Art.box(root,Vector3(x,2.7,-8),Vector3(3.3,.12,3),Color("708d9d" if x<0 else "a89d76"))
-  roof.rotation.z=.06 if x<0 else -.06
-  Art.box(root,Vector3(x,.7,-8),Vector3(2.6,.15,.9),Color("7f7054"))
-  for i in 3:
-   var gear=GearVisual.item(["Iron Sword","Oak Staff","Twin Daggers"][i] if x<0 else ["Traveler's Clothing","Traveler's Pendant","potion"][i])
-   root.add_child(gear)
-   gear.position=Vector3(x-1+i,.95,-8)
-   gear.scale=Vector3.ONE*.45
  for z in [-1.0,-15.0,-24.0,-36.0,-49.0,-59.0]:
   for x in [-3.4,3.4]:lantern(root,Vector3(x,0,z))
  Art.sign_(root,Vector3(0,3,4),"REEDCROSS\nRoyal relief camp · Inn north\nCauseway & waterworks beyond")

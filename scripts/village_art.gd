@@ -16,6 +16,15 @@ static func piece(root: Node3D, model: String, point: Vector3, dimensions: Vecto
  holder.position=point
  holder.rotation.y=yaw
  var asset=load("res://assets/vendor/quaternius_village/%s.gltf" % model).instantiate()
+ for mesh in asset.find_children("*","MeshInstance3D",true,false):
+  for i in mesh.mesh.get_surface_count():
+   var material=mesh.get_active_material(i)
+   if material is StandardMaterial3D:
+    var surface:StandardMaterial3D=material.duplicate()
+    surface.normal_scale=.3
+    surface.roughness=.85
+    surface.texture_filter=BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS_ANISOTROPIC
+    mesh.set_surface_override_material(i,surface)
  var box=bounds(asset)
  var scale_=dimensions/Vector3(maxf(box.size.x,0.01),maxf(box.size.y,0.01),maxf(box.size.z,0.01))
  holder.add_child(asset)

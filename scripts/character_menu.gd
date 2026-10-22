@@ -117,7 +117,7 @@ func build_equipment():
  UI.button(row,"Rotate right",func(): model_yaw+=0.55)
  var options=content_panel(Vector2(810,0),Vector2(450,570))
  UI.label(options,"CHOOSE %s" % slot.to_upper()).add_theme_font_size_override("font_size",22)
- UI.label(options,"Owned items · buy new gear at the outfitter" if State.hero.profile.economy else "Legacy wardrobe · owned gear preserved")
+ UI.label(options,"Owned items · buy new gear inside town shops" if State.hero.profile.economy else "Legacy wardrobe · owned gear preserved")
  var items: Array=[]
  for item in State.equipment_data:
   if State.equipment_data[item].slot==slot and State.owns(item): items.append(item)
@@ -135,7 +135,7 @@ func build_equipment():
   button.tooltip_text="Change visible gear and derived stats. Two-handed weapons stow your shield."
   button.disabled=item!="None" and (not State.compatible(item) or (slot=="Shield" and GameRules.two_handed(State.equipment_data.get(State.hero.equipment.Weapon,{}))))
  if items.size()==1: UI.label(options,"No equipment owned for this slot.
-Visit the outfitter beside the village camp.")
+Enter the western weapon shop in Willowbrook.")
 func build_skills():
  var heading=content_panel(Vector2(20,0),Vector2(1240,82))
  var tabs=HBoxContainer.new()
@@ -206,14 +206,14 @@ func paragraph(parent: Node, text: String):
 func build_shop():
  var left=content_panel(Vector2(20,0),Vector2(390,565))
  UI.label(left,str(ShopBook.data.get(State.shop_id,{}).get("name","Outfitter")).to_upper()).add_theme_font_size_override("font_size",23)
- paragraph(left,"Buy a weapon to start fighting. Armor and speaking to Mira are optional. Weapon access combines your primary and both secondary classes.")
+ paragraph(left,"Weapon access combines all three classes. Inspect an item to preview it; purchases remain in your inventory." if not State.shop_id.ends_with("items") else "Potions, ether and companion rations. Use supplies from inventory outside battle or from the battle item command.")
  shop_preview=WeaponPreview.new()
  left.add_child(shop_preview)
- shop_info=UI.label(left,"Hover over a weapon to preview it · keyboard focus also works")
+ shop_info=UI.label(left,"Hover over an item to preview it · keyboard focus also works")
  UI.label(left,"Gold: %s · funds reserved only for your first weapon" % State.hero.gold)
 
  UI.button(left,"View equipped gear",func(): show_page("equipment"))
- UI.button(left,"Return to village",leave)
+ UI.button(left,"Return to building" if State.hero.journey.region=="interior" else "Return to village",leave)
  var right=content_panel(Vector2(430,0),Vector2(830,565))
  UI.label(right,"BUY & EQUIP · owned items remain in your inventory")
  for name_ in ShopBook.stock(State.shop_id):
@@ -239,12 +239,11 @@ func build_shop():
   button.disabled=State.hero.gold<int(entry.price)+State.weapon_reserve()
   button.mouse_entered.connect(func(): preview_supply(supply))
   button.focus_entered.connect(func(): preview_supply(supply))
- if State.hero.equipment.Weapon!="None": preview_shop_weapon(State.hero.equipment.Weapon)
+ var stock=ShopBook.stock(State.shop_id)
+ if not stock.is_empty():preview_shop_weapon(stock[0])
  else:
-  for item in ShopBook.stock(State.shop_id):
-   if State.equipment_data[item].slot=="Weapon" and State.compatible(item):
-    preview_shop_weapon(item)
-    break
+  var supplies:Array=ShopBook.data.get(State.shop_id,{}).get("supplies",[])
+  if not supplies.is_empty():preview_supply(supplies[0])
 func preview_shop_weapon(item: String):
  if not is_instance_valid(shop_preview): return
  shop_preview.show_item(item)
@@ -429,7 +428,7 @@ func build_journal():
  UI.label(left,"THE BELL BENEATH THE WOODS").add_theme_font_size_override("font_size",23)
  var journey=State.hero.journey
  var steps=[
-  [State.starter_ready(),"Buy a weapon at the outfitter"],
+  [State.starter_ready(),"Buy a weapon inside the western shop"],
   [journey.started,"Speak to Mira beside the camp"],
   [State.hero.exploration.herbs.size()==3,"Gather Moonleaf along Whisperwood and Sunmeadow road"],
   [State.hero.exploration.quest_done,"Return the Moonleaf to Mira"],
