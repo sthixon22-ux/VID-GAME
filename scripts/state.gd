@@ -10,16 +10,19 @@ var notice = ""
 var save_notice=""
 var save_blocked=false
 var menu_page="equipment"
+var shop_id="willowbrook"
 var return_position=Vector3.ZERO
 var enemy_id="goblin"
 var encounter_id=-1
 var cleared_until: Dictionary={}
 
 func _ready():
+ QuestBook.add_marsh_quests()
  classes = JSON.parse_string(FileAccess.get_file_as_string("res://data/classes.json"))
  reset()
  load_game()
 func reset():
+ shop_id="willowbrook"
  notice=""
  last_reward={}
  save_notice=""
@@ -29,7 +32,7 @@ func reset():
  hero.items={"ether":1,"treat":1}
  hero.side_quests={"goblin":0,"mossling":0,"started":[],"claimed":[],"crystals":[]}
  hero.puzzles={"dials":[0,0,0],"sequence":[],"solved":[]}
- hero.campaign={"reliquary_west":false,"reliquary_east":false,"reliquary_cleared":false}
+ hero.campaign=MirefenRules.defaults()
  hero.world_version=8
  hero.progression_version=GameRules.PROGRESSION_VERSION
  hero.progression_archive={}
@@ -153,7 +156,7 @@ func reward(normal: bool, species: String="goblin"):
  award_gold(int(enemy.gold),"Battle victory")
  hero.side_quests[species]=int(hero.side_quests.get(species,0))+1
  if normal and species=="goblin": hero.mastery+=1
- if normal and hero.monsters.has(species): hero.monsters[species]+=1
+ if normal: hero.monsters[species]=int(hero.monsters.get(species,0))+1
  for class_ in active_classes(): hero.class_mastery[class_]+=1
  if proficiencies().has(weapon_type()): hero.weapon_mastery[weapon_type()]+=1
  if hero.equipment.Shield!="None": hero.weapon_mastery.shield+=1
@@ -182,6 +185,8 @@ func load_game():
  save_blocked=result.blocked
  var data: Dictionary=result.hero
  if not data.is_empty():
+  # Loading a legacy save must not inherit campaign flags from the running session.
+  hero.campaign=MirefenRules.defaults()
   var legacy_skills=not data.has("skills")
   var saved_position: Array=[]
   if data.get("journey") is Dictionary and data.journey.get("position") is Array:
@@ -198,6 +203,7 @@ func load_game():
    for item in equipment_data: grant_item(item)
 
   hero.monsters.goblin=maxi(int(hero.monsters.goblin),int(hero.mastery))
+  MirefenRules.campaign(hero)
   migrate_progression(data)
   if GameRules.two_handed(equipment_data.get(hero.equipment.Weapon,{})): hero.equipment.Shield="None"
   if int(data.get("world_version",0))<8:
@@ -235,6 +241,10 @@ func travel_scene() -> String:
  if hero.journey.region=="mirefen": return "res://scenes/mirefen.tscn"
  if hero.journey.region=="reliquary": return "res://scenes/reliquary.tscn"
  return "res://scenes/world.tscn"
+func retreat_to_safety():
+ var marsh=hero.journey.region in ["mirefen","reliquary"]
+ hero.journey.region="mirefen" if marsh else "forest"
+ remember_position(Vector3(0,0,-10) if marsh else Vector3.ZERO)
 func restore():
  hero.hp=stats().max_hp
  hero.mp=stats().max_mp
@@ -284,7 +294,7 @@ func grant_item(item: String):
  var id: String=equipment_data.get(item,{}).get("id","")
  if not id.is_empty() and not hero.inventory.has(id): hero.inventory.append(id)
 func buy(item: String) -> bool:
- if not ShopBook.in_stock(item): return false
+ if not ShopBook.in_stock(item,shop_id): return false
  if not equipment_data.has(item) or owns(item) or not compatible(item): return false
  var price=int(equipment_data[item].price)
  if not can_buy(item): return false
@@ -384,7 +394,7 @@ func weapon_reserve() -> int:
 func can_buy_potion() -> bool:
  return int(hero.gold)>=8+weapon_reserve()
 func can_buy(item: String) -> bool:
- if not ShopBook.in_stock(item): return false
+ if not ShopBook.in_stock(item,shop_id): return false
  if not equipment_data.has(item) or owns(item) or not compatible(item): return false
  var reserve=0 if equipment_data[item].slot=="Weapon" else weapon_reserve()
  return int(hero.gold)>=int(equipment_data[item].price)+reserve

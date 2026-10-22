@@ -43,7 +43,7 @@ static func write_hero(hero: Dictionary, path: String) -> bool:
  return DirAccess.rename_absolute(temporary,path)==OK
 
 static func valid_nested(data: Dictionary) -> bool:
- for key in ["profile","journey","exploration","skills","class_mastery","weapon_mastery","weapon_skills","monsters","demo","items","side_quests","puzzles"]:
+ for key in ["profile","journey","exploration","skills","class_mastery","weapon_mastery","weapon_skills","monsters","demo","items","side_quests","puzzles","campaign"]:
   if data.has(key) and not data[key] is Dictionary: return false
  for key in ["secondary","inventory"]:
   if data.has(key) and not string_array(data[key]): return false
@@ -91,6 +91,14 @@ static func valid_nested(data: Dictionary) -> bool:
   if field=="sequence" and puzzles[field].size()>3: return false
   for value in puzzles[field]:
    if not numeric(value) or value<0 or value>(3 if field=="dials" else 2): return false
+ var campaign:Dictionary=data.get("campaign",{})
+ for key in ["audience","investigating","sluice_key","reliquary_west","reliquary_east","reliquary_cleared","reported","desert_clue","cache"]:
+  if campaign.has(key) and not campaign[key] is bool:return false
+ for key in ["readings","reeds"]:
+  if not campaign.has(key):continue
+  if not campaign[key] is Array:return false
+  for index in campaign[key]:
+   if not numeric(index) or index<0 or index> (2 if key=="readings" else 3):return false
  var companion: Dictionary=data.companion
  if companion.has("owned") and not string_array(companion.owned): return false
  if companion.has("records"):

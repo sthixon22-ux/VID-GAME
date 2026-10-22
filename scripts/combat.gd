@@ -134,20 +134,30 @@ func enemy_turn():
   bound-=1
   emit("Goblin","Goblin",0,"Entangled; loses turn")
   return
+ if species=="reliquary_keeper" and turns%3==1 and not charging:
+  charging=true
+  emit("Goblin","Goblin",0,"The crown fills with water! Oathbreaker Tide next turn — DEFEND!")
+  return
  if species=="warden" and turns%3==2 and not charging:
   charging=true
   emit("Goblin","Goblin",0,"Branches coil! Crushing Canopy next turn — DEFEND!")
   return
+ if enemy.get("behavior","")=="guard" and turns%3==1:
+  enemy_hp=mini(int(enemy.hp),enemy_hp+12)
+  emit("Goblin","Goblin",-12,"Silt mends the sentinel")
+  return
  var heavy=charging
  charging=false
  var power=int(enemy.attack)-(5 if weakened>0 else 0)+rng.randi_range(-3,3)+(22 if heavy else 0)
+ if enemy.get("behavior","")=="ambush" and turns==1:power+=6
+ var attack_label="Oathbreaker Tide" if heavy and species=="reliquary_keeper" else ("Crushing Canopy" if heavy else str(enemy.get("attack_name","Briar lash" if species!="goblin" else "Goblin club")))
  if not heavy and wolf_hp>0 and h.companion.active and rng.randi_range(0,3)==0:
   if demo_rules and h.companion.current=="griffin" and rng.randf()<0.15:
    emit("Goblin","Wolf",0,"Aerial evasion")
    return
   var amount=damage(power,8 if demo_rules and h.companion.current=="golem" else 5)
   wolf_hp=maxi(0,wolf_hp-amount)
-  emit("Goblin","Wolf",amount,"Crushing Canopy" if heavy else ("Briar lash" if species!="goblin" else "Goblin club"))
+  emit("Goblin","Wolf",amount,attack_label)
  else:
   if rng.randf()<GameRules.dodge_chance(current_stat("dexterity")):
    emit("Goblin","Hero",0,"Dodged")
@@ -158,7 +168,14 @@ func enemy_turn():
    if demo_rules and h.equipment.Shield!="None": prime_chemistry()
   if wolf_guard: amount=maxi(1,amount/(3 if companion_skills().has("guardian") else 2))
   h.hp=maxi(0,int(h.hp)-amount)
-  emit("Goblin","Hero",amount,"Crushing Canopy" if heavy else ("Briar lash" if species!="goblin" else "Goblin club"))
+  emit("Goblin","Hero",amount,attack_label)
+ if species=="mire_leech" and enemy_hp>0:
+  var restored=mini(6,int(enemy.hp)-enemy_hp)
+  enemy_hp+=restored
+  emit("Goblin","Goblin",-restored,"Siphoned vitality")
+ if species=="bog_wisp" and turns%2==0:
+  h.mp=maxi(0,int(h.mp)-3)
+  emit("Goblin","Hero",0,"Lantern siphon · 3 MP drained")
 func round_(action: String) -> Array:
  action=AbilityBook.name_for(action)
  events=[]

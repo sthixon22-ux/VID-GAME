@@ -23,6 +23,16 @@ func _ready():
   clearing.material_override=Art.surface(Color("b3a480"),"dirt",5)
  else:
   sanctuary_arena()
+  if State.enemy_id in ["mire_leech","bog_wisp","reed_stalker","drowned_sentinel","reliquary_keeper"]:
+   MarshArt.atmosphere(self,true)
+   for side in [-1,1]:
+    var channel=Art.box(self,Vector3(0,-.03,side*4.8),Vector3(14,.04,2.5),Color("416a6e"))
+    var water=ShaderMaterial.new()
+    water.shader=load("res://assets/shaders/water.gdshader")
+    water.set_shader_parameter("deep_color",Color("17404a"))
+    water.set_shader_parameter("shallow_color",Color("426e75"))
+    channel.material_override=water
+    for x in [-5,0,5]:MarshArt.lantern(self,Vector3(x,0,side*6.5))
  sim=Combat.new(State.hero,State.stats(),State.enemy_id)
  Art.sign_(self,Vector3(2,4.5 if State.enemy_id=="warden" else 3,0),str(sim.enemy.name).to_upper())
  dialogue=Dialogue.new()
@@ -197,13 +207,14 @@ func finish():
   var fall=UserSettings.tween(self)
   fall.tween_property(actors.Goblin,"scale",Vector3.ONE*0.01,0.6)
  else:
-  State.hero.journey.region="forest"
-  State.remember_position(Vector3.ZERO)
+  State.retreat_to_safety()
  State.save_game()
  clear_menu()
  if sim.outcome=="Victory":
   log_label.text="Victory! +%s XP · +%s gold · %s\n%s" % [sim.enemy.xp,State.last_reward.get("total",int(sim.enemy.gold)),"Potion found!" if State.hero.potions>previous else "No item drop.","The guardian is free. Bring the living ember to Mira." if sim.species=="warden" else ("The seal is now unguarded. Cleanse it with E." if sim.species=="mossling" else "Normal goblin victories: %s/10" % State.hero.mastery)]
- else: log_label.text="Defeat. Retreat to Willowbrook and press R at camp to recover."
+ else: log_label.text="Defeat. Retreat to safety and rest at the inn or camp to recover."
+ if sim.outcome=="Victory" and sim.species=="reliquary_keeper":log_label.text+="\nThe oath is quiet. Return to Iona in Reedcross."
+ if sim.outcome=="Victory" and sim.species in ["mire_leech","bog_wisp","reed_stalker","drowned_sentinel"]:log_label.text+="\nSpecies mastery: %s/10" % State.species_wins(sim.species)
  if sim.outcome=="Victory" and int(State.last_reward.get("bonus",0))>0: log_label.text+="\nDexterity bonus: +%s extra gold!" % State.last_reward.bonus
  if State.encounter_id==1000 and sim.outcome=="Victory":
   log_label.text+="\nWarden echo overcome! Second and final bond unlocked. Return to camp and open Companion [C]."

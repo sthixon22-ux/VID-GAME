@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "status": "planning_not_playable",
+  "status": "chapter_2_playable_alpha_later_regions_planning",
   "story": {
     "acts": 5,
     "final_choice_flag": "allegiance",
@@ -20,7 +20,9 @@
       "minimum_level": 1,
       "maximum_level": 8,
       "main_dungeon": "dungeon_1",
-      "unlocked_after": null
+      "unlocked_after": null,
+      "starting_town": "willowbrook",
+      "implementation": "playable_alpha"
     },
     {
       "id": "mirefen",
@@ -29,7 +31,9 @@
       "minimum_level": 8,
       "maximum_level": 15,
       "main_dungeon": "dungeon_2",
-      "unlocked_after": "dungeon_1"
+      "unlocked_after": "dungeon_1",
+      "starting_town": "reedcross",
+      "implementation": "playable_alpha"
     },
     {
       "id": "sahir",
@@ -38,7 +42,9 @@
       "minimum_level": 15,
       "maximum_level": 23,
       "main_dungeon": "dungeon_3",
-      "unlocked_after": "dungeon_2"
+      "unlocked_after": "dungeon_2",
+      "starting_town": "qasira",
+      "implementation": "planning"
     },
     {
       "id": "kharholt",
@@ -47,7 +53,9 @@
       "minimum_level": 23,
       "maximum_level": 31,
       "main_dungeon": "dungeon_4",
-      "unlocked_after": "dungeon_3"
+      "unlocked_after": "dungeon_3",
+      "starting_town": "kharholt_forge",
+      "implementation": "planning"
     },
     {
       "id": "canopy",
@@ -56,7 +64,9 @@
       "minimum_level": 31,
       "maximum_level": 39,
       "main_dungeon": "dungeon_5",
-      "unlocked_after": "dungeon_4"
+      "unlocked_after": "dungeon_4",
+      "starting_town": "leafhaven",
+      "implementation": "planning"
     },
     {
       "id": "nivehold",
@@ -65,7 +75,9 @@
       "minimum_level": 39,
       "maximum_level": 47,
       "main_dungeon": "dungeon_6",
-      "unlocked_after": "dungeon_5"
+      "unlocked_after": "dungeon_5",
+      "starting_town": "snowmere",
+      "implementation": "planning"
     },
     {
       "id": "galecrest",
@@ -74,7 +86,9 @@
       "minimum_level": 47,
       "maximum_level": 55,
       "main_dungeon": "dungeon_7",
-      "unlocked_after": "dungeon_6"
+      "unlocked_after": "dungeon_6",
+      "starting_town": "galecrest_port",
+      "implementation": "planning"
     },
     {
       "id": "underdeep",
@@ -83,7 +97,9 @@
       "minimum_level": 55,
       "maximum_level": 63,
       "main_dungeon": "dungeon_8",
-      "unlocked_after": "dungeon_7"
+      "unlocked_after": "dungeon_7",
+      "starting_town": "vesper_archive",
+      "implementation": "planning"
     },
     {
       "id": "cinderfall",
@@ -92,7 +108,9 @@
       "minimum_level": 63,
       "maximum_level": 71,
       "main_dungeon": "dungeon_9",
-      "unlocked_after": "dungeon_8"
+      "unlocked_after": "dungeon_8",
+      "starting_town": "cinderfall_camp",
+      "implementation": "planning"
     },
     {
       "id": "mournglen",
@@ -101,7 +119,9 @@
       "minimum_level": 71,
       "maximum_level": 79,
       "main_dungeon": "dungeon_10",
-      "unlocked_after": "dungeon_9"
+      "unlocked_after": "dungeon_9",
+      "starting_town": "mournglen_refuge",
+      "implementation": "planning"
     },
     {
       "id": "black_march",
@@ -110,7 +130,9 @@
       "minimum_level": 79,
       "maximum_level": 87,
       "main_dungeon": "dungeon_11",
-      "unlocked_after": "dungeon_10"
+      "unlocked_after": "dungeon_10",
+      "starting_town": "black_march_outpost",
+      "implementation": "planning"
     },
     {
       "id": "two_thrones",
@@ -120,7 +142,8 @@
       "maximum_level": 95,
       "starting_town": "aurel",
       "main_dungeon": "dungeon_12",
-      "unlocked_after": "dungeon_11"
+      "unlocked_after": "dungeon_11",
+      "implementation": "planning"
     }
   ],
   "dungeons": [
@@ -368,7 +391,11 @@
         ]
       },
       "notes": "Reed-topped canals, antidotes, river tools",
-      "playable": false
+      "playable": false,
+      "shop_ids": [
+        "reedcross_weapons",
+        "reedcross_armor"
+      ]
     },
     {
       "id": "qasira",

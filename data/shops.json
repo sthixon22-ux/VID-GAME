@@ -13,5 +13,32 @@
       "ether",
       "treat"
     ]
+  },
+  "reedcross_weapons": {
+    "name": "Reedcross \u00b7 Tamsin\u2019s Reed & Steel",
+    "equipment": [
+      "Reedsteel Sword",
+      "Marsh Daggers",
+      "Willowheart Staff",
+      "Reed Bow",
+      "Ferryman Spear"
+    ],
+    "supplies": [
+      "potion",
+      "ether"
+    ]
+  },
+  "reedcross_armor": {
+    "name": "Reedcross \u00b7 Beren\u2019s Dry Thread",
+    "equipment": [
+      "Reedcoat",
+      "Sluicekeeper Robe",
+      "Fenwarden Pendant"
+    ],
+    "supplies": [
+      "potion",
+      "ether",
+      "treat"
+    ]
   }
 }

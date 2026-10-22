@@ -88,7 +88,7 @@ static func roots(host: Node3D, point: Vector3, count: int=9):
 static func present(host: Node3D, actor: Node3D, target: Node3D, label: String) -> float:
  label=label.trim_suffix(" · Critical!")
  var duration=0.95
- if actor.has_method("play_action") and (actor is CompanionActor or STYLES.has(label) or not AbilityBook.entry(label).is_empty() or label in ["Victory","Defeat"]): duration=actor.play_action(label)
+ if actor.has_method("play_action") and (actor is CompanionActor or actor is MarshCreature or STYLES.has(label) or not AbilityBook.entry(label).is_empty() or label in ["Victory","Defeat"]): duration=actor.play_action(label)
  elif not STYLES.has(label): duration=0.4
  var origin=actor.position
  var forward=(target.position-origin).normalized() if actor!=target else Vector3.ZERO
@@ -177,6 +177,9 @@ static func present(host: Node3D, actor: Node3D, target: Node3D, label: String) 
     grow.tween_property(tree,"scale",Vector3.ONE*0.01,0.4)
     grow.tween_callback(tree.queue_free)
   "Shield raised", "Wolf protects you": ring(host,actor.position+Vector3.UP*0.08,Color("9cc5e7"))
+  "Oathbreaker Tide":
+   ring(host,point+Vector3.UP*.1,Color("66d0d0"),2.5)
+   for i in 16:mote(host,actor.position+Vector3.UP*2,point+Vector3(sin(i)*1.1,.5,cos(i)*1.1),Color("75cbd6"),.65,.2)
   "Crushing Canopy":
    ring(host,point+Vector3.UP*0.08,Color("c3a887"),1.4)
    roots(host,point,14)
@@ -201,6 +204,8 @@ static func present(host: Node3D, actor: Node3D, target: Node3D, label: String) 
     var color_=Color("e6b575") if label.contains("Ember") else (Color("b4e8ee") if label.contains("Wind") else Color("b8d8b0"))
     for i in range(6): mote(host,actor.position+Vector3.UP,point+Vector3(sin(i)*0.3,1.1,cos(i)*0.3),color_,0.3,0.13)
     arc(host,point+Vector3.UP,color_,false)
+   elif label.begins_with("The crown fills"):
+    ring(host,actor.position+Vector3.UP*.1,Color("56c9df"),1.7)
    elif label.begins_with("Branches coil"):
     ring(host,actor.position+Vector3.UP*0.1,Color("e8ae7c"),1.5)
  return duration

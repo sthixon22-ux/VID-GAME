@@ -166,8 +166,8 @@ func run():
  State.buy("Iron Sword")
  State.equip("Weapon","Iron Sword")
  world=await scene("res://scenes/world.tscn")
- for id in QuestBook.data:
-  var index=QuestBook.data.keys().find(id)
+ for id in ["roadwatch","skyglass","briar"]:
+  var index=["roadwatch","skyglass","briar"].find(id)
   world.hero.position=Forest.QUEST_NPCS[index]
   world.interact()
   dismiss(world.dialogue)

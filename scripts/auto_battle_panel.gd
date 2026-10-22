@@ -29,7 +29,7 @@ func open(species_: String="goblin", offer_normal:bool=false):
  clear()
  UI.label(content,"AUTO-BATTLE / "+species.to_upper()).add_theme_font_size_override("font_size",25)
  var wins=State.species_wins(species)
- if species=="warden" or wins<10:
+ if species in ["warden","reliquary_keeper"] or wins<10:
   UI.label(content,"Requires 10 normal victories for this species.\nThe Hollow Warden cannot be skipped.")
  else:
   var forecast=Combat.new(State.hero,State.stats(),species)
@@ -55,7 +55,7 @@ func open(species_: String="goblin", offer_normal:bool=false):
 func resolve():
  if not active or resolved: return
  var wins=State.species_wins(species)
- if species=="warden" or wins<10: return
+ if species in ["warden","reliquary_keeper"] or wins<10: return
  resolved=true
  var hp=int(State.hero.hp)
  var mp=int(State.hero.mp)
@@ -69,8 +69,7 @@ func resolve():
   State.reward(false,species)
   State.record_encounter_clear()
  else:
-  State.hero.journey.region="forest"
-  State.remember_position(Vector3.ZERO)
+  State.retreat_to_safety()
  State.save_game()
  clear()
  UI.label(content,"AUTO-BATTLE / "+sim.outcome.to_upper()).add_theme_font_size_override("font_size",25)

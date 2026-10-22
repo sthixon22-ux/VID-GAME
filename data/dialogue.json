@@ -160,5 +160,87 @@
       "Hero",
       "So could I. For a little while."
     ]
+  ],
+  "marsh_royal": [
+    [
+      "Messenger Elian",
+      "Mira sent word of the restored guardian. His Majesty came to Reedcross when the waterworks failed. He asked to hear from you personally."
+    ],
+    [
+      "King Aldren",
+      "You helped Willowbrook without a crown to command you. That is the sort of service this realm needs."
+    ],
+    [
+      "King Aldren",
+      "I have opened the royal granary to Reedcross. But grain cannot mend its failing sluices. Speak to Warden Iona; listen before you draw your weapon."
+    ],
+    [
+      "Hero",
+      "The forest guardian was wounded by a broken oath. Could these waters share its roots?"
+    ],
+    [
+      "King Aldren",
+      "Then help me keep an older promise: no village abandoned to the flood. Take this travel purse. I will remain until the evacuation boats are ready."
+    ]
+  ],
+  "marsh_iona": [
+    [
+      "Warden Iona",
+      "The ancient waterworks are drowning our fields. Blue lanterns burn where no ferryman walks, and the keeper no longer hears us."
+    ],
+    [
+      "Warden Iona",
+      "Bring a water-reading from each of the three blue survey stones along the causeway. They will tell us whether the seal is broken or merely blocked."
+    ]
+  ],
+  "marsh_key": [
+    [
+      "Warden Iona",
+      "All three readings point inward. The keeper is trapping the flood to protect a covenant nobody remembers."
+    ],
+    [
+      "Warden Iona",
+      "Take this sluice key. In the reliquary: drain the west basin, cross its bed, then divert the east channel. Do not mistake an open valve for a safe crossing."
+    ],
+    [
+      "Warden Iona",
+      "The inscription says: EMPTY the bowl; TURN the river; QUIET the heart. Listen when the keeper gathers a tide."
+    ]
+  ],
+  "marsh_after": [
+    [
+      "Warden Iona",
+      "The channels are running clear. You did not destroy our keeper; you freed it from an oath twisted against the people it protected."
+    ],
+    [
+      "King Aldren",
+      "My soldiers will repair the causeway. You have my thanks\u2014and payment, not merely praise."
+    ],
+    [
+      "Warden Iona",
+      "The tablet names an Emberglass archive in the Sahir desert. Someone removed a passage about the first closing of the gates."
+    ],
+    [
+      "King Aldren",
+      "Seek answers when the southern road is ready. Until then, rest here. Reedcross owes you safe harbour."
+    ]
+  ],
+  "marsh_complete": [
+    [
+      "Warden Iona",
+      "The reliquary is quiet. The Emberglass tablet remains your next lead; the Sahir route is not yet open."
+    ]
+  ],
+  "marsh_reeds": [
+    [
+      "Healer Sella",
+      "My patients cannot wait for the flood to fall. I need four silverreed bundles from the marked banks along the causeway. Watch for leeches by the water."
+    ]
+  ],
+  "marsh_patrol": [
+    [
+      "Ferryman Jory",
+      "Reed Stalkers have taken the causeway. Defeat three and I can bring the medicine boat through. You can clear them before or after speaking to me."
+    ]
   ]
 }

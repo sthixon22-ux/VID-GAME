@@ -205,7 +205,7 @@ func paragraph(parent: Node, text: String):
  label.custom_minimum_size=Vector2(300,0)
 func build_shop():
  var left=content_panel(Vector2(20,0),Vector2(390,565))
- UI.label(left,"WILLOWBROOK OUTFITTER").add_theme_font_size_override("font_size",23)
+ UI.label(left,str(ShopBook.data.get(State.shop_id,{}).get("name","Outfitter")).to_upper()).add_theme_font_size_override("font_size",23)
  paragraph(left,"Buy a weapon to start fighting. Armor and speaking to Mira are optional. Weapon access combines your primary and both secondary classes.")
  shop_preview=WeaponPreview.new()
  left.add_child(shop_preview)
@@ -216,7 +216,7 @@ func build_shop():
  UI.button(left,"Return to village",leave)
  var right=content_panel(Vector2(430,0),Vector2(830,565))
  UI.label(right,"BUY & EQUIP · owned items remain in your inventory")
- for name_ in ShopBook.stock():
+ for name_ in ShopBook.stock(State.shop_id):
   var item: String=name_
   var entry: Dictionary=State.equipment_data[item]
   if entry.slot=="Any" or item=="Sunsteel Sword": continue
@@ -230,7 +230,7 @@ func build_shop():
   if entry.slot!="Any":
    button.mouse_entered.connect(func(): preview_shop_weapon(item))
    button.focus_entered.connect(func(): preview_shop_weapon(item))
- for id in InventoryBook.data:
+ for id in ShopBook.data.get(State.shop_id,{}).get("supplies",[]):
   var supply:String=id
   var entry:Dictionary=InventoryBook.data[id]
   var button=UI.button(right,"%s · %s gold · %s owned\n%s" % [entry.name,entry.price,State.item_count(id),entry.description],func():
@@ -241,7 +241,7 @@ func build_shop():
   button.focus_entered.connect(func(): preview_supply(supply))
  if State.hero.equipment.Weapon!="None": preview_shop_weapon(State.hero.equipment.Weapon)
  else:
-  for item in ShopBook.stock():
+  for item in ShopBook.stock(State.shop_id):
    if State.equipment_data[item].slot=="Weapon" and State.compatible(item):
     preview_shop_weapon(item)
     break
@@ -425,6 +425,7 @@ func refresh_companion_skill():
  UI.button(info,"Back to companions",func():show_page("companions"))
 func build_journal():
  var left=content_panel(Vector2(20,0),Vector2(590,565))
+ if State.hero.journey.finished:paragraph(left,"MIREFEN · THE DROWNED OATH\n"+MirefenRules.goal(State.hero))
  UI.label(left,"THE BELL BENEATH THE WOODS").add_theme_font_size_override("font_size",23)
  var journey=State.hero.journey
  var steps=[
@@ -444,11 +445,11 @@ func build_journal():
  UI.label(left,"Recorded exploration time: %s minutes" % (int(State.hero.demo.elapsed)/60))
  var right=content_panel(Vector2(630,0),Vector2(630,565))
  UI.label(right,"FIELD GUIDE & INVENTORY").add_theme_font_size_override("font_size",24)
- for species in ["goblin","bristleback","mossling"]:
+ for species in ["goblin","bristleback","mossling","mire_leech","bog_wisp","reed_stalker","drowned_sentinel"]:
   var wins=int(State.hero.monsters.get(species,0))
   if species=="goblin": wins=maxi(wins,int(State.hero.mastery))
   paragraph(right,"%s · %s / 10 normal victories
-%s" % [{"goblin":"Forest Goblin","bristleback":"Meadow Bristleback","mossling":"Briar Mossling"}[species],wins,("AUTO-BATTLE UNLOCKED" if wins>=10 else "Normal victories unlock optional Auto-Battle.") if species!="warden" else "The Hollow Warden must be faced normally."])
+%s" % [JSON.parse_string(FileAccess.get_file_as_string("res://data/enemies.json"))[species].name,wins,("AUTO-BATTLE UNLOCKED" if wins>=10 else "Normal victories unlock optional Auto-Battle.") if species!="warden" else "The Hollow Warden must be faced normally."])
  UI.label(right,"Potions: %s · restore 45 HP" % State.hero.potions)
  UI.button(right,"Use a potion",func(): State.use_item("potion"); show_page("journal")).disabled=not State.can_use_item("potion")
  paragraph(right,"Rest at the village camp to restore HP, MP and companion HP. Save at any time outside battle. If defeated, you return to camp without rewards.")

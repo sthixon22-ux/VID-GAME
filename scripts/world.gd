@@ -28,6 +28,7 @@ var hud: Label
 var menu: VBoxContainer
 var message=""
 func _ready():
+ State.shop_id="willowbrook"
  auto_panel=AutoBattlePanel.new()
  add_child(auto_panel)
  auto_panel.fight_requested.connect(func(): start_normal_battle(pending_species,pending_id))

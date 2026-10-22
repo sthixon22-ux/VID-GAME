@@ -41,6 +41,7 @@ static func shape(parent: Node3D, pos: Vector3, scale_: Vector3, color: Color, k
  parent.add_child(mesh)
  return mesh
 static func actor(kind: String, gear: Dictionary={}) -> Node3D:
+ if kind in ["MireLeech","BogWisp","ReedStalker","DrownedSentinel","ReliquaryKeeper"]:return MarshCreature.new(kind)
  if kind=="Goblin": return CompanionVisual.model("res://assets/models/enemies/forest_goblin.glb")
  if kind=="Wolf": return CompanionVisual.build("intro_wolf")
  if kind=="Bristleback": return CompanionVisual.build("bristleback")

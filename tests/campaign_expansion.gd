@@ -36,7 +36,7 @@ func run() -> void:
  check(State.travel_scene() == "res://scenes/reliquary.tscn", "Reliquary travel routes correctly")
  var mobs = JSON.parse_string(FileAccess.get_file_as_string("res://data/enemies.json"))
  check(mobs.has("reliquary_keeper"), "Relic keeper enemy data exists")
- check(mobs.reliquary_keeper.get("model") == "Mossling", "Relic keeper uses existing compatible visual")
+ check(mobs.reliquary_keeper.get("model") == "ReliquaryKeeper", "Relic keeper uses regional guardian visual")
  State.hero.campaign.reliquary_cleared = true
  check(State.save_game(), "Boss completion flag saves")
  State.reset()
