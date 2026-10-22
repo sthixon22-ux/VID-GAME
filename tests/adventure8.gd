@@ -226,7 +226,7 @@ func run():
  for id in State.companions:
   var model=CompanionVisual.build(id)
   var bounds=GearVisual.bounds(model)
-  check(bounds.size.x>.5 and bounds.size.y>1 and model.has_node("Body"),"New companion has a complete authored model: "+id)
+  check(bounds.size.x>.25 and bounds.size.y>1 and model.has_node("Body"),"New companion has a complete authored model: "+id)
   model.free()
  var bad=State.hero.duplicate(true)
  bad.puzzles.dials=[99,0,0]

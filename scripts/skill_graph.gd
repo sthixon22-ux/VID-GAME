@@ -7,6 +7,7 @@ var nodes: Array=[]
 var buttons: Dictionary={}
 var selected_id="oath"
 var learned: Array=[]
+var point_budget=-1
 var tint=Color("d8bc78")
 func configure(class_: String):
  class_name_=class_
@@ -21,6 +22,13 @@ func configure_weapon(type_: String):
  learned=State.hero.weapon_skills[type_]
  tint=Color("9dc6df")
  build()
+func configure_companion(id:String):
+ point_budget=int(State.hero.companion.records.get(id,{}).get("points",0))
+ family="companion"
+ nodes=State.companions[id].nodes
+ learned=State.hero.companion.records.get(id,{}).get("skills",[])
+ tint=Color(State.companions[id].color)
+ build()
 func build():
  for child in get_children(): child.queue_free()
  buttons.clear()
@@ -28,8 +36,10 @@ func build():
   var id: String=node.id
   var button=Button.new()
   button.custom_minimum_size=Vector2(162,62)
-  var locked=State.hero.level<int(node.level_required)
-  button.text=node.name+"\n"+("LEARNED" if learned.has(id) else "Lv %s · %s SP" % [int(node.level_required),int(node.cost)])
+  var prerequisites:Array=node.get("prerequisites",node.get("requires",[]))
+  var budget=point_budget if point_budget>=0 else int(State.hero.points)
+  var locked=int(node.cost)>budget or not prerequisites.all(func(id_):return learned.has(id_))
+  button.text=node.name+"\n"+("LEARNED" if learned.has(id) else "%s %s" % [int(node.cost),"BP" if family=="companion" else "SP"])
   button.tooltip_text=node.description
   var style=StyleBoxFlat.new()
   style.bg_color=Color("544a32") if learned.has(id) else (Color("172334") if locked else Color("1d3048"))

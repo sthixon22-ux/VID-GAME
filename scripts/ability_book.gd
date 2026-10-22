@@ -22,7 +22,7 @@ static func available(hero: Dictionary) -> Array:
   for id in class_data[class_].spellbook:
    if not result.has(id): result.append(id)
   for node in class_data[class_].nodes:
-   if not hero.get("skills",{}).get(class_,[]).has(node.id) or hero.level<int(node.level_required): continue
+   if not hero.get("skills",{}).get(class_,[]).has(node.id): continue
    for id in node.get("grants",[]):
     if data[id].kind=="mythic" and hero.primary!=class_: continue
     if not result.has(id): result.append(id)
@@ -35,7 +35,7 @@ static func techniques(hero: Dictionary) -> Array:
  if data.has(family+"_technique"): result.append(family+"_technique")
  for type_ in [family,"shield" if hero.equipment.Shield!="None" else ""]:
   for node in weapon_data.get(type_,[]):
-   if hero.weapon_skills.get(type_,[]).has(node.id) and hero.level>=int(node.level_required):
+   if hero.weapon_skills.get(type_,[]).has(node.id):
     for id in node.get("grants",[]): result.append(id)
  for id in available(hero):
   if data[id].kind=="technique": result.append(id)
@@ -43,6 +43,7 @@ static func techniques(hero: Dictionary) -> Array:
 static func weapon_type(hero: Dictionary) -> String:
  return gear_data.get(hero.equipment.Weapon,{}).get("weapon_type","unarmed")
 static func proficient(hero: Dictionary, family: String) -> bool:
+ if hero.get("weapon_skills",{}).get(family,[]).has("master"):return true
  var active: Array=hero.secondary.duplicate()
  active.append(hero.primary)
  for class_ in active:

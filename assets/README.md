@@ -44,3 +44,28 @@ Demo 0.7 adds original procedural weapon geometry in `scripts/gear_visual.gd` fo
 `models/gear/` contains original designed weapon, shield, armor and accessory meshes with metal/leather/enamel materials. `models/companions/` contains sculpted bodies, articulated limb groups and distinct horns, wings, manes, feathers or tails for all six companions, the temporary wolf and meadow bristlebacks. `models/enemies/` contains the original goblin, mossling and guardian. `textures/rpg/` supplies original albedo, normal and roughness maps plus cutout leaf branches. These are project art created for this demo, with no external service or paid content.
 
 `models/heroes/` contains proportion-adjusted derivatives of the credited CC0 KayKit Knight, Rogue and Mage, retaining their skeletal clips. They still use the credited source palette textures. Rebuild meshes with `blender --background --factory-startup --python tools/build_rpg_art.py`. Rebuild surface maps with `python3 tools/build_surface_textures.py` (Pillow and NumPy). Blender/Python are development tools; opening or playing the shipped project only requires Godot. Hashes and source distinctions are recorded in `vendor/SOURCES.json`.
+
+## Demo 0.9 natural-proportion hero replacement
+
+The active hero meshes in `models/heroes/` now replace the KayKit body geometry with clothed human topology derived from MakeHuman’s CC0 base mesh. The face and hands use anatomical surfaces; fitted clothed torso/legs/boots use its helper topology. Original eye/hair assembly, skinning and retargeting are implemented in `tools/build_natural_hero.py`. KayKit’s credited skeleton and animation clips remain. The original vendor assets remain unmodified for reproducibility.
+
+- Source: https://github.com/makehumancommunity/makehuman/blob/master/makehuman/data/3dobjs/base.obj
+- MakeHuman base-mesh header explicitly declares CC0 release in September 2020; copyright holders: Data Collection AB, Joel Palmius and Jonas Hauquier.
+- Vendored source: `vendor/makehuman/base.obj.txt`; full CC0 legal text: `vendor/makehuman/LICENSE-CC0.txt`. Source and derivative SHA-256 hashes are recorded in `vendor/SOURCES.json`.
+- Rebuild the active hero meshes with `blender --background --factory-startup --python tools/build_natural_hero.py`. If rebuilding every original art asset, run this **after** `build_rpg_art.py`, which produces the older hero variants. No source geometry download or Blender installation is needed to play.
+
+The 0.8 hero description above documents the previous release; these new hero GLBs supersede its proportions and palette material. Companions and enemies remain the 0.8 original meshes with simpler segmented motion.
+
+## Art-development review assets (not production replacements)
+
+The optional comparison scene in `art_lab/` vendors separately licensed Quaternius Standard derivatives/animations, a 2021 CC0 animated wolf, two official VRM sample avatars, and the MIT Godot VRM/MToon addon. See [the complete pinned source and permission manifest](../art_lab/SOURCES.json), [required attribution and controls](../art_lab/README.md) and [audit](../art_lab/reports/VISUAL_AUDIT.md). These models are not used by production hero, enemy or companion factories. Seed-san requires credit to VirtualCast, Inc.; VRM content is not blanket CC0. Bestiary models were excluded after inspecting their QAL license rather than accepting a mirror's general CC0 claim.
+
+### Approved Quaternius production hero
+
+The user approved Pipeline A after art-lab review. Byte-identical verified CC0 character/animation copies now live in `assets/vendor/quaternius/`; `SOURCES.json` records their provenance. `HeroVisual` uses the authored ranger/traveler family independently of classes. See `docs/QUATERNIUS_HERO.md` for the equipment mapping, supported animation clips, verification and current wardrobe limitations. The existing Blender-generated hero remains available only as legacy/comparison content.
+
+Male counterparts are now included from the same pinned CC0 source. `assets/textures/class_skins/` holds original class recolors and crests derived from the licensed outfit atlases. See `docs/CLASS_SKINS.md` and `DERIVATIVES.json`; there are 24 class looks using shared male/female body/outfit families, not 24 unrelated third-party character packs.
+
+### Companion refresh
+
+Active companion visuals now use `CompanionActor`, refined licensed animal meshes, an unchanged native dragon with material overrides, an original griffin derivative and an original stone-guardian derivative. Legacy generated companions remain for the historical comparison. See `docs/COMPANION_ART.md`; exact input grants/hashes are in `assets/vendor/SOURCES.json`, and actual output paths/hashes are in `assets/models/companions/refined/DERIVATIVES.json`. Blender inputs/sources are excluded from runtime import and Blender is not required to play.

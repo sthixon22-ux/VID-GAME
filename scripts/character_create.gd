@@ -1,6 +1,9 @@
 extends Node3D
 var name_field: LineEdit
 var primary="Paladin"
+var sex="Female"
+var sex_picker:OptionButton
+var skin_title:Label
 var skin=0
 var hair=0
 var dye=0
@@ -13,7 +16,7 @@ var message: Label
 var clock=0.0
 func _ready():
  Art.environment_(self)
- actor=Art.actor("Hero",State.hero.equipment)
+ actor=Node3D.new()
  add_child(actor)
  actor.position=Vector3(2.8,0,0)
  actor.rotation.y=PI+0.3
@@ -32,6 +35,14 @@ func _ready():
  name_field.placeholder_text="Traveler"
  name_field.custom_minimum_size=Vector2(0,36)
  menu.add_child(name_field)
+ var body_row=HBoxContainer.new()
+ menu.add_child(body_row)
+ UI.label(body_row,"Character: ").custom_minimum_size=Vector2(180,0)
+ sex_picker=OptionButton.new()
+ for value in ["Male","Female"]:sex_picker.add_item(value)
+ sex_picker.select(1)
+ sex_picker.item_selected.connect(func(index):select_sex(sex_picker.get_item_text(index)))
+ body_row.add_child(sex_picker)
  UI.label(menu,"Choose your PRIMARY class")
  class_picker=OptionButton.new()
  for class_ in State.classes: class_picker.add_item(class_)
@@ -49,9 +60,11 @@ func _ready():
  details=UI.label(menu,"")
  details.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
  details.custom_minimum_size=Vector2(580,135)
+ skin_title=UI.label(menu,"")
+ skin_title.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
  appearance_choice(menu,"Skin tone",["Warm","Bronze","Deep"],func(index): skin=index; update_preview())
  appearance_choice(menu,"Hair color",["Chestnut","Golden","Silver"],func(index): hair=index; update_preview())
- appearance_choice(menu,"Travel clothes",["River blue","Forest green","Berry red"],func(index): dye=index; update_preview())
+ appearance_choice(menu,"Outfit tint",["Class colors","Forest tint","Berry tint"],func(index): dye=index; update_preview())
  UI.label(menu,"You arrive unequipped with 120 gold and 3 potions.\nBuy compatible gear at the outfitter; shields are optional.\nMira lends you a wolf; choose your own after the quest.")
  message=UI.label(menu,"")
  var footer=UI.panel(self,Vector2(36,630),Vector2(660,75))
@@ -74,6 +87,12 @@ func select_class(value: String):
  class_picker.select(State.classes.keys().find(value))
  update_secondaries()
  refresh_stats()
+ update_preview()
+func select_sex(value:String):
+ if value not in ["Male","Female"]:return
+ sex=value
+ sex_picker.select(0 if sex=="Male" else 1)
+ update_preview()
 func refresh_stats():
  if secondary1.selected<0 or secondary2.selected<0: return
  var secondaries=[secondary1.get_item_text(secondary1.selected),secondary2.get_item_text(secondary2.selected)]
@@ -85,17 +104,17 @@ func refresh_stats():
    if not profs.has(family): profs.append(family)
  details.text="%s / %s / %s\n60%% primary + 20%% each secondary. Roles are LOCKED for this demo.\nLevel 1: %s\nLevel 10: %s\nWeapons: %s" % [primary,secondaries[0],secondaries[1],GameRules.summary(combined),GameRules.summary(future),", ".join(profs)]
 func update_preview():
- State.hero.profile.skin=skin
- State.hero.profile.hair=hair
- State.hero.profile.dye=dye
+ var appearance={"skin":skin,"hair":hair,"dye":dye,"sex":sex,"class":primary}
  var pos=actor.position
  actor.queue_free()
- actor=Art.actor("Hero",State.hero.equipment)
+ actor=HeroVisual.new(State.hero.equipment,appearance)
  add_child(actor)
  actor.position=pos
  actor.rotation.y=PI+0.3
+ var look=HeroSkinBook.profile(primary,sex)
+ skin_title.text="%s · %s %s\nCosmetic class outfit. Start without equipped gear." % [look.title,sex,primary]
 func begin():
- if State.create_hero(name_field.text,primary,skin,hair,dye,[secondary1.get_item_text(secondary1.selected),secondary2.get_item_text(secondary2.selected)]): get_tree().change_scene_to_file("res://scenes/world.tscn")
+ if State.create_hero(name_field.text,primary,skin,hair,dye,[secondary1.get_item_text(secondary1.selected),secondary2.get_item_text(secondary2.selected)],sex): get_tree().change_scene_to_file("res://scenes/world.tscn")
  else: message.text="Could not save your character. "+State.save_notice
 func _process(delta):
  clock+=delta

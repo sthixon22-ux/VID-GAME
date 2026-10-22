@@ -44,9 +44,12 @@ static func actor(kind: String, gear: Dictionary={}) -> Node3D:
  if kind=="Goblin": return CompanionVisual.model("res://assets/models/enemies/forest_goblin.glb")
  if kind=="Wolf": return CompanionVisual.build("intro_wolf")
  if kind=="Bristleback": return CompanionVisual.build("bristleback")
- if kind=="Hero": return load("res://scripts/hero_visual.gd").new(gear,State.hero.get("profile",{}))
+ if kind=="Hero":
+  var appearance:Dictionary=State.hero.get("profile",{}).duplicate(true)
+  appearance["class"]=State.hero.primary
+  return load("res://scripts/hero_visual.gd").new(gear,appearance)
  if kind=="Mira":
-  var npc=load("res://scripts/hero_visual.gd").new({"Chest":"Leather Vest","Weapon":"Iron Sword","Shield":"None"})
+  var npc=load("res://scripts/hero_visual.gd").new({"Chest":"Leather Vest","Weapon":"Iron Sword","Shield":"None"},{"class":"Healer","sex":"Female"})
   npc.find_child("EquippedWeapon",true,false).hide()
   return npc
  if kind=="Warden": return warden()

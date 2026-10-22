@@ -34,7 +34,7 @@ func reset():
  hero.progression_version=GameRules.PROGRESSION_VERSION
  hero.progression_archive={}
  hero.points=GameRules.POINTS_PER_LEVEL
- hero.profile={"created":false,"economy":false,"name":"Traveler","skin":0,"hair":0,"dye":0}
+ hero.profile={"created":false,"economy":false,"name":"Traveler","sex":"Female","skin":0,"hair":0,"dye":0}
  hero.inventory=[]
  hero.class_mastery={"Paladin":0,"Ranger":0,"Druid":0}
  hero.weapon_mastery={}
@@ -54,15 +54,17 @@ func stats() -> Dictionary:
  var result=GameRules.combined_stats(classes,hero.primary,hero.secondary,int(hero.level))
  result.wolf_attack=0
  result.healing=0
+ result.critical=5
  for slot in hero.equipment:
   if slot=="Shield" and GameRules.two_handed(equipment_data.get(hero.equipment.Weapon,{})): continue
   apply_bonus(result,equipment_data.get(hero.equipment[slot],{}))
- for class_ in active_classes():
+ for class_ in classes:
   for node in classes[class_].nodes:
    if skill_active(class_,node.id): apply_bonus(result,node.bonus)
  for family in [weapon_type(),"shield" if hero.equipment.Shield!="None" and not GameRules.two_handed(equipment_data.get(hero.equipment.Weapon,{})) else ""]:
   for node in weapon_trees.get(family,[]):
    if weapon_skill_active(family,node.id): apply_bonus(result,node.bonus)
+ for key in result: result[key]+=CompanionRules.bonus(hero,key)
  result.agility=maxi(1,int(result.agility))
  result.dexterity=maxi(0,int(result.dexterity))
  result.speed=result.agility # Compatibility alias for older tools; initiative uses agility.
@@ -72,10 +74,10 @@ func apply_bonus(result: Dictionary, source: Dictionary):
   result[key]+=int(source.get(key,0))
 func skill_active(class_: String, id: String) -> bool:
  var node=skill_node(class_,id)
- return not node.is_empty() and hero.skills.get(class_,[]).has(id) and int(hero.level)>=int(node.get("level_required",1))
+ return not node.is_empty() and hero.skills.get(class_,[]).has(id)
 func weapon_skill_active(family: String, id: String) -> bool:
  for node in weapon_trees.get(family,[]):
-  if node.id==id: return hero.weapon_skills.get(family,[]).has(id) and hero.level>=int(node.level_required)
+  if node.id==id: return hero.weapon_skills.get(family,[]).has(id)
  return false
 func weapon_type() -> String:
  return equipment_data.get(hero.equipment.Weapon,{}).get("weapon_type","unarmed")
@@ -84,6 +86,8 @@ func proficiencies() -> Array:
  for class_ in active_classes():
   for family in classes[class_].proficiencies:
    if not result.has(family): result.append(family)
+ for family in weapon_trees:
+  if hero.weapon_skills.get(family,[]).has("master") and not result.has(family): result.append(family)
  return result
 func skill_node(class_: String, id: String) -> Dictionary:
  for node in classes.get(class_,{}).get("nodes",[]):
@@ -94,7 +98,6 @@ func invest_skill(class_: String, id: String) -> bool:
  if node.is_empty() or hero.skills[class_].has(id): return false
  if hero.points<int(node.cost): return false
  if not active_classes().has(class_): return false
- if hero.level<int(node.get("level_required",1)) or int(hero.class_mastery[class_])<int(node.get("mastery_required",0)): return false
  for prerequisite in node.requires:
   if not hero.skills[class_].has(prerequisite): return false
  hero.skills[class_].append(id)
@@ -160,7 +163,7 @@ func reward(normal: bool, species: String="goblin"):
   while record.xp>=record.level*60:
    record.xp-=record.level*60
    record.level+=1
-   record.points+=1
+   record.points+=2
  hero.seed=(int(hero.seed)*48271)%2147483647
  if hero.seed%int(enemy.drop_chance)==0: hero.potions+=1
  while hero.xp>=int(hero.level)*70:
@@ -252,13 +255,13 @@ func new_adventure():
  for slot in hero.equipment: hero.equipment[slot]="None"
  hero.gold=120
  hero.potions=3
-func create_hero(name_: String, primary: String, skin: int, hair: int, dye: int, secondary: Array=[]) -> bool:
- if hero.profile.created or not classes.has(primary): return false
+func create_hero(name_: String, primary: String, skin: int, hair: int, dye: int, secondary: Array=[], sex: String="Female") -> bool:
+ if hero.profile.created or not classes.has(primary) or sex not in ["Male","Female"]: return false
  if secondary.is_empty(): secondary=classes[primary].recommended_secondary.duplicate()
  if secondary.size()!=2 or secondary[0]==secondary[1] or secondary.has(primary): return false
  for value in secondary:
   if not classes.has(value): return false
- hero.profile.merge({"created":true,"name":name_.strip_edges().left(20) if not name_.strip_edges().is_empty() else "Traveler","skin":clampi(skin,0,2),"hair":clampi(hair,0,2),"dye":clampi(dye,0,2)},true)
+ hero.profile.merge({"created":true,"sex":sex,"name":name_.strip_edges().left(20) if not name_.strip_edges().is_empty() else "Traveler","skin":clampi(skin,0,2),"hair":clampi(hair,0,2),"dye":clampi(dye,0,2)},true)
  hero.primary=primary
  hero.secondary=secondary.duplicate()
  restore()
@@ -281,6 +284,7 @@ func grant_item(item: String):
  var id: String=equipment_data.get(item,{}).get("id","")
  if not id.is_empty() and not hero.inventory.has(id): hero.inventory.append(id)
 func buy(item: String) -> bool:
+ if not ShopBook.in_stock(item): return false
  if not equipment_data.has(item) or owns(item) or not compatible(item): return false
  var price=int(equipment_data[item].price)
  if not can_buy(item): return false
@@ -309,31 +313,43 @@ func choose_companion(id: String) -> bool:
  hero.companion.owned.append(id)
  hero.companion.current=id
  hero.companion.active=true
- hero.companion.records[id]={"level":maxi(1,int(hero.level)-1),"xp":0,"points":2,"skills":[],"hp":int(companions[id].hp)}
+ hero.companion.records[id]={"level":maxi(1,int(hero.level)-1),"xp":0,"points":maxi(1,int(hero.level)-1)*2,"skills":[],"hp":int(companions[id].hp)}
  hero.demo.first_choice=true
  hero.companion.records[id].hp=companion_max_hp()
+ hero.hp=mini(int(hero.hp),int(stats().max_hp))
+ hero.mp=mini(int(hero.mp),int(stats().max_mp))
  save_game()
  return true
 func activate_companion(id: String) -> bool:
  if not hero.companion.owned.has(id): return false
  hero.companion.current=id
  hero.companion.active=true
+ hero.hp=mini(int(hero.hp),int(stats().max_hp))
+ hero.mp=mini(int(hero.mp),int(stats().max_mp))
  save_game()
  return true
-func train_companion(id: String) -> bool:
- if not hero.companion.records.has(hero.companion.current): return false
- var record=hero.companion.records[hero.companion.current]
- if record.points<1 or record.skills.has(id) or id not in ["predator","guardian","bond"]: return false
- record.points-=1
+func train_companion(id:String,companion_id:String="")->bool:
+ if companion_id.is_empty():companion_id=hero.companion.current
+ if not hero.companion.records.has(companion_id):return false
+ var record:Dictionary=hero.companion.records[companion_id]
+ var node:Dictionary={}
+ for candidate in companions[companion_id].nodes:
+  if candidate.id==id:node=candidate
+ if node.is_empty() or record.skills.has(id) or record.points<int(node.cost):return false
+ for prerequisite in node.requires:
+  if not record.skills.has(prerequisite):return false
+ record.points-=int(node.cost)
  record.skills.append(id)
- if id=="guardian": record.hp+=15
+ record.hp+=int(node.bonus.get("max_hp",0))
  save_game()
  return true
+func train_companion_for(companion_id:String,id:String)->bool:
+ if not hero.companion.owned.has(companion_id):return false
+ return train_companion(id,companion_id)
 func learn_weapon(type_: String, id: String) -> bool:
  for node in weapon_trees.get(type_,[]):
   if node.id!=id: continue
-  if not proficiencies().has(type_) or hero.level<int(node.level_required): return false
-  if hero.points<int(node.cost) or hero.weapon_mastery[type_]<int(node.requires) or hero.weapon_skills[type_].has(id): return false
+  if hero.points<int(node.cost) or hero.weapon_skills[type_].has(id): return false
   for prerequisite in node.prerequisites:
    if not hero.weapon_skills[type_].has(prerequisite): return false
   hero.points-=int(node.cost)
@@ -345,7 +361,7 @@ func companion_record() -> Dictionary:
  return hero.companion.records.get(hero.companion.current,{})
 func companion_max_hp() -> int:
  var record=companion_record()
- return int(companions.get(hero.companion.current,{"hp":55}).hp)+int(record.get("level",1))*3+(15 if record.get("skills",[]).has("guardian") else 0)
+ return int(companions.get(hero.companion.current,{"hp":55}).hp)+int(record.get("level",1))*3+CompanionRules.pet_bonus(hero,"max_hp")
 func travel_multiplier() -> float:
  return 1.25 if hero.companion.active and not hero.companion.owned.is_empty() else 1.0
 func restore_companion():
@@ -361,13 +377,14 @@ func starter_ready() -> bool:
 func weapon_reserve() -> int:
  if starter_ready(): return 0
  var cheapest=100000
- for item in equipment_data:
+ for item in ShopBook.stock():
   if equipment_data[item].slot=="Weapon" and compatible(item):
    cheapest=mini(cheapest,int(equipment_data[item].price))
  return cheapest
 func can_buy_potion() -> bool:
  return int(hero.gold)>=8+weapon_reserve()
 func can_buy(item: String) -> bool:
+ if not ShopBook.in_stock(item): return false
  if not equipment_data.has(item) or owns(item) or not compatible(item): return false
  var reserve=0 if equipment_data[item].slot=="Weapon" else weapon_reserve()
  return int(hero.gold)>=int(equipment_data[item].price)+reserve
@@ -391,7 +408,7 @@ func migrate_progression(data: Dictionary):
  for family in weapon_trees: hero.weapon_skills[family]=[]
  hero.points=maxi(1,int(hero.level))*GameRules.POINTS_PER_LEVEL
  hero.progression_version=GameRules.PROGRESSION_VERSION
- save_notice="Progression updated: skills reset to %s unspent points for the new level-50 trees. Previous investments are archived; level, quests, equipment and companions are kept." % hero.points
+ save_notice="Progression updated: skills reset to %s unspent points for the point-based trees. Previous investments are archived; level, quests, equipment and companions are kept." % hero.points
 
 func item_count(id: String) -> int:
  return int(hero.potions) if id=="potion" else int(hero.items.get(id,0))

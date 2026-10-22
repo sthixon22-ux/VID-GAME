@@ -3,7 +3,7 @@ extends RefCounted
 static func item(item_name: String) -> Node3D:
  if InventoryBook.data.has(item_name): return supply(item_name)
  var entry:Dictionary=State.equipment_data[item_name]
- return load("res://assets/models/gear/%s.glb" % entry.id).instantiate()
+ return load("res://assets/models/gear/%s.glb" % entry.get("visual_id",entry.id)).instantiate()
 static func supply(id:String)->Node3D:
  var root=Node3D.new()
  var data:Dictionary=InventoryBook.data[id]

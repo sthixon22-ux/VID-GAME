@@ -5,6 +5,8 @@ const STAT_LABELS={"max_hp":"HP","max_mp":"MP","attack":"ATK","defense":"DEF","a
 const TWO_HANDED=["greatsword","axe","spear","bow","staff","claws","scythe","hammer"]
 const POINTS_PER_LEVEL=2
 const PROGRESSION_VERSION=3
+static func critical_chance(points:int)->float:
+ return clampf(points*.01,0.0,.60)
 static func dodge_chance(dexterity: int) -> float:
  return clampf(float(dexterity)*0.004,0.0,0.35)
 static func gold_chance(dexterity: int) -> float:

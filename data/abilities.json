@@ -321,7 +321,7 @@
     "mp": 9,
     "effect": "damage",
     "power": 24,
-    "description": "An advanced class ability learned from the level-10 branch. Requires a matching proficient weapon.",
+    "description": "An advanced class ability learned from the class tree. Requires a matching proficient weapon.",
     "weapon_types": [
       "sword",
       "greatsword",
@@ -336,7 +336,7 @@
     "mp": 14,
     "effect": "damage",
     "power": 36,
-    "description": "A master class ability learned from the level-35 branch. Requires a matching proficient weapon.",
+    "description": "A master class ability learned from the class tree. Requires a matching proficient weapon.",
     "weapon_types": [
       "sword",
       "greatsword",
@@ -360,7 +360,7 @@
     "mp": 9,
     "effect": "damage",
     "power": 24,
-    "description": "An advanced class ability learned from the level-10 branch. Requires a matching proficient weapon.",
+    "description": "An advanced class ability learned from the class tree. Requires a matching proficient weapon.",
     "weapon_types": [
       "axe",
       "greatsword",
@@ -373,7 +373,7 @@
     "mp": 14,
     "effect": "damage",
     "power": 36,
-    "description": "A master class ability learned from the level-35 branch. Requires a matching proficient weapon.",
+    "description": "A master class ability learned from the class tree. Requires a matching proficient weapon.",
     "weapon_types": [
       "axe",
       "greatsword",
@@ -381,12 +381,12 @@
     ]
   },
   "paladin_adept": {
-    "name": "Radiant Lance",
+    "name": "Holy Light",
     "kind": "spell",
-    "mp": 9,
-    "effect": "damage",
-    "power": 24,
-    "description": "An advanced class ability learned from the level-10 branch."
+    "mp": 7,
+    "effect": "heal",
+    "power": 32,
+    "description": "A learned Paladin spell: restore HP with sacred light."
   },
   "paladin_master": {
     "name": "Judgment",
@@ -394,7 +394,7 @@
     "mp": 14,
     "effect": "damage",
     "power": 36,
-    "description": "A master class ability learned from the level-35 branch."
+    "description": "A master class ability learned from the class tree."
   },
   "arcane_cataclysm": {
     "name": "Arcane Cataclysm",
@@ -411,7 +411,7 @@
     "mp": 9,
     "effect": "magic",
     "power": 24,
-    "description": "An advanced class ability learned from the level-10 branch."
+    "description": "An advanced class ability learned from the class tree."
   },
   "wizard_master": {
     "name": "Astral Rupture",
@@ -419,7 +419,7 @@
     "mp": 14,
     "effect": "magic",
     "power": 36,
-    "description": "A master class ability learned from the level-35 branch."
+    "description": "A master class ability learned from the class tree."
   },
   "elemental_tempest": {
     "name": "Elemental Tempest",
@@ -436,7 +436,7 @@
     "mp": 9,
     "effect": "magic",
     "power": 24,
-    "description": "An advanced class ability learned from the level-10 branch."
+    "description": "An advanced class ability learned from the class tree."
   },
   "sorcerer_master": {
     "name": "Inferno",
@@ -444,7 +444,7 @@
     "mp": 14,
     "effect": "magic",
     "power": 36,
-    "description": "A master class ability learned from the level-35 branch."
+    "description": "A master class ability learned from the class tree."
   },
   "miracle": {
     "name": "Miracle",
@@ -461,7 +461,7 @@
     "mp": 9,
     "effect": "heal",
     "power": 65,
-    "description": "An advanced class ability learned from the level-10 branch."
+    "description": "An advanced class ability learned from the class tree."
   },
   "healer_master": {
     "name": "Sanctuary",
@@ -469,7 +469,7 @@
     "mp": 14,
     "effect": "heal",
     "power": 100,
-    "description": "A master class ability learned from the level-35 branch."
+    "description": "A master class ability learned from the class tree."
   },
   "ranger_adept": {
     "name": "Seeking Arrow",
@@ -477,7 +477,7 @@
     "mp": 9,
     "effect": "damage",
     "power": 24,
-    "description": "An advanced class ability learned from the level-10 branch. Requires a matching proficient weapon.",
+    "description": "An advanced class ability learned from the class tree. Requires a matching proficient weapon.",
     "weapon_types": [
       "bow"
     ]
@@ -488,7 +488,7 @@
     "mp": 14,
     "effect": "damage",
     "power": 36,
-    "description": "A master class ability learned from the level-35 branch. Requires a matching proficient weapon.",
+    "description": "A master class ability learned from the class tree. Requires a matching proficient weapon.",
     "weapon_types": [
       "bow"
     ]
@@ -508,7 +508,7 @@
     "mp": 9,
     "effect": "damage",
     "power": 24,
-    "description": "An advanced class ability learned from the level-10 branch. Requires a matching proficient weapon.",
+    "description": "An advanced class ability learned from the class tree. Requires a matching proficient weapon.",
     "weapon_types": [
       "dagger",
       "sword",
@@ -521,7 +521,7 @@
     "mp": 14,
     "effect": "damage",
     "power": 36,
-    "description": "A master class ability learned from the level-35 branch. Requires a matching proficient weapon.",
+    "description": "A master class ability learned from the class tree. Requires a matching proficient weapon.",
     "weapon_types": [
       "dagger",
       "sword",
@@ -543,7 +543,7 @@
     "mp": 9,
     "effect": "damage",
     "power": 24,
-    "description": "An advanced class ability learned from the level-10 branch. Requires a matching proficient weapon.",
+    "description": "An advanced class ability learned from the class tree. Requires a matching proficient weapon.",
     "weapon_types": [
       "dagger",
       "sword"
@@ -555,7 +555,7 @@
     "mp": 14,
     "effect": "damage",
     "power": 36,
-    "description": "A master class ability learned from the level-35 branch. Requires a matching proficient weapon.",
+    "description": "A master class ability learned from the class tree. Requires a matching proficient weapon.",
     "weapon_types": [
       "dagger",
       "sword"
@@ -576,7 +576,7 @@
     "mp": 9,
     "effect": "damage",
     "power": 24,
-    "description": "An advanced class ability learned from the level-10 branch. Requires a matching proficient weapon.",
+    "description": "An advanced class ability learned from the class tree. Requires a matching proficient weapon.",
     "weapon_types": [
       "unarmed",
       "claws",
@@ -589,7 +589,7 @@
     "mp": 14,
     "effect": "damage",
     "power": 36,
-    "description": "A master class ability learned from the level-35 branch. Requires a matching proficient weapon.",
+    "description": "A master class ability learned from the class tree. Requires a matching proficient weapon.",
     "weapon_types": [
       "unarmed",
       "claws",
@@ -602,7 +602,7 @@
     "mp": 9,
     "effect": "magic",
     "power": 24,
-    "description": "An advanced class ability learned from the level-10 branch."
+    "description": "An advanced class ability learned from the class tree."
   },
   "druid_master": {
     "name": "Grove Renewal",
@@ -610,7 +610,7 @@
     "mp": 14,
     "effect": "heal",
     "power": 100,
-    "description": "A master class ability learned from the level-35 branch."
+    "description": "A master class ability learned from the class tree."
   },
   "requiem": {
     "name": "Requiem",
@@ -627,7 +627,7 @@
     "mp": 9,
     "effect": "magic",
     "power": 24,
-    "description": "An advanced class ability learned from the level-10 branch."
+    "description": "An advanced class ability learned from the class tree."
   },
   "necromancer_master": {
     "name": "Grave Harvest",
@@ -635,7 +635,7 @@
     "mp": 14,
     "effect": "drain",
     "power": 36,
-    "description": "A master class ability learned from the level-35 branch."
+    "description": "A master class ability learned from the class tree."
   },
   "axe_technique": {
     "name": "Rending Chop",
@@ -769,12 +769,12 @@
     "description": "Agility +8 for three rounds. Turn order is recalculated each round."
   },
   "sword_master_technique": {
-    "name": "Tempest Slash",
+    "name": "Thunder Strike",
     "kind": "weapon",
     "mp": 8,
     "effect": "pierce",
-    "power": 20,
-    "description": "Advanced sword technique; requires the level-35 weapon node.",
+    "power": 24,
+    "description": "A learned sword art: a lightning-charged strike pierces half the target defense.",
     "weapon_node": {
       "family": "sword",
       "id": "technique"
@@ -790,7 +790,7 @@
     "mp": 8,
     "effect": "bash",
     "power": 20,
-    "description": "Advanced shield technique; requires the level-35 weapon node.",
+    "description": "Advanced shield technique; requires the learned weapon technique node.",
     "weapon_node": {
       "family": "shield",
       "id": "technique"
@@ -804,7 +804,7 @@
     "mp": 8,
     "effect": "pierce",
     "power": 20,
-    "description": "Advanced axe technique; requires the level-35 weapon node.",
+    "description": "Advanced axe technique; requires the learned weapon technique node.",
     "weapon_node": {
       "family": "axe",
       "id": "technique"
@@ -820,7 +820,7 @@
     "mp": 8,
     "effect": "pierce",
     "power": 20,
-    "description": "Advanced greatsword technique; requires the level-35 weapon node.",
+    "description": "Advanced greatsword technique; requires the learned weapon technique node.",
     "weapon_node": {
       "family": "greatsword",
       "id": "technique"
@@ -836,7 +836,7 @@
     "mp": 8,
     "effect": "pierce",
     "power": 20,
-    "description": "Advanced hammer technique; requires the level-35 weapon node.",
+    "description": "Advanced hammer technique; requires the learned weapon technique node.",
     "weapon_node": {
       "family": "hammer",
       "id": "technique"
@@ -852,7 +852,7 @@
     "mp": 8,
     "effect": "pierce",
     "power": 20,
-    "description": "Advanced spear technique; requires the level-35 weapon node.",
+    "description": "Advanced spear technique; requires the learned weapon technique node.",
     "weapon_node": {
       "family": "spear",
       "id": "technique"
@@ -868,7 +868,7 @@
     "mp": 8,
     "effect": "pierce",
     "power": 20,
-    "description": "Advanced bow technique; requires the level-35 weapon node.",
+    "description": "Advanced bow technique; requires the learned weapon technique node.",
     "weapon_node": {
       "family": "bow",
       "id": "technique"
@@ -884,7 +884,7 @@
     "mp": 8,
     "effect": "pierce",
     "power": 20,
-    "description": "Advanced dagger technique; requires the level-35 weapon node.",
+    "description": "Advanced dagger technique; requires the learned weapon technique node.",
     "weapon_node": {
       "family": "dagger",
       "id": "technique"
@@ -900,7 +900,7 @@
     "mp": 8,
     "effect": "pierce",
     "power": 20,
-    "description": "Advanced staff technique; requires the level-35 weapon node.",
+    "description": "Advanced staff technique; requires the learned weapon technique node.",
     "weapon_node": {
       "family": "staff",
       "id": "technique"
@@ -916,7 +916,7 @@
     "mp": 8,
     "effect": "pierce",
     "power": 20,
-    "description": "Advanced wand technique; requires the level-35 weapon node.",
+    "description": "Advanced wand technique; requires the learned weapon technique node.",
     "weapon_node": {
       "family": "wand",
       "id": "technique"
@@ -932,7 +932,7 @@
     "mp": 8,
     "effect": "pierce",
     "power": 20,
-    "description": "Advanced scythe technique; requires the level-35 weapon node.",
+    "description": "Advanced scythe technique; requires the learned weapon technique node.",
     "weapon_node": {
       "family": "scythe",
       "id": "technique"
@@ -948,7 +948,7 @@
     "mp": 8,
     "effect": "pierce",
     "power": 20,
-    "description": "Advanced claws technique; requires the level-35 weapon node.",
+    "description": "Advanced claws technique; requires the learned weapon technique node.",
     "weapon_node": {
       "family": "claws",
       "id": "technique"
@@ -964,7 +964,7 @@
     "mp": 8,
     "effect": "pierce",
     "power": 20,
-    "description": "Advanced unarmed technique; requires the level-35 weapon node.",
+    "description": "Advanced unarmed technique; requires the learned weapon technique node.",
     "weapon_node": {
       "family": "unarmed",
       "id": "technique"

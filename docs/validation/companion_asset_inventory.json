@@ -1,0 +1,134 @@
+{
+  "dire_wolf": {
+    "runtime_model": "assets/models/companions/refined/dire_wolf.glb",
+    "triangles": 8932,
+    "mesh_nodes": 1,
+    "material_count": 4,
+    "source_bones": [
+      51
+    ],
+    "embedded_clips": [
+      "Attack",
+      "Death",
+      "Eating",
+      "Gallop",
+      "Gallop_Jump",
+      "Idle",
+      "Idle_2",
+      "Idle_2_HeadLow",
+      "Idle_HitReact_Left",
+      "Idle_HitReact_Right",
+      "Jump_ToIdle",
+      "Walk"
+    ],
+    "motion_note": "Native creature animation; original wing layer added for griffin",
+    "sha256": "c005784c05728cefee05a7a43af2a6b14456c43499baeea6e66ae71989bea964"
+  },
+  "spirit_fox": {
+    "runtime_model": "assets/models/companions/refined/spirit_fox.glb",
+    "triangles": 8224,
+    "mesh_nodes": 1,
+    "material_count": 5,
+    "source_bones": [
+      51
+    ],
+    "embedded_clips": [
+      "Attack",
+      "Death",
+      "Eating",
+      "Gallop",
+      "Gallop_Jump",
+      "Idle",
+      "Idle_2",
+      "Idle_2_HeadLow",
+      "Idle_HitReact_Left",
+      "Idle_HitReact_Right",
+      "Jump_ToIdle",
+      "Walk"
+    ],
+    "motion_note": "Native creature animation; original wing layer added for griffin",
+    "sha256": "844c590bde272efb7fb9a573e2a0cbf5801664dda5ccb1dc6272e077adb073b7"
+  },
+  "warhorse": {
+    "runtime_model": "assets/models/companions/refined/warhorse.glb",
+    "triangles": 9700,
+    "mesh_nodes": 1,
+    "material_count": 8,
+    "source_bones": [
+      50
+    ],
+    "embedded_clips": [
+      "Attack_Headbutt",
+      "Attack_Kick",
+      "Death",
+      "Eating",
+      "Gallop",
+      "Gallop_Jump",
+      "Idle",
+      "Idle_2",
+      "Idle_Headlow",
+      "Idle_HitReact_Left",
+      "Idle_HitReact_Right",
+      "Jump_toIdle",
+      "Walk"
+    ],
+    "motion_note": "Native creature animation; original wing layer added for griffin",
+    "sha256": "66282617a6264e354d7cd160435121849f7d38566fd717f428d26b86b0f89470"
+  },
+  "griffin": {
+    "runtime_model": "assets/models/companions/refined/griffin.glb",
+    "triangles": 21032,
+    "mesh_nodes": 1,
+    "material_count": 7,
+    "source_bones": [
+      53
+    ],
+    "embedded_clips": [
+      "Attack",
+      "Death",
+      "Eating",
+      "Gallop",
+      "Gallop_Jump",
+      "Idle",
+      "Idle_2",
+      "Idle_2_HeadLow",
+      "Idle_HitReact_Left",
+      "Idle_HitReact_Right",
+      "Jump_ToIdle",
+      "Walk"
+    ],
+    "motion_note": "Native creature animation; original wing layer added for griffin",
+    "sha256": "9ffbd13c7f4433062694e9e8cf4cf4406b7719426894447bc0d593e044d5cc60"
+  },
+  "dragon": {
+    "runtime_model": "assets/vendor/quaternius/companions/monsters/Dragon_Evolved.glb",
+    "triangles": 7438,
+    "mesh_nodes": 1,
+    "material_count": 4,
+    "source_bones": [
+      46
+    ],
+    "embedded_clips": [
+      "CharacterArmature|Death",
+      "CharacterArmature|Fast_Flying",
+      "CharacterArmature|Flying_Idle",
+      "CharacterArmature|Headbutt",
+      "CharacterArmature|HitReact",
+      "CharacterArmature|Punch"
+    ],
+    "motion_note": "Native creature animation; original wing layer added for griffin",
+    "sha256": "9805d397f669d5e18041ddcb78a8877f58a685ae9cf4920799f623675eb25a99"
+  },
+  "golem": {
+    "runtime_model": "assets/models/companions/refined/golem.glb",
+    "triangles": 15170,
+    "mesh_nodes": 1,
+    "material_count": 3,
+    "source_bones": [
+      65
+    ],
+    "embedded_clips": [],
+    "motion_note": "Retargeted CC0 UAL humanoid animations at runtime",
+    "sha256": "bbb06585e5ada75f372f2d0414259f4287e9b8484f0997f0be088cd740557391"
+  }
+}

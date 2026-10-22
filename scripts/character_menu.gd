@@ -18,6 +18,8 @@ var header_title: Label
 var time_=0.0
 var model_yaw=PI+0.35
 var pending_companion=""
+var companion_tree_id="dire_wolf"
+var companion_skill="predator"
 func _ready():
  selected_class=State.hero.primary
  var layer=CanvasLayer.new()
@@ -70,6 +72,7 @@ func show_page(which: String):
   "skills": build_skills()
   "shop": build_shop()
   "companions": build_companions()
+  "companion_tree":build_companion_tree()
   "weapons": build_weapons()
   "journal": build_journal()
   "inventory": build_inventory()
@@ -107,7 +110,7 @@ func build_equipment():
  var stats=content_panel(Vector2(345,450),Vector2(450,120))
  var attributes=State.stats()
  UI.label(stats,GameRules.summary(attributes))
- UI.label(stats,"Dodge %.1f%% · bonus-gold chance %.1f%% (+25%% gold)" % [GameRules.dodge_chance(attributes.dexterity)*100,GameRules.gold_chance(attributes.dexterity)*100])
+ UI.label(stats,"Crit %.1f%% · dodge %.1f%% · bonus gold %.1f%%" % [GameRules.critical_chance(attributes.critical)*100,GameRules.dodge_chance(attributes.dexterity)*100,GameRules.gold_chance(attributes.dexterity)*100])
  var row=HBoxContainer.new()
  stats.add_child(row)
  UI.button(row,"Rotate left",func(): model_yaw-=0.55)
@@ -147,7 +150,7 @@ func build_skills():
   show_page("skills"))
  tabs.add_child(picker)
  UI.label(tabs,"Loadout: %s / %s / %s" % [State.hero.primary,State.hero.secondary[0],State.hero.secondary[1]]).size_flags_horizontal=Control.SIZE_EXPAND_FILL
- point_label=UI.label(heading,"Available skill points: %s · %s mastery: %s victories · Gold nodes are learned." % [State.hero.points,selected_class,State.hero.class_mastery[selected_class]])
+ point_label=UI.label(heading,"Available skill points: %s · Shared by every class and weapon tree · Gold nodes are learned." % State.hero.points)
  graph=SkillGraph.new()
  graph.position=Vector2(25,90)
  graph.size=Vector2(845,470)
@@ -175,16 +178,15 @@ func refresh_skill_info():
  var state="LEARNED" if learned else ("Requires: "+", ".join(missing) if not missing.is_empty() else "Available to learn")
  UI.label(info,"%s\nCost: %s skill points\nPoints available: %s" % [state,int(node.cost),State.hero.points])
  if node.id=="mythic":
-  var label=UI.label(info,"AVAILABLE IN COMBAT" if learned and State.hero.primary==selected_class else "Requires level 50 and this class PRIMARY.\nUnlock stays saved when switching classes.")
+  var label=UI.label(info,"AVAILABLE IN COMBAT" if learned and State.hero.primary==selected_class else "Requires learning this node and this class PRIMARY.\nUnlock stays saved when switching classes.")
   label.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
  var learn=UI.button(info,"Learn skill" if not learned else "Already learned",func():
   State.invest_skill(selected_class,selected_skill)
   Sound.cue("confirm")
   show_page("skills"))
- var mastery_needed=int(node.get("mastery_required",0))
- UI.label(info,"%s · Hero level %s / %s required\nClass mastery %s / %s required" % [node.rarity,State.hero.level,int(node.level_required),State.hero.class_mastery[selected_class],mastery_needed])
- learn.disabled=learned or not missing.is_empty() or State.hero.points<int(node.cost) or State.hero.level<int(node.level_required) or State.hero.class_mastery[selected_class]<mastery_needed or not State.active_classes().has(selected_class)
- UI.label(info,"Your three classes and primary role are locked for this demo. Class reassignment belongs to a later chapter.\nEach full tree costs 50 SP; capstone at level 50. Earn 2 shared SP per level.\nGold nodes are learned. Lines show prerequisites.")
+ UI.label(info,"%s · %s SP · No level or victory requirements" % [node.rarity,node.cost])
+ learn.disabled=learned or not missing.is_empty() or State.hero.points<int(node.cost) or not State.active_classes().has(selected_class)
+ UI.label(info,"Your class roles are locked for this demo.\nAll learned class stat bonuses remain permanent even after future class changes.\nA full tree costs 60 shared SP. Earn 2 per level; a full tree normally takes level 30.\nOnly points and prerequisite paths gate nodes.")
  constrain_page(info)
 func _process(delta):
  time_+=delta
@@ -214,7 +216,7 @@ func build_shop():
  UI.button(left,"Return to village",leave)
  var right=content_panel(Vector2(430,0),Vector2(830,565))
  UI.label(right,"BUY & EQUIP · owned items remain in your inventory")
- for name_ in State.equipment_data:
+ for name_ in ShopBook.stock():
   var item: String=name_
   var entry: Dictionary=State.equipment_data[item]
   if entry.slot=="Any" or item=="Sunsteel Sword": continue
@@ -239,7 +241,7 @@ func build_shop():
   button.focus_entered.connect(func(): preview_supply(supply))
  if State.hero.equipment.Weapon!="None": preview_shop_weapon(State.hero.equipment.Weapon)
  else:
-  for item in State.equipment_data:
+  for item in ShopBook.stock():
    if State.equipment_data[item].slot=="Weapon" and State.compatible(item):
     preview_shop_weapon(item)
     break
@@ -250,6 +252,7 @@ func preview_shop_weapon(item: String):
  var sources:Array=[]
  for class_ in State.active_classes():
   if State.classes[class_].proficiencies.has(entry.get("weapon_type","")): sources.append(class_)
+ if sources.is_empty() and State.proficiencies().has(entry.get("weapon_type","")):sources.append("permanent weapon mastery")
  var access="Usable through: "+", ".join(sources) if not sources.is_empty() else ("Compatible armor" if State.compatible(item) else "Not usable by your class combination")
  shop_info.text="%s · %s gold\n%s\n%s%s" % [item,int(entry.price),GameRules.summary(entry,true),access,"\nTWO HANDED · shield is stowed" if GameRules.two_handed(entry) else ""]
 func preview_supply(id: String):
@@ -286,8 +289,8 @@ func build_weapons():
   weapon_node=State.weapon_trees[weapon_family][0].id
   show_page("weapons"))
  row.add_child(picker)
- UI.label(row,"%s mastery: %s victories · %s skill points" % [weapon_family.capitalize(),State.hero.weapon_mastery[weapon_family],State.hero.points]).size_flags_horizontal=Control.SIZE_EXPAND_FILL
- UI.label(heading,"50 points per full tree · 2 shared points per level · final node requires level 50")
+ UI.label(row,"%s tree · %s shared skill points" % [weapon_family.capitalize(),State.hero.points]).size_flags_horizontal=Control.SIZE_EXPAND_FILL
+ UI.label(heading,"60 points per full tree · 2 shared points per level · Points and prerequisites only")
  graph=SkillGraph.new()
  graph.position=Vector2(25,90)
  graph.size=Vector2(845,470)
@@ -311,13 +314,12 @@ func refresh_weapon_info():
  var missing: Array=[]
  for prerequisite in node.prerequisites:
   if not State.hero.weapon_skills[weapon_family].has(prerequisite): missing.append(prerequisite)
- paragraph(info,"Hero level %s / %s required\nWeapon mastery %s / %s required\nCost %s SP · available %s\n%s" % [State.hero.level,int(node.level_required),State.hero.weapon_mastery[weapon_family],int(node.requires),int(node.cost),State.hero.points,"Prerequisites: "+", ".join(missing) if not missing.is_empty() else "Prerequisites met"])
+ paragraph(info,"Cost %s SP · available %s\n%s" % [int(node.cost),State.hero.points,"Prerequisites: "+", ".join(missing) if not missing.is_empty() else "Prerequisites met"])
  var button=UI.button(info,"Learn technique" if not learned else "Already learned",func():
   State.learn_weapon(weapon_family,weapon_node)
   show_page("weapons"))
- button.disabled=learned or not missing.is_empty() or State.hero.level<int(node.level_required) or State.hero.weapon_mastery[weapon_family]<int(node.requires) or State.hero.points<int(node.cost) or not State.proficiencies().has(weapon_family)
- paragraph(info,"Requires proficiency from an equipped class. Learned bonuses apply only while using this weapon family. Shield bonuses require an equipped shield.")
- paragraph(info,"Guardian of the Wild: Paladin + Ranger + Druid. Block to empower your next Mark or Regrowth.")
+ button.disabled=learned or not missing.is_empty() or State.hero.points<int(node.cost)
+ paragraph(info,"Any weapon tree may be studied. Bonuses apply while using that weapon family. The final Freedom node permanently grants its proficiency regardless of class. Physical two-handed restrictions still apply.")
  constrain_page(info)
 func build_companions():
  var left=content_panel(Vector2(20,0),Vector2(390,565))
@@ -351,11 +353,14 @@ func build_companions():
  var record=State.companion_record()
  if not record.is_empty():
   UI.label(right,"%s · Level %s · XP %s/%s · HP %s/%s · %s bond points" % [State.companion_name(),record.level,record.xp,int(record.level)*60,record.hp,State.companion_max_hp(),record.points])
-  for branch in State.companions[State.hero.companion.current].branches:
-   var id: String=branch.id
-   var trained=record.skills.has(id)
-   UI.button(right,"%s · %s
-%s" % [branch.name,"LEARNED" if trained else "1 bond point",branch.description],func(): State.train_companion(id); show_page("companions")).disabled=trained or record.points<1
+  UI.button(right,"Open companion skill tree · %s bond points" % record.points,func():
+   companion_tree_id=State.hero.companion.current
+   show_page("companion_tree"))
+ if preview_id!="intro_wolf":
+  paragraph(right,"Hero bond: "+State.companions[preview_id].role)
+  UI.button(right,"Inspect "+State.companions[preview_id].name+" skill tree",func():
+   companion_tree_id=preview_id
+   show_page("companion_tree"))
  UI.label(right,"THE SIX BONDS")
  for id in State.companions:
   var selected: String=id
@@ -368,6 +373,56 @@ func build_companions():
    else: pending_companion=selected
    show_page("companions"))
   button.disabled=not owned and (not State.hero.journey.finished or State.hero.companion.owned.size()>=limit)
+func build_companion_tree():
+ var heading=content_panel(Vector2(20,0),Vector2(1240,82))
+ var tabs=HBoxContainer.new()
+ heading.add_child(tabs)
+ var picker=OptionButton.new()
+ for id in State.companions:picker.add_item(State.companions[id].name)
+ picker.select(State.companions.keys().find(companion_tree_id))
+ picker.item_selected.connect(func(index):
+  companion_tree_id=State.companions.keys()[index]
+  companion_skill="predator"
+  show_page("companion_tree"))
+ tabs.add_child(picker)
+ UI.label(tabs,"Companion abilities and bond bonuses").size_flags_horizontal=Control.SIZE_EXPAND_FILL
+ UI.label(heading,"24 bond points per full tree · 2 per companion level · Owned companions train independently")
+ graph=SkillGraph.new()
+ graph.position=Vector2(25,90)
+ graph.size=Vector2(845,470)
+ body.add_child(graph)
+ graph.configure_companion(companion_tree_id)
+ graph.selected_id=companion_skill
+ graph.selected.connect(func(id):companion_skill=id;refresh_companion_skill())
+ info=content_panel(Vector2(895,90),Vector2(365,470))
+ refresh_companion_skill()
+func refresh_companion_skill():
+ for child in info.get_children():
+  info.remove_child(child)
+  child.queue_free()
+ var data:Dictionary=State.companions[companion_tree_id]
+ var record:Dictionary=State.hero.companion.records.get(companion_tree_id,{"skills":[],"points":0})
+ var node:Dictionary={}
+ for candidate in data.nodes:
+  if candidate.id==companion_skill:node=candidate
+ UI.label(info,data.name+" / "+node.name).add_theme_font_size_override("font_size",22)
+ paragraph(info,node.description)
+ paragraph(info,"%s BP required · %s available\nBond: %s" % [int(node.cost),int(record.points),data.role])
+ var ready=true
+ var missing:Array=[]
+ for prerequisite in node.requires:
+  if not record.skills.has(prerequisite):
+   ready=false
+   for candidate in data.nodes:
+    if candidate.id==prerequisite:missing.append(candidate.name)
+ paragraph(info,"LEARNED" if record.skills.has(node.id) else ("Requires: "+", ".join(missing) if not ready else "Prerequisites met"))
+ if not State.hero.companion.owned.has(companion_tree_id):paragraph(info,"Choose this permanent companion before investing bond points.")
+ var button=UI.button(info,"Learn companion skill",func():
+  State.train_companion_for(companion_tree_id,companion_skill)
+  show_page("companion_tree"))
+ button.disabled=not State.hero.companion.owned.has(companion_tree_id) or record.skills.has(node.id) or not ready or record.points<int(node.cost)
+ paragraph(info,"Attack / Support / Defend determines which learned abilities your companion uses automatically. Abilities spend its turn and have cooldowns. Bond points belong to this companion, not the hero.")
+ UI.button(info,"Back to companions",func():show_page("companions"))
 func build_journal():
  var left=content_panel(Vector2(20,0),Vector2(590,565))
  UI.label(left,"THE BELL BENEATH THE WOODS").add_theme_font_size_override("font_size",23)
@@ -419,9 +474,29 @@ func companion_preview(parent: Node, id: String):
  var camera=Camera3D.new()
  root.add_child(camera)
  camera.fov=40
- camera.position=Vector3(2.3,2.0,4.3)
- camera.look_at(Vector3(0,1.15,0))
  camera.current=true
+ fit_companion_camera(camera,preview_actor,viewport)
+ viewport.size_changed.connect(fit_companion_camera.bind(camera,preview_actor,viewport))
+ call_deferred("fit_companion_camera",camera,preview_actor,viewport)
+
+func fit_companion_camera(camera:Camera3D,actor:Node3D,viewport:SubViewport):
+ if not is_instance_valid(camera) or not is_instance_valid(actor) or not is_instance_valid(viewport):return
+ var bounds=GearVisual.bounds(actor)
+ var center=bounds.get_center()
+ var direction=Vector3(2.3,1.3,4.3).normalized()
+ camera.position=center+direction
+ camera.look_at(center)
+ var inverse=camera.basis.inverse()
+ var tangent=tan(deg_to_rad(camera.fov*.5))
+ var aspect=float(viewport.size.x)/maxf(1,float(viewport.size.y))
+ var distance=1.0
+ for x in [0,1]:
+  for y in [0,1]:
+   for z in [0,1]:
+    var corner=bounds.position+Vector3(bounds.size.x*x,bounds.size.y*y,bounds.size.z*z)
+    var point=inverse*(corner-center)
+    distance=maxf(distance,maxf(absf(point.x)/(tangent*aspect),absf(point.y)/tangent)+point.z)
+ camera.position=center+direction*maxf(2.8,distance*1.16)
 
 func constrain_page(root: Node):
  for child in root.get_children():

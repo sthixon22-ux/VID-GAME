@@ -10,6 +10,7 @@ var chemistry: Array=JSON.parse_string(FileAccess.get_file_as_string("res://data
 var companion_data: Dictionary=JSON.parse_string(FileAccess.get_file_as_string("res://data/companions.json"))
 var buffs: Dictionary={}
 var cooldowns: Dictionary={}
+var companion_cooldowns:Dictionary={}
 var poison=0
 var weakened=0
 var nature_blessing=0
@@ -76,6 +77,9 @@ func hit_enemy(actor: String, power: int, label: String) -> bool:
   emit(actor,"Goblin",0,"Dodged")
   return false
  var amount=damage(power,maxi(0,int(enemy.defense)-(5 if weakened>0 else 0)))+(6 if marked>0 else 0)
+ if demo_rules and actor=="Hero" and physical and rng.randf()<GameRules.critical_chance(current_stat("critical")):
+  amount=ceili(amount*1.5)
+  label+=" · Critical!"
  enemy_hp=maxi(0,enemy_hp-amount)
  emit(actor,"Goblin",amount,label)
  return true
@@ -189,6 +193,7 @@ func round_(action: String) -> Array:
   buffs[key].rounds-=1
   if buffs[key].rounds<=0: buffs.erase(key)
  for id in cooldowns: cooldowns[id]=maxi(0,int(cooldowns[id])-1)
+ for id in companion_cooldowns:companion_cooldowns[id]=maxi(0,int(companion_cooldowns[id])-1)
  if nature_blessing>0: nature_blessing-=1
  if marked>0: marked-=1
  if enemy_hp<=0: outcome="Victory"
@@ -294,30 +299,58 @@ func demo_hero_turn(action: String):
   _:
    hit_enemy("Hero",power,action)
 func companion_turn():
- if wolf_hp<=0 or not h.companion.active: return
- var id: String=h.companion.current
- var data: Dictionary=companion_data[id]
- var record: Dictionary=h.companion.records[id]
- var skills=companion_skills()
- var active: Array=h.secondary.duplicate()
- active.append(h.primary)
+ if wolf_hp<=0 or not h.companion.active:return
+ var id:String=h.companion.current
+ var data:Dictionary=companion_data[id]
+ var record:Dictionary=h.companion.records[id]
+ var chosen=""
+ for ability in CompanionRules.learned_abilities(h):
+  var entry:Dictionary=data.abilities[ability]
+  var useful=not (entry.effect in ["heal","renewal"] and h.hp>=stats.max_hp) and not (entry.effect=="mana" and h.mp>=stats.max_mp)
+  if useful and entry.behavior==h.companion.behavior and int(companion_cooldowns.get(ability,0))==0:chosen=ability
+ if not chosen.is_empty():
+  companion_ability(chosen)
+  return
  var synergy=0
- for class_ in active:
-  if data.synergy_classes.has(str(class_).to_lower()): synergy=int(data.synergy_bonus)
+ for class_ in [h.primary]+h.secondary:
+  if data.synergy_classes.has(str(class_).to_lower()):synergy=int(data.synergy_bonus)
  match h.companion.behavior:
   "Support":
-   var healed=mini(int(data.support)+synergy+(6 if skills.has("bond") else 0),int(stats.max_hp)-int(h.hp))
+   var healed=mini(int(data.support)+synergy+CompanionRules.pet_bonus(h,"support"),int(stats.max_hp)-int(h.hp))
    h.hp+=healed
-   if id=="spirit_fox": regeneration=maxi(regeneration,1)
    emit("Wolf","Hero",-healed,data.name+" · support")
   "Defend":
    wolf_guard=true
    emit("Wolf","Hero",0,data.name+" · protection")
   _:
-   var power=int(data.attack)+synergy+int(record.level)*2+int(stats.get("wolf_attack",0))+(4 if skills.has("predator") else 0)
-   var landed=hit_enemy("Wolf",power,data.name+" · "+{"dire_wolf":"Rending bite","griffin":"Wind dive","dragon":"Ember breath","warhorse":"Charge","spirit_fox":"Spirit spark","golem":"Earth fist"}[id])
-   if landed and id=="dire_wolf": bleed=2
-   if landed and id=="golem" and rng.randf()<0.2: enemy_stun=1
+   var power=int(data.attack)+synergy+int(record.level)*2+int(stats.get("wolf_attack",0))+CompanionRules.pet_bonus(h,"attack")
+   hit_enemy("Wolf",power,data.name+" · strike")
+func companion_ability(id:String):
+ var data:Dictionary=companion_data[h.companion.current]
+ var entry:Dictionary=data.abilities[id]
+ var power=int(entry.power)
+ companion_cooldowns[id]=int(entry.cooldown)+1
+ match entry.effect:
+  "heal","renewal":
+   var amount=mini(power+CompanionRules.pet_bonus(h,"support"),int(stats.max_hp)-int(h.hp))
+   h.hp+=amount
+   if entry.effect=="renewal":regeneration=maxi(regeneration,3)
+   emit("Wolf","Hero",-amount,entry.name)
+  "mana":
+   var amount=mini(power,int(stats.max_mp)-int(h.mp))
+   h.mp+=amount
+   emit("Wolf","Hero",0,entry.name+" · MP +%s" % amount)
+  "buff_attack","buff_defense","buff_agility","buff_dexterity","ward":
+   var stat="defense" if entry.effect=="ward" else str(entry.effect).trim_prefix("buff_")
+   buffs[stat]={"amount":power,"rounds":4}
+   if entry.effect=="ward":wolf_guard=true
+   emit("Wolf","Hero",0,entry.name+" · "+stat+" increased")
+  _:
+   var attack=int(data.attack)+int(h.companion.records[h.companion.current].level)*2+power+CompanionRules.pet_bonus(h,"attack")
+   if entry.effect=="pierce":attack+=int(enemy.defense)/2
+   var landed=hit_enemy("Wolf",attack,entry.name)
+   if landed and entry.effect=="bleed":bleed=3
+   if landed and entry.effect=="stun":enemy_stun=1
 func status_summary() -> String:
  var labels: Array=[]
  if marked>0: labels.append("Marked %s" % marked)
