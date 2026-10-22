@@ -227,7 +227,10 @@ func merge_defaults(default, value):
  return value
 func travel_scene() -> String:
  if hero.profile.economy and not hero.profile.created: return "res://scenes/create.tscn"
- return "res://scenes/dungeon.tscn" if hero.journey.region=="dungeon" else "res://scenes/world.tscn"
+ if hero.journey.region=="dungeon": return "res://scenes/dungeon.tscn"
+ if hero.journey.region=="mirefen": return "res://scenes/mirefen.tscn"
+ if hero.journey.region=="reliquary": return "res://scenes/reliquary.tscn"
+ return "res://scenes/world.tscn"
 func restore():
  hero.hp=stats().max_hp
  hero.mp=stats().max_mp
