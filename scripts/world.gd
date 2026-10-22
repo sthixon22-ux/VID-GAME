@@ -38,6 +38,7 @@ func _ready():
  add_child(options)
  forest=Forest.new()
  forest.build(self)
+ Art.sign_(self,Vector3(0,2.6,13),"Road to Reedcross [E]\nAfter the guardian's restoration")
  State.hero.journey.region="forest"
  dialogue=Dialogue.new()
  add_child(dialogue)
@@ -173,7 +174,7 @@ func _process(delta):
  if State.hero.exploration.herbs.size()==3: goal="Bring the Moonleaf to Mira"
  if State.hero.exploration.quest_done: goal="Enter the shrine beyond Sunstream"
  if State.hero.journey.boss: goal="Return to Mira with the living ember"
- if State.hero.journey.finished: goal="Choose your permanent companion [C]" if State.hero.companion.owned.is_empty() else "Adventure complete · Optional village board challenge"
+ if State.hero.journey.finished: goal="Choose your permanent companion [C]" if State.hero.companion.owned.is_empty() else "Travel south to Reedcross [E] · Village board echo available"
  if State.hero.profile.economy and not State.starter_ready(): goal="Buy a weapon: outfitter east of camp"
  var region=Forest.region(hero.position)
  if region!=current_region:
@@ -223,6 +224,7 @@ func start_normal_battle(species:String,id:int):
 func animate_actor(model: Node3D, moving: bool):
  Art.animate(model,time_,moving)
 func context_prompt() -> String:
+ if State.hero.journey.finished and not State.hero.companion.owned.is_empty() and hero.position.distance_to(Vector3(0,0,13))<3: return "[E] Travel to Reedcross and Mirefen Marsh"
  if hero.position.distance_to(Vector3(3.5,0,1))<2.2: return "[E] Willowbrook outfitter · Buy your first equipment"
  if hero.position.distance_to(Vector3(0,0,5))<2.2: return "[E] Village board · Training & postgame challenge"
  if hero.position.distance_to(Vector3(-2.6,0,-0.8))<2.4: return "[E] Talk to Mira · [R] Rest at camp"
@@ -240,6 +242,12 @@ func context_prompt() -> String:
  if hero.position.length()<3: return "[R] Rest and restore HP / MP · Follow the northern trail"
  return ""
 func interact():
+ if State.hero.journey.finished and not State.hero.companion.owned.is_empty() and hero.position.distance_to(Vector3(0,0,13))<3:
+  State.hero.journey.region="mirefen"
+  State.remember_position(Vector3(0,0,4))
+  State.save_game()
+  get_tree().change_scene_to_file("res://scenes/mirefen.tscn")
+  return
  if auto_panel.active or options.active or board.get_parent().get_parent().visible or menu.get_parent().get_parent().visible or dialogue.active: return
  if hero.position.distance_to(Vector3(3.5,0,1))<2.2:
   open_character("shop")

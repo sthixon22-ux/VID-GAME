@@ -1,0 +1,604 @@
+{
+  "schema_version": 1,
+  "status": "planning_not_playable",
+  "story": {
+    "acts": 5,
+    "final_choice_flag": "allegiance",
+    "final_choice_values": [
+      "human_crown",
+      "demon_throne"
+    ],
+    "father_reveal_dungeon": "dungeon_8",
+    "human_final_boss": "aldren",
+    "demon_final_boss": "vaelor"
+  },
+  "regions": [
+    {
+      "id": "willowbrook",
+      "name": "Willowbrook & Sunmeadow",
+      "biome": "temperate_forest",
+      "minimum_level": 1,
+      "maximum_level": 8,
+      "main_dungeon": "dungeon_1",
+      "unlocked_after": null
+    },
+    {
+      "id": "mirefen",
+      "name": "Mirefen Marsh",
+      "biome": "marsh",
+      "minimum_level": 8,
+      "maximum_level": 15,
+      "main_dungeon": "dungeon_2",
+      "unlocked_after": "dungeon_1"
+    },
+    {
+      "id": "sahir",
+      "name": "Sahir Expanse",
+      "biome": "desert",
+      "minimum_level": 15,
+      "maximum_level": 23,
+      "main_dungeon": "dungeon_3",
+      "unlocked_after": "dungeon_2"
+    },
+    {
+      "id": "kharholt",
+      "name": "Kharholt Highlands",
+      "biome": "mountains",
+      "minimum_level": 23,
+      "maximum_level": 31,
+      "main_dungeon": "dungeon_4",
+      "unlocked_after": "dungeon_3"
+    },
+    {
+      "id": "canopy",
+      "name": "Canopy Reach",
+      "biome": "jungle",
+      "minimum_level": 31,
+      "maximum_level": 39,
+      "main_dungeon": "dungeon_5",
+      "unlocked_after": "dungeon_4"
+    },
+    {
+      "id": "nivehold",
+      "name": "Nivehold Tundra",
+      "biome": "tundra",
+      "minimum_level": 39,
+      "maximum_level": 47,
+      "main_dungeon": "dungeon_6",
+      "unlocked_after": "dungeon_5"
+    },
+    {
+      "id": "galecrest",
+      "name": "Galecrest Coast",
+      "biome": "coastal_cliffs",
+      "minimum_level": 47,
+      "maximum_level": 55,
+      "main_dungeon": "dungeon_7",
+      "unlocked_after": "dungeon_6"
+    },
+    {
+      "id": "underdeep",
+      "name": "Underdeep",
+      "biome": "underground",
+      "minimum_level": 55,
+      "maximum_level": 63,
+      "main_dungeon": "dungeon_8",
+      "unlocked_after": "dungeon_7"
+    },
+    {
+      "id": "cinderfall",
+      "name": "Cinderfall",
+      "biome": "volcanic",
+      "minimum_level": 63,
+      "maximum_level": 71,
+      "main_dungeon": "dungeon_9",
+      "unlocked_after": "dungeon_8"
+    },
+    {
+      "id": "mournglen",
+      "name": "Mournglen",
+      "biome": "haunted_highlands",
+      "minimum_level": 71,
+      "maximum_level": 79,
+      "main_dungeon": "dungeon_10",
+      "unlocked_after": "dungeon_9"
+    },
+    {
+      "id": "black_march",
+      "name": "Black March",
+      "biome": "demonic_borderlands",
+      "minimum_level": 79,
+      "maximum_level": 87,
+      "main_dungeon": "dungeon_11",
+      "unlocked_after": "dungeon_10"
+    },
+    {
+      "id": "two_thrones",
+      "name": "The Two Thrones",
+      "biome": "branching_finale",
+      "minimum_level": 87,
+      "maximum_level": 95,
+      "starting_town": "aurel",
+      "main_dungeon": "dungeon_12",
+      "unlocked_after": "dungeon_11"
+    }
+  ],
+  "dungeons": [
+    {
+      "id": "dungeon_1",
+      "name": "The Bell Beneath the Woods",
+      "region_id": "willowbrook",
+      "number": 1,
+      "level_min": 1,
+      "level_max": 8,
+      "central_mechanic": "root_seals",
+      "boss_id": "warden",
+      "playable": true,
+      "existing_scene": "res://scenes/dungeon.tscn",
+      "requires": [],
+      "branch_options": null
+    },
+    {
+      "id": "dungeon_2",
+      "name": "Sunken Reliquary",
+      "region_id": "mirefen",
+      "number": 2,
+      "level_min": 8,
+      "level_max": 15,
+      "central_mechanic": "water_levels",
+      "boss_id": "reliquary_keeper",
+      "playable": false,
+      "existing_scene": null,
+      "requires": [
+        "dungeon_1"
+      ],
+      "branch_options": null
+    },
+    {
+      "id": "dungeon_3",
+      "name": "Emberglass Tomb",
+      "region_id": "sahir",
+      "number": 3,
+      "level_min": 15,
+      "level_max": 23,
+      "central_mechanic": "light_mirrors",
+      "boss_id": "glass_sentinel",
+      "playable": false,
+      "existing_scene": null,
+      "requires": [
+        "dungeon_2"
+      ],
+      "branch_options": null
+    },
+    {
+      "id": "dungeon_4",
+      "name": "Ironroot Bastion",
+      "region_id": "kharholt",
+      "number": 4,
+      "level_min": 23,
+      "level_max": 31,
+      "central_mechanic": "siege_lifts",
+      "boss_id": "ironroot_colossus",
+      "playable": false,
+      "existing_scene": null,
+      "requires": [
+        "dungeon_3"
+      ],
+      "branch_options": null
+    },
+    {
+      "id": "dungeon_5",
+      "name": "Temple of Verdant Fangs",
+      "region_id": "canopy",
+      "number": 5,
+      "level_min": 31,
+      "level_max": 39,
+      "central_mechanic": "living_vines",
+      "boss_id": "fang_keeper",
+      "playable": false,
+      "existing_scene": null,
+      "requires": [
+        "dungeon_4"
+      ],
+      "branch_options": null
+    },
+    {
+      "id": "dungeon_6",
+      "name": "Frostbound Citadel",
+      "region_id": "nivehold",
+      "number": 6,
+      "level_min": 39,
+      "level_max": 47,
+      "central_mechanic": "heat_and_ice",
+      "boss_id": "frost_warden",
+      "playable": false,
+      "existing_scene": null,
+      "requires": [
+        "dungeon_5"
+      ],
+      "branch_options": null
+    },
+    {
+      "id": "dungeon_7",
+      "name": "Stormwatch Spire",
+      "region_id": "galecrest",
+      "number": 7,
+      "level_min": 47,
+      "level_max": 55,
+      "central_mechanic": "wind_bridges",
+      "boss_id": "tempest_sentinel",
+      "playable": false,
+      "existing_scene": null,
+      "requires": [
+        "dungeon_6"
+      ],
+      "branch_options": null
+    },
+    {
+      "id": "dungeon_8",
+      "name": "Hollow Crown Vault",
+      "region_id": "underdeep",
+      "number": 8,
+      "level_min": 55,
+      "level_max": 63,
+      "central_mechanic": "ancestral_seals",
+      "boss_id": "memory_keeper",
+      "playable": false,
+      "existing_scene": null,
+      "requires": [
+        "dungeon_7"
+      ],
+      "branch_options": null
+    },
+    {
+      "id": "dungeon_9",
+      "name": "Ashen Crucible",
+      "region_id": "cinderfall",
+      "number": 9,
+      "level_min": 63,
+      "level_max": 71,
+      "central_mechanic": "magma_cooling",
+      "boss_id": "ashbound_general",
+      "playable": false,
+      "existing_scene": null,
+      "requires": [
+        "dungeon_8"
+      ],
+      "branch_options": null
+    },
+    {
+      "id": "dungeon_10",
+      "name": "Palace of Broken Oaths",
+      "region_id": "mournglen",
+      "number": 10,
+      "level_min": 71,
+      "level_max": 79,
+      "central_mechanic": "historical_echoes",
+      "boss_id": "oathbound_specter",
+      "playable": false,
+      "existing_scene": null,
+      "requires": [
+        "dungeon_9"
+      ],
+      "branch_options": null
+    },
+    {
+      "id": "dungeon_11",
+      "name": "Obsidian Gate",
+      "region_id": "black_march",
+      "number": 11,
+      "level_min": 79,
+      "level_max": 87,
+      "central_mechanic": "gate_wards",
+      "boss_id": "gate_champion",
+      "playable": false,
+      "existing_scene": null,
+      "requires": [
+        "dungeon_10"
+      ],
+      "branch_options": null
+    },
+    {
+      "id": "dungeon_12",
+      "name": "Throne of Two Kings",
+      "region_id": "two_thrones",
+      "number": 12,
+      "level_min": 87,
+      "level_max": 95,
+      "central_mechanic": "allegiance_routes",
+      "boss_id": "vaelor_or_aldren",
+      "playable": false,
+      "existing_scene": null,
+      "requires": [
+        "dungeon_11"
+      ],
+      "branch_options": {
+        "human_crown": {
+          "final_boss_id": "vaelor",
+          "destination": "demon_citadel"
+        },
+        "demon_throne": {
+          "final_boss_id": "aldren",
+          "destination": "aurel_royal_keep"
+        }
+      }
+    }
+  ],
+  "towns": [
+    {
+      "id": "willowbrook",
+      "name": "Willowbrook",
+      "region_id": "willowbrook",
+      "shop_specialties": {
+        "classes": [
+          "Warrior",
+          "Paladin",
+          "Ranger"
+        ],
+        "weapon_families": [
+          "sword",
+          "shield",
+          "bow"
+        ],
+        "armor_categories": [
+          "light_armor",
+          "medium_armor"
+        ]
+      },
+      "notes": "Existing outfitter; preserve purchases and item IDs",
+      "playable": true
+    },
+    {
+      "id": "reedcross",
+      "name": "Reedcross",
+      "region_id": "mirefen",
+      "shop_specialties": {
+        "classes": [
+          "Ranger",
+          "Druid",
+          "Healer"
+        ],
+        "weapon_families": [
+          "spear",
+          "staff"
+        ],
+        "armor_categories": [
+          "light_armor",
+          "marsh_resistance"
+        ]
+      },
+      "notes": "Reed-topped canals, antidotes, river tools",
+      "playable": false
+    },
+    {
+      "id": "qasira",
+      "name": "Qasira Caravanserai",
+      "region_id": "sahir",
+      "shop_specialties": {
+        "classes": [
+          "Ranger",
+          "Rogue",
+          "Assassin"
+        ],
+        "weapon_families": [
+          "bow",
+          "dagger",
+          "spear"
+        ],
+        "armor_categories": [
+          "light_armor",
+          "heat_resistance"
+        ]
+      },
+      "notes": "Dune caravans, shifting market tents",
+      "playable": false
+    },
+    {
+      "id": "kharholt_forge",
+      "name": "Kharholt Forge",
+      "region_id": "kharholt",
+      "shop_specialties": {
+        "classes": [
+          "Warrior",
+          "Barbarian",
+          "Paladin"
+        ],
+        "weapon_families": [
+          "sword",
+          "axe",
+          "warhammer",
+          "shield"
+        ],
+        "armor_categories": [
+          "heavy_armor",
+          "medium_armor"
+        ]
+      },
+      "notes": "Fortress forge and ceremonial weapon smiths",
+      "playable": false
+    },
+    {
+      "id": "leafhaven",
+      "name": "Leafhaven",
+      "region_id": "canopy",
+      "shop_specialties": {
+        "classes": [
+          "Druid",
+          "Healer",
+          "Ranger"
+        ],
+        "weapon_families": [
+          "staff",
+          "sickle",
+          "spear"
+        ],
+        "armor_categories": [
+          "light_armor",
+          "nature_resistance"
+        ]
+      },
+      "notes": "Canopy walkways and living-carved workshops",
+      "playable": false
+    },
+    {
+      "id": "snowmere",
+      "name": "Snowmere",
+      "region_id": "nivehold",
+      "shop_specialties": {
+        "classes": [
+          "Warrior",
+          "Monk",
+          "Healer"
+        ],
+        "weapon_families": [
+          "sword",
+          "staff"
+        ],
+        "armor_categories": [
+          "medium_armor",
+          "cold_resistance"
+        ]
+      },
+      "notes": "Winter survival equipment",
+      "playable": false
+    },
+    {
+      "id": "galecrest_port",
+      "name": "Galecrest Port",
+      "region_id": "galecrest",
+      "shop_specialties": {
+        "classes": [
+          "Ranger",
+          "Monk",
+          "Rogue"
+        ],
+        "weapon_families": [
+          "crossbow",
+          "spear",
+          "claws"
+        ],
+        "armor_categories": [
+          "light_armor",
+          "storm_resistance"
+        ]
+      },
+      "notes": "Sailmakers and storm warders",
+      "playable": false
+    },
+    {
+      "id": "vesper_archive",
+      "name": "Vesper Archive",
+      "region_id": "underdeep",
+      "shop_specialties": {
+        "classes": [
+          "Wizard",
+          "Sorcerer",
+          "Healer"
+        ],
+        "weapon_families": [
+          "wand",
+          "staff",
+          "tome"
+        ],
+        "armor_categories": [
+          "robes",
+          "magic_resistance"
+        ]
+      },
+      "notes": "Ancient research town; magic scrolls",
+      "playable": false
+    },
+    {
+      "id": "cinderfall_camp",
+      "name": "Cinderfall Encampment",
+      "region_id": "cinderfall",
+      "shop_specialties": {
+        "classes": [
+          "Sorcerer",
+          "Necromancer",
+          "Barbarian"
+        ],
+        "weapon_families": [
+          "scythe",
+          "staff",
+          "axe"
+        ],
+        "armor_categories": [
+          "medium_armor",
+          "fire_resistance"
+        ]
+      },
+      "notes": "Volcanic salvage and infernal smithing",
+      "playable": false
+    },
+    {
+      "id": "mournglen_refuge",
+      "name": "Mournglen Refuge",
+      "region_id": "mournglen",
+      "shop_specialties": {
+        "classes": [
+          "Paladin",
+          "Healer",
+          "Necromancer"
+        ],
+        "weapon_families": [
+          "mace",
+          "staff",
+          "shield"
+        ],
+        "armor_categories": [
+          "medium_armor",
+          "curse_resistance"
+        ]
+      },
+      "notes": "Refuge from ancestral hauntings",
+      "playable": false
+    },
+    {
+      "id": "black_march_outpost",
+      "name": "Black March Outpost",
+      "region_id": "black_march",
+      "shop_specialties": {
+        "classes": [
+          "Paladin",
+          "Necromancer",
+          "Assassin"
+        ],
+        "weapon_families": [
+          "scythe",
+          "sword",
+          "dagger"
+        ],
+        "armor_categories": [
+          "heavy_armor",
+          "shadow_resistance"
+        ]
+      },
+      "notes": "Frontier quartermasters and gate artifacts",
+      "playable": false
+    },
+    {
+      "id": "aurel",
+      "name": "Aurel Royal Capital",
+      "region_id": "two_thrones",
+      "shop_specialties": {
+        "classes": [
+          "Warrior",
+          "Paladin",
+          "Wizard"
+        ],
+        "weapon_families": [
+          "sword",
+          "shield",
+          "tome"
+        ],
+        "armor_categories": [
+          "heavy_armor",
+          "magic_resistance"
+        ]
+      },
+      "notes": "Royal armories; final allegiance matters",
+      "playable": false
+    }
+  ]
+}

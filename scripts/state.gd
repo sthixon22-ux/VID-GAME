@@ -29,6 +29,7 @@ func reset():
  hero.items={"ether":1,"treat":1}
  hero.side_quests={"goblin":0,"mossling":0,"started":[],"claimed":[],"crystals":[]}
  hero.puzzles={"dials":[0,0,0],"sequence":[],"solved":[]}
+ hero.campaign={"reliquary_west":false,"reliquary_east":false,"reliquary_cleared":false}
  hero.world_version=8
  hero.progression_version=GameRules.PROGRESSION_VERSION
  hero.progression_archive={}
@@ -227,7 +228,10 @@ func merge_defaults(default, value):
  return value
 func travel_scene() -> String:
  if hero.profile.economy and not hero.profile.created: return "res://scenes/create.tscn"
- return "res://scenes/dungeon.tscn" if hero.journey.region=="dungeon" else "res://scenes/world.tscn"
+ if hero.journey.region=="dungeon": return "res://scenes/dungeon.tscn"
+ if hero.journey.region=="mirefen": return "res://scenes/mirefen.tscn"
+ if hero.journey.region=="reliquary": return "res://scenes/reliquary.tscn"
+ return "res://scenes/world.tscn"
 func restore():
  hero.hp=stats().max_hp
  hero.mp=stats().max_mp
