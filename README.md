@@ -1,20 +1,28 @@
 # Verdant Oath — The Bell Beneath the Woods
 
-**Demo 0.9.0 · Godot 4.6+ · GDScript · Original art and credited CC0 assets**
+**Four-region campaign alpha · Godot 4.6+ · GDScript · Original art and credited CC0 assets**
 
-A short, fully turn-based 3D RPG: create a three-class hero, buy your first weapon in Willowbrook, journey through Whisperwood and Sunmeadow Plains, solve the sanctuary's puzzles and restore its guardian. The main story targets 15–20 minutes; optional errands, mastery and the postgame challenge extend it. This target has not been established by a timed human playtest.
+A fully turn-based 3D RPG with four playable regions: Willowbrook, Mirefen, Sahir and Kharholt. Create a three-class hero, prepare in town, explore branching wilderness paths, recover hidden treasure, solve dungeon mechanisms and confront the guardians behind an altered covenant. The original 15–20 minute opening is now part of a larger alpha; the expanded campaign has not been timed in a human playtest.
 
 ![Updated exploration HUD and Willowbrook](docs/screenshots/0_9_town.png)
 
 [Equipment preview](docs/screenshots/0_9_equipment.png) · [Companion skill tree](docs/screenshots/0_9_companion_tree.png)
 
-## Chapter 2 alpha — Mirefen Marsh
+## Four playable regions and distinct skill effects
+
+Continue your existing adventure. After restoring the Reliquary, report to Iona, then use **E at the Sahir caravan-road sign east of Reedcross’s square**. In Qasira, meet Safiya and investigate the three marked sites. Restoring the Emberglass guardian opens the northeastern Kharholt Pass. Both new towns have enterable shops and paid inns.
+
+Learned techniques now include enemy-family bonuses, elemental attacks, armor breaks, multi-hit strikes, status effects and conditional finishers. **Dragon Slash doubles damage against draconic enemies; Deathmark has a 1% instant-KO chance on landed hits against non-bosses.** Hover battle skills and tree nodes for their effects. Full trees still cost 60 shared points; no level gates were added.
+
+[Route guide, screenshots, validation and limitations](docs/FOUR_REGION_ALPHA.md) · [Skill effects reference](docs/SKILL_EFFECTS.md)
+
+## Chapter 2 — Mirefen Marsh
 
 This branch adds a tested continuation after the opening. Restore the Warden, return to Mira, choose a companion, then press **E at Willowbrook’s southern road exit** to reach Reedcross. Meet King Aldren, investigate with Iona, visit the regional shops, help Sella and Jory, and clear the Sunken Reliquary. Existing saves and all twelve class choices remain supported.
 
 [Chapter guide, validation and limitations](docs/MILESTONE_MIRFEN_ALPHA.md) · [Reedcross](docs/screenshots/mirefen/reedcross.png) · [Reliquary](docs/screenshots/mirefen/reliquary_flooded.png)
 
-This is a playable second-chapter alpha; later campaign regions remain planning records. Dungeon 3 is not playable.
+Chapters 1–4 are now playable. Campaign records for regions 5–12 remain planning content.
 
 ## Equipment, materials and enterable towns
 
@@ -121,12 +129,12 @@ godot --headless --path . --editor --import --quit
 Tests create/replace saves; isolate each run from your personal data:
 
 ```bash
-for suite in run presentation reliability demo progression layout shop_flow adventure8 progression9; do
+for suite in run presentation reliability demo progression layout shop_flow adventure8 progression9 hero_quaternius class_skins companion_art campaign_expansion mirefen_chapter equipment_towns frontier frontier_balance; do
   XDG_DATA_HOME=/tmp/verdant-test-$suite godot --headless --path . res://tests/$suite.tscn
 done
 ```
 
-The suites cover deterministic combat, the actual creation-to-ending/postgame flow, all twelve starts and 1,320 class permutations, equipment/hand rules, healing, side rewards, contact/Auto-Battle choices, partial puzzle saves and layout. Tests accelerate time and teleport; they do not establish human playtime or final visual quality. See [the 0.9 report](docs/DEMO_0_9.md) for final results and limitations.
+The suites cover deterministic combat, the actual creation-to-ending/postgame flow, all twelve starts and 1,320 class permutations, equipment/hand rules, healing, side rewards, contact/Auto-Battle choices, partial puzzle saves and layout. Tests accelerate time and teleport; they do not establish human playtime or final visual quality. See [the four-region report](docs/FOUR_REGION_ALPHA.md) for current results and limitations; [the 0.9 report](docs/DEMO_0_9.md) records the earlier opening milestone.
 
 With a display, capture the new areas, models, previews and puzzles at a separate save location:
 

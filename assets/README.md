@@ -77,3 +77,7 @@ Regional equipment and marsh guardian/stalker variants reuse the existing credit
 ## Equipment/world/town material update
 
 No new third-party pack was downloaded for this pass: the public texture-host requests were blocked. Original world-space terrain/wood/water shader work reuses the existing verified CC0 Quaternius atlas surfaces and original terrain maps. Existing authored village floor, windows and crate pieces are reused inside enterable buildings. Skinned plate derives from the authored torso; robe/coat extensions, arrow/quiver geometry and post-animation weapon arm trajectories are original project additions. The remaining environmental art gap and exact validation are documented in [the update report](../docs/EQUIPMENT_WORLD_TOWNS.md).
+
+## Four-region alpha additions
+
+No new third-party downloads were used. Sahir and Kharholt reuse the existing credited village, equipment, companion and animation assets. `FrontierCreature` supplies encounter variants using the existing dragon, guardian, wolf, griffin, fox and bristleback families, with original ornaments, mirror/orrery effects and furnace details. The new biome ground shader, palm/wreck scenery, mirror beams and guardian decorations are original project code. These are alpha derivatives and set dressing, not newly commissioned bespoke character models. Original upstream license notices and source records remain intact.
