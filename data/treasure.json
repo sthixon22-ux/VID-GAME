@@ -1,0 +1,230 @@
+{
+  "woodland_hollow": {
+    "region": "forest",
+    "position": [
+      -10,
+      0,
+      -31
+    ],
+    "gold": 28,
+    "potions": 1,
+    "ether": 0,
+    "equipment": ""
+  },
+  "plains_ruins": {
+    "region": "forest",
+    "position": [
+      51,
+      0,
+      -48
+    ],
+    "gold": 35,
+    "potions": 0,
+    "ether": 1,
+    "equipment": "Pilgrim Ring"
+  },
+  "sanctuary_west": {
+    "region": "dungeon",
+    "position": [
+      -18,
+      0,
+      -10
+    ],
+    "gold": 35,
+    "potions": 2,
+    "ether": 0,
+    "equipment": ""
+  },
+  "sanctuary_library": {
+    "region": "dungeon",
+    "position": [
+      18,
+      0,
+      -18
+    ],
+    "gold": 45,
+    "potions": 0,
+    "ether": 1,
+    "equipment": "Pilgrim Ring"
+  },
+  "reedcross_bank": {
+    "region": "mirefen",
+    "position": [
+      -4,
+      0,
+      -27
+    ],
+    "gold": 55,
+    "potions": 1,
+    "ether": 1,
+    "equipment": ""
+  },
+  "reliquary_crypt": {
+    "region": "reliquary",
+    "position": [
+      -21,
+      0,
+      -15
+    ],
+    "gold": 80,
+    "potions": 1,
+    "ether": 1,
+    "equipment": ""
+  },
+  "reliquary_archive": {
+    "region": "reliquary",
+    "position": [
+      21,
+      0,
+      -31
+    ],
+    "gold": 85,
+    "potions": 0,
+    "ether": 1,
+    "equipment": "Fenwarden Pendant"
+  },
+  "sahir_wild_0": {
+    "region": "sahir",
+    "position": [
+      -32,
+      0,
+      -20
+    ],
+    "gold": 80,
+    "potions": 2,
+    "ether": 1,
+    "equipment": ""
+  },
+  "sahir_wild_1": {
+    "region": "sahir",
+    "position": [
+      30,
+      0,
+      -34
+    ],
+    "gold": 80,
+    "potions": 2,
+    "ether": 1,
+    "equipment": "Prismheart Pendant"
+  },
+  "sahir_wild_2": {
+    "region": "sahir",
+    "position": [
+      32,
+      0,
+      10
+    ],
+    "gold": 80,
+    "potions": 2,
+    "ether": 1,
+    "equipment": ""
+  },
+  "emberglass_vault_0": {
+    "region": "emberglass",
+    "position": [
+      -18,
+      0,
+      0
+    ],
+    "gold": 100,
+    "potions": 2,
+    "ether": 1,
+    "equipment": ""
+  },
+  "emberglass_vault_1": {
+    "region": "emberglass",
+    "position": [
+      18,
+      0,
+      -18
+    ],
+    "gold": 100,
+    "potions": 2,
+    "ether": 1,
+    "equipment": ""
+  },
+  "emberglass_vault_2": {
+    "region": "emberglass",
+    "position": [
+      -18,
+      0,
+      -36
+    ],
+    "gold": 100,
+    "potions": 2,
+    "ether": 1,
+    "equipment": "Drakebane"
+  },
+  "kharholt_wild_0": {
+    "region": "kharholt",
+    "position": [
+      -32,
+      0,
+      -20
+    ],
+    "gold": 150,
+    "potions": 2,
+    "ether": 1,
+    "equipment": ""
+  },
+  "kharholt_wild_1": {
+    "region": "kharholt",
+    "position": [
+      30,
+      0,
+      -34
+    ],
+    "gold": 150,
+    "potions": 2,
+    "ether": 1,
+    "equipment": ""
+  },
+  "kharholt_wild_2": {
+    "region": "kharholt",
+    "position": [
+      32,
+      0,
+      10
+    ],
+    "gold": 150,
+    "potions": 2,
+    "ether": 1,
+    "equipment": ""
+  },
+  "ironroot_vault_0": {
+    "region": "ironroot",
+    "position": [
+      -18,
+      0,
+      0
+    ],
+    "gold": 180,
+    "potions": 2,
+    "ether": 1,
+    "equipment": ""
+  },
+  "ironroot_vault_1": {
+    "region": "ironroot",
+    "position": [
+      18,
+      0,
+      -18
+    ],
+    "gold": 180,
+    "potions": 2,
+    "ether": 1,
+    "equipment": ""
+  },
+  "ironroot_vault_2": {
+    "region": "ironroot",
+    "position": [
+      -18,
+      0,
+      -36
+    ],
+    "gold": 180,
+    "potions": 2,
+    "ether": 1,
+    "equipment": "Stormpiercer"
+  }
+}

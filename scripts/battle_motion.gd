@@ -86,9 +86,9 @@ static func roots(host: Node3D, point: Vector3, count: int=9):
   tween.tween_property(thorn,"scale",Vector3.ONE*0.01,0.3)
   tween.tween_callback(thorn.queue_free)
 static func present(host: Node3D, actor: Node3D, target: Node3D, label: String) -> float:
- label=label.trim_suffix(" · Critical!")
+ label=label.trim_suffix(" · Critical!").trim_suffix(" · Effective!").trim_suffix(" · Resisted")
  var duration=0.95
- if actor.has_method("play_action") and (actor is CompanionActor or actor is MarshCreature or STYLES.has(label) or not AbilityBook.entry(label).is_empty() or label in ["Victory","Defeat"]): duration=actor.play_action(label)
+ if actor.has_method("play_action") and (actor is CompanionActor or actor is MarshCreature or actor is FrontierCreature or STYLES.has(label) or not AbilityBook.entry(label).is_empty() or label in ["Victory","Defeat"]): duration=actor.play_action(label)
  elif not STYLES.has(label): duration=0.4
  var origin=actor.position
  var forward=(target.position-origin).normalized() if actor!=target else Vector3.ZERO
@@ -200,6 +200,7 @@ static func present(host: Node3D, actor: Node3D, target: Node3D, label: String) 
     var color_=Color("a7e2ac") if healing else (Color("a3b5ee") if effect in ["magic","drain","frost"] else Color("e4bc89"))
     if effect=="drain": color_=Color("b69cce")
     if effect=="frost": color_=Color("a3ddeb")
+    if ability.has("damage_type"):color_=Color(SkillEffects.COLORS.get(ability.damage_type,"e4bc89"))
     if COMPANION_COLORS.has(label):color_=Color(COMPANION_COLORS[label])
     ring(host,point+Vector3.UP*0.1,color_,1.1)
     for i in range(10): mote(host,point+Vector3(sin(i)*0.6,0.3,cos(i)*0.6) if healing else actor.position+Vector3.UP,point+Vector3(sin(i)*0.25,1.5,cos(i)*0.25),color_,0.5,0.12)

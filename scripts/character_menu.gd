@@ -438,13 +438,16 @@ func build_journal():
   [not State.hero.companion.owned.is_empty(),"Choose your first permanent companion"]]
  for step in steps: paragraph(left,("✓ " if step[0] else "○ ")+step[1])
  paragraph(left,"Optional: unlock species mastery, train your companion, improve equipment, and challenge the postgame Warden echo from the village board.")
+ if State.hero.journey.finished:
+  paragraph(left,"MIREFEN: "+MirefenRules.goal(State.hero))
+  for region in ["sahir","kharholt"]:paragraph(left,region.to_upper()+": "+ExpeditionRules.goal(State.hero,region))
  for id in QuestBook.data:
   var quest:Dictionary=QuestBook.data[id]
   paragraph(left,"%s · %s/%s%s\n%s" % [quest.name,QuestBook.progress(State.hero,id),quest.goal," · CLAIMED" if State.hero.side_quests.claimed.has(id) else (" · ACTIVE" if State.hero.side_quests.started.has(id) else " · speak to "+quest.giver),quest.description])
  UI.label(left,"Recorded exploration time: %s minutes" % (int(State.hero.demo.elapsed)/60))
  var right=content_panel(Vector2(630,0),Vector2(630,565))
  UI.label(right,"FIELD GUIDE & INVENTORY").add_theme_font_size_override("font_size",24)
- for species in ["goblin","bristleback","mossling","mire_leech","bog_wisp","reed_stalker","drowned_sentinel"]:
+ for species in ["goblin","bristleback","mossling","mire_leech","bog_wisp","reed_stalker","drowned_sentinel","sand_drake","dune_scarab","glass_wisp","crag_hound","forge_sentinel","storm_roc"]:
   var wins=int(State.hero.monsters.get(species,0))
   if species=="goblin": wins=maxi(wins,int(State.hero.mastery))
   paragraph(right,"%s · %s / 10 normal victories

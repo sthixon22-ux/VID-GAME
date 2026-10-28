@@ -33,7 +33,10 @@
     "effect": "damage",
     "power": 13,
     "class_id": "paladin",
-    "description": "A radiant single-target sword-and-spirit strike."
+    "description": "Holy damage; base power +13. Deals 1.5x damage to undead enemies.",
+    "damage_type": "holy",
+    "slayer": "undead",
+    "slayer_multiplier": 1.5
   },
   "hunters_mark": {
     "name": "Hunter's Mark",
@@ -53,7 +56,8 @@
     "power": 0,
     "class_id": "druid",
     "chance": 0.75,
-    "description": "Nature damage. 75% chance to root for one enemy turn."
+    "description": "Nature damage; base power +0.",
+    "damage_type": "nature"
   },
   "regrowth": {
     "name": "Regrowth",
@@ -71,8 +75,11 @@
     "mp": 25,
     "effect": "damage",
     "power": 55,
-    "description": "Paladin mythic. Learn its level-50 capstone and make Paladin primary.",
-    "class_id": "paladin"
+    "description": "Holy damage; base power +55. Defense +12 for 3 rounds. Primary-class mythic only; secondary unlocks stay saved.",
+    "class_id": "paladin",
+    "damage_type": "holy",
+    "ward": 12,
+    "duration": 3
   },
   "wild_hunt": {
     "name": "Wild Hunt",
@@ -80,8 +87,12 @@
     "mp": 25,
     "effect": "damage",
     "power": 55,
-    "description": "Ranger mythic. Learn its level-50 capstone and make Ranger primary.",
-    "class_id": "ranger"
+    "description": "Wind damage; base power +55. Deals 1.8x damage to beast enemies. Cannot be dodged. Primary-class mythic only; secondary unlocks stay saved.",
+    "class_id": "ranger",
+    "damage_type": "wind",
+    "slayer": "beast",
+    "slayer_multiplier": 1.8,
+    "sure_hit": true
   },
   "ancient_grove": {
     "name": "Ancient Grove",
@@ -89,8 +100,9 @@
     "mp": 25,
     "effect": "heal",
     "power": 160,
-    "description": "Druid mythic. Learn its level-50 capstone and make Druid primary.",
-    "class_id": "druid"
+    "description": "Restore 160 HP + healing bonus. Primary-class mythic only; learned with skill points, no level gate. Also restore 100 companion HP (does not revive).",
+    "class_id": "druid",
+    "pet_heal": 100
   },
   "items": {
     "name": "Items",
@@ -179,8 +191,9 @@
     "mp": 6,
     "effect": "magic",
     "power": 17,
-    "description": "Fire damage, scaling with maximum MP and level.",
-    "element": "fire"
+    "description": "Fire damage; base power +17.",
+    "element": "fire",
+    "damage_type": "fire"
   },
   "frostbind": {
     "name": "Frostbind",
@@ -188,8 +201,9 @@
     "mp": 7,
     "effect": "frost",
     "power": 9,
-    "description": "Cold damage; 50% chance to deny one enemy turn.",
-    "chance": 0.5
+    "description": "Ice damage; base power +9.",
+    "chance": 0.5,
+    "damage_type": "ice"
   },
   "healing_light": {
     "name": "Healing Light",
@@ -273,7 +287,7 @@
     "mp": 4,
     "effect": "pierce",
     "power": 10,
-    "description": "A palm technique that ignores half the enemy\u2019s defense.",
+    "description": "A palm technique that ignores half the enemy’s defense.",
     "weapon_types": [
       "unarmed",
       "claws",
@@ -295,7 +309,8 @@
     "mp": 8,
     "effect": "drain",
     "power": 12,
-    "description": "Shadow damage; restore half the damage dealt as HP."
+    "description": "Shadow damage; base power +12.",
+    "damage_type": "shadow"
   },
   "wither": {
     "name": "Wither",
@@ -312,38 +327,46 @@
     "mp": 25,
     "effect": "damage",
     "power": 55,
-    "description": "Warrior mythic. Learn its level-50 capstone and make Warrior primary.",
-    "class_id": "warrior"
+    "description": "Physical damage; base power +55. 4 strikes at 44% power each; defense applies per strike. Primary-class mythic only; secondary unlocks stay saved.",
+    "class_id": "warrior",
+    "hits": 4,
+    "hit_scale": 0.44
   },
   "warrior_adept": {
     "name": "Cleave",
     "kind": "technique",
     "mp": 9,
-    "effect": "damage",
+    "effect": "special",
     "power": 24,
-    "description": "An advanced class ability learned from the class tree. Requires a matching proficient weapon.",
+    "description": "Physical damage; base power +24. Enemy defense -4 for 3 rounds.",
     "weapon_types": [
       "sword",
       "greatsword",
       "spear",
       "axe",
       "mace"
-    ]
+    ],
+    "sunder": 4,
+    "duration": 3
   },
   "warrior_master": {
     "name": "Veteran Assault",
     "kind": "technique",
     "mp": 14,
-    "effect": "damage",
+    "effect": "special",
     "power": 36,
-    "description": "A master class ability learned from the class tree. Requires a matching proficient weapon.",
+    "description": "Physical damage; base power +36. 2 strikes at 62% power each; defense applies per strike. Bonus damage +16 against armor-broken or weakened targets.",
     "weapon_types": [
       "sword",
       "greatsword",
       "spear",
       "axe",
       "mace"
-    ]
+    ],
+    "hits": 2,
+    "hit_scale": 0.62,
+    "conditional": "weakened",
+    "conditional_bonus": 16
   },
   "worldbreaker": {
     "name": "Worldbreaker",
@@ -351,34 +374,41 @@
     "mp": 25,
     "effect": "damage",
     "power": 65,
-    "description": "Barbarian mythic. Learn its level-50 capstone and make Barbarian primary.",
-    "class_id": "barbarian"
+    "description": "Physical damage; base power +65. Enemy defense -10 for 3 rounds. Ignores 100% defense. Primary-class mythic only; secondary unlocks stay saved.",
+    "class_id": "barbarian",
+    "ignore_defense": 1.0,
+    "sunder": 10,
+    "duration": 3
   },
   "barbarian_adept": {
     "name": "Sundering Roar",
     "kind": "technique",
     "mp": 9,
-    "effect": "damage",
+    "effect": "special",
     "power": 24,
-    "description": "An advanced class ability learned from the class tree. Requires a matching proficient weapon.",
+    "description": "Physical damage; base power +24. Enemy defense -7 for 3 rounds.",
     "weapon_types": [
       "axe",
       "greatsword",
       "hammer"
-    ]
+    ],
+    "sunder": 7,
+    "duration": 3
   },
   "barbarian_master": {
     "name": "Titan Swing",
     "kind": "technique",
     "mp": 14,
-    "effect": "damage",
+    "effect": "special",
     "power": 36,
-    "description": "A master class ability learned from the class tree. Requires a matching proficient weapon.",
+    "description": "Physical damage; base power +36. Ignores 50% defense. Costs 8 HP (cannot self-KO).",
     "weapon_types": [
       "axe",
       "greatsword",
       "hammer"
-    ]
+    ],
+    "ignore_defense": 0.5,
+    "self_damage": 8
   },
   "paladin_adept": {
     "name": "Holy Light",
@@ -386,15 +416,20 @@
     "mp": 7,
     "effect": "heal",
     "power": 32,
-    "description": "A learned Paladin spell: restore HP with sacred light."
+    "description": "Restore 32 HP + healing bonus. Against undead, also deal 18 holy power damage. No weapon required.",
+    "smite_undead": 18,
+    "damage_type": "holy"
   },
   "paladin_master": {
     "name": "Judgment",
     "kind": "spell",
     "mp": 14,
-    "effect": "damage",
+    "effect": "special",
     "power": 36,
-    "description": "A master class ability learned from the class tree."
+    "description": "Holy damage; base power +36. Deals 1.8x damage to undead enemies.",
+    "damage_type": "holy",
+    "slayer": "undead",
+    "slayer_multiplier": 1.8
   },
   "arcane_cataclysm": {
     "name": "Arcane Cataclysm",
@@ -402,24 +437,32 @@
     "mp": 25,
     "effect": "magic",
     "power": 60,
-    "description": "Wizard mythic. Learn its level-50 capstone and make Wizard primary.",
-    "class_id": "wizard"
+    "description": "Arcane damage; base power +60. 3 strikes at 55% power each; defense applies per strike. Primary-class mythic only; secondary unlocks stay saved.",
+    "class_id": "wizard",
+    "damage_type": "arcane",
+    "hits": 3,
+    "hit_scale": 0.55
   },
   "wizard_adept": {
     "name": "Arcane Barrage",
     "kind": "spell",
     "mp": 9,
-    "effect": "magic",
+    "effect": "special",
     "power": 24,
-    "description": "An advanced class ability learned from the class tree."
+    "description": "Arcane damage; base power +24. 3 strikes at 48% power each; defense applies per strike.",
+    "hits": 3,
+    "hit_scale": 0.48,
+    "damage_type": "arcane"
   },
   "wizard_master": {
     "name": "Astral Rupture",
     "kind": "spell",
     "mp": 14,
-    "effect": "magic",
+    "effect": "special",
     "power": 36,
-    "description": "A master class ability learned from the class tree."
+    "description": "Arcane damage; base power +36. Ignores 100% defense.",
+    "damage_type": "arcane",
+    "ignore_defense": 1.0
   },
   "elemental_tempest": {
     "name": "Elemental Tempest",
@@ -427,24 +470,32 @@
     "mp": 25,
     "effect": "magic",
     "power": 65,
-    "description": "Sorcerer mythic. Learn its level-50 capstone and make Sorcerer primary.",
-    "class_id": "sorcerer"
+    "description": "Lightning damage; base power +65. Burn: 12 fire damage for 3 rounds. Primary-class mythic only; secondary unlocks stay saved.",
+    "class_id": "sorcerer",
+    "damage_type": "lightning",
+    "burn": 12,
+    "duration": 3
   },
   "sorcerer_adept": {
     "name": "Lightning Lance",
     "kind": "spell",
     "mp": 9,
-    "effect": "magic",
+    "effect": "special",
     "power": 24,
-    "description": "An advanced class ability learned from the class tree."
+    "description": "Lightning damage; base power +24. 35% chance to stun for one turn (bosses resist half).",
+    "damage_type": "lightning",
+    "stun_chance": 0.35
   },
   "sorcerer_master": {
     "name": "Inferno",
     "kind": "spell",
     "mp": 14,
-    "effect": "magic",
+    "effect": "special",
     "power": 36,
-    "description": "A master class ability learned from the class tree."
+    "description": "Fire damage; base power +36. Burn: 10 fire damage for 3 rounds.",
+    "damage_type": "fire",
+    "burn": 10,
+    "duration": 3
   },
   "miracle": {
     "name": "Miracle",
@@ -452,8 +503,9 @@
     "mp": 25,
     "effect": "heal",
     "power": 180,
-    "description": "Healer mythic. Learn its level-50 capstone and make Healer primary.",
-    "class_id": "healer"
+    "description": "Restore 180 HP + healing bonus. Primary-class mythic only; learned with skill points, no level gate. Revive the active companion with 55 HP, or restore 55 companion HP.",
+    "class_id": "healer",
+    "pet_revive": true
   },
   "healer_adept": {
     "name": "Greater Mending",
@@ -461,7 +513,9 @@
     "mp": 9,
     "effect": "heal",
     "power": 65,
-    "description": "An advanced class ability learned from the class tree."
+    "description": "Restore 65 HP + healing bonus. Defense +6 for 2 rounds.",
+    "ward": 6,
+    "duration": 2
   },
   "healer_master": {
     "name": "Sanctuary",
@@ -469,29 +523,37 @@
     "mp": 14,
     "effect": "heal",
     "power": 100,
-    "description": "A master class ability learned from the class tree."
+    "description": "Restore 100 HP + healing bonus. Defense +12 for 3 rounds. Also restore 40 companion HP (does not revive).",
+    "ward": 12,
+    "duration": 3,
+    "pet_heal": 40
   },
   "ranger_adept": {
     "name": "Seeking Arrow",
     "kind": "technique",
     "mp": 9,
-    "effect": "damage",
+    "effect": "special",
     "power": 24,
-    "description": "An advanced class ability learned from the class tree. Requires a matching proficient weapon.",
+    "description": "Physical damage; base power +24. Cannot be dodged.",
     "weapon_types": [
       "bow"
-    ]
+    ],
+    "sure_hit": true,
+    "damage_type": "physical"
   },
   "ranger_master": {
     "name": "Hawkstrike",
     "kind": "technique",
     "mp": 14,
-    "effect": "damage",
+    "effect": "special",
     "power": 36,
-    "description": "A master class ability learned from the class tree. Requires a matching proficient weapon.",
+    "description": "Wind damage; base power +36. Deals 1.75x damage to flying enemies.",
     "weapon_types": [
       "bow"
-    ]
+    ],
+    "slayer": "flying",
+    "slayer_multiplier": 1.75,
+    "damage_type": "wind"
   },
   "phantom_dance": {
     "name": "Phantom Dance",
@@ -499,34 +561,44 @@
     "mp": 25,
     "effect": "damage",
     "power": 58,
-    "description": "Rogue mythic. Learn its level-50 capstone and make Rogue primary.",
-    "class_id": "rogue"
+    "description": "Physical damage; base power +58. 3 strikes at 55% power each; defense applies per strike. Dexterity +20 for 3 rounds. Primary-class mythic only; secondary unlocks stay saved.",
+    "class_id": "rogue",
+    "hits": 3,
+    "hit_scale": 0.55,
+    "evasion": 20,
+    "duration": 3
   },
   "rogue_adept": {
     "name": "Opportunist Strike",
     "kind": "technique",
     "mp": 9,
-    "effect": "damage",
+    "effect": "special",
     "power": 24,
-    "description": "An advanced class ability learned from the class tree. Requires a matching proficient weapon.",
+    "description": "Physical damage; base power +24. Bonus damage +22 against marked, poisoned, bleeding or burning targets.",
     "weapon_types": [
       "dagger",
       "sword",
       "bow"
-    ]
+    ],
+    "conditional": "afflicted",
+    "conditional_bonus": 22
   },
   "rogue_master": {
     "name": "Dancing Blades",
     "kind": "technique",
     "mp": 14,
-    "effect": "damage",
+    "effect": "special",
     "power": 36,
-    "description": "A master class ability learned from the class tree. Requires a matching proficient weapon.",
+    "description": "Physical damage; base power +36. 3 strikes at 48% power each; defense applies per strike. Dexterity +8 for 2 rounds.",
     "weapon_types": [
       "dagger",
       "sword",
       "bow"
-    ]
+    ],
+    "hits": 3,
+    "hit_scale": 0.48,
+    "evasion": 8,
+    "duration": 2
   },
   "nightfall": {
     "name": "Nightfall",
@@ -534,32 +606,39 @@
     "mp": 25,
     "effect": "execute",
     "power": 65,
-    "description": "Assassin mythic. Learn its level-50 capstone and make Assassin primary.",
-    "class_id": "assassin"
+    "description": "Shadow damage; base power +65. Bonus damage +35 against marked, poisoned, bleeding or burning targets. Primary-class mythic only; secondary unlocks stay saved.",
+    "class_id": "assassin",
+    "damage_type": "shadow",
+    "conditional": "afflicted",
+    "conditional_bonus": 35
   },
   "assassin_adept": {
     "name": "Deathmark",
     "kind": "technique",
     "mp": 9,
-    "effect": "damage",
+    "effect": "special",
     "power": 24,
-    "description": "An advanced class ability learned from the class tree. Requires a matching proficient weapon.",
+    "description": "Physical damage; base power +24. 1% instant KO on a landed hit. Bosses are immune; otherwise deals normal damage.",
     "weapon_types": [
       "dagger",
       "sword"
-    ]
+    ],
+    "execute_chance": 0.01
   },
   "assassin_master": {
     "name": "Eclipse Cut",
     "kind": "technique",
     "mp": 14,
-    "effect": "damage",
+    "effect": "special",
     "power": 36,
-    "description": "A master class ability learned from the class tree. Requires a matching proficient weapon.",
+    "description": "Physical damage; base power +36. Ignores 25% defense. Bonus damage +30 when enemy HP is below 35%.",
     "weapon_types": [
       "dagger",
       "sword"
-    ]
+    ],
+    "conditional": "low_hp",
+    "conditional_bonus": 30,
+    "ignore_defense": 0.25
   },
   "enlightenment": {
     "name": "Enlightenment",
@@ -567,50 +646,60 @@
     "mp": 25,
     "effect": "pierce",
     "power": 55,
-    "description": "Monk mythic. Learn its level-50 capstone and make Monk primary.",
-    "class_id": "monk"
+    "description": "Physical damage; base power +55. Ignores 100% defense. Defense +10 for 3 rounds. Primary-class mythic only; secondary unlocks stay saved.",
+    "class_id": "monk",
+    "ignore_defense": 1.0,
+    "ward": 10,
+    "duration": 3
   },
   "monk_adept": {
     "name": "Rising Palm",
     "kind": "technique",
     "mp": 9,
-    "effect": "damage",
+    "effect": "special",
     "power": 24,
-    "description": "An advanced class ability learned from the class tree. Requires a matching proficient weapon.",
+    "description": "Physical damage; base power +24. 65% chance to stun for one turn (bosses resist half).",
     "weapon_types": [
       "unarmed",
       "claws",
       "staff"
-    ]
+    ],
+    "stun_chance": 0.65
   },
   "monk_master": {
     "name": "Hundred Fists",
     "kind": "technique",
     "mp": 14,
-    "effect": "damage",
+    "effect": "special",
     "power": 36,
-    "description": "A master class ability learned from the class tree. Requires a matching proficient weapon.",
+    "description": "Physical damage; base power +36. 5 strikes at 32% power each; defense applies per strike.",
     "weapon_types": [
       "unarmed",
       "claws",
       "staff"
-    ]
+    ],
+    "hits": 5,
+    "hit_scale": 0.32
   },
   "druid_adept": {
     "name": "Briarstorm",
     "kind": "spell",
     "mp": 9,
-    "effect": "magic",
+    "effect": "special",
     "power": 24,
-    "description": "An advanced class ability learned from the class tree."
+    "description": "Nature damage; base power +24. 50% chance to root for one turn (bosses resist half).",
+    "damage_type": "nature",
+    "root_chance": 0.5
   },
   "druid_master": {
     "name": "Grove Renewal",
     "kind": "spell",
     "mp": 14,
-    "effect": "heal",
-    "power": 100,
-    "description": "A master class ability learned from the class tree."
+    "effect": "regrowth",
+    "power": 60,
+    "description": "Restore 60 HP + healing bonus and renew 12 HP for 4 rounds. Defense +5 for 4 rounds.",
+    "duration": 4,
+    "ward": 5
   },
   "requiem": {
     "name": "Requiem",
@@ -618,145 +707,171 @@
     "mp": 25,
     "effect": "drain",
     "power": 60,
-    "description": "Necromancer mythic. Learn its level-50 capstone and make Necromancer primary.",
-    "class_id": "necromancer"
+    "description": "Shadow damage; base power +60. Restore 100% of damage dealt as HP. Primary-class mythic only; secondary unlocks stay saved.",
+    "class_id": "necromancer",
+    "damage_type": "shadow",
+    "life_steal": 1.0
   },
   "necromancer_adept": {
     "name": "Soul Rend",
     "kind": "spell",
     "mp": 9,
-    "effect": "magic",
+    "effect": "special",
     "power": 24,
-    "description": "An advanced class ability learned from the class tree."
+    "description": "Shadow damage; base power +24. Recover 5 MP on a hit.",
+    "damage_type": "shadow",
+    "mp_drain": 5
   },
   "necromancer_master": {
     "name": "Grave Harvest",
     "kind": "spell",
     "mp": 14,
-    "effect": "drain",
+    "effect": "special",
     "power": 36,
-    "description": "A master class ability learned from the class tree."
+    "description": "Shadow damage; base power +36. Restore 75% of damage dealt as HP. Bonus damage +20 when enemy HP is below 35%.",
+    "damage_type": "shadow",
+    "life_steal": 0.75,
+    "conditional": "low_hp",
+    "conditional_bonus": 20
   },
   "axe_technique": {
     "name": "Rending Chop",
     "kind": "weapon",
     "mp": 3,
-    "effect": "damage",
+    "effect": "special",
     "power": 7,
-    "description": "A axe technique. Requires axe proficiency and the matching weapon.",
+    "description": "Physical damage; base power +7. Enemy defense -3 for 2 rounds.",
     "weapon_types": [
       "axe"
-    ]
+    ],
+    "sunder": 3,
+    "duration": 2
   },
   "greatsword_technique": {
     "name": "Sweeping Cleave",
     "kind": "weapon",
     "mp": 3,
-    "effect": "damage",
+    "effect": "special",
     "power": 7,
-    "description": "A greatsword technique. Requires greatsword proficiency and the matching weapon.",
+    "description": "Physical damage; base power +7. Bonus damage +10 when enemy HP is above 70%.",
     "weapon_types": [
       "greatsword"
-    ]
+    ],
+    "conditional": "healthy",
+    "conditional_bonus": 10
   },
   "hammer_technique": {
     "name": "Crushing Blow",
     "kind": "weapon",
     "mp": 3,
-    "effect": "damage",
+    "effect": "special",
     "power": 7,
-    "description": "A hammer technique. Requires hammer proficiency and the matching weapon.",
+    "description": "Physical damage; base power +7. 25% chance to stun for one turn (bosses resist half).",
     "weapon_types": [
       "hammer"
-    ]
+    ],
+    "stun_chance": 0.25
   },
   "spear_technique": {
     "name": "Piercing Thrust",
     "kind": "weapon",
     "mp": 3,
-    "effect": "damage",
+    "effect": "special",
     "power": 7,
-    "description": "A spear technique. Requires spear proficiency and the matching weapon.",
+    "description": "Physical damage; base power +7. Ignores 50% defense.",
     "weapon_types": [
       "spear"
-    ]
+    ],
+    "ignore_defense": 0.5
   },
   "bow_technique": {
     "name": "Aimed Shot",
     "kind": "weapon",
     "mp": 3,
-    "effect": "damage",
+    "effect": "special",
     "power": 7,
-    "description": "A bow technique. Requires bow proficiency and the matching weapon.",
+    "description": "Physical damage; base power +7. Cannot be dodged.",
     "weapon_types": [
       "bow"
-    ]
+    ],
+    "sure_hit": true
   },
   "dagger_technique": {
     "name": "Twin Fang",
     "kind": "weapon",
     "mp": 3,
-    "effect": "damage",
+    "effect": "special",
     "power": 7,
-    "description": "A dagger technique. Requires dagger proficiency and the matching weapon.",
+    "description": "Physical damage; base power +7. 2 strikes at 65% power each; defense applies per strike.",
     "weapon_types": [
       "dagger"
-    ]
+    ],
+    "hits": 2,
+    "hit_scale": 0.65
   },
   "staff_technique": {
     "name": "Runic Sweep",
     "kind": "weapon",
     "mp": 3,
-    "effect": "damage",
+    "effect": "special",
     "power": 7,
-    "description": "A staff technique. Requires staff proficiency and the matching weapon.",
+    "description": "Arcane damage; base power +7. Recover 2 MP on a hit.",
     "weapon_types": [
       "staff"
-    ]
+    ],
+    "damage_type": "arcane",
+    "mp_drain": 2
   },
   "wand_technique": {
     "name": "Focused Spark",
     "kind": "weapon",
     "mp": 3,
-    "effect": "damage",
+    "effect": "special",
     "power": 7,
-    "description": "A wand technique. Requires wand proficiency and the matching weapon.",
+    "description": "Arcane damage; base power +7. Ignores 50% defense.",
     "weapon_types": [
       "wand"
-    ]
+    ],
+    "damage_type": "arcane",
+    "ignore_defense": 0.5
   },
   "scythe_technique": {
     "name": "Reaping Arc",
     "kind": "weapon",
     "mp": 3,
-    "effect": "damage",
+    "effect": "special",
     "power": 7,
-    "description": "A scythe technique. Requires scythe proficiency and the matching weapon.",
+    "description": "Physical damage; base power +7. Restore 25% of damage dealt as HP.",
     "weapon_types": [
       "scythe"
-    ]
+    ],
+    "life_steal": 0.25
   },
   "claws_technique": {
     "name": "Raking Flurry",
     "kind": "weapon",
     "mp": 3,
-    "effect": "damage",
+    "effect": "special",
     "power": 7,
-    "description": "A claws technique. Requires claws proficiency and the matching weapon.",
+    "description": "Physical damage; base power +7. Bleed: 4 damage for 2 rounds.",
     "weapon_types": [
       "claws"
-    ]
+    ],
+    "wound": 4,
+    "duration": 2
   },
   "unarmed_technique": {
     "name": "Jab Combination",
     "kind": "weapon",
     "mp": 3,
-    "effect": "damage",
+    "effect": "special",
     "power": 7,
-    "description": "A unarmed technique. Requires unarmed proficiency and the matching weapon.",
+    "description": "Physical damage; base power +7. 3 strikes at 45% power each; defense applies per strike.",
     "weapon_types": [
       "unarmed"
-    ]
+    ],
+    "hits": 3,
+    "hit_scale": 0.45
   },
   "windstep": {
     "name": "Windstep",
@@ -772,9 +887,9 @@
     "name": "Thunder Strike",
     "kind": "weapon",
     "mp": 8,
-    "effect": "pierce",
+    "effect": "special",
     "power": 24,
-    "description": "A learned sword art: a lightning-charged strike pierces half the target defense.",
+    "description": "Lightning damage; base power +24. 40% chance to stun for one turn (bosses resist half).",
     "weapon_node": {
       "family": "sword",
       "id": "technique"
@@ -782,7 +897,9 @@
     "chance": 0.45,
     "weapon_types": [
       "sword"
-    ]
+    ],
+    "damage_type": "lightning",
+    "stun_chance": 0.4
   },
   "shield_master_technique": {
     "name": "Guardian Reprisal",
@@ -790,21 +907,23 @@
     "mp": 8,
     "effect": "bash",
     "power": 20,
-    "description": "Advanced shield technique; requires the learned weapon technique node.",
+    "description": "Physical damage; base power +20. Defense +8 for 3 rounds.",
     "weapon_node": {
       "family": "shield",
       "id": "technique"
     },
     "chance": 0.45,
-    "shield": true
+    "shield": true,
+    "ward": 8,
+    "duration": 3
   },
   "axe_master_technique": {
     "name": "Rupturing Cleave",
     "kind": "weapon",
     "mp": 8,
-    "effect": "pierce",
+    "effect": "special",
     "power": 20,
-    "description": "Advanced axe technique; requires the learned weapon technique node.",
+    "description": "Physical damage; base power +20. Enemy defense -9 for 3 rounds. Bleed: 5 damage for 3 rounds.",
     "weapon_node": {
       "family": "axe",
       "id": "technique"
@@ -812,15 +931,18 @@
     "chance": 0.45,
     "weapon_types": [
       "axe"
-    ]
+    ],
+    "sunder": 9,
+    "wound": 5,
+    "duration": 3
   },
   "greatsword_master_technique": {
     "name": "Cyclone Blade",
     "kind": "weapon",
     "mp": 8,
-    "effect": "pierce",
+    "effect": "special",
     "power": 20,
-    "description": "Advanced greatsword technique; requires the learned weapon technique node.",
+    "description": "Physical damage; base power +20. 2 strikes at 70% power each; defense applies per strike.",
     "weapon_node": {
       "family": "greatsword",
       "id": "technique"
@@ -828,15 +950,17 @@
     "chance": 0.45,
     "weapon_types": [
       "greatsword"
-    ]
+    ],
+    "hits": 2,
+    "hit_scale": 0.7
   },
   "hammer_master_technique": {
     "name": "Seismic Smash",
     "kind": "weapon",
     "mp": 8,
-    "effect": "pierce",
+    "effect": "special",
     "power": 20,
-    "description": "Advanced hammer technique; requires the learned weapon technique node.",
+    "description": "Physical damage; base power +20. 75% chance to stun for one turn (bosses resist half).",
     "weapon_node": {
       "family": "hammer",
       "id": "technique"
@@ -844,15 +968,16 @@
     "chance": 0.45,
     "weapon_types": [
       "hammer"
-    ]
+    ],
+    "stun_chance": 0.75
   },
   "spear_master_technique": {
     "name": "Dragon Thrust",
     "kind": "weapon",
     "mp": 8,
-    "effect": "pierce",
+    "effect": "special",
     "power": 20,
-    "description": "Advanced spear technique; requires the learned weapon technique node.",
+    "description": "Physical damage; base power +20. Deals 2x damage to draconic enemies.",
     "weapon_node": {
       "family": "spear",
       "id": "technique"
@@ -860,15 +985,17 @@
     "chance": 0.45,
     "weapon_types": [
       "spear"
-    ]
+    ],
+    "slayer": "draconic",
+    "slayer_multiplier": 2.0
   },
   "bow_master_technique": {
     "name": "Piercing Volley",
     "kind": "weapon",
     "mp": 8,
-    "effect": "pierce",
+    "effect": "special",
     "power": 20,
-    "description": "Advanced bow technique; requires the learned weapon technique node.",
+    "description": "Physical damage; base power +20. 3 strikes at 55% power each; defense applies per strike. Cannot be dodged.",
     "weapon_node": {
       "family": "bow",
       "id": "technique"
@@ -876,15 +1003,18 @@
     "chance": 0.45,
     "weapon_types": [
       "bow"
-    ]
+    ],
+    "hits": 3,
+    "hit_scale": 0.55,
+    "sure_hit": true
   },
   "dagger_master_technique": {
     "name": "Twin Crescents",
     "kind": "weapon",
     "mp": 8,
-    "effect": "pierce",
+    "effect": "special",
     "power": 20,
-    "description": "Advanced dagger technique; requires the learned weapon technique node.",
+    "description": "Physical damage; base power +20. 2 strikes at 70% power each; defense applies per strike. Bonus damage +8 against marked, poisoned, bleeding or burning targets.",
     "weapon_node": {
       "family": "dagger",
       "id": "technique"
@@ -892,15 +1022,19 @@
     "chance": 0.45,
     "weapon_types": [
       "dagger"
-    ]
+    ],
+    "hits": 2,
+    "hit_scale": 0.7,
+    "conditional": "afflicted",
+    "conditional_bonus": 8
   },
   "staff_master_technique": {
     "name": "Runic Rupture",
     "kind": "weapon",
     "mp": 8,
-    "effect": "pierce",
+    "effect": "special",
     "power": 20,
-    "description": "Advanced staff technique; requires the learned weapon technique node.",
+    "description": "Arcane damage; base power +20. Recover 6 MP on a hit.",
     "weapon_node": {
       "family": "staff",
       "id": "technique"
@@ -908,15 +1042,17 @@
     "chance": 0.45,
     "weapon_types": [
       "staff"
-    ]
+    ],
+    "damage_type": "arcane",
+    "mp_drain": 6
   },
   "wand_master_technique": {
     "name": "Prismatic Ray",
     "kind": "weapon",
     "mp": 8,
-    "effect": "pierce",
+    "effect": "special",
     "power": 20,
-    "description": "Advanced wand technique; requires the learned weapon technique node.",
+    "description": "Holy damage; base power +20. Ignores 100% defense.",
     "weapon_node": {
       "family": "wand",
       "id": "technique"
@@ -924,15 +1060,17 @@
     "chance": 0.45,
     "weapon_types": [
       "wand"
-    ]
+    ],
+    "damage_type": "holy",
+    "ignore_defense": 1.0
   },
   "scythe_master_technique": {
     "name": "Soul Reaping",
     "kind": "weapon",
     "mp": 8,
-    "effect": "pierce",
+    "effect": "special",
     "power": 20,
-    "description": "Advanced scythe technique; requires the learned weapon technique node.",
+    "description": "Shadow damage; base power +20. Restore 60% of damage dealt as HP.",
     "weapon_node": {
       "family": "scythe",
       "id": "technique"
@@ -940,15 +1078,17 @@
     "chance": 0.45,
     "weapon_types": [
       "scythe"
-    ]
+    ],
+    "life_steal": 0.6,
+    "damage_type": "shadow"
   },
   "claws_master_technique": {
     "name": "Tiger Flurry",
     "kind": "weapon",
     "mp": 8,
-    "effect": "pierce",
+    "effect": "special",
     "power": 20,
-    "description": "Advanced claws technique; requires the learned weapon technique node.",
+    "description": "Physical damage; base power +20. 3 strikes at 55% power each; defense applies per strike. Bleed: 7 damage for 3 rounds.",
     "weapon_node": {
       "family": "claws",
       "id": "technique"
@@ -956,15 +1096,19 @@
     "chance": 0.45,
     "weapon_types": [
       "claws"
-    ]
+    ],
+    "hits": 3,
+    "hit_scale": 0.55,
+    "wound": 7,
+    "duration": 3
   },
   "unarmed_master_technique": {
     "name": "Rising Knee",
     "kind": "weapon",
     "mp": 8,
-    "effect": "pierce",
+    "effect": "special",
     "power": 20,
-    "description": "Advanced unarmed technique; requires the learned weapon technique node.",
+    "description": "Physical damage; base power +20. Ignores 75% defense. 50% chance to stun for one turn (bosses resist half).",
     "weapon_node": {
       "family": "unarmed",
       "id": "technique"
@@ -972,6 +1116,26 @@
     "chance": 0.45,
     "weapon_types": [
       "unarmed"
-    ]
+    ],
+    "stun_chance": 0.5,
+    "ignore_defense": 0.75
+  },
+  "dragon_slash": {
+    "name": "Dragon Slash",
+    "kind": "weapon",
+    "mp": 5,
+    "effect": "special",
+    "power": 9,
+    "weapon_types": [
+      "sword"
+    ],
+    "weapon_node": {
+      "family": "sword",
+      "id": "flow"
+    },
+    "slayer": "draconic",
+    "slayer_multiplier": 2.0,
+    "damage_type": "physical",
+    "description": "Sword strike: attack +9 physical power. Double damage against draconic enemies. Requires a sword."
   }
 }

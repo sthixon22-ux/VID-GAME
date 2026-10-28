@@ -1,4 +1,5 @@
 extends Node3D
+var treasures:TreasureField
 # First playable expansion, preserving the demo's combat, equipment, and character systems.
 const RELIQUARY_GATE := Vector3(3, 0, -62)
 const RETURN_GATE := Vector3(0, 0, 8)
@@ -66,10 +67,12 @@ func _ready() -> void:
  auto_panel.closed.connect(func():
   grace=3.0
   if State.hero.hp<=0:get_tree().change_scene_to_file.call_deferred(State.travel_scene()))
+ treasures=TreasureField.new("mirefen");add_child(treasures)
  Sound.theme_("woodland")
  MarshArt.ambience(self)
 
 func _build_marsh() -> void:
+ Art.sign_(self,Vector3(16,2.6,-16),"Sahir caravan road [E]")
  TownServices.signs(self,"mirefen")
  MarshArt.settlement(self)
  for entry in [[ROYAL,"King Aldren","Paladin","Male"],[IONA,"Warden Iona","Druid","Female"],[SELLA,"Healer Sella","Healer","Female"],[JORY,"Ferryman Jory","Ranger","Male"]]:
@@ -90,6 +93,8 @@ func _build_marsh() -> void:
    Art.box(self,Vector3(center,.04,z+(plank-3)*.37),Vector3(4.2,.15,.34),Color("8e8063")).material_override=Art.surface(Color("9c8b69"),"wood",1)
   if i%2==0:
    for side in [-2.2,2.2]:Art.box(self,Vector3(center+side,.55,z),Vector3(.14,1.1,.14),Color("685d49"))
+ for entry in [[Vector3(10,.17,-36),Vector3(8,.18,26)],[Vector3(-10,.17,-44),Vector3(8,.18,28)]]:
+  Art.box(self,entry[0],entry[1],Color.WHITE).material_override=Art.surface(Color("9c8b69"),"wood",7)
  for x in [-16.0, 16.0]:
   var water = Art.box(self, Vector3(x, -0.05, -34), Vector3(15, 0.09, 68), Color("4b777a"))
   var surface = ShaderMaterial.new()
@@ -180,11 +185,12 @@ func _process(delta: float) -> void:
 
 func walkable(pos:Vector3)->bool:
  if absf(pos.x)>20 or pos.z< -67 or pos.z>13:return false
- if pos.z< -18 and absf(pos.x)>6:return false
+ if pos.z< -18 and absf(pos.x)>6 and not ((pos.x>0 and pos.x<15 and pos.z> -49 and pos.z< -23) or (pos.x<0 and pos.x> -15 and pos.z> -59 and pos.z< -30)):return false
  for house in [Vector3(-8,0,-5),Vector3(8,0,-5),Vector3(-8,0,-12),Vector3(8,0,-12)]:
   if absf(pos.x-house.x)<2.5 and absf(pos.z-house.z)<2.4:return false
  return true
 func _prompt() -> String:
+ if hero.position.distance_to(Vector3(16,0,-16))<3:return "[E] Travel to Sahir Expanse"
  var door=TownServices.nearby("mirefen",hero.position)
  if not door.is_empty():return "[E] Enter "+door[2]
  for entry in [[ROYAL,"Meet King Aldren"],[IONA,"Speak with Warden Iona"],[SELLA,"Healer Sella · silverreed"],[JORY,"Ferryman Jory · causeway patrol"]]:
@@ -205,7 +211,12 @@ func _done() -> bool:
 
 func interact() -> void:
  if dialogue.active or options.active or auto_panel.active or menu.get_parent().get_parent().visible:return
+ if treasures.open_near(hero.position):message=State.notice;return
  var c=MirefenRules.campaign(State.hero)
+ if hero.position.distance_to(Vector3(16,0,-16))<3:
+  if c.reported:_travel("sahir","res://scenes/sahir.tscn",Vector3(0,0,10))
+  else:message="Restore the Reliquary and report to Iona before joining the Sahir caravan."
+  return
  var door=TownServices.nearby("mirefen",hero.position)
  if not door.is_empty():
   TownServices.enter(get_tree(),"mirefen",door)

@@ -10,7 +10,7 @@ static func campaign(hero:Dictionary) -> Dictionary:
  return hero.campaign
 static func goal(hero:Dictionary)->String:
  var c=campaign(hero)
- if c.reported:return "Chapter 2 complete · Emberglass tablet points toward Sahir"
+ if c.reported:return "Eastern caravan road open · travel to Sahir from the east side of Reedcross"
  if c.reliquary_cleared:return "Return to Warden Iona in Reedcross"
  if c.sluice_key:return "Enter the Reliquary · drain west, divert east, quiet the heart"
  if c.readings.size()==3:return "Bring the three water-readings to Warden Iona"

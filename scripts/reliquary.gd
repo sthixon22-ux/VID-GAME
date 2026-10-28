@@ -1,4 +1,5 @@
 extends Node3D
+var treasures:TreasureField
 # Dungeon 2: a small complete exploration loop with two water locks and a boss.
 const EXIT := Vector3(0, 0, 5)
 const WEST := Vector3(-6, 0, -14)
@@ -6,10 +7,16 @@ const EAST := Vector3(6, 0, -28)
 const BOSS_GATE := Vector3(0, 0, -44)
 const CACHE:=Vector3(-8,0,-23)
 const SENTINEL:=Vector3(4,0,-34)
+var dialogue:Dialogue
+var cells:Dictionary={}
+var extra_mobs:Array=[]
+var pending_species="drowned_sentinel"
+var pending_id=2200
 var water_surfaces:Array[Node3D]=[]
 var west_wheel:Node3D
 var east_wheel:Node3D
 var sentinel:Node3D
+var keeper:Node3D
 var auto_panel:AutoBattlePanel
 var grace:=2.0
 var hero: Node3D
@@ -38,8 +45,10 @@ func _ready() -> void:
  camera.current = true
  hud = ExplorationHUD.new()
  add_child(hud)
+ hud.map.dungeon=true;hud.map.floor_cells=cells
  for pos in [WEST,EAST,EXIT]:hud.map.markers.append({"position":pos,"color":Color("7ad9d3")})
  hud.map.markers.append({"position":BOSS_GATE,"color":Color("d5887d")})
+ dialogue=Dialogue.new();add_child(dialogue)
  options = OptionsPanel.new()
  add_child(options)
  auto_panel=AutoBattlePanel.new()
@@ -51,15 +60,22 @@ func _ready() -> void:
  sentinel=Art.actor("DrownedSentinel")
  add_child(sentinel)
  sentinel.position=SENTINEL
+ keeper=Art.actor("ReliquaryKeeper");add_child(keeper);keeper.position=Vector3(0,0,-46)
+ for entry in [[Vector3(-17,0,-15),"drowned_sentinel",2201],[Vector3(-23,0,-15),"bog_wisp",2202],[Vector3(18,0,-31),"drowned_sentinel",2203]]:
+  var data:Dictionary=JSON.parse_string(FileAccess.get_file_as_string("res://data/enemies.json"))[entry[1]]
+  var model=Art.actor(data.model);add_child(model);model.position=entry[0]
+  extra_mobs.append({"model":model,"species":entry[1],"id":entry[2]})
  _sync_water(false)
+ treasures=TreasureField.new("reliquary");add_child(treasures)
  Sound.theme_("sanctuary")
 
 func _build() -> void:
- Art.box(self, Vector3(0, -0.3, -21), Vector3(26, 0.5, 64), Color("6d7166")).material_override = Art.surface(Color("858981"), "stone", 12)
- for x in [-12.0, 12.0]:
-  Art.box(self, Vector3(x, 1.7, -21), Vector3(0.8, 3.4, 63), Color("677c77")).material_override=Art.surface(Color("75857e"),"stone",8)
- for z in [-51.0, 8.0]:
-  Art.box(self, Vector3(0, 1.7, z), Vector3(25, 3.4, 0.8), Color("677c77")).material_override=Art.surface(Color("75857e"),"stone",8)
+ RoomLayout.rect(cells,-5,5,-24,3)
+ RoomLayout.rect(cells,-13,-7,-9,-5)
+ RoomLayout.rect(cells,-7,-5,-8,-7)
+ RoomLayout.rect(cells,7,13,-17,-13)
+ RoomLayout.rect(cells,5,7,-16,-15)
+ RoomLayout.build(self,cells,Color("858981"))
  for z in [-6.0, -21.0, -36.0]:
   var water = Art.box(self, Vector3(0, 0.12, z), Vector3(20, 0.05, 7), Color("47757c"))
   var material = ShaderMaterial.new()
@@ -100,7 +116,7 @@ func _build() -> void:
   Art.shape(self, p + Vector3(0, 1.0, 0), Vector3(0.9, 2.0, 0.9), Color("a3aea0"), "cylinder")
 
 func _unhandled_input(event: InputEvent) -> void:
- if options.active or auto_panel.active: return
+ if options.active or auto_panel.active or dialogue.active: return
  if event is InputEventMouseMotion and Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
   yaw -= event.relative.x * 0.005 * UserSettings.camera_sensitivity
   pitch = clampf(pitch - event.relative.y * 0.004 * UserSettings.camera_sensitivity, -1.1, -0.15)
@@ -119,14 +135,14 @@ func _unhandled_input(event: InputEvent) -> void:
   KEY_ESCAPE: options.open()
 
 func _process(delta: float) -> void:
- if not options.active and not auto_panel.active:
+ if not options.active and not auto_panel.active and not dialogue.active:
   var orbit=CameraOrbit.step(yaw,pitch,delta)
   yaw=orbit.x
   pitch=orbit.y
  elapsed += delta
  grace=maxf(0,grace-delta)
  var direction := Vector3.ZERO
- if not options.active and not auto_panel.active:
+ if not options.active and not auto_panel.active and not dialogue.active:
   var input := Vector3(float(Input.is_physical_key_pressed(KEY_D)) - float(Input.is_physical_key_pressed(KEY_A)), 0, float(Input.is_physical_key_pressed(KEY_S)) - float(Input.is_physical_key_pressed(KEY_W)))
   direction = input.rotated(Vector3.UP, yaw).normalized()
   var next = hero.position + direction * (7.5 if Input.is_physical_key_pressed(KEY_SHIFT) else 4.3) * delta
@@ -141,21 +157,31 @@ func _process(delta: float) -> void:
  companion.position = companion.position.lerp(follow, minf(1, delta * 4))
  Art.animate(companion, elapsed, moving)
  camera.update_view(hero.position + Vector3.UP * 1.2, Vector3(sin(yaw) * cos(pitch) * 8, -sin(pitch) * 8 + 0.3, cos(yaw) * cos(pitch) * 8), delta)
+ keeper.visible=not _campaign().reliquary_cleared
+ Art.animate(keeper,elapsed,false)
+ if keeper.visible and grace<=0 and not options.active and not auto_panel.active and not dialogue.active and _open() and hero.position.distance_to(BOSS_GATE)<3:
+  interact();return
  sentinel.visible=Time.get_ticks_msec()>int(State.cleared_until.get(2200,0))
  Art.animate(sentinel,elapsed,false)
- if sentinel.visible and grace<=0 and not options.active and not auto_panel.active and hero.position.distance_to(SENTINEL)<1.5 and State.hero.hp>0:
+ if sentinel.visible and grace<=0 and not options.active and not auto_panel.active and not dialogue.active and hero.position.distance_to(SENTINEL)<1.5 and State.hero.hp>0:
+  pending_species="drowned_sentinel";pending_id=2200
   State.enemy_id="drowned_sentinel"
   State.encounter_id=2200
   State.remember_position(hero.position)
   if State.species_wins("drowned_sentinel")>=10:auto_panel.open("drowned_sentinel",true)
   else:_sentinel_battle()
   return
+ for mob in extra_mobs:
+  mob.model.visible=not ExpeditionRules.progress(State.hero).rooms.has(str(mob.id))
+  Art.animate(mob.model,elapsed,false)
+  if mob.model.visible and grace<=0 and not options.active and not auto_panel.active and not dialogue.active and hero.position.distance_to(mob.model.position)<1.4:
+   pending_species=mob.species;pending_id=mob.id;_sentinel_battle();return
  hud.update_view(hero.position, MirefenRules.goal(State.hero), _prompt(), message, delta)
 
 func _campaign() -> Dictionary:
  return MirefenRules.campaign(State.hero)
 func walkable(pos:Vector3)->bool:
- if absf(pos.x)>=11 or pos.z>=7 or pos.z<=-49:return false
+ if not RoomLayout.contains(cells,pos):return false
  var c=_campaign()
  if pos.z< -18 and not c.reliquary_west:return false
  if pos.z< -39 and not _open():return false
@@ -172,8 +198,8 @@ func _sync_water(animate:bool=true):
  if west_wheel:west_wheel.rotation.z=PI if c.reliquary_west else 0
  if east_wheel:east_wheel.rotation.z=PI if c.reliquary_east else 0
 func _sentinel_battle():
- State.enemy_id="drowned_sentinel"
- State.encounter_id=2200
+ State.enemy_id=pending_species
+ State.encounter_id=pending_id
  State.remember_position(hero.position)
  State.save_game()
  get_tree().change_scene_to_file.call_deferred("res://scenes/battle.tscn")
@@ -191,7 +217,8 @@ func _prompt() -> String:
  return "Follow the flooded corridors. Each valve releases an ancient seal."
 
 func interact() -> void:
- if options.active or auto_panel.active:return
+ if options.active or auto_panel.active or dialogue.active:return
+ if treasures.open_near(hero.position):message=State.notice;return
  if hero.position.distance_to(EXIT) < 3:
   _travel("mirefen", "res://scenes/mirefen.tscn", Vector3(0, 0, -58))
   return
@@ -213,12 +240,10 @@ func interact() -> void:
   elif c.reliquary_cleared:
    message = "The keeper rests. A fragment of the old covenant remains."
   else:
-   State.enemy_id = "reliquary_keeper"
-   State.encounter_id = 2300
-   State.hero.journey.region = "reliquary"
-   State.remember_position(hero.position)
-   State.save_game()
-   get_tree().change_scene_to_file("res://scenes/battle.tscn")
+   dialogue.show_id("marsh_boss_before",func():
+    State.enemy_id="reliquary_keeper";State.encounter_id=2300
+    State.hero.journey.region="reliquary";State.remember_position(hero.position);State.save_game()
+    get_tree().change_scene_to_file("res://scenes/battle.tscn"))
    return
  _sync_water()
  State.save_game()

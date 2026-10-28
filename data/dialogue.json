@@ -99,34 +99,46 @@
   ],
   "boss": [
     [
-      "Warden",
-      "SMALL... FLAMES... WHY DO YOU BURN MY ROOTS?"
+      "The Hollow Warden",
+      "I remember a bell. Children tied ribbons to my branches. Why do I remember their hands as axes?"
     ],
     [
       "Hero",
-      "We came to help. Willowbrook still remembers you."
+      "The bell is still ringing above us. Someone wanted you to hear a threat instead of a welcome."
     ],
     [
-      "Warden",
-      "THE BELL... THE DARK BENEATH... I CANNOT..."
+      "The Hollow Warden",
+      "My roots hold this village together. If I unclench them, everything falls."
     ],
     [
       "Hero",
-      "Then let us carry the light until you can."
+      "Then let me stand here when you do. You don’t have to hold it alone."
+    ],
+    [
+      "The Hollow Warden",
+      "Come close, little promise. Show me something that does not break."
     ]
   ],
   "boss_win": [
     [
-      "Warden",
-      "The bell... is quiet. Little oathkeeper, I had forgotten the sound of birds."
+      "The Hollow Warden",
+      "There. A bird. I had forgotten how small their feet were."
     ],
     [
       "Hero",
-      "They'll be waiting when you wake."
+      "You stopped listening for the axe."
     ],
     [
-      "Warden",
-      "Take this living ember. Let Willowbrook know: the roots remember."
+      "The Hollow Warden",
+      "No. I heard it, and heard the bird as well. There is room for both."
+    ],
+    [
+      "The Hollow Warden",
+      "Take this ember from my heartwood. The water keeper carried our first oath east. Ask why the royal seal appears on a promise older than the crown."
+    ],
+    [
+      "Hero",
+      "I’ll ask. And I’ll come back when the ribbons are up."
     ]
   ],
   "ending": [
@@ -214,7 +226,7 @@
     ],
     [
       "King Aldren",
-      "My soldiers will repair the causeway. You have my thanks\u2014and payment, not merely praise."
+      "My soldiers will repair the causeway. You have my thanks—and payment, not merely praise."
     ],
     [
       "Warden Iona",
@@ -222,13 +234,13 @@
     ],
     [
       "King Aldren",
-      "Seek answers when the southern road is ready. Until then, rest here. Reedcross owes you safe harbour."
+      "The eastern caravan road is open. Seek your answers in Sahir; I will see the causeway repaired."
     ]
   ],
   "marsh_complete": [
     [
       "Warden Iona",
-      "The reliquary is quiet. The Emberglass tablet remains your next lead; the Sahir route is not yet open."
+      "The eastern caravan road is open. Look for its sign east of our square. Qasira’s archivist knows the Emberglass Tomb."
     ]
   ],
   "marsh_reeds": [
@@ -241,6 +253,298 @@
     [
       "Ferryman Jory",
       "Reed Stalkers have taken the causeway. Defeat three and I can bring the medicine boat through. You can clear them before or after speaking to me."
+    ]
+  ],
+  "marsh_boss_before": [
+    [
+      "Keeper of the Drowned Oath",
+      "State your name. State your cargo. State which of your dead you would leave at the gate."
+    ],
+    [
+      "Hero",
+      "None. I came to open it."
+    ],
+    [
+      "Keeper of the Drowned Oath",
+      "Every king says that. The last brought chains under white cloth. I kept the water out until they ordered me to keep the people in."
+    ],
+    [
+      "Hero",
+      "Iona’s people still live above you. Your oath is drowning them."
+    ],
+    [
+      "Keeper of the Drowned Oath",
+      "Then prove you can bear a tide without becoming a wall."
+    ]
+  ],
+  "marsh_boss_after": [
+    [
+      "Keeper of the Drowned Oath",
+      "The names on my shield… I thought they were prisoners. They were the people I ferried home."
+    ],
+    [
+      "Hero",
+      "You can remember them without keeping everyone else here."
+    ],
+    [
+      "Keeper of the Drowned Oath",
+      "An archivist in Qasira kept a glass copy of the covenant. The copy was never delivered to the throne."
+    ],
+    [
+      "Hero",
+      "Then that’s where we go next."
+    ],
+    [
+      "Keeper of the Drowned Oath",
+      "Take the dry road. I will mind the river. This time, the gates stay open."
+    ]
+  ],
+  "sahir_intro": [
+    [
+      "Archivist Safiya",
+      "You’ve brought marsh mud into my desert. That is either commitment or a very expensive wrong turn."
+    ],
+    [
+      "Hero",
+      "The keeper sent me. He said you had a copy of the first covenant."
+    ],
+    [
+      "Archivist Safiya",
+      "I had a rubbing. Namarra took the original into her tomb when the sky turned to glass. She believes every visitor is another royal collector."
+    ],
+    [
+      "Hero",
+      "I’m getting that a lot."
+    ],
+    [
+      "Archivist Safiya",
+      "Then arrive with knowledge instead of a seal. Read the oasis, wreck and observatory inscriptions. Each holds a direction the mirrors have forgotten."
+    ]
+  ],
+  "sahir_key": [
+    [
+      "Archivist Safiya",
+      "East for dawn, west for dusk, south for the moon. Three memories; one sky. The tomb should let you pass now."
+    ],
+    [
+      "Hero",
+      "And Namarra?"
+    ],
+    [
+      "Archivist Safiya",
+      "She was keeper of the caravan skies. Her glass wings kept storms from the road. Do not mistake her fear for cruelty."
+    ],
+    [
+      "Hero",
+      "I’ll try talking first."
+    ],
+    [
+      "Archivist Safiya",
+      "Good. But take supplies. Being understood sometimes takes a second attempt."
+    ]
+  ],
+  "sahir_after": [
+    [
+      "Archivist Safiya",
+      "You came back with every bone inside your skin. I owe Laleh a coin."
+    ],
+    [
+      "Hero",
+      "Namarra said the oath was forged, not signed."
+    ],
+    [
+      "Archivist Safiya",
+      "Kharholt. The Ironroot foundry stamped the royal seal on the covenant. Follow the northeastern pass; Brann can read the hammer marks."
+    ]
+  ],
+  "sahir_tablet_0": [
+    [
+      "Hero",
+      "At the oasis: “DAWN reaches EAST. We gave travelers a horizon, not a border.” I’ll remember that."
+    ]
+  ],
+  "sahir_tablet_1": [
+    [
+      "Hero",
+      "The broken caravan plaque reads: “DUSK faces WEST. Count the people who arrive, never the coins they carry.”"
+    ]
+  ],
+  "sahir_tablet_2": [
+    [
+      "Hero",
+      "In the observatory: “The MOON looks SOUTH, toward the living.” Someone scratched a royal crest beneath the older writing."
+    ]
+  ],
+  "sahir_boss_before": [
+    [
+      "Namarra",
+      "No more lanterns. No more hooks. I have no feathers left for your king."
+    ],
+    [
+      "Hero",
+      "I’m not here to take your wings. I need to know what happened to the covenant."
+    ],
+    [
+      "Namarra",
+      "They polished my scales until I could see only their faces. They called that loyalty."
+    ],
+    [
+      "Hero",
+      "Safiya remembers the sky before the storms. So do the caravans."
+    ],
+    [
+      "Namarra",
+      "Then look at me without looking away. When the light breaks, stand your ground."
+    ]
+  ],
+  "sahir_boss_after": [
+    [
+      "Namarra",
+      "You shielded your eyes. You did not reach for a broken scale."
+    ],
+    [
+      "Hero",
+      "Some things don’t belong in a trophy room."
+    ],
+    [
+      "Namarra",
+      "The covenant was not signed. It was struck on an anvil beneath Kharholt. The first seal closed a wound. The second made a weapon of it."
+    ],
+    [
+      "Hero",
+      "Who ordered the second?"
+    ],
+    [
+      "Namarra",
+      "Ask Vorr. He still kneels beneath the weight of the answer. The highland pass is yours."
+    ]
+  ],
+  "kharholt_intro": [
+    [
+      "Forgekeeper Brann",
+      "Keep your fingers away from the anvil. It remembers being hot longer than a visitor remembers being warned."
+    ],
+    [
+      "Hero",
+      "Namarra sent me. I’m looking for Vorr and the first royal seal."
+    ],
+    [
+      "Forgekeeper Brann",
+      "Of course you are. Everyone wants a king’s secret; nobody wants to carry the coal."
+    ],
+    [
+      "Hero",
+      "Tell me what needs doing."
+    ],
+    [
+      "Forgekeeper Brann",
+      "Three forge songs survive at the overlook, storm ruins and miners’ camp. Bring them back. They are instructions, not music. Vorr will know if you skip a verse."
+    ]
+  ],
+  "kharholt_key": [
+    [
+      "Forgekeeper Brann",
+      "Cool the west anvil. Vent the east. Never open both while the heart is burning. That’s the song."
+    ],
+    [
+      "Hero",
+      "Why did they hide it outside?"
+    ],
+    [
+      "Forgekeeper Brann",
+      "So one frightened keeper could not lock the whole mountain. Watchers hold the valve keys. Vorr holds everything else."
+    ],
+    [
+      "Hero",
+      "Including the truth?"
+    ],
+    [
+      "Forgekeeper Brann",
+      "Especially that. Take a proper weapon. A promise won’t turn aside his hammer."
+    ]
+  ],
+  "kharholt_after": [
+    [
+      "Forgekeeper Brann",
+      "The chimney smoke is silver again. For the first time in years, it smells like work instead of a warning."
+    ],
+    [
+      "Hero",
+      "Vorr said the crown and the gate were made from the same iron."
+    ],
+    [
+      "Forgekeeper Brann",
+      "Then the next question is who has been feeding the furnace. Rest here. The mountain is open to you, and there are still lost camps worth finding."
+    ]
+  ],
+  "kharholt_tablet_0": [
+    [
+      "Hero",
+      "The overlook stone reads: “First, cool the western anvil. Iron bends; a trapped heart breaks.”"
+    ]
+  ],
+  "kharholt_tablet_1": [
+    [
+      "Hero",
+      "The storm tower remembers: “Second, vent the eastern pressure. Give the mountain somewhere to breathe.”"
+    ]
+  ],
+  "kharholt_tablet_2": [
+    [
+      "Hero",
+      "The miners carved their names below the last verse: “Leave no worker beneath the stone.” Vorr’s name is last."
+    ]
+  ],
+  "kharholt_boss_before": [
+    [
+      "Vorr",
+      "The shift is not finished. The names have not all been called."
+    ],
+    [
+      "Hero",
+      "Brann sent me to relieve you."
+    ],
+    [
+      "Vorr",
+      "Brann was a child when the roof fell. He used to bring me a cup of water. I could never hold it."
+    ],
+    [
+      "Hero",
+      "He remembers. He wants you out of here."
+    ],
+    [
+      "Vorr",
+      "If I stand, the mountain moves. If I kneel, the furnace eats. Tell me which promise I am allowed to break."
+    ],
+    [
+      "Hero",
+      "The one that says you have to choose alone."
+    ]
+  ],
+  "kharholt_boss_after": [
+    [
+      "Vorr",
+      "Listen. No hammer. No falling stone. Just… wind."
+    ],
+    [
+      "Hero",
+      "The west anvil is cold. The east vent is open. You can stand."
+    ],
+    [
+      "Vorr",
+      "The crown and the gate came from one iron bloom. Every time the seal is renewed, the king asks the mountain for another piece of itself."
+    ],
+    [
+      "Hero",
+      "Aldren called it repairing an old defense."
+    ],
+    [
+      "Vorr",
+      "A blade is a defense until someone tells it where to point. Keep asking who holds the hilt."
+    ],
+    [
+      "Hero",
+      "I will. But first, Brann owes you a cup of water."
     ]
   ]
 }

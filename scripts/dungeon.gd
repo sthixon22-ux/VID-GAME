@@ -1,4 +1,5 @@
 extends Node3D
+var treasures:TreasureField
 var hero: Node3D
 var wolf: Node3D
 var camera: ExplorationCamera
@@ -24,7 +25,7 @@ var elapsed_fraction=0.0
 var boss: Node3D
 var chest: Node3D
 var pause_menu: VBoxContainer
-var enemy_homes=[Vector3(-8,0,-10),Vector3(8,0,-10)]
+var enemy_homes=[Vector3(-8,0,-10),Vector3(8,0,-10),Vector3(-14,0,-10),Vector3(-20,0,-12),Vector3(12,0,-18),Vector3(19,0,-18)]
 func _ready():
  auto_panel=AutoBattlePanel.new()
  add_child(auto_panel)
@@ -69,6 +70,7 @@ func _ready():
  UI.button(pause_menu,"Save and return to title",func():
   State.save_game()
   get_tree().change_scene_to_file("res://scenes/title.tscn"))
+ treasures=TreasureField.new("dungeon");add_child(treasures)
  Sound.theme_("sanctuary")
  if not State.hero.journey.entered:
   State.hero.journey.entered=true
@@ -94,6 +96,11 @@ func build_dungeon():
    var center=Vector3(x*2,0,z*2)
    if (absf(center.x)<=2 and center.z>=-26) or (absf(center.x)<=10 and absf(center.z+10)<=2) or (absf(center.x)>=6 and absf(center.x)<=10 and center.z>=-14 and center.z<=-6) or (absf(center.x)<=6 and center.z>=-32 and center.z<=-24):
     floor_cells[Vector2i(x,z)]=true
+ # Optional west vault and eastern library, reached through separate lateral halls.
+ RoomLayout.rect(floor_cells,-11,-7,-7,-3)
+ RoomLayout.rect(floor_cells,-7,-4,-6,-4)
+ RoomLayout.rect(floor_cells,7,11,-11,-7)
+ RoomLayout.rect(floor_cells,1,7,-10,-8)
  for cell in floor_cells:
   var point=Vector3(cell.x*2,0,cell.y*2)
   var tile=Art.box(self,point+Vector3(0,-0.14,0),Vector3(2,0.28,2),Color("697e77"))
@@ -112,7 +119,7 @@ func build_dungeon():
   Art.shape(seal,Vector3(0,1.2,0),Vector3(0.8,1.6,0.8),Color("95cfc1"),"cone")
   Art.sign_(seal,Vector3(0,2.5,0),"Root Seal · [E]")
   seals.append(seal)
- for i in range(2):
+ for i in range(enemy_homes.size()):
   var enemy=Art.actor("Mossling")
   add_child(enemy)
   enemy.position=enemy_homes[i]
@@ -194,18 +201,19 @@ func _process(delta):
  chest.visible=not State.hero.journey.chest
  camera.update_view(hero.position+Vector3.UP,Vector3(sin(yaw)*cos(pitch)*8,-sin(pitch)*8,cos(yaw)*cos(pitch)*8),delta)
  gate.visible=State.hero.journey.seals.size()<2
- var context="[E] Interact · [Esc] Menu"
+ var context="[E] Open treasure chest" if not treasures.nearby(hero.position).is_empty() else "[E] Interact · [Esc] Menu"
  if hero.position.distance_to(boss.position)<4 and boss.visible: context="Contact the Hollow Warden · Defend its charged attack"
- hud_layer.update_view(hero.position,"Rootbound Sanctuary · Seals %s/2 · Solve both chamber puzzles" % State.hero.journey.seals.size(),context,"",delta)
+ hud_layer.update_view(hero.position,"Rootbound Sanctuary · Seals %s/2 · Solve both chamber puzzles" % State.hero.journey.seals.size(),context,State.notice,delta)
  if contact_grace<=0 and not auto_panel.active and not dialogue.active and not options.active and not pause_menu.get_parent().get_parent().visible and not puzzle_panel.get_parent().get_parent().visible and not encounter_busy:
   for index in range(enemies.size()):
    if enemies[index].visible and hero.position.distance_to(enemies[index].position)<1.25:
     start_battle("mossling",100+index)
     return
   if boss.visible and State.hero.journey.seals.size()==2 and hero.position.distance_to(boss.position)<2.5:
-   start_battle("warden",200)
+   dialogue.show_id("boss",func():start_battle("warden",200))
 func interact():
  if auto_panel.active or dialogue.active or options.active or puzzle_panel.get_parent().get_parent().visible or pause_menu.get_parent().get_parent().visible: return
+ if treasures.open_near(hero.position):return
  if hero.position.z>-1.0:
   State.hero.journey.region="forest"
   State.remember_position(Forest.SHRINE+Vector3(0,0,3))

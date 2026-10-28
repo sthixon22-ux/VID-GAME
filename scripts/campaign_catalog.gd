@@ -1,7 +1,7 @@
 class_name CampaignCatalog
 extends RefCounted
 
-# Planning registry only. Gameplay must opt in to these records as regions become playable.
+# Campaign registry: four playable regions; later records remain planning.
 const PATH := "res://data/campaign.json"
 const CLASSES := ["Warrior", "Barbarian", "Paladin", "Wizard", "Sorcerer", "Healer", "Ranger", "Rogue", "Assassin", "Monk", "Druid", "Necromancer"]
 

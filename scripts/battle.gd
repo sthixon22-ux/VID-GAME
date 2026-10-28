@@ -11,6 +11,7 @@ var dialogue: Dialogue
 var hero_bar: ProgressBar
 var enemy_bar: ProgressBar
 var breath=0.0
+var camera_home=Vector3(-4.8,3.4,6.4)
 func _ready():
  options=OptionsPanel.new()
  add_child(options)
@@ -48,13 +49,15 @@ func _ready():
   model.look_at(Vector3(2,0,0) if entry[0]!="Goblin" else Vector3(-2,0,1))
  camera=Camera3D.new()
  add_child(camera)
- camera.position=Vector3(-4.8,3.4,6.4)
+ if sim.enemy.get("boss",false):camera_home=Vector3(-6.5,4.8,9)
+ camera.position=camera_home
  camera.look_at(Vector3(0,1.3,0))
  camera.current=true
  UI.button(UI.panel(self,Vector2(1080,20),Vector2(180,65)),"Settings",func():
   if not busy: options.open())
- var panel=UI.panel(self,Vector2(20,20),Vector2(860,200))
+ var panel=UI.panel(self,Vector2(20,20),Vector2(860,225))
  status=UI.label(panel,"")
+ status.add_theme_font_size_override("font_size",18)
  hero_bar=ProgressBar.new()
  panel.add_child(hero_bar)
  hero_bar.custom_minimum_size=Vector2(0,14)
@@ -69,10 +72,14 @@ func _ready():
  enemy_bar.custom_minimum_size=Vector2(0,14)
  enemy_bar.show_percentage=false
  enemy_bar.max_value=sim.enemy.hp
+ var matchups=[]
+ for element in sim.enemy.get("affinities",{}):matchups.append(element.capitalize()+" x"+str(sim.enemy.affinities[element]))
+ enemy_bar.tooltip_text="Families: "+", ".join(sim.enemy.get("tags",[]))+"\nDamage multipliers: "+(", ".join(matchups) if not matchups.is_empty() else "All neutral")
  var red=StyleBoxFlat.new()
  red.bg_color=Color("bd7771")
  red.set_corner_radius_all(4)
  enemy_bar.add_theme_stylebox_override("fill",red)
+ UI.label(panel,"Enemy: "+", ".join(sim.enemy.get("tags",[]))+" · Hover techniques/spells for effects").add_theme_font_size_override("font_size",14)
  log_label=UI.label(panel,"%s approaches!" % sim.enemy.name)
  log_label.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
  commands=UI.panel(self,Vector2(20,390),Vector2(350,300))
@@ -116,7 +123,7 @@ func submenu(actions: Array):
   var selected: String=action
   var b=UI.button(commands,"%s · %s MP" % [action,sim.cost(action)],func(): act(selected))
   b.disabled=not sim.legal(selected)
-  b.tooltip_text=AbilityBook.entry(selected).get("description","")
+  b.tooltip_text=SkillEffects.tooltip(selected)
  UI.button(commands,"Back",main_menu)
 func companion_menu():
  clear_menu()
@@ -132,7 +139,7 @@ func companion_menu():
    main_menu())
  UI.button(commands,"Back",main_menu)
 func act(action: String):
- if busy or options.active or not sim.legal(action): return
+ if busy or options.active or dialogue.active or not sim.legal(action): return
  busy=true
  commands.get_parent().get_parent().hide()
  clear_menu()
@@ -172,7 +179,7 @@ func act(action: String):
  if not UserSettings.reduced_camera_motion and not UserSettings.minimal_animations:
   var reset_camera=UserSettings.tween(self)
   reset_camera.set_parallel(true)
-  reset_camera.tween_property(camera,"position",Vector3(-4.8,3.4,6.4),0.3)
+  reset_camera.tween_property(camera,"position",camera_home,0.3)
   reset_camera.tween_method(func(weight: float): camera.look_at(Vector3(0,1.3,0)),0.0,1.0,0.3)
  refresh()
  busy=false
@@ -187,6 +194,7 @@ func finish():
  if sim.outcome=="Victory":
   State.reward(true,sim.species)
   State.record_encounter_clear()
+  ExpeditionRules.boss_win(sim.species)
   if State.encounter_id>=300 and State.encounter_id<=302 and not State.hero.demo.field_guards.has(State.encounter_id-300): State.hero.demo.field_guards.append(State.encounter_id-300)
   if State.encounter_id==1000:
    State.hero.demo.echo=true
@@ -221,6 +229,9 @@ func finish():
   UI.button(commands,"Return to Willowbrook",return_to_adventure)
  elif sim.species=="warden" and sim.outcome=="Victory":
   UI.button(commands,"Speak to the guardian",func(): dialogue.show_id("boss_win",return_to_adventure))
+ elif sim.outcome=="Victory" and sim.species in ["reliquary_keeper","glass_sentinel","ironroot_colossus"]:
+  var key={"reliquary_keeper":"marsh_boss_after","glass_sentinel":"sahir_boss_after","ironroot_colossus":"kharholt_boss_after"}[sim.species]
+  UI.button(commands,"Speak with the guardian",func():dialogue.show_id(key,return_to_adventure))
  else: UI.button(commands,"Continue adventure",return_to_adventure)
 func return_to_adventure():
  get_tree().change_scene_to_file(State.travel_scene())
@@ -252,7 +263,7 @@ func sanctuary_arena():
  light.light_energy=0.75
  light.shadow_enabled=true
  add_child(light)
- Art.box(self,Vector3(0,-0.2,0),Vector3(24,0.4,22),Color.WHITE).material_override=Art.surface(Color("8a9b8d"),"stone",10)
+ Art.box(self,Vector3(0,-0.2,0),Vector3(24,0.4,22),Color.WHITE).material_override=Art.surface(Color("b29a76") if State.enemy_id=="glass_sentinel" else (Color("626f78") if State.enemy_id=="ironroot_colossus" else Color("8a9b8d")),"stone",10)
  for i in range(10):
   var angle=i*TAU/10
   var pos=Vector3(sin(angle)*9,0,cos(angle)*9)

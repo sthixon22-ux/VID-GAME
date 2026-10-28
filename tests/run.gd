@@ -146,7 +146,7 @@ func run():
  var dungeon=get_tree().current_scene
  check(dungeon.scene_file_path=="res://scenes/dungeon.tscn" and State.hero.journey.region=="dungeon","Shrine dialogue enters the dungeon")
  dismiss(dungeon.dialogue)
- check(dungeon.can_walk(Vector3(0,0,-20)) and not dungeon.can_walk(Vector3(20,0,-20)),"Dungeon floors constrain movement")
+ check(dungeon.can_walk(Vector3(0,0,-20)) and not dungeon.can_walk(Vector3(26,0,-20)),"Dungeon floors constrain movement")
  dungeon.hero.position=Vector3(0,0,-27)
  dungeon.interact()
  check(dungeon.dialogue.active,"Boss is gated by two seals")

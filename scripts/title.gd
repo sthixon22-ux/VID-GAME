@@ -31,7 +31,7 @@ func main_menu():
  if not FileAccess.file_exists(State.SAVE): State.new_adventure()
  var title=UI.label(menu,"VERDANT OATH")
  title.add_theme_font_size_override("font_size",36)
- UI.label(menu,"The Bell Beneath the Woods\nDemo 0.9.0 · Target playtime 15–20 minutes\n")
+ UI.label(menu,"The Bell Beneath the Woods\nFour-region campaign alpha\n")
  UI.button(menu,"Continue adventure",func(): get_tree().change_scene_to_file(State.travel_scene())).disabled=State.save_blocked
  if not State.save_notice.is_empty(): UI.label(menu,State.save_notice)
  UI.button(menu,"Settings",options.open)
@@ -39,7 +39,7 @@ func main_menu():
  UI.button(menu,"Music / sound: %s" % ("Off" if Sound.muted else "On"),func():
   Sound.toggle()
   main_menu())
- UI.label(menu,"\nWASD move · Arrow keys / Right mouse orbit · E interact\nShift sprint · Escape menu\n\nA short original turn-based fantasy adventure.")
+ UI.label(menu,"\nWASD move · Arrow keys / Right mouse orbit · E interact\nShift sprint · Escape menu\n\nAn original turn-based fantasy adventure.")
 func confirm_new():
  clear()
  UI.label(menu,"Begin a new adventure?\nYour current save will be copied to hero.backup.json.")

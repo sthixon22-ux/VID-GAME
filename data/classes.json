@@ -80,7 +80,7 @@
       {
         "id": "light",
         "name": "Paladin Arts",
-        "description": "healing power +3. Permanent once learned. Unlocks Radiant Lance. Learns Holy Light.",
+        "description": "Healing +3. Holy Light: Restore 32 HP + healing bonus. Against undead, also deal 18 holy power damage. No weapon required.",
         "requires": [
           "oath"
         ],
@@ -182,7 +182,7 @@
       {
         "id": "precision",
         "name": "Radiant Discipline",
-        "description": "healing power +5. Permanent once learned. Learns Judgment.",
+        "description": "Healing +5. Judgment: Holy damage; base power +36. Deals 1.8x damage to undead enemies.",
         "requires": [
           "grace"
         ],
@@ -267,7 +267,7 @@
       {
         "id": "mythic",
         "name": "Dawn Avatar",
-        "description": "A signature active ability for this class. Unlocks Dawn Avatar. Only usable while this class is primary.",
+        "description": "Dawn Avatar: Holy damage; base power +55. Defense +12 for 3 rounds. Primary-class mythic only; secondary unlocks stay saved.",
         "requires": [
           "veteran",
           "legend"
@@ -377,7 +377,7 @@
       {
         "id": "light",
         "name": "Ranger Arts",
-        "description": "attack +2. Permanent once learned. Unlocks Seeking Arrow. Learns Seeking Arrow.",
+        "description": "Attack +2. Seeking Arrow: Physical damage; base power +24. Cannot be dodged.",
         "requires": [
           "oath"
         ],
@@ -479,7 +479,7 @@
       {
         "id": "precision",
         "name": "Hunter Precision",
-        "description": "critical chance (%) +5. Permanent once learned. Learns Hawkstrike.",
+        "description": "Critical chance (%) +5. Hawkstrike: Wind damage; base power +36. Deals 1.75x damage to flying enemies.",
         "requires": [
           "grace"
         ],
@@ -563,7 +563,7 @@
       {
         "id": "mythic",
         "name": "Wild Hunt",
-        "description": "A signature active ability for this class. Unlocks Wild Hunt. Only usable while this class is primary.",
+        "description": "Wild Hunt: Wind damage; base power +55. Deals 1.8x damage to beast enemies. Cannot be dodged. Primary-class mythic only; secondary unlocks stay saved.",
         "requires": [
           "veteran",
           "legend"
@@ -673,7 +673,7 @@
       {
         "id": "light",
         "name": "Druid Arts",
-        "description": "healing power +4. Permanent once learned. Unlocks Briarstorm. Learns Briarstorm.",
+        "description": "Healing +4. Briarstorm: Nature damage; base power +24. 50% chance to root for one turn (bosses resist half).",
         "requires": [
           "oath"
         ],
@@ -775,7 +775,7 @@
       {
         "id": "precision",
         "name": "Wild Renewal",
-        "description": "healing power +6. Permanent once learned. Learns Grove Renewal.",
+        "description": "Healing +6. Grove Renewal: Restore 60 HP + healing bonus and renew 12 HP for 4 rounds. Defense +5 for 4 rounds.",
         "requires": [
           "grace"
         ],
@@ -860,7 +860,7 @@
       {
         "id": "mythic",
         "name": "Ancient Grove",
-        "description": "A signature active ability for this class. Unlocks Ancient Grove. Only usable while this class is primary.",
+        "description": "Ancient Grove: Restore 160 HP + healing bonus. Primary-class mythic only; learned with skill points, no level gate. Also restore 100 companion HP (does not revive).",
         "requires": [
           "veteran",
           "legend"
@@ -930,7 +930,7 @@
     "nodes": [
       {
         "id": "oath",
-        "name": "Soldier\u2019s Resolve",
+        "name": "Soldier’s Resolve",
         "description": "attack +2, HP +6. Permanent once learned.",
         "requires": [],
         "bonus": {
@@ -970,7 +970,7 @@
       {
         "id": "light",
         "name": "Warrior Arts",
-        "description": "attack +3. Permanent once learned. Unlocks Cleave. Learns Cleave.",
+        "description": "Attack +3. Cleave: Physical damage; base power +24. Enemy defense -4 for 3 rounds.",
         "requires": [
           "oath"
         ],
@@ -1072,7 +1072,7 @@
       {
         "id": "precision",
         "name": "Veteran Strength",
-        "description": "attack +5. Permanent once learned. Learns Veteran Assault.",
+        "description": "Attack +5. Veteran Assault: Physical damage; base power +36. 2 strikes at 62% power each; defense applies per strike. Bonus damage +16 against armor-broken or weakened targets.",
         "requires": [
           "grace"
         ],
@@ -1156,7 +1156,7 @@
       {
         "id": "mythic",
         "name": "Legendary Onslaught",
-        "description": "A signature active ability for this class. Unlocks Legendary Onslaught. Only usable while this class is primary.",
+        "description": "Legendary Onslaught: Physical damage; base power +55. 4 strikes at 44% power each; defense applies per strike. Primary-class mythic only; secondary unlocks stay saved.",
         "requires": [
           "veteran",
           "legend"
@@ -1263,7 +1263,7 @@
       {
         "id": "light",
         "name": "Barbarian Arts",
-        "description": "critical chance (%) +3. Permanent once learned. Unlocks Sundering Roar. Learns Sundering Roar.",
+        "description": "Critical chance (%) +3. Sundering Roar: Physical damage; base power +24. Enemy defense -7 for 3 rounds.",
         "requires": [
           "oath"
         ],
@@ -1365,7 +1365,7 @@
       {
         "id": "precision",
         "name": "Blood Fury",
-        "description": "critical chance (%) +5. Permanent once learned. Learns Titan Swing.",
+        "description": "Critical chance (%) +5. Titan Swing: Physical damage; base power +36. Ignores 50% defense. Costs 8 HP (cannot self-KO).",
         "requires": [
           "grace"
         ],
@@ -1449,7 +1449,7 @@
       {
         "id": "mythic",
         "name": "Worldbreaker",
-        "description": "A signature active ability for this class. Unlocks Worldbreaker. Only usable while this class is primary.",
+        "description": "Worldbreaker: Physical damage; base power +65. Enemy defense -10 for 3 rounds. Ignores 100% defense. Primary-class mythic only; secondary unlocks stay saved.",
         "requires": [
           "veteran",
           "legend"
@@ -1554,7 +1554,7 @@
       {
         "id": "light",
         "name": "Wizard Arts",
-        "description": "healing power +2. Permanent once learned. Unlocks Arcane Barrage. Learns Arcane Barrage.",
+        "description": "Healing +2. Arcane Barrage: Arcane damage; base power +24. 3 strikes at 48% power each; defense applies per strike.",
         "requires": [
           "oath"
         ],
@@ -1656,7 +1656,7 @@
       {
         "id": "precision",
         "name": "Spell Scholar",
-        "description": "MP +12. Permanent once learned. Learns Astral Rupture.",
+        "description": "MP +12. Astral Rupture: Arcane damage; base power +36. Ignores 100% defense.",
         "requires": [
           "grace"
         ],
@@ -1740,7 +1740,7 @@
       {
         "id": "mythic",
         "name": "Arcane Cataclysm",
-        "description": "A signature active ability for this class. Unlocks Arcane Cataclysm. Only usable while this class is primary.",
+        "description": "Arcane Cataclysm: Arcane damage; base power +60. 3 strikes at 55% power each; defense applies per strike. Primary-class mythic only; secondary unlocks stay saved.",
         "requires": [
           "veteran",
           "legend"
@@ -1846,7 +1846,7 @@
       {
         "id": "light",
         "name": "Sorcerer Arts",
-        "description": "MP +10. Permanent once learned. Unlocks Lightning Lance. Learns Lightning Lance.",
+        "description": "MP +10. Lightning Lance: Lightning damage; base power +24. 35% chance to stun for one turn (bosses resist half).",
         "requires": [
           "oath"
         ],
@@ -1948,7 +1948,7 @@
       {
         "id": "precision",
         "name": "Wild Magic",
-        "description": "MP +14. Permanent once learned. Learns Inferno.",
+        "description": "MP +14. Inferno: Fire damage; base power +36. Burn: 10 fire damage for 3 rounds.",
         "requires": [
           "grace"
         ],
@@ -2032,7 +2032,7 @@
       {
         "id": "mythic",
         "name": "Elemental Tempest",
-        "description": "A signature active ability for this class. Unlocks Elemental Tempest. Only usable while this class is primary.",
+        "description": "Elemental Tempest: Lightning damage; base power +65. Burn: 12 fire damage for 3 rounds. Primary-class mythic only; secondary unlocks stay saved.",
         "requires": [
           "veteran",
           "legend"
@@ -2139,7 +2139,7 @@
       {
         "id": "light",
         "name": "Healer Arts",
-        "description": "MP +8. Permanent once learned. Unlocks Greater Mending. Learns Greater Mending.",
+        "description": "MP +8. Greater Mending: Restore 65 HP + healing bonus. Defense +6 for 2 rounds.",
         "requires": [
           "oath"
         ],
@@ -2241,7 +2241,7 @@
       {
         "id": "precision",
         "name": "Restorative Grace",
-        "description": "healing power +6. Permanent once learned. Learns Sanctuary.",
+        "description": "Healing +6. Sanctuary: Restore 100 HP + healing bonus. Defense +12 for 3 rounds. Also restore 40 companion HP (does not revive).",
         "requires": [
           "grace"
         ],
@@ -2325,7 +2325,7 @@
       {
         "id": "mythic",
         "name": "Miracle",
-        "description": "A signature active ability for this class. Unlocks Miracle. Only usable while this class is primary.",
+        "description": "Miracle: Restore 180 HP + healing bonus. Primary-class mythic only; learned with skill points, no level gate. Revive the active companion with 55 HP, or restore 55 companion HP.",
         "requires": [
           "veteran",
           "legend"
@@ -2431,7 +2431,7 @@
       {
         "id": "light",
         "name": "Rogue Arts",
-        "description": "critical chance (%) +4. Permanent once learned. Unlocks Opportunist Strike. Learns Opportunist Strike.",
+        "description": "Critical chance (%) +4. Opportunist Strike: Physical damage; base power +24. Bonus damage +22 against marked, poisoned, bleeding or burning targets.",
         "requires": [
           "oath"
         ],
@@ -2533,7 +2533,7 @@
       {
         "id": "precision",
         "name": "Opportunist",
-        "description": "critical chance (%) +5. Permanent once learned. Learns Dancing Blades.",
+        "description": "Critical chance (%) +5. Dancing Blades: Physical damage; base power +36. 3 strikes at 48% power each; defense applies per strike. Dexterity +8 for 2 rounds.",
         "requires": [
           "grace"
         ],
@@ -2617,7 +2617,7 @@
       {
         "id": "mythic",
         "name": "Phantom Dance",
-        "description": "A signature active ability for this class. Unlocks Phantom Dance. Only usable while this class is primary.",
+        "description": "Phantom Dance: Physical damage; base power +58. 3 strikes at 55% power each; defense applies per strike. Dexterity +20 for 3 rounds. Primary-class mythic only; secondary unlocks stay saved.",
         "requires": [
           "veteran",
           "legend"
@@ -2722,7 +2722,7 @@
       {
         "id": "light",
         "name": "Assassin Arts",
-        "description": "attack +3. Permanent once learned. Unlocks Deathmark. Learns Deathmark.",
+        "description": "Attack +3. Deathmark: Physical damage; base power +24. 1% instant KO on a landed hit. Bosses are immune; otherwise deals normal damage.",
         "requires": [
           "oath"
         ],
@@ -2824,7 +2824,7 @@
       {
         "id": "precision",
         "name": "Lethal Precision",
-        "description": "attack +5. Permanent once learned. Learns Eclipse Cut.",
+        "description": "Attack +5. Eclipse Cut: Physical damage; base power +36. Ignores 25% defense. Bonus damage +30 when enemy HP is below 35%.",
         "requires": [
           "grace"
         ],
@@ -2908,7 +2908,7 @@
       {
         "id": "mythic",
         "name": "Nightfall",
-        "description": "A signature active ability for this class. Unlocks Nightfall. Only usable while this class is primary.",
+        "description": "Nightfall: Shadow damage; base power +65. Bonus damage +35 against marked, poisoned, bleeding or burning targets. Primary-class mythic only; secondary unlocks stay saved.",
         "requires": [
           "veteran",
           "legend"
@@ -3016,7 +3016,7 @@
       {
         "id": "light",
         "name": "Monk Arts",
-        "description": "critical chance (%) +3. Permanent once learned. Unlocks Rising Palm. Learns Rising Palm.",
+        "description": "Critical chance (%) +3. Rising Palm: Physical damage; base power +24. 65% chance to stun for one turn (bosses resist half).",
         "requires": [
           "oath"
         ],
@@ -3118,7 +3118,7 @@
       {
         "id": "precision",
         "name": "Focused Fist",
-        "description": "attack +5. Permanent once learned. Learns Hundred Fists.",
+        "description": "Attack +5. Hundred Fists: Physical damage; base power +36. 5 strikes at 32% power each; defense applies per strike.",
         "requires": [
           "grace"
         ],
@@ -3202,7 +3202,7 @@
       {
         "id": "mythic",
         "name": "Enlightenment",
-        "description": "A signature active ability for this class. Unlocks Enlightenment. Only usable while this class is primary.",
+        "description": "Enlightenment: Physical damage; base power +55. Ignores 100% defense. Defense +10 for 3 rounds. Primary-class mythic only; secondary unlocks stay saved.",
         "requires": [
           "veteran",
           "legend"
@@ -3310,7 +3310,7 @@
       {
         "id": "light",
         "name": "Necromancer Arts",
-        "description": "HP +12. Permanent once learned. Unlocks Soul Rend. Learns Soul Rend.",
+        "description": "HP +12. Soul Rend: Shadow damage; base power +24. Recover 5 MP on a hit.",
         "requires": [
           "oath"
         ],
@@ -3412,7 +3412,7 @@
       {
         "id": "precision",
         "name": "Deathless Study",
-        "description": "MP +14. Permanent once learned. Learns Grave Harvest.",
+        "description": "MP +14. Grave Harvest: Shadow damage; base power +36. Restore 75% of damage dealt as HP. Bonus damage +20 when enemy HP is below 35%.",
         "requires": [
           "grace"
         ],
@@ -3497,7 +3497,7 @@
       {
         "id": "mythic",
         "name": "Requiem",
-        "description": "A signature active ability for this class. Unlocks Requiem. Only usable while this class is primary.",
+        "description": "Requiem: Shadow damage; base power +60. Restore 100% of damage dealt as HP. Primary-class mythic only; secondary unlocks stay saved.",
         "requires": [
           "veteran",
           "legend"

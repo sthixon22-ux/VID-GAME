@@ -1,6 +1,8 @@
 class_name TownServices
 extends RefCounted
 const DOORS={
+ "sahir":[[Vector3(-8,0,8),"weapons","Caravan Blades"],[Vector3(8,0,8),"armor","Sunveil Tailor"],[Vector3(-8,0,0),"items","Oasis Supplies"],[Vector3(8,0,0),"inn","The Copper Moon"]],
+ "kharholt":[[Vector3(-8,0,8),"weapons","Brann’s Anvil"],[Vector3(8,0,8),"armor","Forgeguard Armory"],[Vector3(-8,0,0),"items","Mountain Provisions"],[Vector3(8,0,0),"inn","The Hearthstone"]],
  "forest":[[Vector3(-8,0,8),"weapons","Reed & Steel · Weapons"],[Vector3(7,0,8),"armor","The Stitch & Shield · Armor"],[Vector3(-9,0,-1),"items","Mira’s Supplies · Items"],[Vector3(8,0,-2),"inn","The Wayfarer · Inn"]],
  "mirefen":[[Vector3(-8,0,-2),"weapons","Tamsin’s Reed & Steel"],[Vector3(8,0,-2),"armor","Beren’s Dry Thread"],[Vector3(-8,0,-9),"items","Sella’s Supplies"],[Vector3(8,0,-9),"inn","The Lantern Rest · Inn"]]}
 static func nearby(region:String,pos:Vector3)->Array:
@@ -16,6 +18,7 @@ static func signs(root:Node3D,region:String):
   var step=Art.box(root,door[0]+Vector3(0,-.02,0),Vector3(1.7,.12,1.1),Color.WHITE)
   step.material_override=mat
 static func shop(region:String,service:String)->String:
+ if region in ["sahir","kharholt"]:return region+"_"+service
  var prefix="reedcross" if region=="mirefen" else "willowbrook"
  return prefix+"_"+service
 static func enter(tree:SceneTree,region:String,door:Array):
@@ -25,7 +28,7 @@ static func enter(tree:SceneTree,region:String,door:Array):
  State.shop_id=shop(region,door[1])
  State.save_game()
  tree.change_scene_to_file("res://scenes/town_interior.tscn")
-static func inn_price(region:String)->int:return 24 if region=="mirefen" else 12
+static func inn_price(region:String)->int:return {"forest":12,"mirefen":24,"sahir":32,"kharholt":45}.get(region,12)
 static func rest(region:String)->bool:
  var price=inn_price(region)
  if State.hero.gold<price:return false

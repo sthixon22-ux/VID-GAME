@@ -18,6 +18,12 @@ var enemy_stun=0
 var regeneration=0
 var regeneration_cast=false
 var bleed=0
+var sunder=0
+var sunder_rounds=0
+var burn=0
+var burn_rounds=0
+var wound=0
+var wound_rounds=0
 var demo_rules=false
 var enemy_hp=85
 var wolf_hp=55
@@ -73,10 +79,18 @@ func emit(actor: String, target: String, amount: int, label: String):
 func hit_enemy(actor: String, power: int, label: String) -> bool:
  var entry=AbilityBook.entry(label)
  var physical=actor=="Wolf" or entry.get("kind","") in ["attack","weapon","technique"]
- if physical and int(enemy.get("dexterity",0))>0 and rng.randf()<GameRules.dodge_chance(int(enemy.dexterity)):
+ if physical and not entry.get("sure_hit",false) and int(enemy.get("dexterity",0))>0 and rng.randf()<GameRules.dodge_chance(int(enemy.dexterity)):
   emit(actor,"Goblin",0,"Dodged")
   return false
- var amount=damage(power,maxi(0,int(enemy.defense)-(5 if weakened>0 else 0)))+(6 if marked>0 else 0)
+ var defense=maxi(0,int(enemy.defense)-(5 if weakened>0 else 0)-(sunder if sunder_rounds>0 else 0))
+ defense=int(defense*(1.0-float(entry.get("ignore_defense",0))))
+ var amount=damage(power,defense)+(6 if marked>0 else 0)
+ var element=str(entry.get("damage_type","physical"))
+ var multiplier=float(enemy.get("affinities",{}).get(element,1.0))
+ if enemy.get("tags",[]).has(entry.get("slayer","")):multiplier*=float(entry.get("slayer_multiplier",1))
+ amount=maxi(1,roundi(amount*multiplier))
+ if multiplier>1.0:label+=" · Effective!"
+ elif multiplier<1.0:label+=" · Resisted"
  if demo_rules and actor=="Hero" and physical and rng.randf()<GameRules.critical_chance(current_stat("critical")):
   amount=ceili(amount*1.5)
   label+=" · Critical!"
@@ -134,6 +148,10 @@ func enemy_turn():
   bound-=1
   emit("Goblin","Goblin",0,"Entangled; loses turn")
   return
+ if species in ["glass_sentinel","ironroot_colossus"] and turns%3==1 and not charging:
+  charging=true
+  emit("Goblin","Goblin",0,"Prismatic wings flare! Glassfall next turn — DEFEND!" if species=="glass_sentinel" else "The furnace bell tolls! Mountainfall next turn — DEFEND!")
+  return
  if species=="reliquary_keeper" and turns%3==1 and not charging:
   charging=true
   emit("Goblin","Goblin",0,"The crown fills with water! Oathbreaker Tide next turn — DEFEND!")
@@ -151,6 +169,7 @@ func enemy_turn():
  var power=int(enemy.attack)-(5 if weakened>0 else 0)+rng.randi_range(-3,3)+(22 if heavy else 0)
  if enemy.get("behavior","")=="ambush" and turns==1:power+=6
  var attack_label="Oathbreaker Tide" if heavy and species=="reliquary_keeper" else ("Crushing Canopy" if heavy else str(enemy.get("attack_name","Briar lash" if species!="goblin" else "Goblin club")))
+ if heavy and species in ["glass_sentinel","ironroot_colossus"]:attack_label="Glassfall" if species=="glass_sentinel" else "Mountainfall"
  if not heavy and wolf_hp>0 and h.companion.active and rng.randi_range(0,3)==0:
   if demo_rules and h.companion.current=="griffin" and rng.randf()<0.15:
    emit("Goblin","Wolf",0,"Aerial evasion")
@@ -201,6 +220,14 @@ func round_(action: String) -> Array:
    bleed-=1
    enemy_hp=maxi(0,enemy_hp-5)
    emit("Wolf","Goblin",5,"Bleeding")
+ for condition in ["burn","wound"]:
+  if get(condition+"_rounds")>0 and enemy_hp>0 and h.hp>0:
+   set(condition+"_rounds",get(condition+"_rounds")-1)
+   var tick=int(get(condition))
+   if condition=="burn":tick=maxi(1,roundi(tick*float(enemy.get("affinities",{}).get("fire",1.0))))
+   enemy_hp=maxi(0,enemy_hp-tick)
+   emit("Hero","Goblin",tick,"Burning" if condition=="burn" else "Bleeding wound")
+ if sunder_rounds>0:sunder_rounds-=1
  if poison>0 and enemy_hp>0 and h.hp>0:
   poison-=1
   enemy_hp=maxi(0,enemy_hp-5)
@@ -261,7 +288,11 @@ func demo_hero_turn(action: String):
  var power=current_stat("attack")+int(entry.get("power",0))+blessing
  if h.equipment.Weapon=="None" and not AbilityBook.proficient(h,"unarmed"): power-=8
  if entry.kind in ["weapon","technique"] and h.weapon_skills.get(AbilityBook.weapon_type(h),[]).has("flow"): power+=4
+ if entry.effect in ["magic","drain","pierce","execute"] and (entry.has("hits") or entry.has("life_steal") or entry.has("ward") or entry.has("conditional") or entry.has("sunder") or entry.has("burn")):
+  SkillEffects.cast(self,action,entry,power)
+  return
  match entry.effect:
+  "special":SkillEffects.cast(self,action,entry,power)
   "buff":
    buffs[entry.stat]={"amount":int(entry.power),"rounds":int(entry.duration)+1}
    emit("Hero","Hero",0,action+" · "+str(entry.stat)+" increased")
@@ -314,7 +345,10 @@ func demo_hero_turn(action: String):
    if landed and rng.randf()<chance: enemy_stun=1
    emit("Hero","Goblin",0,"Stunned for one turn" if enemy_stun else "Stun resisted")
   _:
-   hit_enemy("Hero",power,action)
+   if entry.has("hits") or entry.has("ward") or entry.has("life_steal") or entry.has("sunder") or entry.has("conditional") or entry.has("evasion") or entry.has("burn"):
+    SkillEffects.cast(self,action,entry,power)
+   else:hit_enemy("Hero",power,action)
+ if entry.effect in ["heal","regrowth","bash"]:SkillEffects.after(self,entry,action)
 func companion_turn():
  if wolf_hp<=0 or not h.companion.active:return
  var id:String=h.companion.current
@@ -376,6 +410,9 @@ func status_summary() -> String:
  if regeneration>0: labels.append("Regeneration %s" % regeneration)
  if nature_blessing>0: labels.append("Nature blessing %s" % nature_blessing)
  if bleed>0: labels.append("Bleeding %s" % bleed)
+ if sunder_rounds>0:labels.append("Armor break -%s (%s)" % [sunder,sunder_rounds])
+ if burn_rounds>0:labels.append("Burn %s (%s)" % [burn,burn_rounds])
+ if wound_rounds>0:labels.append("Wound %s (%s)" % [wound,wound_rounds])
  if poison>0: labels.append("Poison %s" % poison)
  if weakened>0: labels.append("Weakened %s" % weakened)
  for stat in buffs: labels.append("%s +%s (%s)" % [stat.capitalize(),buffs[stat].amount,buffs[stat].rounds])
@@ -402,7 +439,7 @@ func auto_action() -> String:
  for id in candidates:
   if not legal(id): continue
   var entry=AbilityBook.entry(id)
-  if entry.effect not in ["damage","magic","drain","rage","execute","pierce","frost"]: continue
+  if entry.effect not in ["damage","magic","drain","rage","execute","pierce","frost","special"]: continue
   var value=float(entry.get("power",0))
   if entry.effect in ["magic","drain","frost"]: value+=float(stats.max_mp)*0.18+float(h.level)*1.5-float(stats.attack)
   if value>score:

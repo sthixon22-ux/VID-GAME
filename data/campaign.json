@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "status": "chapter_2_playable_alpha_later_regions_planning",
+  "status": "chapters_1_through_4_playable_alpha",
   "story": {
     "acts": 5,
     "final_choice_flag": "allegiance",
@@ -39,23 +39,23 @@
       "id": "sahir",
       "name": "Sahir Expanse",
       "biome": "desert",
-      "minimum_level": 15,
-      "maximum_level": 23,
+      "minimum_level": 8,
+      "maximum_level": 13,
       "main_dungeon": "dungeon_3",
       "unlocked_after": "dungeon_2",
       "starting_town": "qasira",
-      "implementation": "planning"
+      "implementation": "playable_alpha"
     },
     {
       "id": "kharholt",
       "name": "Kharholt Highlands",
       "biome": "mountains",
-      "minimum_level": 23,
-      "maximum_level": 31,
+      "minimum_level": 12,
+      "maximum_level": 18,
       "main_dungeon": "dungeon_4",
       "unlocked_after": "dungeon_3",
       "starting_town": "kharholt_forge",
-      "implementation": "planning"
+      "implementation": "playable_alpha"
     },
     {
       "id": "canopy",
@@ -170,8 +170,8 @@
       "level_max": 15,
       "central_mechanic": "water_levels",
       "boss_id": "reliquary_keeper",
-      "playable": false,
-      "existing_scene": null,
+      "playable": true,
+      "existing_scene": "res://scenes/reliquary.tscn",
       "requires": [
         "dungeon_1"
       ],
@@ -182,12 +182,12 @@
       "name": "Emberglass Tomb",
       "region_id": "sahir",
       "number": 3,
-      "level_min": 15,
-      "level_max": 23,
+      "level_min": 8,
+      "level_max": 13,
       "central_mechanic": "light_mirrors",
       "boss_id": "glass_sentinel",
-      "playable": false,
-      "existing_scene": null,
+      "playable": true,
+      "existing_scene": "res://scenes/emberglass.tscn",
       "requires": [
         "dungeon_2"
       ],
@@ -198,12 +198,12 @@
       "name": "Ironroot Bastion",
       "region_id": "kharholt",
       "number": 4,
-      "level_min": 23,
-      "level_max": 31,
+      "level_min": 12,
+      "level_max": 18,
       "central_mechanic": "siege_lifts",
       "boss_id": "ironroot_colossus",
-      "playable": false,
-      "existing_scene": null,
+      "playable": true,
+      "existing_scene": "res://scenes/ironroot.tscn",
       "requires": [
         "dungeon_3"
       ],
@@ -391,7 +391,7 @@
         ]
       },
       "notes": "Reed-topped canals, antidotes, river tools",
-      "playable": false,
+      "playable": true,
       "shop_ids": [
         "reedcross_weapons",
         "reedcross_armor"
@@ -418,7 +418,7 @@
         ]
       },
       "notes": "Dune caravans, shifting market tents",
-      "playable": false
+      "playable": true
     },
     {
       "id": "kharholt_forge",
@@ -442,7 +442,7 @@
         ]
       },
       "notes": "Fortress forge and ceremonial weapon smiths",
-      "playable": false
+      "playable": true
     },
     {
       "id": "leafhaven",

@@ -41,6 +41,7 @@ static func shape(parent: Node3D, pos: Vector3, scale_: Vector3, color: Color, k
  parent.add_child(mesh)
  return mesh
 static func actor(kind: String, gear: Dictionary={}) -> Node3D:
+ if kind in ["SandDrake","Scarab","GlassWisp","GlassSovereign","CragHound","ForgeSentinel","StormRoc","IronrootColossus"]:return FrontierCreature.new(kind)
  if kind in ["MireLeech","BogWisp","ReedStalker","DrownedSentinel","ReliquaryKeeper"]:return MarshCreature.new(kind)
  if kind=="Goblin": return CompanionVisual.model("res://assets/models/enemies/forest_goblin.glb")
  if kind=="Wolf": return CompanionVisual.build("intro_wolf")
@@ -189,6 +190,15 @@ static func mossling()->Node3D:
  return CompanionVisual.model("res://assets/models/enemies/mossling.glb")
 static func warden()->Node3D:
  var model=CompanionVisual.model("res://assets/models/enemies/warden.glb")
+ # Crown of old branches and hanging votive bells distinguish the guardian from common forest foes.
+ var bark=surface(Color("716b52"),"wood",2)
+ for side in [-1,1]:
+  var bough=shape(model,Vector3(side*1.2,2.8,.1),Vector3(.22,2.4,.22),Color.WHITE,"cylinder")
+  bough.rotation.z=-side*.7;bough.material_override=bark
+  for i in 3:
+   var bell=shape(model,Vector3(side*(1.1+i*.3),2.8+i*.18,.1),Vector3(.22,.3,.22),Color("c8b57d"),"cone")
+   bell.rotation.z=PI
+   box(model,Vector3(side*(1.1+i*.3),2.35+i*.18,.12),Vector3(.09,.6,.025),Color("91b9b2"))
  var glow=OmniLight3D.new()
  glow.position=Vector3(0,1.8,-.5)
  glow.light_color=Color("8dedc6")

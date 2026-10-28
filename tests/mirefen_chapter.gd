@@ -37,7 +37,7 @@ func run():
  var saved_classes=[State.hero.primary,State.hero.secondary.duplicate(),State.hero.profile.sex]
  var area=await scene("res://scenes/mirefen.tscn")
  check(area.hero is HeroVisual and area.companion is CompanionActor,"Approved hero and companion art survives region travel")
- check(area.walkable(Vector3(0,0,-40)) and not area.walkable(Vector3(14,0,-40)),"Marsh causeway walkable; deep banks bounded")
+ check(area.walkable(Vector3(0,0,-40)) and area.walkable(Vector3(12,0,-40)) and not area.walkable(Vector3(19,0,-40)),"Marsh causeway and new side boardwalk are walkable; deep banks bounded")
  check(not area.walkable(Vector3(-8,0,-5)),"Settlement cottages block movement")
  interact_at(area,area.RELIQUARY_GATE)
  check(get_tree().current_scene==area and not State.hero.campaign.sluice_key,"Dungeon access requires investigation, not class or gear")

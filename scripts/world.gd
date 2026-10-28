@@ -1,4 +1,5 @@
 extends Node3D
+var treasures:TreasureField
 var dialogue: Dialogue
 var completion: VBoxContainer
 var hero: Node3D
@@ -43,6 +44,7 @@ func _ready():
  State.hero.journey.region="forest"
  dialogue=Dialogue.new()
  add_child(dialogue)
+ treasures=TreasureField.new("forest");add_child(treasures)
  Sound.theme_("woodland")
  hero=Art.actor("Hero",State.hero.equipment)
  add_child(hero)
@@ -250,6 +252,7 @@ func context_prompt() -> String:
  if hero.position.length()<3: return "[R] Rest and restore HP / MP · Follow the northern trail"
  return ""
 func interact():
+ if not modal_active() and treasures.open_near(hero.position):return
  if not modal_active():
   var door=TownServices.nearby("forest",hero.position)
   if not door.is_empty():

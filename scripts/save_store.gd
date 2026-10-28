@@ -93,7 +93,7 @@ static func valid_nested(data: Dictionary) -> bool:
    if not numeric(value) or value<0 or value>(3 if field=="dials" else 2): return false
  var visit:Dictionary=data.get("town_visit",{})
  if not visit.is_empty():
-  if visit.get("region","") not in ["forest","mirefen"]:return false
+  if visit.get("region","") not in ["forest","mirefen","sahir","kharholt"]:return false
   if visit.get("service","") not in ["weapons","armor","items","inn"]:return false
   if not visit.get("name","") is String:return false
   if not visit.get("position") is Array or visit.position.size()!=3:return false
@@ -107,6 +107,15 @@ static func valid_nested(data: Dictionary) -> bool:
   if not campaign[key] is Array:return false
   for index in campaign[key]:
    if not numeric(index) or index<0 or index> (2 if key=="readings" else 3):return false
+ if campaign.has("expedition"):
+  var progress=campaign.expedition
+  if not progress is Dictionary:return false
+  for field in ["chests","inscriptions","briefed","cleared","side_claimed","lifts","rooms","boss_intro"]:
+   if progress.has(field) and not string_array(progress[field]):return false
+  if progress.has("mirrors"):
+   if not progress.mirrors is Array or progress.mirrors.size()!=3:return false
+   for value in progress.mirrors:
+    if not numeric(value) or value<0 or value>3:return false
  var companion: Dictionary=data.companion
  if companion.has("owned") and not string_array(companion.owned): return false
  if companion.has("records"):

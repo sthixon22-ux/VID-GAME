@@ -20,7 +20,7 @@ func _ready():
   "DrownedSentinel","ReliquaryKeeper":
    native=CompanionVisual.build("golem")
    body.add_child(native)
-   if species=="ReliquaryKeeper":native.scale=Vector3.ONE*1.3
+   if species=="ReliquaryKeeper":native.scale=Vector3.ONE*1.6
    for x in [-.8,.8]:
     Art.shape(body,Vector3(x,1.7,0),Vector3(.15,.8,.15),Color("45b5b3"),"cone")
    if species=="ReliquaryKeeper":
@@ -29,12 +29,18 @@ func _ready():
     ring.inner_radius=.34
     ring.outer_radius=.49
     crown.mesh=ring
-    crown.position=Vector3(0,2.75,0)
+    crown.position=Vector3(0,3.35,0)
     crown.material_override=Art.surface(Color("b0a276"),"metal",1)
     body.add_child(crown)
     for i in 7:
      var a=i*TAU/7
-     Art.shape(body,Vector3(sin(a)*.43,2.93,cos(a)*.43),Vector3(.1,.38,.1),Color("8ecbc0"),"cone")
+     Art.shape(body,Vector3(sin(a)*.43,3.53,cos(a)*.43),Vector3(.1,.38,.1),Color("8ecbc0"),"cone")
+    # A broken floodgate shield and tide-staff belong to the keeper, not its common sentinels.
+    var shield=Art.box(body,Vector3(1.1,1.7,-.15),Vector3(.95,1.8,.22),Color("789f9e"))
+    shield.rotation.z=-.15;shield.material_override=Art.surface(Color("789f9e"),"metal",2)
+    for row in 4:Art.box(body,Vector3(1.1,1.15+row*.35,-.29),Vector3(.7,.055,.04),Color("d4c695"))
+    Art.box(body,Vector3(-1.15,1.8,0),Vector3(.12,3.6,.12),Color("7e7767"))
+    Art.shape(body,Vector3(-1.15,3.5,0),Vector3(.6,.8,.6),Color("72dbd9"),"cone")
   "MireLeech":
    for i in range(7):
     Art.shape(body,Vector3(0,.22+sin(i*.45)*.08,(i-3)*.19),Vector3(.5-i*.025,.45,.34),Color("4c665c"))

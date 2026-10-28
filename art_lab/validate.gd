@@ -94,7 +94,7 @@ func run():
  var unmodified=true
  # Historical audit exemptions: approved art integration and the requested Chapter 2 content changes.
  # Remaining source/assets retain their original hashes; gameplay regressions run in tests/*.tscn.
- var approved=["scripts/hero_visual.gd","scripts/art.gd","scripts/character_create.gd","scripts/state.gd","scripts/save_store.gd","scripts/companion_visual.gd","scripts/battle_motion.gd","scripts/battle.gd","scripts/character_menu.gd","scripts/combat.gd","scripts/auto_battle_panel.gd","scripts/quest_book.gd","scripts/world.gd","scripts/trail_map.gd","data/shops.json","data/enemies.json","data/equipment.json","data/dialogue.json","scripts/village_art.gd","scripts/forest.gd","scripts/gear_visual.gd","scripts/dungeon.gd","scripts/title.gd"]
+ var approved=["scripts/hero_visual.gd","scripts/art.gd","scripts/character_create.gd","scripts/state.gd","scripts/save_store.gd","scripts/companion_visual.gd","scripts/battle_motion.gd","scripts/battle.gd","scripts/character_menu.gd","scripts/combat.gd","scripts/auto_battle_panel.gd","scripts/quest_book.gd","scripts/world.gd","scripts/trail_map.gd","data/shops.json","data/enemies.json","data/equipment.json","data/dialogue.json","scripts/village_art.gd","scripts/forest.gd","scripts/gear_visual.gd","scripts/dungeon.gd","scripts/title.gd","data/classes.json","data/weapon_trees.json","data/abilities.json"]
  for path in baseline:
   if path in approved:continue
   if FileAccess.get_sha256("res://"+path)!=baseline[path]:unmodified=false;push_error("Production changed: "+path)

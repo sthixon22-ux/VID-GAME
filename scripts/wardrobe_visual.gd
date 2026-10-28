@@ -9,7 +9,8 @@ const CHESTS={
  "Reedcoat":{"outfit":"ranger","color":"789aaa","style":"coat"},
  "Sluicekeeper Robe":{"outfit":"traveler","color":"92b8c9","style":"robe"}}
 static func profile(chest:String)->Dictionary:
- return CHESTS.get(chest,CHESTS["None"])
+ var aliases={"Sunveil Coat":"Reedcoat","Forgeguard Coat":"Steel Cuirass"}
+ return CHESTS.get(aliases.get(chest,chest),CHESTS["None"])
 static func apply(hero:HeroVisual,chest:String):
  var definition=profile(chest)
  hero.set_meta("wardrobe_style",definition.style)

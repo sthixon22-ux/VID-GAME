@@ -241,12 +241,17 @@ func merge_defaults(default, value):
  return value
 func travel_scene() -> String:
  if hero.profile.economy and not hero.profile.created: return "res://scenes/create.tscn"
+ if hero.journey.region in ["sahir","kharholt","emberglass","ironroot"]:return ExpeditionRules.scene(hero.journey.region)
  if hero.journey.region=="dungeon": return "res://scenes/dungeon.tscn"
  if hero.journey.region=="interior":return "res://scenes/town_interior.tscn"
  if hero.journey.region=="mirefen": return "res://scenes/mirefen.tscn"
  if hero.journey.region=="reliquary": return "res://scenes/reliquary.tscn"
  return "res://scenes/world.tscn"
 func retreat_to_safety():
+ if hero.journey.region in ["sahir","kharholt","emberglass","ironroot"]:
+  hero.journey.region=ExpeditionRules.region_for(hero.journey.region)
+  remember_position(Vector3(0,0,7))
+  return
  var marsh=hero.journey.region in ["mirefen","reliquary"]
  hero.journey.region="mirefen" if marsh else "forest"
  remember_position(Vector3(0,0,-10) if marsh else Vector3.ZERO)
@@ -491,6 +496,9 @@ func puzzle_note(index: int):
 func species_wins(species: String) -> int:
  return maxi(int(hero.mastery),int(hero.monsters.get(species,0))) if species=="goblin" else int(hero.monsters.get(species,0))
 func record_encounter_clear():
+ if encounter_id in [2201,2202,2203] or (encounter_id>=3100 and encounter_id<3200) or (encounter_id>=4100 and encounter_id<4200):
+  var progress=ExpeditionRules.progress(hero)
+  if not progress.rooms.has(str(encounter_id)):progress.rooms.append(str(encounter_id))
  cleared_until[encounter_id]=Time.get_ticks_msec()+45000
  if encounter_id>=300 and encounter_id<=302 and not hero.demo.field_guards.has(encounter_id-300): hero.demo.field_guards.append(encounter_id-300)
- if encounter_id in [100,101] and not hero.journey.guards.has(encounter_id-100): hero.journey.guards.append(encounter_id-100)
+ if encounter_id in [100,101,102,103,104,105] and not hero.journey.guards.has(encounter_id-100): hero.journey.guards.append(encounter_id-100)

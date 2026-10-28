@@ -15,7 +15,7 @@
     ]
   },
   "reedcross_weapons": {
-    "name": "Reedcross \u00b7 Tamsin\u2019s Reed & Steel",
+    "name": "Reedcross · Tamsin’s Reed & Steel",
     "equipment": [
       "Reedsteel Sword",
       "Marsh Daggers",
@@ -26,7 +26,7 @@
     "supplies": []
   },
   "reedcross_armor": {
-    "name": "Reedcross \u00b7 Beren\u2019s Dry Thread",
+    "name": "Reedcross · Beren’s Dry Thread",
     "equipment": [
       "Reedcoat",
       "Sluicekeeper Robe",
@@ -35,7 +35,7 @@
     "supplies": []
   },
   "willowbrook_weapons": {
-    "name": "Willowbrook \u00b7 Reed & Steel",
+    "name": "Willowbrook · Reed & Steel",
     "equipment": [
       "Iron Sword",
       "Twin Daggers",
@@ -44,7 +44,7 @@
     "supplies": []
   },
   "willowbrook_armor": {
-    "name": "Willowbrook \u00b7 Stitch & Shield",
+    "name": "Willowbrook · Stitch & Shield",
     "equipment": [
       "Traveler's Clothing",
       "Traveler's Pendant"
@@ -52,7 +52,7 @@
     "supplies": []
   },
   "willowbrook_items": {
-    "name": "Willowbrook \u00b7 Mira\u2019s Supplies",
+    "name": "Willowbrook · Mira’s Supplies",
     "equipment": [],
     "supplies": [
       "potion",
@@ -61,7 +61,63 @@
     ]
   },
   "reedcross_items": {
-    "name": "Reedcross \u00b7 Sella\u2019s Supplies",
+    "name": "Reedcross · Sella’s Supplies",
+    "equipment": [],
+    "supplies": [
+      "potion",
+      "ether",
+      "treat"
+    ]
+  },
+  "sahir_weapons": {
+    "name": "Sahir Arms",
+    "equipment": [
+      "Sahir Sword",
+      "Sahir Daggers",
+      "Sahir Staff",
+      "Sahir Bow",
+      "Sahir Spear"
+    ],
+    "supplies": []
+  },
+  "sahir_armor": {
+    "name": "Sahir Outfitter",
+    "equipment": [
+      "Sunveil Coat",
+      "Prismheart Pendant"
+    ],
+    "supplies": []
+  },
+  "sahir_items": {
+    "name": "Sahir Supplies",
+    "equipment": [],
+    "supplies": [
+      "potion",
+      "ether",
+      "treat"
+    ]
+  },
+  "kharholt_weapons": {
+    "name": "Kharholt Arms",
+    "equipment": [
+      "Kharholt Sword",
+      "Kharholt Daggers",
+      "Kharholt Staff",
+      "Kharholt Bow",
+      "Kharholt Spear"
+    ],
+    "supplies": []
+  },
+  "kharholt_armor": {
+    "name": "Kharholt Outfitter",
+    "equipment": [
+      "Forgeguard Coat",
+      "Ironroot Signet"
+    ],
+    "supplies": []
+  },
+  "kharholt_items": {
+    "name": "Kharholt Supplies",
     "equipment": [],
     "supplies": [
       "potion",
