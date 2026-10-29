@@ -81,3 +81,9 @@ No new third-party pack was downloaded for this pass: the public texture-host re
 ## Four-region alpha additions
 
 No new third-party downloads were used. Sahir and Kharholt reuse the existing credited village, equipment, companion and animation assets. `FrontierCreature` supplies encounter variants using the existing dragon, guardian, wolf, griffin, fox and bristleback families, with original ornaments, mirror/orrery effects and furnace details. The new biome ground shader, palm/wreck scenery, mirror beams and guardian decorations are original project code. These are alpha derivatives and set dressing, not newly commissioned bespoke character models. Original upstream license notices and source records remain intact.
+
+## Thematic equipment and wing-arm dragons
+
+The new outfit patterns are original derivatives of the existing credited CC0 Quaternius-derived class atlases; their hashes and generator are recorded in `textures/equipment/DERIVATIVES.json`. Weapon ornaments and named-material variants are original runtime code in `EquipmentStyle`. No new third-party pack was downloaded.
+
+The true-dragon model is now an original four-limbed derivative of the verified CC0 `Dragon_Evolved.glb`, with two hind legs, two supporting wing-arms, wrist claws, a remapped rig and nine original clips. See `models/companions/refined/DRAGON_WINGARM_SOURCE.json` for input/output hashes and `tools/build_wingarm_dragon.py` for reproduction. Companion and Namarra use it; Sandglass Drakes retain the original source anatomy. Upstream source files and license notices remain untouched.

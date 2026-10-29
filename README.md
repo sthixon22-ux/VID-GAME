@@ -8,6 +8,16 @@ A fully turn-based 3D RPG with four playable regions: Willowbrook, Mirefen, Sahi
 
 [Equipment preview](docs/screenshots/0_9_equipment.png) · [Companion skill tree](docs/screenshots/0_9_companion_tree.png)
 
+## Thematic gear, companion field powers and four-limbed dragons
+
+The starter town stays simple. From Reedcross onward, shops cover every weapon family and multiple armor silhouettes; advanced nonregional crafts arrive in Sahir and Kharholt. Named gear has equipment motifs, outfit patterns and elemental attacks where specified. Armor shop previews show the outfit on your character.
+
+Use **Tab → Inventory** for Return Threads, Town Waystones, camp supplies and companion field powers. Companion trees now cost **80 bond points**, with slower XP growth; their final powers recharge only after a paid inn rest with that companion active. Existing learned skills remain saved. Sundering Roar is weapon-independent and appears under **Spells**.
+
+Dialogue uses rendered portraits of the actual speaker and your chosen hero. True dragons now have two hind legs plus two supporting wing-arms; drakes remain separate. Dragon Slash and Sacred Strike have expanded thematic effects.
+
+[Changes, previews, balance and crash investigation](docs/THEMATIC_UPDATE.md)
+
 ## Four playable regions and distinct skill effects
 
 Continue your existing adventure. After restoring the Reliquary, report to Iona, then use **E at the Sahir caravan-road sign east of Reedcross’s square**. In Qasira, meet Safiya and investigate the three marked sites. Restoring the Emberglass guardian opens the northeastern Kharholt Pass. Both new towns have enterable shops and paid inns.
@@ -129,7 +139,7 @@ godot --headless --path . --editor --import --quit
 Tests create/replace saves; isolate each run from your personal data:
 
 ```bash
-for suite in run presentation reliability demo progression layout shop_flow adventure8 progression9 hero_quaternius class_skins companion_art campaign_expansion mirefen_chapter equipment_towns frontier frontier_balance; do
+for suite in run presentation reliability demo progression layout shop_flow adventure8 progression9 hero_quaternius class_skins companion_art campaign_expansion mirefen_chapter equipment_towns frontier frontier_balance theme_update ironroot_combat_stress; do
   XDG_DATA_HOME=/tmp/verdant-test-$suite godot --headless --path . res://tests/$suite.tscn
 done
 ```
