@@ -37,3 +37,14 @@ func open_near(pos:Vector3)->bool:
  Sound.cue("confirm")
  State.save_game()
  return true
+
+func _process(_delta):
+ if State.field_reveal_area!=area:return
+ for child in get_parent().get_children():
+  if child is ExplorationHUD:
+   for id in chests:
+    if not chests[id].visible:
+     child.map.markers=child.map.markers.filter(func(marker):return marker.get("treasure","")!=id)
+    if not chests[id].get_meta("mapped",false) and chests[id].visible:
+     child.map.markers.append({"position":chests[id].position,"color":Color("f2d185"),"treasure":id})
+     chests[id].set_meta("mapped",true)

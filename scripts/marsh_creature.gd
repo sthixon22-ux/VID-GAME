@@ -59,7 +59,9 @@ func _ready():
 func motion(moving:bool,sprint:bool=false):
  if native and native.has_method("motion"):native.motion(moving,sprint)
 func play_action(label:String)->float:
- if native and native.has_method("play_action"):return native.play_action(label)
+ if native and native.has_method("play_action"):
+  native.battle=battle
+  return native.play_action(label)
  var tween=create_tween()
  tween.tween_property(body,"rotation:z",.18,.15)
  tween.tween_property(body,"rotation:z",0,.2)

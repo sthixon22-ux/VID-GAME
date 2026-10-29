@@ -100,6 +100,7 @@ static func valid_nested(data: Dictionary) -> bool:
   for coordinate in visit.position:
    if not numeric(coordinate):return false
  var campaign:Dictionary=data.get("campaign",{})
+ if campaign.has("field_reveal_area") and not campaign.field_reveal_area is String:return false
  for key in ["audience","investigating","sluice_key","reliquary_west","reliquary_east","reliquary_cleared","reported","desert_clue","cache"]:
   if campaign.has(key) and not campaign[key] is bool:return false
  for key in ["readings","reeds"]:
@@ -125,6 +126,7 @@ static func valid_nested(data: Dictionary) -> bool:
    for key in ["level","xp","points","hp"]:
     if not numeric(record.get(key)): return false
    if not string_array(record.get("skills")): return false
+   if record.has("field_used") and not record.field_used is bool:return false
  return true
 static func numeric(value) -> bool:
  return (value is int or value is float) and is_finite(float(value))

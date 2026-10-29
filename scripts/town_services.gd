@@ -34,6 +34,7 @@ static func rest(region:String)->bool:
  if State.hero.gold<price:return false
  State.hero.gold-=price
  State.restore()
+ if State.hero.companion.active and not State.companion_record().is_empty():State.companion_record().field_used=false
  State.save_game()
  return true
 

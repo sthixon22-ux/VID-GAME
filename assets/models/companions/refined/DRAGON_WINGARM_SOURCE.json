@@ -1,0 +1,9 @@
+{
+  "source": "assets/vendor/quaternius/companions/monsters/Dragon_Evolved.glb",
+  "source_sha256": "9805d397f669d5e18041ddcb78a8877f58a685ae9cf4920799f623675eb25a99",
+  "license": "CC0; existing verified Quaternius source notice retained",
+  "output": "assets/models/companions/refined/dragon_wingarm.glb",
+  "sha256": "2afec6fc63b370a25f5dffb9d0811be604f20b1ebcffee455276c98bb8e9ad17",
+  "anatomy": "Two hind legs and two integrated supporting wing-arms. No separate back wings or forelegs.",
+  "original_work": "Skin remap, hind limbs, wing-arm membranes/fingers/claws, four-contact rig and nine animation clips."
+}

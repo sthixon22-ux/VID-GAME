@@ -1,0 +1,1 @@
+Original equipment pattern derivatives created by tools/build_equipment_textiles.py from the existing credited CC0 Quaternius-derived class outfit atlases. Source grants remain in assets/vendor/SOURCES.json and class_skins/DERIVATIVES.json. No new third-party download. Patterns are cosmetic; original rigs and UVs are preserved.

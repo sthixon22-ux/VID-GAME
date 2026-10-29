@@ -13,6 +13,7 @@ var enemy_bar: ProgressBar
 var breath=0.0
 var camera_home=Vector3(-4.8,3.4,6.4)
 func _ready():
+ TravelRules.breadcrumb(str(State.hero.journey.region),"battle load "+State.enemy_id)
  options=OptionsPanel.new()
  add_child(options)
  if State.enemy_id in ["goblin","bristleback"]:
@@ -114,7 +115,7 @@ func main_menu():
  var primary: String=State.hero.primary
  if not sim.demo_rules and State.can_mythic(primary): spells.append(State.classes[primary].mythic)
  UI.button(commands,"Spells",func(): submenu(spells))
- UI.button(commands,"Items · Potions %s" % sim.h.potions,func(): act("Items"))
+ UI.button(commands,"Items · Potions %s" % sim.h.potions,func(): submenu(["Items","Moon Ether","Royal Elixir","Companion Ration"] if sim.demo_rules else ["Items"]))
  UI.button(commands,"Defend",func(): act("Defend"))
  UI.button(commands,"Companion",func(): companion_menu())
 func submenu(actions: Array):
@@ -140,6 +141,7 @@ func companion_menu():
  UI.button(commands,"Back",main_menu)
 func act(action: String):
  if busy or options.active or dialogue.active or not sim.legal(action): return
+ TravelRules.breadcrumb(str(State.hero.journey.region),"battle "+sim.species+" action "+action)
  busy=true
  commands.get_parent().get_parent().hide()
  clear_menu()

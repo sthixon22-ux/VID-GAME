@@ -263,8 +263,8 @@
   "glass_sentinel": {
     "name": "Namarra, the Glasswing Sovereign",
     "model": "GlassSovereign",
-    "hp": 620,
-    "attack": 43,
+    "hp": 540,
+    "attack": 38,
     "defense": 14,
     "speed": 18,
     "agility": 18,
@@ -359,8 +359,8 @@
   "ironroot_colossus": {
     "name": "Vorr, the Mountain That Kneels",
     "model": "IronrootColossus",
-    "hp": 800,
-    "attack": 49,
+    "hp": 700,
+    "attack": 44,
     "defense": 21,
     "speed": 12,
     "agility": 12,

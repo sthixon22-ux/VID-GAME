@@ -86,7 +86,11 @@ static func roots(host: Node3D, point: Vector3, count: int=9):
   tween.tween_property(thorn,"scale",Vector3.ONE*0.01,0.3)
   tween.tween_callback(thorn.queue_free)
 static func present(host: Node3D, actor: Node3D, target: Node3D, label: String) -> float:
+ TravelRules.breadcrumb(str(State.hero.journey.region),"present "+label)
  label=label.trim_suffix(" · Critical!").trim_suffix(" · Effective!").trim_suffix(" · Resisted")
+ if label.ends_with(" increased") or label.ends_with(" weakened"):
+  var base=label.split(" · ")[0]
+  if not AbilityBook.entry(base).is_empty():label=base
  var duration=0.95
  if actor.has_method("play_action") and (actor is CompanionActor or actor is MarshCreature or actor is FrontierCreature or STYLES.has(label) or not AbilityBook.entry(label).is_empty() or label in ["Victory","Defeat"]): duration=actor.play_action(label)
  elif not STYLES.has(label): duration=0.4
@@ -120,7 +124,8 @@ static func present(host: Node3D, actor: Node3D, target: Node3D, label: String) 
  var bow_shot=actor is HeroVisual and actor.weapon_family=="bow" and actor.weapon_action
  if bow_shot:actor.set_meta("shot_target_world",target.global_position+Vector3.UP*1.2)
  await host.get_tree().create_timer(UserSettings.duration(duration*(.82 if bow_shot else .38))).timeout
- if bow_shot:return duration
+ var bespoke=ThematicEffects.show(host,actor,target,label)
+ if bow_shot or bespoke:return duration
  var point=target.position
  match label:
   "Attack":
@@ -196,8 +201,9 @@ static func present(host: Node3D, actor: Node3D, target: Node3D, label: String) 
    if ability.is_empty():ability=companion_art
    if not ability.is_empty():
     var effect=ability.effect
-    var healing=effect in ["heal","buff","renewal","meditate","mana","ward"] or effect.begins_with("buff_")
+    var healing=effect in ["heal","buff","renewal","regrowth","meditate","mana","ward","mana_item","elixir_item","ration_item"] or effect.begins_with("buff_")
     var color_=Color("a7e2ac") if healing else (Color("a3b5ee") if effect in ["magic","drain","frost"] else Color("e4bc89"))
+    if effect=="buff":color_=Color({"attack":"e6a786","defense":"92bde7","agility":"92d9c4","dexterity":"e3d08d"}.get(ability.get("stat",""),"a7e2ac"))
     if effect=="drain": color_=Color("b69cce")
     if effect=="frost": color_=Color("a3ddeb")
     if ability.has("damage_type"):color_=Color(SkillEffects.COLORS.get(ability.damage_type,"e4bc89"))

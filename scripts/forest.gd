@@ -63,7 +63,8 @@ func build(root:Node3D):
  fire.omni_range=5
  root.add_child(fire)
  for index in range(3):
-  var npc=Art.actor("Mira")
+  var profile=[["Warrior","Male"],["Wizard","Female"],["Druid","Male"]][index]
+  var npc=HeroVisual.new({"Chest":"Leather Vest","Weapon":"None","Shield":"None"},{"class":profile[0],"sex":profile[1]})
   root.add_child(npc)
   npc.position=QUEST_NPCS[index]
   var id: String=QuestBook.data.keys()[index]

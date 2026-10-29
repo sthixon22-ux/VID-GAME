@@ -11,7 +11,7 @@ var orrery:Node3D
 func _init(value:String="SandDrake"):kind=value
 func _ready():
  var base={"SandDrake":"dragon","GlassSovereign":"dragon","Scarab":"bristleback","GlassWisp":"spirit_fox","CragHound":"dire_wolf","StormRoc":"griffin","ForgeSentinel":"golem","IronrootColossus":"golem"}.get(kind,"golem")
- native=CompanionVisual.build(base)
+ native=CompanionActor.new("drake") if kind=="SandDrake" else CompanionVisual.build(base)
  add_child(native)
  var big=kind in ["GlassSovereign","IronrootColossus"]
  native.scale=Vector3.ONE*(2.0 if big else 1.0)
@@ -40,7 +40,9 @@ func _ready():
 func motion(moving:bool,sprint:bool=false):
  if native and native.has_method("motion"):native.motion(moving,sprint)
 func play_action(label:String)->float:
- if native and native.has_method("play_action"):return native.play_action(label)
+ if native and native.has_method("play_action"):
+  native.battle=battle
+  return native.play_action(label)
  return .6
 func _process(delta:float):
  clock+=delta

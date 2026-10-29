@@ -1,0 +1,101 @@
+{
+  "license": "Original pattern derivatives on existing CC0 Quaternius-derived outfit atlases; see assets/vendor/SOURCES.json and assets/textures/class_skins/DERIVATIVES.json.",
+  "outputs": {
+    "assets/textures/equipment/aetherweave_robe_female.webp": {
+      "sha256": "204d95359a6d92a1174705af64ca35e5a19ab7104e865fd4dfe9971fc7874fa4",
+      "generator": "tools/build_equipment_textiles.py"
+    },
+    "assets/textures/equipment/aetherweave_robe_male.webp": {
+      "sha256": "dd99d93306fd6c55f0e548cf41e3f6f1a347048f02add69fb288f77a6e4f9eee",
+      "generator": "tools/build_equipment_textiles.py"
+    },
+    "assets/textures/equipment/daystar_vestments_female.webp": {
+      "sha256": "a6be349ecc9998f8851ae416b239792a62fb24ed13a87c3ec3f1e8b67147718c",
+      "generator": "tools/build_equipment_textiles.py"
+    },
+    "assets/textures/equipment/daystar_vestments_male.webp": {
+      "sha256": "1ad1963287568cfa7e6733fbd0506271f75c964166b6cffbf12bd3f5b2791b9f",
+      "generator": "tools/build_equipment_textiles.py"
+    },
+    "assets/textures/equipment/horizonwraps_female.webp": {
+      "sha256": "10a3f98b2219542e87e591467b55c036519aa9f621a2242c53a3c6348bd73ee4",
+      "generator": "tools/build_equipment_textiles.py"
+    },
+    "assets/textures/equipment/horizonwraps_male.webp": {
+      "sha256": "3720ffb87238662a12667e2eeef5bbcbe3375458a16dc7462e6b02c5459e75dd",
+      "generator": "tools/build_equipment_textiles.py"
+    },
+    "assets/textures/equipment/knights_harness_female.webp": {
+      "sha256": "75ce28235290eef3f441bfa39dce91d2234c7db10b695840a9d679016e83162d",
+      "generator": "tools/build_equipment_textiles.py"
+    },
+    "assets/textures/equipment/knights_harness_male.webp": {
+      "sha256": "4e1b87c3e5363d2bb6f98f2115b15367ca8d7d47ef22dfa4499ecac1f1d6f117",
+      "generator": "tools/build_equipment_textiles.py"
+    },
+    "assets/textures/equipment/nightwarden_leathers_female.webp": {
+      "sha256": "42b5cc8dd60a6521f58e735eba40e03025d658e691db02762a6d3bcfe478f756",
+      "generator": "tools/build_equipment_textiles.py"
+    },
+    "assets/textures/equipment/nightwarden_leathers_male.webp": {
+      "sha256": "2270d770a696c496af07362e010c0bc7228f051fce0e04e71ccb290ede561eab",
+      "generator": "tools/build_equipment_textiles.py"
+    },
+    "assets/textures/equipment/oathkeeper_plate_female.webp": {
+      "sha256": "75ce28235290eef3f441bfa39dce91d2234c7db10b695840a9d679016e83162d",
+      "generator": "tools/build_equipment_textiles.py"
+    },
+    "assets/textures/equipment/oathkeeper_plate_male.webp": {
+      "sha256": "4e1b87c3e5363d2bb6f98f2115b15367ca8d7d47ef22dfa4499ecac1f1d6f117",
+      "generator": "tools/build_equipment_textiles.py"
+    },
+    "assets/textures/equipment/runewoven_robe_female.webp": {
+      "sha256": "204d95359a6d92a1174705af64ca35e5a19ab7104e865fd4dfe9971fc7874fa4",
+      "generator": "tools/build_equipment_textiles.py"
+    },
+    "assets/textures/equipment/runewoven_robe_male.webp": {
+      "sha256": "dd99d93306fd6c55f0e548cf41e3f6f1a347048f02add69fb288f77a6e4f9eee",
+      "generator": "tools/build_equipment_textiles.py"
+    },
+    "assets/textures/equipment/shadowstalker_leathers_female.webp": {
+      "sha256": "42b5cc8dd60a6521f58e735eba40e03025d658e691db02762a6d3bcfe478f756",
+      "generator": "tools/build_equipment_textiles.py"
+    },
+    "assets/textures/equipment/shadowstalker_leathers_male.webp": {
+      "sha256": "2270d770a696c496af07362e010c0bc7228f051fce0e04e71ccb290ede561eab",
+      "generator": "tools/build_equipment_textiles.py"
+    },
+    "assets/textures/equipment/sunpriest_vestments_female.webp": {
+      "sha256": "a6be349ecc9998f8851ae416b239792a62fb24ed13a87c3ec3f1e8b67147718c",
+      "generator": "tools/build_equipment_textiles.py"
+    },
+    "assets/textures/equipment/sunpriest_vestments_male.webp": {
+      "sha256": "1ad1963287568cfa7e6733fbd0506271f75c964166b6cffbf12bd3f5b2791b9f",
+      "generator": "tools/build_equipment_textiles.py"
+    },
+    "assets/textures/equipment/thornwarden_mantle_female.webp": {
+      "sha256": "d6661f2fcd9f2e4cf6e304c845968c2dcbc2e977c16eea06a0ded1907d49a656",
+      "generator": "tools/build_equipment_textiles.py"
+    },
+    "assets/textures/equipment/thornwarden_mantle_male.webp": {
+      "sha256": "0956ab12e27651eba2054a53eb5448a42159fceb03c3bc27849bea7c4bbf32e5",
+      "generator": "tools/build_equipment_textiles.py"
+    },
+    "assets/textures/equipment/wayfarers_wraps_female.webp": {
+      "sha256": "10a3f98b2219542e87e591467b55c036519aa9f621a2242c53a3c6348bd73ee4",
+      "generator": "tools/build_equipment_textiles.py"
+    },
+    "assets/textures/equipment/wayfarers_wraps_male.webp": {
+      "sha256": "3720ffb87238662a12667e2eeef5bbcbe3375458a16dc7462e6b02c5459e75dd",
+      "generator": "tools/build_equipment_textiles.py"
+    },
+    "assets/textures/equipment/wildheart_mantle_female.webp": {
+      "sha256": "d6661f2fcd9f2e4cf6e304c845968c2dcbc2e977c16eea06a0ded1907d49a656",
+      "generator": "tools/build_equipment_textiles.py"
+    },
+    "assets/textures/equipment/wildheart_mantle_male.webp": {
+      "sha256": "0956ab12e27651eba2054a53eb5448a42159fceb03c3bc27849bea7c4bbf32e5",
+      "generator": "tools/build_equipment_textiles.py"
+    }
+  }
+}

@@ -1,4 +1,5 @@
 extends Node
+var field_reveal_area=""
 const SAVE = "user://hero.json"
 var classes: Dictionary = {}
 var companions: Dictionary=JSON.parse_string(FileAccess.get_file_as_string("res://data/companions.json"))
@@ -22,6 +23,7 @@ func _ready():
  reset()
  load_game()
 func reset():
+ field_reveal_area=""
  shop_id="willowbrook"
  notice=""
  last_reward={}
@@ -164,8 +166,8 @@ func reward(normal: bool, species: String="goblin"):
  if hero.companion.current!="intro_wolf" and hero.companion.active:
   var record=hero.companion.records[hero.companion.current]
   record.xp+=int(enemy.xp)
-  while record.xp>=record.level*60:
-   record.xp-=record.level*60
+  while record.xp>=CompanionRules.threshold(int(record.level)):
+   record.xp-=CompanionRules.threshold(int(record.level))
    record.level+=1
    record.points+=2
  hero.seed=(int(hero.seed)*48271)%2147483647
@@ -222,6 +224,7 @@ func load_game():
   hero.mp=mini(int(hero.mp),int(stats().max_mp))
   var pos=hero.journey.position
   return_position=Vector3(float(pos[0]),float(pos[1]),float(pos[2]))
+  field_reveal_area=str(hero.campaign.get("field_reveal_area",""))
 func can_mythic(class_name_: String) -> bool:
  return hero.primary==class_name_ and skill_active(class_name_,"mythic")
 
@@ -261,6 +264,9 @@ func restore():
  restore_companion()
 
 func remember_position(pos: Vector3):
+ if not field_reveal_area.is_empty() and field_reveal_area!=str(hero.journey.region):
+  field_reveal_area=""
+  hero.campaign.field_reveal_area=""
  return_position=pos
  hero.journey.position=[pos.x,pos.y,pos.z]
 
@@ -333,7 +339,7 @@ func choose_companion(id: String) -> bool:
  hero.companion.owned.append(id)
  hero.companion.current=id
  hero.companion.active=true
- hero.companion.records[id]={"level":maxi(1,int(hero.level)-1),"xp":0,"points":maxi(1,int(hero.level)-1)*2,"skills":[],"hp":int(companions[id].hp)}
+ hero.companion.records[id]={"level":1,"xp":0,"points":2,"skills":[],"hp":int(companions[id].hp)}
  hero.demo.first_choice=true
  hero.companion.records[id].hp=companion_max_hp()
  hero.hp=mini(int(hero.hp),int(stats().max_hp))
@@ -436,13 +442,22 @@ func can_use_item(id: String) -> bool:
  if item_count(id)<=0 or hero.hp<=0: return false
  if id=="potion": return hero.hp<stats().max_hp
  if id=="ether": return hero.mp<stats().max_mp
+ if id=="escape_rope":return TravelRules.ENTRANCES.has(str(hero.journey.region))
+ if id=="waystone":return true
+ if id in ["camp_kit","elixir"]:return hero.hp<stats().max_hp or hero.mp<stats().max_mp
  if id=="treat":
   return hero.companion.intro_hp<55 if hero.companion.current=="intro_wolf" else companion_record().get("hp",0)<companion_max_hp()
  return false
-func use_item(id: String) -> bool:
+func use_item(id: String, destination:String="") -> bool:
  if not can_use_item(id): return false
  if id=="potion": return use_potion()
+ if id=="escape_rope" and not TravelRules.escape(hero):return false
+ if id=="waystone" and not TravelRules.town(hero,destination):return false
  hero.items[id]-=1
+ if id in ["camp_kit","elixir"]:
+  var fraction=.3 if id=="camp_kit" else 1.0
+  hero.hp=mini(int(stats().max_hp),int(hero.hp)+roundi(stats().max_hp*fraction))
+  hero.mp=mini(int(stats().max_mp),int(hero.mp)+roundi(stats().max_mp*fraction))
  if id=="ether": hero.mp=mini(int(stats().max_mp),int(hero.mp)+20)
  if id=="treat":
   if hero.companion.current=="intro_wolf": hero.companion.intro_hp=mini(55,int(hero.companion.intro_hp)+35)

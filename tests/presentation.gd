@@ -17,7 +17,7 @@ func run():
  check(not State.invest_skill("Paladin","mythic") and State.hero.points==20,"Mythic prerequisites cannot be bypassed")
  check(State.invest_skill("Paladin","oath"),"Root node learns with two points")
  var attack=State.stats().max_hp
- check(attack==GameRules.combined_stats(State.classes,"Paladin",State.hero.secondary,1).max_hp+15,"Learned HP passive changes blended derived stats")
+ check(attack==GameRules.combined_stats(State.classes,"Paladin",State.hero.secondary,1).max_hp+int(State.skill_node("Paladin","oath").bonus.max_hp)+int(State.equipment_data[State.hero.equipment.Chest].max_hp),"Learned HP passive changes blended derived stats")
  check(not State.invest_skill("Paladin","oath") and State.hero.points==18,"Duplicate investment rejected")
  check(State.invest_skill("Paladin","shield"),"Level-one hero can buy a branch with points and prerequisites")
  State.hero.level=50

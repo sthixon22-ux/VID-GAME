@@ -267,9 +267,21 @@ func build_inventory():
   var entry:Dictionary=InventoryBook.data[id]
   paragraph(left,entry.description)
   UI.button(left,"Use %s · %s owned" % [entry.name,State.item_count(id)],func():
-   if State.use_item(item_id): Sound.cue("heal")
+   if item_id=="waystone":travel_choices(false);return
+   if State.use_item(item_id):
+    Sound.cue("heal")
+    if item_id=="escape_rope":leave();return
    show_page("inventory")).disabled=not State.can_use_item(id)
  var right=content_panel(Vector2(630,0),Vector2(630,565))
+ var companion_id=str(State.hero.companion.current)
+ if State.companions.has(companion_id):
+  var field:Dictionary=State.companions[companion_id].field_ability
+  paragraph(right,field.name+"\n"+field.description)
+  UI.button(right,"Use companion field ability",func():
+   if companion_id in ["warhorse","griffin"]:travel_choices(true);return
+   if CompanionRules.field(State.hero):
+    if companion_id=="dragon":leave();return
+   show_page("inventory")).disabled=not CompanionRules.field_ready(State.hero)
  UI.label(right,"OWNED EQUIPMENT")
  for item in State.equipment_data:
   if State.owns(item): paragraph(right,item+" · "+State.equipment_data[item].slot)
@@ -385,7 +397,7 @@ func build_companion_tree():
   show_page("companion_tree"))
  tabs.add_child(picker)
  UI.label(tabs,"Companion abilities and bond bonuses").size_flags_horizontal=Control.SIZE_EXPAND_FILL
- UI.label(heading,"24 bond points per full tree · 2 per companion level · Owned companions train independently")
+ UI.label(heading,"80 bond points per full tree · 2 per companion level · Owned companions train independently")
  graph=SkillGraph.new()
  graph.position=Vector2(25,90)
  graph.size=Vector2(845,470)
@@ -508,3 +520,23 @@ func constrain_page(root: Node):
    child.text_overrun_behavior=TextServer.OVERRUN_TRIM_ELLIPSIS
    if child.tooltip_text.is_empty(): child.tooltip_text=child.text
   if not child is SubViewport: constrain_page(child)
+
+func travel_choices(companion_field:bool):
+ clear_body()
+ var panel=content_panel(Vector2(280,40),Vector2(720,470))
+ var griffin=companion_field and State.hero.companion.current=="griffin"
+ UI.label(panel,"Choose a local flight landmark" if griffin else "Choose a discovered town")
+ if griffin:
+  var points=TravelRules.waypoints(State.hero)
+  for i in points.size():
+   var destination=str(i)
+   UI.button(panel,points[i][0],func():
+    if CompanionRules.field(State.hero,destination):leave())
+  if points.is_empty():UI.label(panel,"Local flights require an outdoor region.")
+ else:
+  for region in TravelRules.discovered(State.hero):
+   var destination=str(region)
+   UI.button(panel,TravelRules.TOWNS[destination],func():
+    var success=CompanionRules.field(State.hero,destination) if companion_field else State.use_item("waystone",destination)
+    if success:leave())
+ UI.button(panel,"Cancel — spend nothing",func():show_page("inventory"))

@@ -59,6 +59,7 @@ func resolve():
  resolved=true
  var hp=int(State.hero.hp)
  var mp=int(State.hero.mp)
+ var supplies:Dictionary=State.hero.items.duplicate(true)
  var potions=int(State.hero.potions)
  var gold=int(State.hero.gold)
  var level=int(State.hero.level)
@@ -76,6 +77,11 @@ func resolve():
  UI.label(content,"%s rounds · HP %s → %s · MP %s → %s\nPotions %s → %s · Companion HP %s\nGold +%s · Level %s → %s" % [sim.turns,hp,State.hero.hp,mp,State.hero.mp,potions,State.hero.potions,sim.wolf_hp,State.hero.gold-gold,level,State.hero.level])
  UI.label(content,"+%s XP · normal item-drop roll applied.\nOnly normal victories count toward species mastery." % sim.enemy.xp if sim.outcome=="Victory" else "No rewards. Return to camp and rest before trying again.")
  if sim.outcome=="Victory" and int(State.last_reward.get("bonus",0))>0: UI.label(content,"Dexterity bonus included: +%s gold." % State.last_reward.bonus)
+ var spent=[]
+ for id in ["ether","elixir","treat"]:
+  var count=int(supplies.get(id,0))-int(State.hero.items.get(id,0))
+  if count>0:spent.append("%s ×%s" % [InventoryBook.data[id].name,count])
+ if not spent.is_empty():UI.label(content,"Supplies spent: "+", ".join(spent))
  UI.button(content,"Return to exploration",close)
 func close():
  active=false

@@ -7,6 +7,7 @@ var index=0
 var callback: Callable
 var panel: PanelContainer
 var portrait: TextureRect
+var face_view:DialoguePortrait
 var speaker: Label
 var words: Label
 var next: Button
@@ -20,6 +21,7 @@ func _ready():
  var row=HBoxContainer.new()
  row.add_theme_constant_override("separation",22)
  content.add_child(row)
+ face_view=DialoguePortrait.new();add_child(face_view)
  portrait=TextureRect.new()
  portrait.custom_minimum_size=Vector2(175,175)
  portrait.expand_mode=TextureRect.EXPAND_IGNORE_SIZE
@@ -45,10 +47,10 @@ func show_id(id: String, on_finished: Callable=Callable()):
  panel.show()
  render_line()
 func render_line():
- speaker.text=str(lines[index][0])
+ speaker.text=str(State.hero.profile.get("name","Hero")) if str(lines[index][0])=="Hero" else str(lines[index][0])
  words.text=str(lines[index][1])
- var who=str(lines[index][0]).to_lower()
- portrait.texture=load("res://assets/portraits/%s.svg" % (who if who in ["hero","mira","wolf","warden"] else "hero"))
+ face_view.show_speaker(str(lines[index][0]))
+ portrait.texture=face_view.get_texture()
  next.text="Continue  [E / Space]" if index<lines.size()-1 else "Close  [E / Space]"
 func advance():
  if not active: return
@@ -58,6 +60,8 @@ func advance():
  else:
   active=false
   panel.hide()
+  face_view.render_target_update_mode=SubViewport.UPDATE_DISABLED
+  face_view.identity=""
   closed.emit()
   if callback.is_valid(): callback.call()
 func _input(event):

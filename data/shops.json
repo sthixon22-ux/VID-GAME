@@ -11,26 +11,52 @@
     "supplies": [
       "potion",
       "ether",
-      "treat"
+      "treat",
+      "escape_rope",
+      "waystone",
+      "camp_kit",
+      "elixir"
     ]
   },
   "reedcross_weapons": {
     "name": "Reedcross · Tamsin’s Reed & Steel",
     "equipment": [
-      "Reedsteel Sword",
-      "Marsh Daggers",
-      "Willowheart Staff",
-      "Reed Bow",
-      "Ferryman Spear"
+      "Flamebrand",
+      "Dragonbone Greatsword",
+      "Ravager Axe",
+      "Stormcaller Spear",
+      "Moonstring Bow",
+      "Nightfang Daggers",
+      "Dawnwatch Mace",
+      "Runekeeper Staff",
+      "Starseeker Wand",
+      "Tigersteel Claws",
+      "Soulhook Scythe",
+      "Thunderhead Hammer"
     ],
     "supplies": []
   },
   "reedcross_armor": {
     "name": "Reedcross · Beren’s Dry Thread",
     "equipment": [
-      "Reedcoat",
-      "Sluicekeeper Robe",
-      "Fenwarden Pendant"
+      "Knight’s Harness",
+      "Runewoven Robe",
+      "Shadowstalker Leathers",
+      "Wildheart Mantle",
+      "Sunpriest Vestments",
+      "Wayfarer’s Wraps",
+      "Sentinel Shield",
+      "Traveler's Pendant",
+      "Steel Helm",
+      "Ranger Hood",
+      "Steel Gauntlets",
+      "Leather Gloves",
+      "Steel Greaves",
+      "Ranger Trousers",
+      "Steel Sabatons",
+      "Trail Boots",
+      "Sunstone Pendant",
+      "Moonleaf Charm"
     ],
     "supplies": []
   },
@@ -57,7 +83,11 @@
     "supplies": [
       "potion",
       "ether",
-      "treat"
+      "treat",
+      "escape_rope",
+      "waystone",
+      "camp_kit",
+      "elixir"
     ]
   },
   "reedcross_items": {
@@ -66,25 +96,70 @@
     "supplies": [
       "potion",
       "ether",
-      "treat"
+      "treat",
+      "escape_rope",
+      "waystone",
+      "camp_kit",
+      "elixir"
     ]
   },
   "sahir_weapons": {
     "name": "Sahir Arms",
     "equipment": [
-      "Sahir Sword",
-      "Sahir Daggers",
-      "Sahir Staff",
-      "Sahir Bow",
-      "Sahir Spear"
+      "Flamebrand",
+      "Dragonbone Greatsword",
+      "Ravager Axe",
+      "Stormcaller Spear",
+      "Moonstring Bow",
+      "Nightfang Daggers",
+      "Dawnwatch Mace",
+      "Runekeeper Staff",
+      "Starseeker Wand",
+      "Tigersteel Claws",
+      "Soulhook Scythe",
+      "Thunderhead Hammer",
+      "Dawnforged Saber",
+      "Wyrmspine Greatblade",
+      "Bloodoak Axe",
+      "Skyfire Spear",
+      "Hawkmoon Bow",
+      "Duskglass Daggers",
+      "Sanctifier Mace",
+      "Astral Staff",
+      "Sunshard Wand",
+      "Razorwind Claws",
+      "Gravesong Scythe",
+      "Anvilbreaker Hammer"
     ],
     "supplies": []
   },
   "sahir_armor": {
     "name": "Sahir Outfitter",
     "equipment": [
-      "Sunveil Coat",
-      "Prismheart Pendant"
+      "Knight’s Harness",
+      "Runewoven Robe",
+      "Shadowstalker Leathers",
+      "Wildheart Mantle",
+      "Sunpriest Vestments",
+      "Wayfarer’s Wraps",
+      "Sentinel Shield",
+      "Traveler's Pendant",
+      "Steel Helm",
+      "Ranger Hood",
+      "Steel Gauntlets",
+      "Leather Gloves",
+      "Steel Greaves",
+      "Ranger Trousers",
+      "Steel Sabatons",
+      "Trail Boots",
+      "Sunstone Pendant",
+      "Moonleaf Charm",
+      "Oathkeeper Plate",
+      "Aetherweave Robe",
+      "Nightwarden Leathers",
+      "Thornwarden Mantle",
+      "Daystar Vestments",
+      "Horizonwraps"
     ],
     "supplies": []
   },
@@ -94,25 +169,70 @@
     "supplies": [
       "potion",
       "ether",
-      "treat"
+      "treat",
+      "escape_rope",
+      "waystone",
+      "camp_kit",
+      "elixir"
     ]
   },
   "kharholt_weapons": {
     "name": "Kharholt Arms",
     "equipment": [
-      "Kharholt Sword",
-      "Kharholt Daggers",
-      "Kharholt Staff",
-      "Kharholt Bow",
-      "Kharholt Spear"
+      "Flamebrand",
+      "Dragonbone Greatsword",
+      "Ravager Axe",
+      "Stormcaller Spear",
+      "Moonstring Bow",
+      "Nightfang Daggers",
+      "Dawnwatch Mace",
+      "Runekeeper Staff",
+      "Starseeker Wand",
+      "Tigersteel Claws",
+      "Soulhook Scythe",
+      "Thunderhead Hammer",
+      "Dawnforged Saber",
+      "Wyrmspine Greatblade",
+      "Bloodoak Axe",
+      "Skyfire Spear",
+      "Hawkmoon Bow",
+      "Duskglass Daggers",
+      "Sanctifier Mace",
+      "Astral Staff",
+      "Sunshard Wand",
+      "Razorwind Claws",
+      "Gravesong Scythe",
+      "Anvilbreaker Hammer"
     ],
     "supplies": []
   },
   "kharholt_armor": {
     "name": "Kharholt Outfitter",
     "equipment": [
-      "Forgeguard Coat",
-      "Ironroot Signet"
+      "Knight’s Harness",
+      "Runewoven Robe",
+      "Shadowstalker Leathers",
+      "Wildheart Mantle",
+      "Sunpriest Vestments",
+      "Wayfarer’s Wraps",
+      "Sentinel Shield",
+      "Traveler's Pendant",
+      "Steel Helm",
+      "Ranger Hood",
+      "Steel Gauntlets",
+      "Leather Gloves",
+      "Steel Greaves",
+      "Ranger Trousers",
+      "Steel Sabatons",
+      "Trail Boots",
+      "Sunstone Pendant",
+      "Moonleaf Charm",
+      "Oathkeeper Plate",
+      "Aetherweave Robe",
+      "Nightwarden Leathers",
+      "Thornwarden Mantle",
+      "Daystar Vestments",
+      "Horizonwraps"
     ],
     "supplies": []
   },
@@ -122,7 +242,11 @@
     "supplies": [
       "potion",
       "ether",
-      "treat"
+      "treat",
+      "escape_rope",
+      "waystone",
+      "camp_kit",
+      "elixir"
     ]
   }
 }

@@ -1,7 +1,7 @@
 {
   "dire_wolf": {
     "name": "Dire Wolf",
-    "role": "attack +3 \u00b7 critical chance (%) +6",
+    "role": "attack +3 · critical chance (%) +6",
     "attack": 15,
     "support": 10,
     "hp": 65,
@@ -44,7 +44,7 @@
         "power": 10,
         "behavior": "Attack",
         "cooldown": 2,
-        "description": "A tearing bite with +10 attack power that inflicts bleeding for three rounds. Attack behavior; 2-round cooldown. Uses the companion\u2019s turn."
+        "description": "A tearing bite with +10 attack power that inflicts bleeding for three rounds. Attack behavior; 2-round cooldown. Uses the companion’s turn."
       },
       "dire_wolf_art_2": {
         "name": "Pack Howl",
@@ -52,7 +52,7 @@
         "power": 6,
         "behavior": "Support",
         "cooldown": 3,
-        "description": "Raises the hero\u2019s attack by 6 for three rounds. Support behavior; 3-round cooldown. Uses the companion\u2019s turn."
+        "description": "Raises the hero’s attack by 6 for three rounds. Support behavior; 3-round cooldown. Uses the companion’s turn."
       },
       "dire_wolf_art_3": {
         "name": "Moonfang Assault",
@@ -60,7 +60,7 @@
         "power": 24,
         "behavior": "Attack",
         "cooldown": 4,
-        "description": "A powerful bite with +24 attack power that inflicts bleeding for three rounds. Attack behavior; 4-round cooldown. Uses the companion\u2019s turn."
+        "description": "A powerful bite with +24 attack power that inflicts bleeding for three rounds. Attack behavior; 4-round cooldown. Uses the companion’s turn."
       }
     },
     "nodes": [
@@ -68,7 +68,7 @@
         "id": "predator",
         "name": "Instinct",
         "description": "Companion attack +4.",
-        "cost": 1,
+        "cost": 3,
         "requires": [],
         "bonus": {
           "attack": 4
@@ -85,7 +85,7 @@
         "id": "guardian",
         "name": "Endurance",
         "description": "Companion maximum HP +15.",
-        "cost": 2,
+        "cost": 5,
         "requires": [
           "predator"
         ],
@@ -104,7 +104,7 @@
         "id": "bond",
         "name": "Devotion",
         "description": "Companion support +6.",
-        "cost": 2,
+        "cost": 6,
         "requires": [
           "predator"
         ],
@@ -122,8 +122,8 @@
       {
         "id": "art_one",
         "name": "Rending Fang",
-        "description": "A tearing bite with +10 attack power that inflicts bleeding for three rounds. Attack behavior; 2-round cooldown. Uses the companion\u2019s turn.",
-        "cost": 3,
+        "description": "A tearing bite with +10 attack power that inflicts bleeding for three rounds. Attack behavior; 2-round cooldown. Uses the companion’s turn.",
+        "cost": 8,
         "requires": [
           "guardian"
         ],
@@ -141,8 +141,8 @@
       {
         "id": "art_two",
         "name": "Pack Howl",
-        "description": "Raises the hero\u2019s attack by 6 for three rounds. Support behavior; 3-round cooldown. Uses the companion\u2019s turn.",
-        "cost": 3,
+        "description": "Raises the hero’s attack by 6 for three rounds. Support behavior; 3-round cooldown. Uses the companion’s turn.",
+        "cost": 10,
         "requires": [
           "bond"
         ],
@@ -161,7 +161,7 @@
         "id": "aura",
         "name": "Strengthened Bond",
         "description": "Hero bond bonus: attack +1, critical chance (%) +3.",
-        "cost": 4,
+        "cost": 12,
         "requires": [
           "guardian",
           "bond"
@@ -181,8 +181,8 @@
       {
         "id": "art_three",
         "name": "Moonfang Assault",
-        "description": "A powerful bite with +24 attack power that inflicts bleeding for three rounds. Attack behavior; 4-round cooldown. Uses the companion\u2019s turn.",
-        "cost": 4,
+        "description": "A powerful bite with +24 attack power that inflicts bleeding for three rounds. Attack behavior; 4-round cooldown. Uses the companion’s turn.",
+        "cost": 16,
         "requires": [
           "art_one",
           "art_two"
@@ -200,9 +200,9 @@
       },
       {
         "id": "capstone",
-        "name": "Eternal Bond",
-        "description": "Companion attack +6, Companion support +6, Companion maximum HP +20 Hero bond bonus: attack +1, critical chance (%) +3.",
-        "cost": 5,
+        "name": "Trailwarden’s Instinct",
+        "description": "Reveal unopened treasure on the current area’s minimap until you leave. Once per inn rest with this companion active. Companion attack +6, Companion support +6, Companion maximum HP +20 Hero bond bonus: attack +1, critical chance (%) +3.",
+        "cost": 20,
         "requires": [
           "aura",
           "art_three"
@@ -221,13 +221,18 @@
           0.85,
           0.06
         ],
-        "level_required": 1
+        "level_required": 1,
+        "field_ability": "dire_wolf"
       }
-    ]
+    ],
+    "field_ability": {
+      "name": "Trailwarden’s Instinct",
+      "description": "Reveal unopened treasure on the current area’s minimap until you leave. Recharges only after a paid inn rest with this companion active."
+    }
   },
   "griffin": {
     "name": "Griffin",
-    "role": "attack +3 \u00b7 dexterity +6",
+    "role": "attack +3 · dexterity +6",
     "attack": 14,
     "support": 10,
     "hp": 62,
@@ -270,7 +275,7 @@
         "power": 12,
         "behavior": "Attack",
         "cooldown": 2,
-        "description": "A diving attack with +12 power that ignores half the enemy\u2019s defense. Attack behavior; 2-round cooldown. Uses the companion\u2019s turn."
+        "description": "A diving attack with +12 power that ignores half the enemy’s defense. Attack behavior; 2-round cooldown. Uses the companion’s turn."
       },
       "griffin_art_2": {
         "name": "Skyward Grace",
@@ -278,7 +283,7 @@
         "power": 8,
         "behavior": "Support",
         "cooldown": 3,
-        "description": "Raises the hero\u2019s dexterity by 8 for three rounds, improving dodge odds. Support behavior; 3-round cooldown. Uses the companion\u2019s turn."
+        "description": "Raises the hero’s dexterity by 8 for three rounds, improving dodge odds. Support behavior; 3-round cooldown. Uses the companion’s turn."
       },
       "griffin_art_3": {
         "name": "Tempest Dive",
@@ -286,7 +291,7 @@
         "power": 26,
         "behavior": "Attack",
         "cooldown": 4,
-        "description": "A storm dive with +26 power that ignores half the enemy\u2019s defense. Attack behavior; 4-round cooldown. Uses the companion\u2019s turn."
+        "description": "A storm dive with +26 power that ignores half the enemy’s defense. Attack behavior; 4-round cooldown. Uses the companion’s turn."
       }
     },
     "nodes": [
@@ -294,7 +299,7 @@
         "id": "predator",
         "name": "Instinct",
         "description": "Companion attack +4.",
-        "cost": 1,
+        "cost": 3,
         "requires": [],
         "bonus": {
           "attack": 4
@@ -311,7 +316,7 @@
         "id": "guardian",
         "name": "Endurance",
         "description": "Companion maximum HP +15.",
-        "cost": 2,
+        "cost": 5,
         "requires": [
           "predator"
         ],
@@ -330,7 +335,7 @@
         "id": "bond",
         "name": "Devotion",
         "description": "Companion support +6.",
-        "cost": 2,
+        "cost": 6,
         "requires": [
           "predator"
         ],
@@ -348,8 +353,8 @@
       {
         "id": "art_one",
         "name": "Gale Talons",
-        "description": "A diving attack with +12 power that ignores half the enemy\u2019s defense. Attack behavior; 2-round cooldown. Uses the companion\u2019s turn.",
-        "cost": 3,
+        "description": "A diving attack with +12 power that ignores half the enemy’s defense. Attack behavior; 2-round cooldown. Uses the companion’s turn.",
+        "cost": 8,
         "requires": [
           "guardian"
         ],
@@ -367,8 +372,8 @@
       {
         "id": "art_two",
         "name": "Skyward Grace",
-        "description": "Raises the hero\u2019s dexterity by 8 for three rounds, improving dodge odds. Support behavior; 3-round cooldown. Uses the companion\u2019s turn.",
-        "cost": 3,
+        "description": "Raises the hero’s dexterity by 8 for three rounds, improving dodge odds. Support behavior; 3-round cooldown. Uses the companion’s turn.",
+        "cost": 10,
         "requires": [
           "bond"
         ],
@@ -387,7 +392,7 @@
         "id": "aura",
         "name": "Strengthened Bond",
         "description": "Hero bond bonus: attack +1, dexterity +3.",
-        "cost": 4,
+        "cost": 12,
         "requires": [
           "guardian",
           "bond"
@@ -407,8 +412,8 @@
       {
         "id": "art_three",
         "name": "Tempest Dive",
-        "description": "A storm dive with +26 power that ignores half the enemy\u2019s defense. Attack behavior; 4-round cooldown. Uses the companion\u2019s turn.",
-        "cost": 4,
+        "description": "A storm dive with +26 power that ignores half the enemy’s defense. Attack behavior; 4-round cooldown. Uses the companion’s turn.",
+        "cost": 16,
         "requires": [
           "art_one",
           "art_two"
@@ -426,9 +431,9 @@
       },
       {
         "id": "capstone",
-        "name": "Eternal Bond",
-        "description": "Companion attack +6, Companion support +6, Companion maximum HP +20 Hero bond bonus: attack +1, dexterity +3.",
-        "cost": 5,
+        "name": "Skyward Passage",
+        "description": "Fly to a landmark within the current outdoor region. Recharges only after a paid inn rest with this companion active.",
+        "cost": 20,
         "requires": [
           "aura",
           "art_three"
@@ -447,13 +452,18 @@
           0.85,
           0.06
         ],
-        "level_required": 1
+        "level_required": 1,
+        "field_ability": "griffin"
       }
-    ]
+    ],
+    "field_ability": {
+      "name": "Skyward Passage",
+      "description": "Fly to a landmark within the current outdoor region. Recharges only after a paid inn rest with this companion active."
+    }
   },
   "dragon": {
     "name": "Dragon",
-    "role": "MP +12 \u00b7 attack +3",
+    "role": "MP +12 · attack +3",
     "attack": 17,
     "support": 9,
     "hp": 70,
@@ -496,7 +506,7 @@
         "power": 15,
         "behavior": "Attack",
         "cooldown": 2,
-        "description": "Breathes fire with +15 attack power. Attack behavior; 2-round cooldown. Uses the companion\u2019s turn."
+        "description": "Breathes fire with +15 attack power. Attack behavior; 2-round cooldown. Uses the companion’s turn."
       },
       "dragon_art_2": {
         "name": "Arcane Embers",
@@ -504,7 +514,7 @@
         "power": 12,
         "behavior": "Support",
         "cooldown": 3,
-        "description": "Restores up to 12 of the hero\u2019s MP. Skipped when MP is already full. Support behavior; 3-round cooldown. Uses the companion\u2019s turn."
+        "description": "Restores up to 12 of the hero’s MP. Skipped when MP is already full. Support behavior; 3-round cooldown. Uses the companion’s turn."
       },
       "dragon_art_3": {
         "name": "Inferno Breath",
@@ -512,7 +522,7 @@
         "power": 30,
         "behavior": "Attack",
         "cooldown": 4,
-        "description": "Unleashes a greater fire breath with +30 attack power. Attack behavior; 4-round cooldown. Uses the companion\u2019s turn."
+        "description": "Unleashes a greater fire breath with +30 attack power. Attack behavior; 4-round cooldown. Uses the companion’s turn."
       }
     },
     "nodes": [
@@ -520,7 +530,7 @@
         "id": "predator",
         "name": "Instinct",
         "description": "Companion attack +4.",
-        "cost": 1,
+        "cost": 3,
         "requires": [],
         "bonus": {
           "attack": 4
@@ -537,7 +547,7 @@
         "id": "guardian",
         "name": "Endurance",
         "description": "Companion maximum HP +15.",
-        "cost": 2,
+        "cost": 5,
         "requires": [
           "predator"
         ],
@@ -556,7 +566,7 @@
         "id": "bond",
         "name": "Devotion",
         "description": "Companion support +6.",
-        "cost": 2,
+        "cost": 6,
         "requires": [
           "predator"
         ],
@@ -574,8 +584,8 @@
       {
         "id": "art_one",
         "name": "Ember Breath",
-        "description": "Breathes fire with +15 attack power. Attack behavior; 2-round cooldown. Uses the companion\u2019s turn.",
-        "cost": 3,
+        "description": "Breathes fire with +15 attack power. Attack behavior; 2-round cooldown. Uses the companion’s turn.",
+        "cost": 8,
         "requires": [
           "guardian"
         ],
@@ -593,8 +603,8 @@
       {
         "id": "art_two",
         "name": "Arcane Embers",
-        "description": "Restores up to 12 of the hero\u2019s MP. Skipped when MP is already full. Support behavior; 3-round cooldown. Uses the companion\u2019s turn.",
-        "cost": 3,
+        "description": "Restores up to 12 of the hero’s MP. Skipped when MP is already full. Support behavior; 3-round cooldown. Uses the companion’s turn.",
+        "cost": 10,
         "requires": [
           "bond"
         ],
@@ -613,7 +623,7 @@
         "id": "aura",
         "name": "Strengthened Bond",
         "description": "Hero bond bonus: MP +6, attack +1.",
-        "cost": 4,
+        "cost": 12,
         "requires": [
           "guardian",
           "bond"
@@ -633,8 +643,8 @@
       {
         "id": "art_three",
         "name": "Inferno Breath",
-        "description": "Unleashes a greater fire breath with +30 attack power. Attack behavior; 4-round cooldown. Uses the companion\u2019s turn.",
-        "cost": 4,
+        "description": "Unleashes a greater fire breath with +30 attack power. Attack behavior; 4-round cooldown. Uses the companion’s turn.",
+        "cost": 16,
         "requires": [
           "art_one",
           "art_two"
@@ -652,9 +662,9 @@
       },
       {
         "id": "capstone",
-        "name": "Eternal Bond",
-        "description": "Companion attack +6, Companion support +6, Companion maximum HP +20 Hero bond bonus: MP +6, attack +1.",
-        "cost": 5,
+        "name": "Emberglass Passage",
+        "description": "Escape the current dungeon to its entrance. Once per inn rest with this companion active. Companion attack +6, Companion support +6, Companion maximum HP +20 Hero bond bonus: MP +6, attack +1.",
+        "cost": 20,
         "requires": [
           "aura",
           "art_three"
@@ -673,13 +683,18 @@
           0.85,
           0.06
         ],
-        "level_required": 1
+        "level_required": 1,
+        "field_ability": "dragon"
       }
-    ]
+    ],
+    "field_ability": {
+      "name": "Emberglass Passage",
+      "description": "Escape the current dungeon to its entrance. Recharges only after a paid inn rest with this companion active."
+    }
   },
   "warhorse": {
     "name": "Warhorse",
-    "role": "HP +18 \u00b7 agility +5",
+    "role": "HP +18 · agility +5",
     "attack": 12,
     "support": 12,
     "hp": 80,
@@ -722,7 +737,7 @@
         "power": 12,
         "behavior": "Attack",
         "cooldown": 2,
-        "description": "A charging hoof strike with +12 attack power. Attack behavior; 2-round cooldown. Uses the companion\u2019s turn."
+        "description": "A charging hoof strike with +12 attack power. Attack behavior; 2-round cooldown. Uses the companion’s turn."
       },
       "warhorse_art_2": {
         "name": "Wind of the Road",
@@ -730,7 +745,7 @@
         "power": 9,
         "behavior": "Support",
         "cooldown": 3,
-        "description": "Raises the hero\u2019s agility by 9 for three rounds, improving initiative. Support behavior; 3-round cooldown. Uses the companion\u2019s turn."
+        "description": "Raises the hero’s agility by 9 for three rounds, improving initiative. Support behavior; 3-round cooldown. Uses the companion’s turn."
       },
       "warhorse_art_3": {
         "name": "Dawn Charge",
@@ -738,7 +753,7 @@
         "power": 25,
         "behavior": "Attack",
         "cooldown": 4,
-        "description": "A charge with +25 power that stuns the enemy for one turn on a successful hit. Attack behavior; 4-round cooldown. Uses the companion\u2019s turn."
+        "description": "A charge with +25 power that stuns the enemy for one turn on a successful hit. Attack behavior; 4-round cooldown. Uses the companion’s turn."
       }
     },
     "nodes": [
@@ -746,7 +761,7 @@
         "id": "predator",
         "name": "Instinct",
         "description": "Companion attack +4.",
-        "cost": 1,
+        "cost": 3,
         "requires": [],
         "bonus": {
           "attack": 4
@@ -763,7 +778,7 @@
         "id": "guardian",
         "name": "Endurance",
         "description": "Companion maximum HP +15.",
-        "cost": 2,
+        "cost": 5,
         "requires": [
           "predator"
         ],
@@ -782,7 +797,7 @@
         "id": "bond",
         "name": "Devotion",
         "description": "Companion support +6.",
-        "cost": 2,
+        "cost": 6,
         "requires": [
           "predator"
         ],
@@ -800,8 +815,8 @@
       {
         "id": "art_one",
         "name": "Thunderhoof",
-        "description": "A charging hoof strike with +12 attack power. Attack behavior; 2-round cooldown. Uses the companion\u2019s turn.",
-        "cost": 3,
+        "description": "A charging hoof strike with +12 attack power. Attack behavior; 2-round cooldown. Uses the companion’s turn.",
+        "cost": 8,
         "requires": [
           "guardian"
         ],
@@ -819,8 +834,8 @@
       {
         "id": "art_two",
         "name": "Wind of the Road",
-        "description": "Raises the hero\u2019s agility by 9 for three rounds, improving initiative. Support behavior; 3-round cooldown. Uses the companion\u2019s turn.",
-        "cost": 3,
+        "description": "Raises the hero’s agility by 9 for three rounds, improving initiative. Support behavior; 3-round cooldown. Uses the companion’s turn.",
+        "cost": 10,
         "requires": [
           "bond"
         ],
@@ -839,7 +854,7 @@
         "id": "aura",
         "name": "Strengthened Bond",
         "description": "Hero bond bonus: HP +9, agility +2.",
-        "cost": 4,
+        "cost": 12,
         "requires": [
           "guardian",
           "bond"
@@ -859,8 +874,8 @@
       {
         "id": "art_three",
         "name": "Dawn Charge",
-        "description": "A charge with +25 power that stuns the enemy for one turn on a successful hit. Attack behavior; 4-round cooldown. Uses the companion\u2019s turn.",
-        "cost": 4,
+        "description": "A charge with +25 power that stuns the enemy for one turn on a successful hit. Attack behavior; 4-round cooldown. Uses the companion’s turn.",
+        "cost": 16,
         "requires": [
           "art_one",
           "art_two"
@@ -878,9 +893,9 @@
       },
       {
         "id": "capstone",
-        "name": "Eternal Bond",
-        "description": "Companion attack +6, Companion support +6, Companion maximum HP +20 Hero bond bonus: HP +9, agility +2.",
-        "cost": 5,
+        "name": "Homeward Gallop",
+        "description": "Travel to any discovered town. Once per inn rest with this companion active. Companion attack +6, Companion support +6, Companion maximum HP +20 Hero bond bonus: HP +9, agility +2.",
+        "cost": 20,
         "requires": [
           "aura",
           "art_three"
@@ -899,13 +914,18 @@
           0.85,
           0.06
         ],
-        "level_required": 1
+        "level_required": 1,
+        "field_ability": "warhorse"
       }
-    ]
+    ],
+    "field_ability": {
+      "name": "Homeward Gallop",
+      "description": "Travel to any discovered town. Recharges only after a paid inn rest with this companion active."
+    }
   },
   "spirit_fox": {
     "name": "Spirit Fox",
-    "role": "MP +12 \u00b7 healing power +5",
+    "role": "MP +12 · healing power +5",
     "attack": 10,
     "support": 20,
     "hp": 55,
@@ -948,7 +968,7 @@
         "power": 8,
         "behavior": "Attack",
         "cooldown": 2,
-        "description": "A spirit attack with +8 power. Attack behavior; 2-round cooldown. Uses the companion\u2019s turn."
+        "description": "A spirit attack with +8 power. Attack behavior; 2-round cooldown. Uses the companion’s turn."
       },
       "spirit_fox_art_2": {
         "name": "Moonlit Renewal",
@@ -956,7 +976,7 @@
         "power": 24,
         "behavior": "Support",
         "cooldown": 2,
-        "description": "Restores 24 HP plus learned companion support bonuses. Support behavior; 2-round cooldown. Uses the companion\u2019s turn."
+        "description": "Restores 24 HP plus learned companion support bonuses. Support behavior; 2-round cooldown. Uses the companion’s turn."
       },
       "spirit_fox_art_3": {
         "name": "Sanctuary Bloom",
@@ -964,7 +984,7 @@
         "power": 38,
         "behavior": "Support",
         "cooldown": 4,
-        "description": "Restores 38 HP plus support bonuses and grants three rounds of regeneration. Support behavior; 4-round cooldown. Uses the companion\u2019s turn."
+        "description": "Restores 38 HP plus support bonuses and grants three rounds of regeneration. Support behavior; 4-round cooldown. Uses the companion’s turn."
       }
     },
     "nodes": [
@@ -972,7 +992,7 @@
         "id": "predator",
         "name": "Instinct",
         "description": "Companion attack +4.",
-        "cost": 1,
+        "cost": 3,
         "requires": [],
         "bonus": {
           "attack": 4
@@ -989,7 +1009,7 @@
         "id": "guardian",
         "name": "Endurance",
         "description": "Companion maximum HP +15.",
-        "cost": 2,
+        "cost": 5,
         "requires": [
           "predator"
         ],
@@ -1008,7 +1028,7 @@
         "id": "bond",
         "name": "Devotion",
         "description": "Companion support +6.",
-        "cost": 2,
+        "cost": 6,
         "requires": [
           "predator"
         ],
@@ -1026,8 +1046,8 @@
       {
         "id": "art_one",
         "name": "Spirit Spark",
-        "description": "A spirit attack with +8 power. Attack behavior; 2-round cooldown. Uses the companion\u2019s turn.",
-        "cost": 3,
+        "description": "A spirit attack with +8 power. Attack behavior; 2-round cooldown. Uses the companion’s turn.",
+        "cost": 8,
         "requires": [
           "guardian"
         ],
@@ -1045,8 +1065,8 @@
       {
         "id": "art_two",
         "name": "Moonlit Renewal",
-        "description": "Restores 24 HP plus learned companion support bonuses. Support behavior; 2-round cooldown. Uses the companion\u2019s turn.",
-        "cost": 3,
+        "description": "Restores 24 HP plus learned companion support bonuses. Support behavior; 2-round cooldown. Uses the companion’s turn.",
+        "cost": 10,
         "requires": [
           "bond"
         ],
@@ -1065,7 +1085,7 @@
         "id": "aura",
         "name": "Strengthened Bond",
         "description": "Hero bond bonus: MP +6, healing power +2.",
-        "cost": 4,
+        "cost": 12,
         "requires": [
           "guardian",
           "bond"
@@ -1085,8 +1105,8 @@
       {
         "id": "art_three",
         "name": "Sanctuary Bloom",
-        "description": "Restores 38 HP plus support bonuses and grants three rounds of regeneration. Support behavior; 4-round cooldown. Uses the companion\u2019s turn.",
-        "cost": 4,
+        "description": "Restores 38 HP plus support bonuses and grants three rounds of regeneration. Support behavior; 4-round cooldown. Uses the companion’s turn.",
+        "cost": 16,
         "requires": [
           "art_one",
           "art_two"
@@ -1104,9 +1124,9 @@
       },
       {
         "id": "capstone",
-        "name": "Eternal Bond",
-        "description": "Companion attack +6, Companion support +6, Companion maximum HP +20 Hero bond bonus: MP +6, healing power +2.",
-        "cost": 5,
+        "name": "Moonlit Sanctuary",
+        "description": "Restore half hero HP and MP; revive or fully restore the spirit fox. Can be invoked while the fox is defeated. Recharges only at an inn with this companion active.",
+        "cost": 20,
         "requires": [
           "aura",
           "art_three"
@@ -1125,13 +1145,18 @@
           0.85,
           0.06
         ],
-        "level_required": 1
+        "level_required": 1,
+        "field_ability": "spirit_fox"
       }
-    ]
+    ],
+    "field_ability": {
+      "name": "Moonlit Sanctuary",
+      "description": "Restore half hero HP and MP; revive or fully restore the spirit fox. Can be invoked while the fox is defeated. Recharges only at an inn with this companion active."
+    }
   },
   "golem": {
     "name": "Golem",
-    "role": "HP +18 \u00b7 defense +4",
+    "role": "HP +18 · defense +4",
     "attack": 13,
     "support": 10,
     "hp": 90,
@@ -1174,7 +1199,7 @@
         "power": 10,
         "behavior": "Attack",
         "cooldown": 2,
-        "description": "Strikes with +10 power and stuns the enemy for one turn on a successful hit. Attack behavior; 2-round cooldown. Uses the companion\u2019s turn."
+        "description": "Strikes with +10 power and stuns the enemy for one turn on a successful hit. Attack behavior; 2-round cooldown. Uses the companion’s turn."
       },
       "golem_art_2": {
         "name": "Granite Shelter",
@@ -1182,7 +1207,7 @@
         "power": 9,
         "behavior": "Defend",
         "cooldown": 3,
-        "description": "Raises the hero\u2019s defense by 9 for three rounds. Defend behavior; 3-round cooldown. Uses the companion\u2019s turn."
+        "description": "Raises the hero’s defense by 9 for three rounds. Defend behavior; 3-round cooldown. Uses the companion’s turn."
       },
       "golem_art_3": {
         "name": "Mountain Ward",
@@ -1190,7 +1215,7 @@
         "power": 14,
         "behavior": "Defend",
         "cooldown": 4,
-        "description": "Raises defense by 14 for three rounds and intercepts the next incoming attack. Defend behavior; 4-round cooldown. Uses the companion\u2019s turn."
+        "description": "Raises defense by 14 for three rounds and intercepts the next incoming attack. Defend behavior; 4-round cooldown. Uses the companion’s turn."
       }
     },
     "nodes": [
@@ -1198,7 +1223,7 @@
         "id": "predator",
         "name": "Instinct",
         "description": "Companion attack +4.",
-        "cost": 1,
+        "cost": 3,
         "requires": [],
         "bonus": {
           "attack": 4
@@ -1215,7 +1240,7 @@
         "id": "guardian",
         "name": "Endurance",
         "description": "Companion maximum HP +15.",
-        "cost": 2,
+        "cost": 5,
         "requires": [
           "predator"
         ],
@@ -1234,7 +1259,7 @@
         "id": "bond",
         "name": "Devotion",
         "description": "Companion support +6.",
-        "cost": 2,
+        "cost": 6,
         "requires": [
           "predator"
         ],
@@ -1252,8 +1277,8 @@
       {
         "id": "art_one",
         "name": "Stonefist",
-        "description": "Strikes with +10 power and stuns the enemy for one turn on a successful hit. Attack behavior; 2-round cooldown. Uses the companion\u2019s turn.",
-        "cost": 3,
+        "description": "Strikes with +10 power and stuns the enemy for one turn on a successful hit. Attack behavior; 2-round cooldown. Uses the companion’s turn.",
+        "cost": 8,
         "requires": [
           "guardian"
         ],
@@ -1271,8 +1296,8 @@
       {
         "id": "art_two",
         "name": "Granite Shelter",
-        "description": "Raises the hero\u2019s defense by 9 for three rounds. Defend behavior; 3-round cooldown. Uses the companion\u2019s turn.",
-        "cost": 3,
+        "description": "Raises the hero’s defense by 9 for three rounds. Defend behavior; 3-round cooldown. Uses the companion’s turn.",
+        "cost": 10,
         "requires": [
           "bond"
         ],
@@ -1291,7 +1316,7 @@
         "id": "aura",
         "name": "Strengthened Bond",
         "description": "Hero bond bonus: HP +9, defense +2.",
-        "cost": 4,
+        "cost": 12,
         "requires": [
           "guardian",
           "bond"
@@ -1311,8 +1336,8 @@
       {
         "id": "art_three",
         "name": "Mountain Ward",
-        "description": "Raises defense by 14 for three rounds and intercepts the next incoming attack. Defend behavior; 4-round cooldown. Uses the companion\u2019s turn.",
-        "cost": 4,
+        "description": "Raises defense by 14 for three rounds and intercepts the next incoming attack. Defend behavior; 4-round cooldown. Uses the companion’s turn.",
+        "cost": 16,
         "requires": [
           "art_one",
           "art_two"
@@ -1330,9 +1355,9 @@
       },
       {
         "id": "capstone",
-        "name": "Eternal Bond",
-        "description": "Companion attack +6, Companion support +6, Companion maximum HP +20 Hero bond bonus: HP +9, defense +2.",
-        "cost": 5,
+        "name": "Heart of the Mountain",
+        "description": "Fully restore hero HP and MP. Once per inn rest with this companion active. Companion attack +6, Companion support +6, Companion maximum HP +20 Hero bond bonus: HP +9, defense +2.",
+        "cost": 20,
         "requires": [
           "aura",
           "art_three"
@@ -1351,8 +1376,13 @@
           0.85,
           0.06
         ],
-        "level_required": 1
+        "level_required": 1,
+        "field_ability": "golem"
       }
-    ]
+    ],
+    "field_ability": {
+      "name": "Heart of the Mountain",
+      "description": "Fully restore hero HP and MP. Recharges only after a paid inn rest with this companion active."
+    }
   }
 }

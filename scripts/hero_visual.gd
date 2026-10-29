@@ -3,7 +3,7 @@ extends Node3D
 # Visual-only Quaternius adapter. Equipment IDs, stats, classes and saves stay in State.
 const ACTION_CLIPS={
  "Victory":"Yes", "Defeat":"Death01", "Dodge":"Roll",
- "Attack":"Sword_Attack", "Sword Slash":"Sword_Regular_A",
+ "Dragon Slash":"Sword_Regular_Combo", "Attack":"Sword_Attack", "Sword Slash":"Sword_Regular_A",
  "Shield Bash":"Shield_OneShot", "Sacred Strike":"Sword_Regular_B",
  "Hunter's Mark":"OverhandThrow", "Thornbind":"Spell_Simple_Enter",
  "Regrowth":"Spell_Simple_Idle", "Dawn Avatar":"Sword_Regular_Combo",
@@ -18,6 +18,7 @@ var palm_offset=Vector3(0,.075,0)
 var weapon_prop:Node3D
 var pose_modifier:WeaponPose
 var weapon_action=false
+var voice_action=false
 var action_elapsed=0.0
 var action_duration=1.0
 var bow_arrow:Node3D
@@ -76,7 +77,7 @@ func configure_appearance(appearance:Dictionary,chest:String):
   var helmet:String=gear.get("Helmet","None")
   if name_.contains("Head_Hood"):
    mesh.visible=helmet=="Ranger Hood" or (helmet=="None" and skin_profile.hood)
-  if name_.contains("Acc_Pauldron"):mesh.visible=skin_profile.pauldrons or chest=="Steel Cuirass"
+  if name_.contains("Acc_Pauldron"):mesh.visible=skin_profile.pauldrons or WardrobeVisual.profile(chest).style=="plate"
   for surface in range(mesh.mesh.get_surface_count()):
    var original=mesh.get_active_material(surface)
    if not original is StandardMaterial3D:continue
@@ -179,6 +180,7 @@ func play_action(action:String)->float:
  action_elapsed=0
  arrow_released=false
  var entry=AbilityBook.entry(action)
+ voice_action=entry.get("scaling","")=="voice"
  weapon_action=action=="Attack" or (entry.get("kind","") in ["weapon","technique"] and entry.get("effect","") not in ["buff","heal"])
  if action in ["Sword Slash","Sacred Strike","Wild Hunt","Dawn Avatar"]:weapon_action=true
  if action=="Defeat":locked_pose=true
@@ -186,6 +188,8 @@ func play_action(action:String)->float:
  if clip.is_empty():
   entry=AbilityBook.entry(action)
   clip="Spell_Simple_Idle" if entry.get("effect","") in ["heal","buff","renewal","meditate"] else ("Spell_Simple_Shoot" if entry.get("kind","") in ["spell","mythic"] else "Sword_Attack")
+ if entry.get("kind","")=="item":clip="Consume"
+ if voice_action:clip="Sword_Idle"
  if weapon_action:
   match weapon_family:
    "bow":clip="Idle" # Draw/release is supplied by the post-animation arm modifier.

@@ -52,7 +52,7 @@ func _init(hero: Dictionary, attributes: Dictionary, species_: String="goblin"):
  rng=RandomNumberGenerator.new()
  rng.seed=int(h.seed)
 func damage(power: int, defense: int) -> int:
- return maxi(1,power-defense)
+ return maxi(1,power-roundi(float(defense)/(1.0+float(defense)/40.0)))
 func cost(action: String) -> int:
  if demo_rules: return int(AbilityBook.entry(action).get("mp",0))
  return {"Sacred Strike":7,"Hunter's Mark":4,"Thornbind":6,"Regrowth":8,"Dawn Avatar":15,"Wild Hunt":15,"Ancient Grove":15}.get(action,0)
@@ -60,6 +60,10 @@ func legal(action: String) -> bool:
  if demo_rules:
   var entry=AbilityBook.entry(action)
   if entry.is_empty() or h.mp<entry.mp: return false
+  if entry.has("item") and int(h.get("items",{}).get(entry.item,0))<=0:return false
+  if entry.effect=="mana_item" and h.mp>=stats.max_mp:return false
+  if entry.effect=="elixir_item" and h.hp>=stats.max_hp and h.mp>=stats.max_mp:return false
+  if entry.effect=="ration_item" and not h.companion.active:return false
   var family=AbilityBook.weapon_type(h)
   if cooldowns.get(AbilityBook.id_for(action),0)>0: return false
   if entry.has("weapon_node") and not AbilityBook.techniques(h).has(AbilityBook.id_for(action)): return false
@@ -85,7 +89,8 @@ func hit_enemy(actor: String, power: int, label: String) -> bool:
  var defense=maxi(0,int(enemy.defense)-(5 if weakened>0 else 0)-(sunder if sunder_rounds>0 else 0))
  defense=int(defense*(1.0-float(entry.get("ignore_defense",0))))
  var amount=damage(power,defense)+(6 if marked>0 else 0)
- var element=str(entry.get("damage_type","physical"))
+ var weapon_element=str(AbilityBook.gear_data.get(h.equipment.Weapon,{}).get("damage_type","physical")) if actor=="Hero" and physical else "physical"
+ var element=str(entry.get("damage_type",weapon_element))
  var multiplier=float(enemy.get("affinities",{}).get(element,1.0))
  if enemy.get("tags",[]).has(entry.get("slayer","")):multiplier*=float(entry.get("slayer_multiplier",1))
  amount=maxi(1,roundi(amount*multiplier))
@@ -292,6 +297,18 @@ func demo_hero_turn(action: String):
   SkillEffects.cast(self,action,entry,power)
   return
  match entry.effect:
+  "mana_item":
+   h.items.ether-=1
+   var amount=mini(int(entry.power),int(stats.max_mp)-int(h.mp));h.mp+=amount
+   emit("Hero","Hero",0,action)
+  "elixir_item":
+   h.items.elixir-=1;heal(int(stats.max_hp),action);h.mp=int(stats.max_mp)
+  "ration_item":
+   h.items.treat-=1
+   var record:Dictionary=h.companion.get("records",{}).get(h.companion.current,{})
+   var max_pet=55 if h.companion.current=="intro_wolf" else int(companion_data[h.companion.current].hp)+int(record.get("level",1))*3+CompanionRules.pet_bonus(h,"max_hp")
+   var amount=mini(35,maxi(0,max_pet-wolf_hp));wolf_hp+=amount
+   emit("Hero","Wolf",-amount,action)
   "special":SkillEffects.cast(self,action,entry,power)
   "buff":
    buffs[entry.stat]={"amount":int(entry.power),"rounds":int(entry.duration)+1}
@@ -429,20 +446,45 @@ func auto_action() -> String:
   if legal("Sacred Strike"): return "Sacred Strike"
   return "Attack"
  if charging: return "Defend"
+ var available=AbilityBook.available(h)+AbilityBook.techniques(h)
  if h.hp<stats.max_hp/2:
-  for id in ["healing_light","regrowth","purifying_light"]:
-   if legal(id) and (id!="regrowth" or regeneration==0): return id
-  if legal("items"): return "Items"
- var candidates=AbilityBook.available(h)+AbilityBook.techniques(h)
+  var healing=""
+  var healing_value=0.0
+  for id in available:
+   var art=AbilityBook.entry(id)
+   if not legal(id) or art.effect not in ["heal","regrowth","renewal"]:continue
+   var value=minf(float(stats.max_hp-h.hp),float(art.power)+float(stats.get("healing",0)))
+   if art.effect in ["regrowth","renewal"] and regeneration==0:value+=18
+   value+=float(art.get("ward",0))*2
+   if value>healing_value:healing_value=value;healing=id
+  if not healing.is_empty():return healing
+  if legal("items"):return "Items"
+ if h.mp<4 and legal("battle_ether"):return "battle_ether"
  var best="Attack"
- var score=0.0
- for id in candidates:
-  if not legal(id): continue
-  var entry=AbilityBook.entry(id)
-  if entry.effect not in ["damage","magic","drain","rage","execute","pierce","frost","special"]: continue
-  var value=float(entry.get("power",0))
-  if entry.effect in ["magic","drain","frost"]: value+=float(stats.max_mp)*0.18+float(h.level)*1.5-float(stats.attack)
-  if value>score:
-   score=value
-   best=id
+ var score=estimated_damage("Attack")
+ for id in available:
+  if not legal(id):continue
+  var art=AbilityBook.entry(id)
+  if art.effect not in ["damage","magic","drain","rage","execute","pierce","frost","special","poison","root","mark"]:continue
+  var value=estimated_damage(id)-float(art.mp)*.25
+  if value>score:score=value;best=id
  return best
+func estimated_damage(id:String)->float:
+ var art=AbilityBook.entry(id)
+ var power=float(current_stat("attack"))+float(art.get("power",0))
+ var element=str(art.get("damage_type",AbilityBook.gear_data.get(h.equipment.Weapon,{}).get("damage_type","physical")))
+ if art.effect in ["magic","drain","frost"] or (art.effect=="special" and element!="physical" and art.kind in ["spell","mythic"]):power=float(art.power)+float(stats.max_mp)*.18+float(h.level)*1.5
+ if art.get("scaling","")=="voice":power=float(art.power)+float(h.level)*1.5
+ if SkillEffects.conditional(self,art):power+=float(art.get("conditional_bonus",0))
+ if art.effect=="execute" and (marked>0 or poison>0):power+=12
+ var defense=maxi(0,int(enemy.defense)-(5 if weakened>0 else 0)-(sunder if sunder_rounds>0 else 0))
+ var ignored=float(art.get("ignore_defense",.5 if art.effect=="pierce" else 0))
+ var value=float(damage(int(power*float(art.get("hit_scale",1))),int(defense*(1-ignored))))*int(art.get("hits",1))
+ value*=float(enemy.get("affinities",{}).get(element,1))
+ if enemy.get("tags",[]).has(art.get("slayer","")):value*=float(art.get("slayer_multiplier",1))
+ if art.has("burn") and burn_rounds==0:value+=float(art.burn)*int(art.get("duration",3))
+ if art.has("wound") and wound_rounds==0:value+=float(art.wound)*int(art.get("duration",3))
+ if art.effect=="poison" and poison==0:value+=15
+ if art.has("sunder") and sunder_rounds==0:value+=float(art.sunder)*2
+ if art.effect=="rage" and h.hp<stats.max_hp*.35:value-=20
+ return value

@@ -140,6 +140,7 @@ func run():
   var model=CompanionVisual.build(id)
   check(model is CompanionActor and model.skeleton.get_bone_count()>10,"Skinned companion model builds: "+id)
   model.free()
+  State.companion_record().points=3
   check(State.train_companion("predator") and not State.train_companion("predator"),"Companion training spends points once")
   for behavior in ["Attack","Support","Defend"]:
    State.restore()

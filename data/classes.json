@@ -12,12 +12,12 @@
       "dexterity": 8
     },
     "growth": {
-      "max_hp": 11,
-      "max_mp": 3,
-      "attack": 2.6,
-      "defense": 1.5,
-      "agility": 0.6,
-      "dexterity": 0.5
+      "max_hp": 7.7,
+      "max_mp": 2.1,
+      "attack": 1.82,
+      "defense": 1.05,
+      "agility": 0.42,
+      "dexterity": 0.35
     },
     "proficiencies": [
       "sword",
@@ -41,10 +41,10 @@
       {
         "id": "oath",
         "name": "Oathkeeper",
-        "description": "HP +10, defense +1. Permanent once learned.",
+        "description": "Permanent: HP +7, DEFENSE +1. ",
         "requires": [],
         "bonus": {
-          "max_hp": 10,
+          "max_hp": 7,
           "defense": 1
         },
         "position": [
@@ -60,12 +60,12 @@
       {
         "id": "shield",
         "name": "Paladin Discipline",
-        "description": "defense +3. Permanent once learned.",
+        "description": "Permanent: DEFENSE +2. ",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "defense": 3
+          "defense": 2
         },
         "position": [
           0.5,
@@ -80,12 +80,12 @@
       {
         "id": "light",
         "name": "Paladin Arts",
-        "description": "Healing +3. Holy Light: Restore 32 HP + healing bonus. Against undead, also deal 18 holy power damage. No weapon required.",
+        "description": "Permanent: HEALING +2. Holy Light: Restore 32 HP + healing bonus. Against undead, also deal 18 holy power damage. No weapon required.",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "healing": 3
+          "healing": 2
         },
         "position": [
           0.85,
@@ -102,12 +102,12 @@
       {
         "id": "vigor",
         "name": "Stalwart Heart",
-        "description": "HP +20. Permanent once learned.",
+        "description": "Permanent: HP +14. ",
         "requires": [
           "shield"
         ],
         "bonus": {
-          "max_hp": 20
+          "max_hp": 14
         },
         "position": [
           0.15,
@@ -122,12 +122,12 @@
       {
         "id": "grace",
         "name": "Consecrated Resolve",
-        "description": "MP +10. Permanent once learned.",
+        "description": "Permanent: MP +7. ",
         "requires": [
           "light"
         ],
         "bonus": {
-          "max_mp": 10
+          "max_mp": 7
         },
         "position": [
           0.5,
@@ -142,12 +142,12 @@
       {
         "id": "insight",
         "name": "Shield Discipline",
-        "description": "defense +3. Permanent once learned.",
+        "description": "Permanent: DEFENSE +2. ",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "defense": 3
+          "defense": 2
         },
         "position": [
           0.85,
@@ -162,12 +162,12 @@
       {
         "id": "resolve",
         "name": "Adamant Faith",
-        "description": "defense +5. Permanent once learned.",
+        "description": "Permanent: DEFENSE +4. ",
         "requires": [
           "vigor"
         ],
         "bonus": {
-          "defense": 5
+          "defense": 4
         },
         "position": [
           0.15,
@@ -182,12 +182,12 @@
       {
         "id": "precision",
         "name": "Radiant Discipline",
-        "description": "Healing +5. Judgment: Holy damage; base power +36. Deals 1.8x damage to undead enemies.",
+        "description": "Permanent: HEALING +4. Judgment: Holy damage; base power +36. Deals 1.8x damage to undead enemies.",
         "requires": [
           "grace"
         ],
         "bonus": {
-          "healing": 5
+          "healing": 4
         },
         "position": [
           0.5,
@@ -204,12 +204,12 @@
       {
         "id": "mobility",
         "name": "Vigilant Step",
-        "description": "agility +3. Permanent once learned.",
+        "description": "Permanent: AGILITY +2. ",
         "requires": [
           "insight"
         ],
         "bonus": {
-          "agility": 3
+          "agility": 2
         },
         "position": [
           0.85,
@@ -224,13 +224,13 @@
       {
         "id": "veteran",
         "name": "Guardian Insight",
-        "description": "defense +3, HP +10. Permanent once learned.",
+        "description": "Permanent: DEFENSE +2, HP +7. ",
         "requires": [
           "resolve"
         ],
         "bonus": {
-          "defense": 3,
-          "max_hp": 10
+          "defense": 2,
+          "max_hp": 7
         },
         "position": [
           0.15,
@@ -245,14 +245,14 @@
       {
         "id": "legend",
         "name": "Living Bulwark",
-        "description": "HP +30, defense +5. Permanent once learned.",
+        "description": "Permanent: HP +21, DEFENSE +4. ",
         "requires": [
           "precision",
           "mobility"
         ],
         "bonus": {
-          "max_hp": 30,
-          "defense": 5
+          "max_hp": 21,
+          "defense": 4
         },
         "position": [
           0.5,
@@ -305,12 +305,12 @@
       "dexterity": 14
     },
     "growth": {
-      "max_hp": 9,
-      "max_mp": 2.5,
-      "attack": 2.6,
-      "defense": 1,
-      "agility": 0.95,
-      "dexterity": 0.9
+      "max_hp": 6.3,
+      "max_mp": 1.75,
+      "attack": 1.82,
+      "defense": 0.7,
+      "agility": 0.665,
+      "dexterity": 0.63
     },
     "proficiencies": [
       "bow",
@@ -338,10 +338,10 @@
       {
         "id": "oath",
         "name": "Trail Sense",
-        "description": "agility +2, dexterity +1. Permanent once learned.",
+        "description": "Permanent: AGILITY +1, DEXTERITY +1. ",
         "requires": [],
         "bonus": {
-          "agility": 2,
+          "agility": 1,
           "dexterity": 1
         },
         "position": [
@@ -357,12 +357,12 @@
       {
         "id": "shield",
         "name": "Ranger Discipline",
-        "description": "dexterity +3. Permanent once learned.",
+        "description": "Permanent: DEXTERITY +2. ",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "dexterity": 3
+          "dexterity": 2
         },
         "position": [
           0.5,
@@ -377,12 +377,12 @@
       {
         "id": "light",
         "name": "Ranger Arts",
-        "description": "Attack +2. Seeking Arrow: Physical damage; base power +24. Cannot be dodged.",
+        "description": "Permanent: ATTACK +1. Seeking Arrow: Physical damage; base power +24. Cannot be dodged. Requires bow.",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "attack": 2
+          "attack": 1
         },
         "position": [
           0.85,
@@ -399,12 +399,12 @@
       {
         "id": "vigor",
         "name": "Trail Endurance",
-        "description": "HP +15. Permanent once learned.",
+        "description": "Permanent: HP +10. ",
         "requires": [
           "shield"
         ],
         "bonus": {
-          "max_hp": 15
+          "max_hp": 10
         },
         "position": [
           0.15,
@@ -419,12 +419,12 @@
       {
         "id": "grace",
         "name": "Woodland Focus",
-        "description": "MP +8. Permanent once learned.",
+        "description": "Permanent: MP +6. ",
         "requires": [
           "light"
         ],
         "bonus": {
-          "max_mp": 8
+          "max_mp": 6
         },
         "position": [
           0.5,
@@ -439,12 +439,12 @@
       {
         "id": "insight",
         "name": "Eagle Eye",
-        "description": "dexterity +4. Permanent once learned.",
+        "description": "Permanent: DEXTERITY +3. ",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "dexterity": 4
+          "dexterity": 3
         },
         "position": [
           0.85,
@@ -459,12 +459,12 @@
       {
         "id": "resolve",
         "name": "Barkskin Training",
-        "description": "defense +3. Permanent once learned.",
+        "description": "Permanent: DEFENSE +2. ",
         "requires": [
           "vigor"
         ],
         "bonus": {
-          "defense": 3
+          "defense": 2
         },
         "position": [
           0.15,
@@ -479,12 +479,12 @@
       {
         "id": "precision",
         "name": "Hunter Precision",
-        "description": "Critical chance (%) +5. Hawkstrike: Wind damage; base power +36. Deals 1.75x damage to flying enemies.",
+        "description": "Permanent: CRITICAL +4. Hawkstrike: Wind damage; base power +36. Deals 1.75x damage to flying enemies. Requires bow.",
         "requires": [
           "grace"
         ],
         "bonus": {
-          "critical": 5
+          "critical": 4
         },
         "position": [
           0.5,
@@ -501,12 +501,12 @@
       {
         "id": "mobility",
         "name": "Pathfinder",
-        "description": "agility +5. Permanent once learned.",
+        "description": "Permanent: AGILITY +4. ",
         "requires": [
           "insight"
         ],
         "bonus": {
-          "agility": 5
+          "agility": 4
         },
         "position": [
           0.85,
@@ -521,12 +521,12 @@
       {
         "id": "veteran",
         "name": "Keen Senses",
-        "description": "dexterity +6. Permanent once learned.",
+        "description": "Permanent: DEXTERITY +4. ",
         "requires": [
           "resolve"
         ],
         "bonus": {
-          "dexterity": 6
+          "dexterity": 4
         },
         "position": [
           0.15,
@@ -541,14 +541,14 @@
       {
         "id": "legend",
         "name": "Master Tracker",
-        "description": "agility +5, dexterity +7. Permanent once learned.",
+        "description": "Permanent: AGILITY +4, DEXTERITY +5. ",
         "requires": [
           "precision",
           "mobility"
         ],
         "bonus": {
-          "agility": 5,
-          "dexterity": 7
+          "agility": 4,
+          "dexterity": 5
         },
         "position": [
           0.5,
@@ -601,12 +601,12 @@
       "dexterity": 10
     },
     "growth": {
-      "max_hp": 8.5,
-      "max_mp": 4.5,
-      "attack": 1.8,
-      "defense": 1,
-      "agility": 0.7,
-      "dexterity": 0.75
+      "max_hp": 5.95,
+      "max_mp": 3.15,
+      "attack": 1.26,
+      "defense": 0.7,
+      "agility": 0.49,
+      "dexterity": 0.525
     },
     "proficiencies": [
       "staff",
@@ -633,11 +633,11 @@
       {
         "id": "oath",
         "name": "Root Wisdom",
-        "description": "MP +5, HP +5. Permanent once learned.",
+        "description": "Permanent: MP +4, HP +4. ",
         "requires": [],
         "bonus": {
-          "max_mp": 5,
-          "max_hp": 5
+          "max_mp": 4,
+          "max_hp": 4
         },
         "position": [
           0.15,
@@ -652,12 +652,12 @@
       {
         "id": "shield",
         "name": "Druid Discipline",
-        "description": "defense +2, healing power +1. Permanent once learned.",
+        "description": "Permanent: DEFENSE +1, HEALING +1. ",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "defense": 2,
+          "defense": 1,
           "healing": 1
         },
         "position": [
@@ -673,12 +673,12 @@
       {
         "id": "light",
         "name": "Druid Arts",
-        "description": "Healing +4. Briarstorm: Nature damage; base power +24. 50% chance to root for one turn (bosses resist half).",
+        "description": "Permanent: HEALING +3. Briarstorm: Nature damage; base power +24. 50% chance to root for one turn (bosses resist half).",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "healing": 4
+          "healing": 3
         },
         "position": [
           0.85,
@@ -695,12 +695,12 @@
       {
         "id": "vigor",
         "name": "Oakheart",
-        "description": "HP +18. Permanent once learned.",
+        "description": "Permanent: HP +13. ",
         "requires": [
           "shield"
         ],
         "bonus": {
-          "max_hp": 18
+          "max_hp": 13
         },
         "position": [
           0.15,
@@ -715,12 +715,12 @@
       {
         "id": "grace",
         "name": "Grove Reservoir",
-        "description": "MP +12. Permanent once learned.",
+        "description": "Permanent: MP +8. ",
         "requires": [
           "light"
         ],
         "bonus": {
-          "max_mp": 12
+          "max_mp": 8
         },
         "position": [
           0.5,
@@ -735,12 +735,12 @@
       {
         "id": "insight",
         "name": "Herbal Wisdom",
-        "description": "healing power +4. Permanent once learned.",
+        "description": "Permanent: HEALING +3. ",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "healing": 4
+          "healing": 3
         },
         "position": [
           0.85,
@@ -755,12 +755,12 @@
       {
         "id": "resolve",
         "name": "Living Bark",
-        "description": "defense +4. Permanent once learned.",
+        "description": "Permanent: DEFENSE +3. ",
         "requires": [
           "vigor"
         ],
         "bonus": {
-          "defense": 4
+          "defense": 3
         },
         "position": [
           0.15,
@@ -775,12 +775,12 @@
       {
         "id": "precision",
         "name": "Wild Renewal",
-        "description": "Healing +6. Grove Renewal: Restore 60 HP + healing bonus and renew 12 HP for 4 rounds. Defense +5 for 4 rounds.",
+        "description": "Permanent: HEALING +4. Grove Renewal: Restore 60 HP + healing bonus and renew 12 HP for 4 rounds. Defense +5 for 4 rounds.",
         "requires": [
           "grace"
         ],
         "bonus": {
-          "healing": 6
+          "healing": 4
         },
         "position": [
           0.5,
@@ -797,12 +797,12 @@
       {
         "id": "mobility",
         "name": "Forest Stride",
-        "description": "agility +4. Permanent once learned.",
+        "description": "Permanent: AGILITY +3. ",
         "requires": [
           "insight"
         ],
         "bonus": {
-          "agility": 4
+          "agility": 3
         },
         "position": [
           0.85,
@@ -817,13 +817,13 @@
       {
         "id": "veteran",
         "name": "Ancient Sap",
-        "description": "HP +15, MP +8. Permanent once learned.",
+        "description": "Permanent: HP +10, MP +6. ",
         "requires": [
           "resolve"
         ],
         "bonus": {
-          "max_hp": 15,
-          "max_mp": 8
+          "max_hp": 10,
+          "max_mp": 6
         },
         "position": [
           0.15,
@@ -838,14 +838,14 @@
       {
         "id": "legend",
         "name": "Heart of the Grove",
-        "description": "HP +25, healing power +7. Permanent once learned.",
+        "description": "Permanent: HP +18, HEALING +5. ",
         "requires": [
           "precision",
           "mobility"
         ],
         "bonus": {
-          "max_hp": 25,
-          "healing": 7
+          "max_hp": 18,
+          "healing": 5
         },
         "position": [
           0.5,
@@ -898,12 +898,12 @@
       "dexterity": 7
     },
     "growth": {
-      "max_hp": 12,
-      "max_mp": 2,
-      "attack": 3,
-      "defense": 1.4,
-      "agility": 0.7,
-      "dexterity": 0.5
+      "max_hp": 8.4,
+      "max_mp": 1.4,
+      "attack": 2.1,
+      "defense": 0.98,
+      "agility": 0.49,
+      "dexterity": 0.35
     },
     "proficiencies": [
       "sword",
@@ -931,11 +931,11 @@
       {
         "id": "oath",
         "name": "Soldier’s Resolve",
-        "description": "attack +2, HP +6. Permanent once learned.",
+        "description": "Permanent: ATTACK +1, HP +4. ",
         "requires": [],
         "bonus": {
-          "attack": 2,
-          "max_hp": 6
+          "attack": 1,
+          "max_hp": 4
         },
         "position": [
           0.15,
@@ -950,12 +950,12 @@
       {
         "id": "shield",
         "name": "Warrior Discipline",
-        "description": "defense +3. Permanent once learned.",
+        "description": "Permanent: DEFENSE +2. ",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "defense": 3
+          "defense": 2
         },
         "position": [
           0.5,
@@ -970,12 +970,12 @@
       {
         "id": "light",
         "name": "Warrior Arts",
-        "description": "Attack +3. Cleave: Physical damage; base power +24. Enemy defense -4 for 3 rounds.",
+        "description": "Permanent: ATTACK +2. Cleave: Physical damage; base power +24. Enemy defense -4 for 3 rounds. Requires sword, greatsword, spear, axe, mace.",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "attack": 3
+          "attack": 2
         },
         "position": [
           0.85,
@@ -992,12 +992,12 @@
       {
         "id": "vigor",
         "name": "Battle-Hardened",
-        "description": "HP +20. Permanent once learned.",
+        "description": "Permanent: HP +14. ",
         "requires": [
           "shield"
         ],
         "bonus": {
-          "max_hp": 20
+          "max_hp": 14
         },
         "position": [
           0.15,
@@ -1012,12 +1012,12 @@
       {
         "id": "grace",
         "name": "Second Wind",
-        "description": "HP +12. Permanent once learned.",
+        "description": "Permanent: HP +8. ",
         "requires": [
           "light"
         ],
         "bonus": {
-          "max_hp": 12
+          "max_hp": 8
         },
         "position": [
           0.5,
@@ -1032,12 +1032,12 @@
       {
         "id": "insight",
         "name": "Sure Grip",
-        "description": "attack +3. Permanent once learned.",
+        "description": "Permanent: ATTACK +2. ",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "attack": 3
+          "attack": 2
         },
         "position": [
           0.85,
@@ -1052,12 +1052,12 @@
       {
         "id": "resolve",
         "name": "Steel Resolve",
-        "description": "defense +5. Permanent once learned.",
+        "description": "Permanent: DEFENSE +4. ",
         "requires": [
           "vigor"
         ],
         "bonus": {
-          "defense": 5
+          "defense": 4
         },
         "position": [
           0.15,
@@ -1072,12 +1072,12 @@
       {
         "id": "precision",
         "name": "Veteran Strength",
-        "description": "Attack +5. Veteran Assault: Physical damage; base power +36. 2 strikes at 62% power each; defense applies per strike. Bonus damage +16 against armor-broken or weakened targets.",
+        "description": "Permanent: ATTACK +4. Veteran Assault: Physical damage; base power +36. 2 strikes at 62% power each; defense applies per strike. Bonus damage +16 against armor-broken or weakened targets. Requires sword, greatsword, spear, axe, mace.",
         "requires": [
           "grace"
         ],
         "bonus": {
-          "attack": 5
+          "attack": 4
         },
         "position": [
           0.5,
@@ -1094,12 +1094,12 @@
       {
         "id": "mobility",
         "name": "Battlefield Pace",
-        "description": "agility +3. Permanent once learned.",
+        "description": "Permanent: AGILITY +2. ",
         "requires": [
           "insight"
         ],
         "bonus": {
-          "agility": 3
+          "agility": 2
         },
         "position": [
           0.85,
@@ -1114,12 +1114,12 @@
       {
         "id": "veteran",
         "name": "Weapon Instinct",
-        "description": "critical chance (%) +4. Permanent once learned.",
+        "description": "Permanent: CRITICAL +3. ",
         "requires": [
           "resolve"
         ],
         "bonus": {
-          "critical": 4
+          "critical": 3
         },
         "position": [
           0.15,
@@ -1134,14 +1134,14 @@
       {
         "id": "legend",
         "name": "Unbroken Veteran",
-        "description": "HP +25, attack +5. Permanent once learned.",
+        "description": "Permanent: HP +18, ATTACK +4. ",
         "requires": [
           "precision",
           "mobility"
         ],
         "bonus": {
-          "max_hp": 25,
-          "attack": 5
+          "max_hp": 18,
+          "attack": 4
         },
         "position": [
           0.5,
@@ -1194,12 +1194,12 @@
       "dexterity": 5
     },
     "growth": {
-      "max_hp": 14,
-      "max_mp": 1.5,
-      "attack": 3.4,
-      "defense": 0.8,
-      "agility": 0.8,
-      "dexterity": 0.4
+      "max_hp": 9.8,
+      "max_mp": 1.05,
+      "attack": 2.38,
+      "defense": 0.56,
+      "agility": 0.56,
+      "dexterity": 0.28
     },
     "proficiencies": [
       "axe",
@@ -1224,10 +1224,10 @@
       {
         "id": "oath",
         "name": "Iron Blood",
-        "description": "HP +12, attack +1. Permanent once learned.",
+        "description": "Permanent: HP +8, ATTACK +1. ",
         "requires": [],
         "bonus": {
-          "max_hp": 12,
+          "max_hp": 8,
           "attack": 1
         },
         "position": [
@@ -1243,12 +1243,12 @@
       {
         "id": "shield",
         "name": "Barbarian Discipline",
-        "description": "attack +3. Permanent once learned.",
+        "description": "Permanent: ATTACK +2. ",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "attack": 3
+          "attack": 2
         },
         "position": [
           0.5,
@@ -1263,12 +1263,12 @@
       {
         "id": "light",
         "name": "Barbarian Arts",
-        "description": "Critical chance (%) +3. Sundering Roar: Physical damage; base power +24. Enemy defense -7 for 3 rounds.",
+        "description": "Permanent: CRITICAL +2. Sundering Roar: A weapon-independent roar: sonic power 24 + 1.5 per hero level. Enemy defense -7 for three rounds. Costs 9 MP; no HP cost.",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "critical": 3
+          "critical": 2
         },
         "position": [
           0.85,
@@ -1285,12 +1285,12 @@
       {
         "id": "vigor",
         "name": "Thick Hide",
-        "description": "HP +24. Permanent once learned.",
+        "description": "Permanent: HP +17. ",
         "requires": [
           "shield"
         ],
         "bonus": {
-          "max_hp": 24
+          "max_hp": 17
         },
         "position": [
           0.15,
@@ -1305,12 +1305,12 @@
       {
         "id": "grace",
         "name": "Savage Endurance",
-        "description": "HP +16. Permanent once learned.",
+        "description": "Permanent: HP +11. ",
         "requires": [
           "light"
         ],
         "bonus": {
-          "max_hp": 16
+          "max_hp": 11
         },
         "position": [
           0.5,
@@ -1325,12 +1325,12 @@
       {
         "id": "insight",
         "name": "Heavy Hands",
-        "description": "attack +4. Permanent once learned.",
+        "description": "Permanent: ATTACK +3. ",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "attack": 4
+          "attack": 3
         },
         "position": [
           0.85,
@@ -1345,12 +1345,12 @@
       {
         "id": "resolve",
         "name": "Pain Tolerance",
-        "description": "defense +4. Permanent once learned.",
+        "description": "Permanent: DEFENSE +3. ",
         "requires": [
           "vigor"
         ],
         "bonus": {
-          "defense": 4
+          "defense": 3
         },
         "position": [
           0.15,
@@ -1365,12 +1365,12 @@
       {
         "id": "precision",
         "name": "Blood Fury",
-        "description": "Critical chance (%) +5. Titan Swing: Physical damage; base power +36. Ignores 50% defense. Costs 8 HP (cannot self-KO).",
+        "description": "Permanent: CRITICAL +4. Titan Swing: Physical damage; base power +36. Ignores 50% defense. Costs 8 HP (cannot self-KO). Requires axe, greatsword, hammer.",
         "requires": [
           "grace"
         ],
         "bonus": {
-          "critical": 5
+          "critical": 4
         },
         "position": [
           0.5,
@@ -1387,12 +1387,12 @@
       {
         "id": "mobility",
         "name": "Relentless Charge",
-        "description": "agility +4. Permanent once learned.",
+        "description": "Permanent: AGILITY +3. ",
         "requires": [
           "insight"
         ],
         "bonus": {
-          "agility": 4
+          "agility": 3
         },
         "position": [
           0.85,
@@ -1407,12 +1407,12 @@
       {
         "id": "veteran",
         "name": "Ravager Strength",
-        "description": "attack +5. Permanent once learned.",
+        "description": "Permanent: ATTACK +4. ",
         "requires": [
           "resolve"
         ],
         "bonus": {
-          "attack": 5
+          "attack": 4
         },
         "position": [
           0.15,
@@ -1427,14 +1427,14 @@
       {
         "id": "legend",
         "name": "Titan Blood",
-        "description": "HP +35, attack +6. Permanent once learned.",
+        "description": "Permanent: HP +24, ATTACK +4. ",
         "requires": [
           "precision",
           "mobility"
         ],
         "bonus": {
-          "max_hp": 35,
-          "attack": 6
+          "max_hp": 24,
+          "attack": 4
         },
         "position": [
           0.5,
@@ -1487,12 +1487,12 @@
       "dexterity": 9
     },
     "growth": {
-      "max_hp": 7,
-      "max_mp": 6,
-      "attack": 1.3,
-      "defense": 0.7,
-      "agility": 0.6,
-      "dexterity": 0.7
+      "max_hp": 4.9,
+      "max_mp": 4.2,
+      "attack": 0.91,
+      "defense": 0.49,
+      "agility": 0.42,
+      "dexterity": 0.49
     },
     "proficiencies": [
       "staff",
@@ -1516,10 +1516,10 @@
       {
         "id": "oath",
         "name": "Arcane Study",
-        "description": "MP +8. Permanent once learned.",
+        "description": "Permanent: MP +6. ",
         "requires": [],
         "bonus": {
-          "max_mp": 8
+          "max_mp": 6
         },
         "position": [
           0.15,
@@ -1534,12 +1534,12 @@
       {
         "id": "shield",
         "name": "Wizard Discipline",
-        "description": "MP +8. Permanent once learned.",
+        "description": "Permanent: MP +6. ",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "max_mp": 8
+          "max_mp": 6
         },
         "position": [
           0.5,
@@ -1554,12 +1554,12 @@
       {
         "id": "light",
         "name": "Wizard Arts",
-        "description": "Healing +2. Arcane Barrage: Arcane damage; base power +24. 3 strikes at 48% power each; defense applies per strike.",
+        "description": "Permanent: HEALING +1. Arcane Barrage: Arcane damage; base power +24. 3 strikes at 48% power each; defense applies per strike.",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "healing": 2
+          "healing": 1
         },
         "position": [
           0.85,
@@ -1576,12 +1576,12 @@
       {
         "id": "vigor",
         "name": "Warded Vitality",
-        "description": "HP +12. Permanent once learned.",
+        "description": "Permanent: HP +8. ",
         "requires": [
           "shield"
         ],
         "bonus": {
-          "max_hp": 12
+          "max_hp": 8
         },
         "position": [
           0.15,
@@ -1596,12 +1596,12 @@
       {
         "id": "grace",
         "name": "Arcane Reservoir",
-        "description": "MP +15. Permanent once learned.",
+        "description": "Permanent: MP +10. ",
         "requires": [
           "light"
         ],
         "bonus": {
-          "max_mp": 15
+          "max_mp": 10
         },
         "position": [
           0.5,
@@ -1616,12 +1616,12 @@
       {
         "id": "insight",
         "name": "Runic Insight",
-        "description": "MP +10. Permanent once learned.",
+        "description": "Permanent: MP +7. ",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "max_mp": 10
+          "max_mp": 7
         },
         "position": [
           0.85,
@@ -1636,12 +1636,12 @@
       {
         "id": "resolve",
         "name": "Mana Ward",
-        "description": "defense +4. Permanent once learned.",
+        "description": "Permanent: DEFENSE +3. ",
         "requires": [
           "vigor"
         ],
         "bonus": {
-          "defense": 4
+          "defense": 3
         },
         "position": [
           0.15,
@@ -1656,12 +1656,12 @@
       {
         "id": "precision",
         "name": "Spell Scholar",
-        "description": "MP +12. Astral Rupture: Arcane damage; base power +36. Ignores 100% defense.",
+        "description": "Permanent: MP +8. Astral Rupture: Arcane damage; base power +36. Ignores 100% defense.",
         "requires": [
           "grace"
         ],
         "bonus": {
-          "max_mp": 12
+          "max_mp": 8
         },
         "position": [
           0.5,
@@ -1678,12 +1678,12 @@
       {
         "id": "mobility",
         "name": "Swift Incantation",
-        "description": "agility +4. Permanent once learned.",
+        "description": "Permanent: AGILITY +3. ",
         "requires": [
           "insight"
         ],
         "bonus": {
-          "agility": 4
+          "agility": 3
         },
         "position": [
           0.85,
@@ -1698,12 +1698,12 @@
       {
         "id": "veteran",
         "name": "Elder Runes",
-        "description": "MP +15. Permanent once learned.",
+        "description": "Permanent: MP +10. ",
         "requires": [
           "resolve"
         ],
         "bonus": {
-          "max_mp": 15
+          "max_mp": 10
         },
         "position": [
           0.15,
@@ -1718,14 +1718,14 @@
       {
         "id": "legend",
         "name": "Archmage Mind",
-        "description": "MP +30, defense +3. Permanent once learned.",
+        "description": "Permanent: MP +21, DEFENSE +2. ",
         "requires": [
           "precision",
           "mobility"
         ],
         "bonus": {
-          "max_mp": 30,
-          "defense": 3
+          "max_mp": 21,
+          "defense": 2
         },
         "position": [
           0.5,
@@ -1778,12 +1778,12 @@
       "dexterity": 10
     },
     "growth": {
-      "max_hp": 7.5,
-      "max_mp": 5.5,
-      "attack": 1.5,
-      "defense": 0.7,
-      "agility": 0.8,
-      "dexterity": 0.7
+      "max_hp": 5.25,
+      "max_mp": 3.85,
+      "attack": 1.05,
+      "defense": 0.49,
+      "agility": 0.56,
+      "dexterity": 0.49
     },
     "proficiencies": [
       "staff",
@@ -1807,10 +1807,10 @@
       {
         "id": "oath",
         "name": "Innate Magic",
-        "description": "MP +8. Permanent once learned.",
+        "description": "Permanent: MP +6. ",
         "requires": [],
         "bonus": {
-          "max_mp": 8
+          "max_mp": 6
         },
         "position": [
           0.15,
@@ -1825,12 +1825,12 @@
       {
         "id": "shield",
         "name": "Sorcerer Discipline",
-        "description": "MP +6, attack +1. Permanent once learned.",
+        "description": "Permanent: MP +4, ATTACK +1. ",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "max_mp": 6,
+          "max_mp": 4,
           "attack": 1
         },
         "position": [
@@ -1846,12 +1846,12 @@
       {
         "id": "light",
         "name": "Sorcerer Arts",
-        "description": "MP +10. Lightning Lance: Lightning damage; base power +24. 35% chance to stun for one turn (bosses resist half).",
+        "description": "Permanent: MP +7. Lightning Lance: Lightning damage; base power +24. 35% chance to stun for one turn (bosses resist half).",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "max_mp": 10
+          "max_mp": 7
         },
         "position": [
           0.85,
@@ -1868,12 +1868,12 @@
       {
         "id": "vigor",
         "name": "Arcane Resilience",
-        "description": "HP +12. Permanent once learned.",
+        "description": "Permanent: HP +8. ",
         "requires": [
           "shield"
         ],
         "bonus": {
-          "max_hp": 12
+          "max_hp": 8
         },
         "position": [
           0.15,
@@ -1888,12 +1888,12 @@
       {
         "id": "grace",
         "name": "Font of Power",
-        "description": "MP +15. Permanent once learned.",
+        "description": "Permanent: MP +10. ",
         "requires": [
           "light"
         ],
         "bonus": {
-          "max_mp": 15
+          "max_mp": 10
         },
         "position": [
           0.5,
@@ -1908,12 +1908,12 @@
       {
         "id": "insight",
         "name": "Elemental Affinity",
-        "description": "MP +10. Permanent once learned.",
+        "description": "Permanent: MP +7. ",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "max_mp": 10
+          "max_mp": 7
         },
         "position": [
           0.85,
@@ -1928,12 +1928,12 @@
       {
         "id": "resolve",
         "name": "Prismatic Ward",
-        "description": "defense +4. Permanent once learned.",
+        "description": "Permanent: DEFENSE +3. ",
         "requires": [
           "vigor"
         ],
         "bonus": {
-          "defense": 4
+          "defense": 3
         },
         "position": [
           0.15,
@@ -1948,12 +1948,12 @@
       {
         "id": "precision",
         "name": "Wild Magic",
-        "description": "MP +14. Inferno: Fire damage; base power +36. Burn: 10 fire damage for 3 rounds.",
+        "description": "Permanent: MP +10. Inferno: Fire damage; base power +36. Burn: 10 fire damage for 3 rounds.",
         "requires": [
           "grace"
         ],
         "bonus": {
-          "max_mp": 14
+          "max_mp": 10
         },
         "position": [
           0.5,
@@ -1970,12 +1970,12 @@
       {
         "id": "mobility",
         "name": "Surging Tempo",
-        "description": "agility +5. Permanent once learned.",
+        "description": "Permanent: AGILITY +4. ",
         "requires": [
           "insight"
         ],
         "bonus": {
-          "agility": 5
+          "agility": 4
         },
         "position": [
           0.85,
@@ -1990,12 +1990,12 @@
       {
         "id": "veteran",
         "name": "Unbound Essence",
-        "description": "MP +15. Permanent once learned.",
+        "description": "Permanent: MP +10. ",
         "requires": [
           "resolve"
         ],
         "bonus": {
-          "max_mp": 15
+          "max_mp": 10
         },
         "position": [
           0.15,
@@ -2010,14 +2010,14 @@
       {
         "id": "legend",
         "name": "Living Conduit",
-        "description": "MP +30, HP +15. Permanent once learned.",
+        "description": "Permanent: MP +21, HP +10. ",
         "requires": [
           "precision",
           "mobility"
         ],
         "bonus": {
-          "max_mp": 30,
-          "max_hp": 15
+          "max_mp": 21,
+          "max_hp": 10
         },
         "position": [
           0.5,
@@ -2070,12 +2070,12 @@
       "dexterity": 11
     },
     "growth": {
-      "max_hp": 8,
-      "max_mp": 5,
-      "attack": 1.3,
-      "defense": 1,
-      "agility": 0.7,
-      "dexterity": 0.8
+      "max_hp": 5.6,
+      "max_mp": 3.5,
+      "attack": 0.91,
+      "defense": 0.7,
+      "agility": 0.49,
+      "dexterity": 0.56
     },
     "proficiencies": [
       "staff",
@@ -2100,11 +2100,11 @@
       {
         "id": "oath",
         "name": "Mercy",
-        "description": "MP +6, healing power +2. Permanent once learned.",
+        "description": "Permanent: MP +4, HEALING +1. ",
         "requires": [],
         "bonus": {
-          "max_mp": 6,
-          "healing": 2
+          "max_mp": 4,
+          "healing": 1
         },
         "position": [
           0.15,
@@ -2119,12 +2119,12 @@
       {
         "id": "shield",
         "name": "Healer Discipline",
-        "description": "healing power +3. Permanent once learned.",
+        "description": "Permanent: HEALING +2. ",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "healing": 3
+          "healing": 2
         },
         "position": [
           0.5,
@@ -2139,12 +2139,12 @@
       {
         "id": "light",
         "name": "Healer Arts",
-        "description": "MP +8. Greater Mending: Restore 65 HP + healing bonus. Defense +6 for 2 rounds.",
+        "description": "Permanent: MP +6. Greater Mending: Restore 65 HP + healing bonus. Defense +6 for 2 rounds.",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "max_mp": 8
+          "max_mp": 6
         },
         "position": [
           0.85,
@@ -2161,12 +2161,12 @@
       {
         "id": "vigor",
         "name": "Gentle Heart",
-        "description": "HP +15. Permanent once learned.",
+        "description": "Permanent: HP +10. ",
         "requires": [
           "shield"
         ],
         "bonus": {
-          "max_hp": 15
+          "max_hp": 10
         },
         "position": [
           0.15,
@@ -2181,12 +2181,12 @@
       {
         "id": "grace",
         "name": "Merciful Reserve",
-        "description": "MP +12. Permanent once learned.",
+        "description": "Permanent: MP +8. ",
         "requires": [
           "light"
         ],
         "bonus": {
-          "max_mp": 12
+          "max_mp": 8
         },
         "position": [
           0.5,
@@ -2201,12 +2201,12 @@
       {
         "id": "insight",
         "name": "Mending Hands",
-        "description": "healing power +4. Permanent once learned.",
+        "description": "Permanent: HEALING +3. ",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "healing": 4
+          "healing": 3
         },
         "position": [
           0.85,
@@ -2221,12 +2221,12 @@
       {
         "id": "resolve",
         "name": "Sanctuary Ward",
-        "description": "defense +4. Permanent once learned.",
+        "description": "Permanent: DEFENSE +3. ",
         "requires": [
           "vigor"
         ],
         "bonus": {
-          "defense": 4
+          "defense": 3
         },
         "position": [
           0.15,
@@ -2241,12 +2241,12 @@
       {
         "id": "precision",
         "name": "Restorative Grace",
-        "description": "Healing +6. Sanctuary: Restore 100 HP + healing bonus. Defense +12 for 3 rounds. Also restore 40 companion HP (does not revive).",
+        "description": "Permanent: HEALING +4. Sanctuary: Restore 100 HP + healing bonus. Defense +12 for 3 rounds. Also restore 40 companion HP (does not revive).",
         "requires": [
           "grace"
         ],
         "bonus": {
-          "healing": 6
+          "healing": 4
         },
         "position": [
           0.5,
@@ -2263,12 +2263,12 @@
       {
         "id": "mobility",
         "name": "Urgent Care",
-        "description": "agility +4. Permanent once learned.",
+        "description": "Permanent: AGILITY +3. ",
         "requires": [
           "insight"
         ],
         "bonus": {
-          "agility": 4
+          "agility": 3
         },
         "position": [
           0.85,
@@ -2283,12 +2283,12 @@
       {
         "id": "veteran",
         "name": "Renewing Spirit",
-        "description": "MP +15. Permanent once learned.",
+        "description": "Permanent: MP +10. ",
         "requires": [
           "resolve"
         ],
         "bonus": {
-          "max_mp": 15
+          "max_mp": 10
         },
         "position": [
           0.15,
@@ -2303,14 +2303,14 @@
       {
         "id": "legend",
         "name": "Saintly Devotion",
-        "description": "healing power +8, MP +20. Permanent once learned.",
+        "description": "Permanent: HEALING +6, MP +14. ",
         "requires": [
           "precision",
           "mobility"
         ],
         "bonus": {
-          "healing": 8,
-          "max_mp": 20
+          "healing": 6,
+          "max_mp": 14
         },
         "position": [
           0.5,
@@ -2363,12 +2363,12 @@
       "dexterity": 20
     },
     "growth": {
-      "max_hp": 8,
-      "max_mp": 2,
-      "attack": 2.3,
-      "defense": 0.9,
-      "agility": 1.1,
-      "dexterity": 1.2
+      "max_hp": 5.6,
+      "max_mp": 1.4,
+      "attack": 1.61,
+      "defense": 0.63,
+      "agility": 0.77,
+      "dexterity": 0.84
     },
     "proficiencies": [
       "dagger",
@@ -2393,10 +2393,10 @@
       {
         "id": "oath",
         "name": "Light Fingers",
-        "description": "dexterity +3. Permanent once learned.",
+        "description": "Permanent: DEXTERITY +2. ",
         "requires": [],
         "bonus": {
-          "dexterity": 3
+          "dexterity": 2
         },
         "position": [
           0.15,
@@ -2411,12 +2411,12 @@
       {
         "id": "shield",
         "name": "Rogue Discipline",
-        "description": "agility +3. Permanent once learned.",
+        "description": "Permanent: AGILITY +2. ",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "agility": 3
+          "agility": 2
         },
         "position": [
           0.5,
@@ -2431,12 +2431,12 @@
       {
         "id": "light",
         "name": "Rogue Arts",
-        "description": "Critical chance (%) +4. Opportunist Strike: Physical damage; base power +24. Bonus damage +22 against marked, poisoned, bleeding or burning targets.",
+        "description": "Permanent: CRITICAL +3. Opportunist Strike: Physical damage; base power +24. Bonus damage +22 against marked, poisoned, bleeding or burning targets. Requires dagger, sword, bow.",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "critical": 4
+          "critical": 3
         },
         "position": [
           0.85,
@@ -2453,12 +2453,12 @@
       {
         "id": "vigor",
         "name": "Street Survivor",
-        "description": "HP +12. Permanent once learned.",
+        "description": "Permanent: HP +8. ",
         "requires": [
           "shield"
         ],
         "bonus": {
-          "max_hp": 12
+          "max_hp": 8
         },
         "position": [
           0.15,
@@ -2473,12 +2473,12 @@
       {
         "id": "grace",
         "name": "Quick Thinking",
-        "description": "MP +8. Permanent once learned.",
+        "description": "Permanent: MP +6. ",
         "requires": [
           "light"
         ],
         "bonus": {
-          "max_mp": 8
+          "max_mp": 6
         },
         "position": [
           0.5,
@@ -2493,12 +2493,12 @@
       {
         "id": "insight",
         "name": "Nimble Fingers",
-        "description": "dexterity +5. Permanent once learned.",
+        "description": "Permanent: DEXTERITY +4. ",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "dexterity": 5
+          "dexterity": 4
         },
         "position": [
           0.85,
@@ -2513,12 +2513,12 @@
       {
         "id": "resolve",
         "name": "Evasive Guard",
-        "description": "agility +4. Permanent once learned.",
+        "description": "Permanent: AGILITY +3. ",
         "requires": [
           "vigor"
         ],
         "bonus": {
-          "agility": 4
+          "agility": 3
         },
         "position": [
           0.15,
@@ -2533,12 +2533,12 @@
       {
         "id": "precision",
         "name": "Opportunist",
-        "description": "Critical chance (%) +5. Dancing Blades: Physical damage; base power +36. 3 strikes at 48% power each; defense applies per strike. Dexterity +8 for 2 rounds.",
+        "description": "Permanent: CRITICAL +4. Dancing Blades: Physical damage; base power +36. 3 strikes at 48% power each; defense applies per strike. Dexterity +8 for 2 rounds. Requires dagger, sword, bow.",
         "requires": [
           "grace"
         ],
         "bonus": {
-          "critical": 5
+          "critical": 4
         },
         "position": [
           0.5,
@@ -2555,12 +2555,12 @@
       {
         "id": "mobility",
         "name": "Lightfoot",
-        "description": "agility +5. Permanent once learned.",
+        "description": "Permanent: AGILITY +4. ",
         "requires": [
           "insight"
         ],
         "bonus": {
-          "agility": 5
+          "agility": 4
         },
         "position": [
           0.85,
@@ -2575,12 +2575,12 @@
       {
         "id": "veteran",
         "name": "Fortune Finder",
-        "description": "dexterity +7. Permanent once learned.",
+        "description": "Permanent: DEXTERITY +5. ",
         "requires": [
           "resolve"
         ],
         "bonus": {
-          "dexterity": 7
+          "dexterity": 5
         },
         "position": [
           0.15,
@@ -2595,14 +2595,14 @@
       {
         "id": "legend",
         "name": "Shadow Savant",
-        "description": "dexterity +8, critical chance (%) +4. Permanent once learned.",
+        "description": "Permanent: DEXTERITY +6, CRITICAL +3. ",
         "requires": [
           "precision",
           "mobility"
         ],
         "bonus": {
-          "dexterity": 8,
-          "critical": 4
+          "dexterity": 6,
+          "critical": 3
         },
         "position": [
           0.5,
@@ -2655,12 +2655,12 @@
       "dexterity": 18
     },
     "growth": {
-      "max_hp": 7.5,
-      "max_mp": 2.5,
-      "attack": 3,
-      "defense": 0.8,
-      "agility": 1,
-      "dexterity": 0.95
+      "max_hp": 5.25,
+      "max_mp": 1.75,
+      "attack": 2.1,
+      "defense": 0.56,
+      "agility": 0.7,
+      "dexterity": 0.665
     },
     "proficiencies": [
       "dagger",
@@ -2684,10 +2684,10 @@
       {
         "id": "oath",
         "name": "Killer Instinct",
-        "description": "critical chance (%) +3. Permanent once learned.",
+        "description": "Permanent: CRITICAL +2. ",
         "requires": [],
         "bonus": {
-          "critical": 3
+          "critical": 2
         },
         "position": [
           0.15,
@@ -2702,12 +2702,12 @@
       {
         "id": "shield",
         "name": "Assassin Discipline",
-        "description": "dexterity +3. Permanent once learned.",
+        "description": "Permanent: DEXTERITY +2. ",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "dexterity": 3
+          "dexterity": 2
         },
         "position": [
           0.5,
@@ -2722,12 +2722,12 @@
       {
         "id": "light",
         "name": "Assassin Arts",
-        "description": "Attack +3. Deathmark: Physical damage; base power +24. 1% instant KO on a landed hit. Bosses are immune; otherwise deals normal damage.",
+        "description": "Permanent: ATTACK +2. Deathmark: Physical damage; base power +24. 1% instant KO on a landed hit. Bosses are immune; otherwise deals normal damage. Requires dagger, sword.",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "attack": 3
+          "attack": 2
         },
         "position": [
           0.85,
@@ -2744,12 +2744,12 @@
       {
         "id": "vigor",
         "name": "Patient Hunter",
-        "description": "HP +12. Permanent once learned.",
+        "description": "Permanent: HP +8. ",
         "requires": [
           "shield"
         ],
         "bonus": {
-          "max_hp": 12
+          "max_hp": 8
         },
         "position": [
           0.15,
@@ -2764,12 +2764,12 @@
       {
         "id": "grace",
         "name": "Deadly Focus",
-        "description": "MP +8. Permanent once learned.",
+        "description": "Permanent: MP +6. ",
         "requires": [
           "light"
         ],
         "bonus": {
-          "max_mp": 8
+          "max_mp": 6
         },
         "position": [
           0.5,
@@ -2784,12 +2784,12 @@
       {
         "id": "insight",
         "name": "Pressure Points",
-        "description": "critical chance (%) +4. Permanent once learned.",
+        "description": "Permanent: CRITICAL +3. ",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "critical": 4
+          "critical": 3
         },
         "position": [
           0.85,
@@ -2804,12 +2804,12 @@
       {
         "id": "resolve",
         "name": "Shadow Guard",
-        "description": "dexterity +4. Permanent once learned.",
+        "description": "Permanent: DEXTERITY +3. ",
         "requires": [
           "vigor"
         ],
         "bonus": {
-          "dexterity": 4
+          "dexterity": 3
         },
         "position": [
           0.15,
@@ -2824,12 +2824,12 @@
       {
         "id": "precision",
         "name": "Lethal Precision",
-        "description": "Attack +5. Eclipse Cut: Physical damage; base power +36. Ignores 25% defense. Bonus damage +30 when enemy HP is below 35%.",
+        "description": "Permanent: ATTACK +4. Eclipse Cut: Physical damage; base power +36. Ignores 25% defense. Bonus damage +30 when enemy HP is below 35%. Requires dagger, sword.",
         "requires": [
           "grace"
         ],
         "bonus": {
-          "attack": 5
+          "attack": 4
         },
         "position": [
           0.5,
@@ -2846,12 +2846,12 @@
       {
         "id": "mobility",
         "name": "Silent Step",
-        "description": "agility +5. Permanent once learned.",
+        "description": "Permanent: AGILITY +4. ",
         "requires": [
           "insight"
         ],
         "bonus": {
-          "agility": 5
+          "agility": 4
         },
         "position": [
           0.85,
@@ -2866,12 +2866,12 @@
       {
         "id": "veteran",
         "name": "Cold Calculation",
-        "description": "critical chance (%) +5. Permanent once learned.",
+        "description": "Permanent: CRITICAL +4. ",
         "requires": [
           "resolve"
         ],
         "bonus": {
-          "critical": 5
+          "critical": 4
         },
         "position": [
           0.15,
@@ -2886,14 +2886,14 @@
       {
         "id": "legend",
         "name": "Perfect Killer",
-        "description": "attack +6, critical chance (%) +5. Permanent once learned.",
+        "description": "Permanent: ATTACK +4, CRITICAL +4. ",
         "requires": [
           "precision",
           "mobility"
         ],
         "bonus": {
-          "attack": 6,
-          "critical": 5
+          "attack": 4,
+          "critical": 4
         },
         "position": [
           0.5,
@@ -2946,12 +2946,12 @@
       "dexterity": 13
     },
     "growth": {
-      "max_hp": 10,
-      "max_mp": 2.5,
-      "attack": 2.8,
-      "defense": 1.2,
-      "agility": 0.95,
-      "dexterity": 0.8
+      "max_hp": 7.0,
+      "max_mp": 1.75,
+      "attack": 1.96,
+      "defense": 0.84,
+      "agility": 0.665,
+      "dexterity": 0.56
     },
     "proficiencies": [
       "unarmed",
@@ -2976,10 +2976,10 @@
       {
         "id": "oath",
         "name": "Inner Strength",
-        "description": "HP +8, agility +1. Permanent once learned.",
+        "description": "Permanent: HP +6, AGILITY +1. ",
         "requires": [],
         "bonus": {
-          "max_hp": 8,
+          "max_hp": 6,
           "agility": 1
         },
         "position": [
@@ -2995,12 +2995,12 @@
       {
         "id": "shield",
         "name": "Monk Discipline",
-        "description": "defense +2, agility +1. Permanent once learned.",
+        "description": "Permanent: DEFENSE +1, AGILITY +1. ",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "defense": 2,
+          "defense": 1,
           "agility": 1
         },
         "position": [
@@ -3016,12 +3016,12 @@
       {
         "id": "light",
         "name": "Monk Arts",
-        "description": "Critical chance (%) +3. Rising Palm: Physical damage; base power +24. 65% chance to stun for one turn (bosses resist half).",
+        "description": "Permanent: CRITICAL +2. Rising Palm: Physical damage; base power +24. 65% chance to stun for one turn (bosses resist half). Requires unarmed, claws, staff.",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "critical": 3
+          "critical": 2
         },
         "position": [
           0.85,
@@ -3038,12 +3038,12 @@
       {
         "id": "vigor",
         "name": "Tempered Body",
-        "description": "HP +20. Permanent once learned.",
+        "description": "Permanent: HP +14. ",
         "requires": [
           "shield"
         ],
         "bonus": {
-          "max_hp": 20
+          "max_hp": 14
         },
         "position": [
           0.15,
@@ -3058,12 +3058,12 @@
       {
         "id": "grace",
         "name": "Deep Breath",
-        "description": "MP +10. Permanent once learned.",
+        "description": "Permanent: MP +7. ",
         "requires": [
           "light"
         ],
         "bonus": {
-          "max_mp": 10
+          "max_mp": 7
         },
         "position": [
           0.5,
@@ -3078,12 +3078,12 @@
       {
         "id": "insight",
         "name": "Perfect Balance",
-        "description": "dexterity +4. Permanent once learned.",
+        "description": "Permanent: DEXTERITY +3. ",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "dexterity": 4
+          "dexterity": 3
         },
         "position": [
           0.85,
@@ -3098,12 +3098,12 @@
       {
         "id": "resolve",
         "name": "Iron Palm",
-        "description": "defense +4. Permanent once learned.",
+        "description": "Permanent: DEFENSE +3. ",
         "requires": [
           "vigor"
         ],
         "bonus": {
-          "defense": 4
+          "defense": 3
         },
         "position": [
           0.15,
@@ -3118,12 +3118,12 @@
       {
         "id": "precision",
         "name": "Focused Fist",
-        "description": "Attack +5. Hundred Fists: Physical damage; base power +36. 5 strikes at 32% power each; defense applies per strike.",
+        "description": "Permanent: ATTACK +4. Hundred Fists: Physical damage; base power +36. 5 strikes at 32% power each; defense applies per strike. Requires unarmed, claws, staff.",
         "requires": [
           "grace"
         ],
         "bonus": {
-          "attack": 5
+          "attack": 4
         },
         "position": [
           0.5,
@@ -3140,12 +3140,12 @@
       {
         "id": "mobility",
         "name": "Flowing Step",
-        "description": "agility +5. Permanent once learned.",
+        "description": "Permanent: AGILITY +4. ",
         "requires": [
           "insight"
         ],
         "bonus": {
-          "agility": 5
+          "agility": 4
         },
         "position": [
           0.85,
@@ -3160,12 +3160,12 @@
       {
         "id": "veteran",
         "name": "Mindful Strike",
-        "description": "critical chance (%) +4. Permanent once learned.",
+        "description": "Permanent: CRITICAL +3. ",
         "requires": [
           "resolve"
         ],
         "bonus": {
-          "critical": 4
+          "critical": 3
         },
         "position": [
           0.15,
@@ -3180,14 +3180,14 @@
       {
         "id": "legend",
         "name": "Body and Spirit",
-        "description": "HP +25, agility +5. Permanent once learned.",
+        "description": "Permanent: HP +18, AGILITY +4. ",
         "requires": [
           "precision",
           "mobility"
         ],
         "bonus": {
-          "max_hp": 25,
-          "agility": 5
+          "max_hp": 18,
+          "agility": 4
         },
         "position": [
           0.5,
@@ -3240,12 +3240,12 @@
       "dexterity": 12
     },
     "growth": {
-      "max_hp": 7.5,
-      "max_mp": 5,
-      "attack": 1.6,
-      "defense": 0.8,
-      "agility": 0.65,
-      "dexterity": 0.85
+      "max_hp": 5.25,
+      "max_mp": 3.5,
+      "attack": 1.12,
+      "defense": 0.56,
+      "agility": 0.455,
+      "dexterity": 0.595
     },
     "proficiencies": [
       "staff",
@@ -3270,11 +3270,11 @@
       {
         "id": "oath",
         "name": "Grave Wisdom",
-        "description": "MP +7, HP +4. Permanent once learned.",
+        "description": "Permanent: MP +5, HP +3. ",
         "requires": [],
         "bonus": {
-          "max_mp": 7,
-          "max_hp": 4
+          "max_mp": 5,
+          "max_hp": 3
         },
         "position": [
           0.15,
@@ -3289,13 +3289,13 @@
       {
         "id": "shield",
         "name": "Necromancer Discipline",
-        "description": "attack +2, MP +3. Permanent once learned.",
+        "description": "Permanent: ATTACK +1, MP +2. ",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "attack": 2,
-          "max_mp": 3
+          "attack": 1,
+          "max_mp": 2
         },
         "position": [
           0.5,
@@ -3310,12 +3310,12 @@
       {
         "id": "light",
         "name": "Necromancer Arts",
-        "description": "HP +12. Soul Rend: Shadow damage; base power +24. Recover 5 MP on a hit.",
+        "description": "Permanent: HP +8. Soul Rend: Shadow damage; base power +24. Recover 5 MP on a hit.",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "max_hp": 12
+          "max_hp": 8
         },
         "position": [
           0.85,
@@ -3332,12 +3332,12 @@
       {
         "id": "vigor",
         "name": "Grave Endurance",
-        "description": "HP +18. Permanent once learned.",
+        "description": "Permanent: HP +13. ",
         "requires": [
           "shield"
         ],
         "bonus": {
-          "max_hp": 18
+          "max_hp": 13
         },
         "position": [
           0.15,
@@ -3352,12 +3352,12 @@
       {
         "id": "grace",
         "name": "Soul Reservoir",
-        "description": "MP +12. Permanent once learned.",
+        "description": "Permanent: MP +8. ",
         "requires": [
           "light"
         ],
         "bonus": {
-          "max_mp": 12
+          "max_mp": 8
         },
         "position": [
           0.5,
@@ -3372,12 +3372,12 @@
       {
         "id": "insight",
         "name": "Occult Insight",
-        "description": "MP +10. Permanent once learned.",
+        "description": "Permanent: MP +7. ",
         "requires": [
           "oath"
         ],
         "bonus": {
-          "max_mp": 10
+          "max_mp": 7
         },
         "position": [
           0.85,
@@ -3392,12 +3392,12 @@
       {
         "id": "resolve",
         "name": "Bone Ward",
-        "description": "defense +4. Permanent once learned.",
+        "description": "Permanent: DEFENSE +3. ",
         "requires": [
           "vigor"
         ],
         "bonus": {
-          "defense": 4
+          "defense": 3
         },
         "position": [
           0.15,
@@ -3412,12 +3412,12 @@
       {
         "id": "precision",
         "name": "Deathless Study",
-        "description": "MP +14. Grave Harvest: Shadow damage; base power +36. Restore 75% of damage dealt as HP. Bonus damage +20 when enemy HP is below 35%.",
+        "description": "Permanent: MP +10. Grave Harvest: Shadow damage; base power +36. Restore 75% of damage dealt as HP. Bonus damage +20 when enemy HP is below 35%.",
         "requires": [
           "grace"
         ],
         "bonus": {
-          "max_mp": 14
+          "max_mp": 10
         },
         "position": [
           0.5,
@@ -3434,12 +3434,12 @@
       {
         "id": "mobility",
         "name": "Spectral Step",
-        "description": "agility +4. Permanent once learned.",
+        "description": "Permanent: AGILITY +3. ",
         "requires": [
           "insight"
         ],
         "bonus": {
-          "agility": 4
+          "agility": 3
         },
         "position": [
           0.85,
@@ -3454,13 +3454,13 @@
       {
         "id": "veteran",
         "name": "Soul Vessel",
-        "description": "HP +18, MP +8. Permanent once learned.",
+        "description": "Permanent: HP +13, MP +6. ",
         "requires": [
           "resolve"
         ],
         "bonus": {
-          "max_hp": 18,
-          "max_mp": 8
+          "max_hp": 13,
+          "max_mp": 6
         },
         "position": [
           0.15,
@@ -3475,14 +3475,14 @@
       {
         "id": "legend",
         "name": "Undying Scholar",
-        "description": "HP +25, MP +22. Permanent once learned.",
+        "description": "Permanent: HP +18, MP +15. ",
         "requires": [
           "precision",
           "mobility"
         ],
         "bonus": {
-          "max_hp": 25,
-          "max_mp": 22
+          "max_hp": 18,
+          "max_mp": 15
         },
         "position": [
           0.5,

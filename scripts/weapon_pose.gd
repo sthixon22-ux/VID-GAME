@@ -15,7 +15,7 @@ func _process_modification():
  if not is_instance_valid(hero) or hero.locked_pose:return
  var rig=get_skeleton()
  var family=hero.weapon_family
- if hero.action_remaining>0 and not hero.weapon_action:return
+ if hero.action_remaining>0 and not hero.weapon_action and not hero.voice_action:return
  if family not in ["unarmed","claws"]:
   curl_fingers(rig,"Right",family!="bow" or (hero.weapon_action and phase()<.63))
   if GameRules.TWO_HANDED.has(family) or hero.gear.get("Shield","None")!="None":curl_fingers(rig,"Left",true)

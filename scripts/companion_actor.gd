@@ -7,7 +7,8 @@ const PROFILES={
  "spirit_fox":{"asset":"spirit_fox","height":1.05,"idle":"Idle","walk":"Walk","run":"Gallop","attack":"Attack","support":"Idle_2","guard":"Idle_2_HeadLow","hit":"Idle_HitReact_Left","death":"Death"},
  "warhorse":{"asset":"warhorse","height":1.8,"idle":"Idle","walk":"Walk","run":"Gallop","attack":"Attack_Headbutt","support":"Idle_2","guard":"Idle_Headlow","hit":"Idle_HitReact_Left","death":"Death"},
  "griffin":{"asset":"griffin","height":1.38,"idle":"Idle","walk":"Walk","run":"Gallop","attack":"Attack","support":"Idle_2","guard":"Idle_2_HeadLow","hit":"Idle_HitReact_Left","death":"Death"},
- "dragon":{"asset":"dragon","height":1.5,"idle":"Flying_Idle","walk":"Fast_Flying","run":"Fast_Flying","attack":"Headbutt","support":"Flying_Idle","guard":"Flying_Idle","hit":"HitReact","death":"Death"},
+ "dragon":{"asset":"dragon_wingarm","height":1.7,"idle":"Idle","walk":"Walk","run":"Run","attack":"Attack","support":"Support","guard":"Guard","hit":"Hit","death":"Death"},
+ "drake":{"asset":"dragon","height":1.5,"idle":"Flying_Idle","walk":"Fast_Flying","run":"Fast_Flying","attack":"Headbutt","support":"Flying_Idle","guard":"Flying_Idle","hit":"HitReact","death":"Death"},
  "golem":{"asset":"golem","height":2.05,"idle":"Idle","walk":"Walk","run":"Jog_Fwd","attack":"Punch_Cross","support":"Yes","guard":"Idle_FoldArms","hit":"Hit_Chest","death":"Death01"}}
 const ABILITY_CLIPS={
  "Rending Fang":"Attack","Pack Howl":"Idle_2","Moonfang Assault":"Gallop_Jump",
@@ -35,10 +36,10 @@ func _init(id:String="intro_wolf"):
  body.name="Body"
  add_child(body)
  var path="res://assets/models/companions/refined/%s.glb" % profile.asset
- if companion_id=="dragon":
+ if companion_id=="drake":
   path="res://assets/vendor/quaternius/companions/monsters/%s.glb" % "Dragon_Evolved"
  model=load(path).instantiate()
- if companion_id=="dragon":decorate_native_monster()
+ if companion_id in ["dragon","drake"]:decorate_native_monster()
  body.add_child(model)
  var bounds=GearVisual.bounds(model)
  var scale_=float(profile.height)/maxf(.001,bounds.size.y)
@@ -103,6 +104,7 @@ func motion(moving:bool,sprint=false):
  player.play(clip,.14)
 func action_clip(label:String)->String:
  var clean=label.trim_suffix(" · Critical!")
+ if companion_id=="dragon" and clean in ["Glassfall","Tempest Dive","Flight"]:return resolve_clip("Flight")
  if clean=="Defeat":return profile.death
  if clean=="Dodge":return "Jump_ToIdle" if player.has_animation("Jump_ToIdle") else profile.hit
  if clean=="Victory":return profile.support
@@ -119,6 +121,9 @@ func play_action(label:String)->float:
  var clip=action_clip(label)
  var ability=CompanionRules.ability_by_name(label)
  guarding=label=="Wolf protects you" or label.ends_with(" · protection") or ability.get("behavior","")=="Defend"
+ if not player.has_animation(clip):
+  clip=resolve_clip(profile.idle)
+  if not player.has_animation(clip):return .4
  var animation=player.get_animation(clip)
  var duration=clampf(animation.length,.65,1.4)
  var speed:float=UserSettings.battle_speed if battle else 1.0

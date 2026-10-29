@@ -1,7 +1,7 @@
 class_name SkillEffects
 extends RefCounted
 # Shared by manual combat and auto-battle. All randomness uses the combat seed.
-const COLORS={"fire":"f3a367","ice":"91dbe9","holy":"ffe5a1","shadow":"b59ade","nature":"9cdb86","arcane":"a1b7ff","lightning":"e7dc76","wind":"a1e4d5","physical":"e4bc89"}
+const COLORS={"fire":"f3a367","ice":"91dbe9","holy":"ffe5a1","shadow":"b59ade","nature":"9cdb86","arcane":"a1b7ff","lightning":"e7dc76","wind":"a1e4d5","physical":"e4bc89","sonic":"e9bd8e"}
 static func conditional(sim,entry:Dictionary)->bool:
  match entry.get("conditional",""):
   "afflicted":return sim.marked>0 or sim.poison>0 or sim.wound_rounds>0 or sim.burn_rounds>0
@@ -11,7 +11,8 @@ static func conditional(sim,entry:Dictionary)->bool:
  return false
 static func cast(sim,action:String,entry:Dictionary,power:int):
  var magic=entry.get("damage_type","physical")!="physical" and entry.kind in ["spell","mythic"]
- if magic:power=int(entry.power)+int(sim.stats.max_mp)*.18+int(sim.h.level)*1.5
+ if entry.get("scaling","")=="voice":power=int(entry.power)+int(sim.h.level)*1.5
+ if magic and entry.get("scaling","")!="voice":power=int(entry.power)+int(sim.stats.max_mp)*.18+int(sim.h.level)*1.5
  if conditional(sim,entry):power+=int(entry.get("conditional_bonus",0))
  if entry.get("self_damage",0)>0:sim.h.hp=maxi(1,int(sim.h.hp)-int(entry.self_damage))
  var count=int(entry.get("hits",1))
@@ -59,4 +60,5 @@ static func after(sim,entry:Dictionary,action:String):
 static func tooltip(value:String)->String:
  var e=AbilityBook.entry(value)
  if e.is_empty():return ""
- return "%s · %s MP\n%s" % [e.name,e.mp,e.description]
+ var requirements="\nRequired weapons: "+", ".join(e.weapon_types) if not e.get("weapon_types",[]).is_empty() else ""
+ return "%s · %s MP\n%s%s" % [e.name,e.mp,e.description,requirements]

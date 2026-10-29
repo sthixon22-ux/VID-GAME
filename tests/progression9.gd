@@ -88,10 +88,10 @@ func run():
   var record=State.companion_record()
   check(record.points==record.level*2,"Companion earns two independent bond points per level: "+id)
   check(not State.train_companion("capstone"),"Companion capstone requires its branches: "+id)
-  record.points=24
+  record.points=80
   var all_nodes=true
   for node in State.companions[id].nodes:all_nodes=State.train_companion(node.id) and all_nodes
-  check(all_nodes and record.points==0 and CompanionRules.learned_abilities(State.hero).size()==3,"Eight-node companion tree costs 24 and teaches three unique arts: "+id)
+  check(all_nodes and record.points==0 and CompanionRules.learned_abilities(State.hero).size()==3,"Eight-node companion tree costs 80 and teaches three unique arts: "+id)
   State.restore()
   State.hero.hp=1
   State.hero.mp=0
@@ -135,7 +135,7 @@ func run():
  State.hero.companion.postgame_unlocked=true
  State.choose_companion("dragon")
  check(State.hero.hp<=State.stats().max_hp,"Choosing a second companion clamps lost HP capacity")
- State.hero.companion.records.golem.points=24
+ State.hero.companion.records.golem.points=80
  check(State.train_companion_for("golem","predator") and State.hero.companion.current=="dragon","Reserve companion training never changes active selection")
  var stats=State.stats()
  stats.critical=100
@@ -149,7 +149,7 @@ func run():
   sim.hit_enemy("Hero",30,"Attack")
   if sim.events[0].text.ends_with("Critical!"):
    criticals+=1
-   damage_correct=damage_correct and sim.events[0].amount==ceili((30-int(sim.enemy.defense))*1.5)
+   damage_correct=damage_correct and sim.events[0].amount==ceili(sim.damage(30,int(sim.enemy.defense))*1.5)
  check(damage_correct and criticals>35 and criticals<85,"Critical rolls are capped and increase physical damage by fifty percent")
  State.menu_page="companion_tree"
  get_tree().change_scene_to_file("res://scenes/character.tscn")
@@ -158,7 +158,7 @@ func run():
  var menu=get_tree().current_scene
  menu.companion_tree_id="dragon"
  menu.companion_skill="predator"
- State.companion_record().points=24
+ State.companion_record().points=80
  menu.show_page("companion_tree")
  check(menu.graph.buttons.size()==8,"Companion has a dedicated eight-node skill page")
  var learn:Button=null
@@ -166,7 +166,7 @@ func run():
   if button.text=="Learn companion skill":learn=button
  check(learn!=null and not learn.disabled,"Owned companion root can be trained in the menu")
  learn.pressed.emit()
- check(State.companion_record().skills.has("predator") and State.companion_record().points==23,"Companion tree UI spends the selected companion's bond point")
+ check(State.companion_record().skills.has("predator") and State.companion_record().points==77,"Companion tree UI spends the selected companion's bond point")
  menu.show_page("shop")
  var hidden=false
  for button in menu.body.find_children("*","Button",true,false):

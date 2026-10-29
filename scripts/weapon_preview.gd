@@ -36,7 +36,12 @@ func show_item(value: String):
  for child in pivot.get_children():
   pivot.remove_child(child)
   child.queue_free()
- var model=GearVisual.item(value)
+ var entry:Dictionary=State.equipment_data.get(value,{})
+ var model:Node3D
+ if entry.get("slot","")=="Chest":
+  var appearance=State.hero.profile.duplicate(true);appearance["class"]=State.hero.primary
+  model=HeroVisual.new({"Chest":value,"Weapon":"None","Shield":"None"},appearance)
+ else:model=GearVisual.item(value)
  pivot.add_child(model)
  var boxes:Array[AABB]=[]
  collect_bounds(model,Transform3D.IDENTITY,boxes)

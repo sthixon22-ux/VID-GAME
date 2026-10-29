@@ -31,8 +31,10 @@ var clock=0.0
 var grace=2.5
 var message=""
 var pending=0
+var transitioning=false
 func progress()->Dictionary:return ExpeditionRules.progress(State.hero)
 func _ready():
+ TravelRules.breadcrumb(region_id,"enter dungeon" if dungeon else "enter wilderness")
  info=ExpeditionRules.regions[region_id]
  area=info.dungeon if dungeon else region_id
  State.hero.journey.region=area
@@ -68,7 +70,7 @@ func _ready():
   var page=pair[1];UI.button(menu,pair[0],func():character(page))
  UI.button(menu,"Settings",options.open)
  UI.button(menu,"Save",func():State.save_game();message="Saved.")
- UI.button(menu,"Return to title",func():State.save_game();get_tree().change_scene_to_file("res://scenes/title.tscn"))
+ UI.button(menu,"Return to title",func():State.save_game();get_tree().change_scene_to_file.call_deferred("res://scenes/title.tscn"))
  UI.button(menu,"Close",func():menu.get_parent().get_parent().hide())
  puzzle=UI.panel(self,Vector2(330,110),Vector2(620,470));puzzle.get_parent().get_parent().hide()
  treasures=TreasureField.new(area);add_child(treasures)
@@ -181,7 +183,7 @@ func spawn(point:Vector3,species:String,id:int):
  var model=Art.actor(data.model);add_child(model);model.position=point
  Art.sign_(model,Vector3(0,2.6,0),data.name)
  mobs.append({"model":model,"species":species,"id":id});points.append(point)
-func modal()->bool:return dialogue.active or options.active or auto_panel.active or menu.get_parent().get_parent().visible or puzzle.get_parent().get_parent().visible
+func modal()->bool:return transitioning or dialogue.active or options.active or auto_panel.active or menu.get_parent().get_parent().visible or puzzle.get_parent().get_parent().visible
 func walkable(p:Vector3)->bool:
  if dungeon:
   if p.z< -28 and absf(p.x)<9 and not ExpeditionRules.can_open(State.hero,region_id):return false
@@ -268,6 +270,8 @@ func interact():
   if progress().cleared.has("sahir"):travel("kharholt",Vector3(0,0,10))
   else:message="Glass storms close the pass. Quiet the tomb's guardian first."
 func mechanism(index:int):
+ if index<0 or index>=MECHANISMS.size():return
+ TravelRules.breadcrumb(area,"mechanism "+str(index))
  for child in puzzle.get_children():puzzle.remove_child(child);child.queue_free()
  puzzle.get_parent().get_parent().show()
  if region_id=="sahir":
@@ -300,18 +304,26 @@ func start_battle(index:int,force=false):
  State.enemy_id=mobs[index].species;State.encounter_id=mobs[index].id
  State.remember_position(hero.position);State.save_game()
  if State.species_wins(State.enemy_id)>=10 and not force:auto_panel.open(State.enemy_id,true)
- else:get_tree().change_scene_to_file.call_deferred("res://scenes/battle.tscn")
+ else:
+  transitioning=true
+  get_tree().change_scene_to_file.call_deferred("res://scenes/battle.tscn")
 func boss_intro():
  if progress().cleared.has(region_id):dialogue.show_id(region_id+"_boss_after");return
  if not ExpeditionRules.can_open(State.hero,region_id):message="The guardian chamber is still sealed.";return
  dialogue.show_id(region_id+"_boss_before",func():
+  transitioning=true
   State.enemy_id=info.boss;State.encounter_id=int(info.boss_id);State.remember_position(hero.position);State.save_game()
-  get_tree().change_scene_to_file("res://scenes/battle.tscn"))
+  get_tree().change_scene_to_file.call_deferred("res://scenes/battle.tscn"))
 func travel(destination:String,pos:Vector3):
+ if transitioning:return
+ transitioning=true
+ TravelRules.breadcrumb(area,"travel "+destination)
  State.hero.journey.region=destination;State.remember_position(pos);State.save_game()
- get_tree().change_scene_to_file(State.travel_scene())
+ get_tree().change_scene_to_file.call_deferred(State.travel_scene())
 func character(page:String):
- State.menu_page=page;State.save_game();get_tree().change_scene_to_file("res://scenes/character.tscn")
+ if transitioning:return
+ transitioning=true
+ State.menu_page=page;State.save_game();get_tree().change_scene_to_file.call_deferred("res://scenes/character.tscn")
 func _unhandled_input(event):
  if event is InputEventMouseMotion and Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT) and not modal():yaw-=event.relative.x*.005*UserSettings.camera_sensitivity;pitch=clampf(pitch-event.relative.y*.004*UserSettings.camera_sensitivity,-1.1,-.15)
  if not event is InputEventKey or not event.pressed or event.echo:return

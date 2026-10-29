@@ -68,10 +68,10 @@ func run():
  # Shops use normal purchase, equipment and preview paths.
  State.shop_id="reedcross_weapons"
  State.hero.gold=1000
- check(State.buy("Willowheart Staff") and State.equip("Weapon","Willowheart Staff"),"Regional weapon purchasable and equippable")
- check(not State.buy("Reedcoat"),"Weapon stall rejects armor stock")
+ check(State.buy("Runekeeper Staff") and State.equip("Weapon","Runekeeper Staff"),"Regional weapon purchasable and equippable")
+ check(not State.buy("Wildheart Mantle"),"Weapon stall rejects armor stock")
  State.shop_id="reedcross_armor"
- check(State.buy("Reedcoat") and State.equip("Chest","Reedcoat"),"Armorer uses same owned equipment rules")
+ check(State.buy("Wildheart Mantle") and State.equip("Chest","Wildheart Mantle"),"Armorer uses same owned equipment rules")
  check(State.save_game(),"Campaign and equipment save")
  State.reset();State.load_game()
  check([State.hero.primary,State.hero.secondary,State.hero.profile.sex]==saved_classes,"Three classes and appearance retained after region save/load")
@@ -191,7 +191,7 @@ func run():
   check(not weapon.is_empty(),"Regional weapon coverage: "+names[i])
   State.buy(weapon);State.equip("Weapon",weapon)
   State.shop_id="reedcross_armor"
-  State.buy("Reedcoat");State.equip("Chest","Reedcoat")
+  State.buy("Wildheart Mantle");State.equip("Chest","Wildheart Mantle")
   State.choose_companion("dire_wolf")
   State.restore()
   var trial=Combat.new(State.hero,State.stats(),"reliquary_keeper")

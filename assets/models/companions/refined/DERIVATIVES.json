@@ -25,9 +25,9 @@
   },
   "dragon": {
     "source": "monsters/Dragon_Evolved.glb",
-    "runtime_model": "assets/vendor/quaternius/companions/monsters/Dragon_Evolved.glb",
-    "geometry": "Original native rig/mesh; material overrides only",
-    "sha256": "9805d397f669d5e18041ddcb78a8877f58a685ae9cf4920799f623675eb25a99"
+    "runtime_model": "assets/models/companions/refined/dragon_wingarm.glb",
+    "geometry": "Four-limbed wing-arm derivative; see DRAGON_WINGARM_SOURCE.json",
+    "sha256": "2afec6fc63b370a25f5dffb9d0811be604f20b1ebcffee455276c98bb8e9ad17"
   },
   "golem": {
     "source": "golem/Superhero_Male.glb",

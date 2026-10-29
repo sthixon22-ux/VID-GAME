@@ -299,12 +299,13 @@ requested=sys.argv[sys.argv.index('--')+1:] if '--' in sys.argv else list(SOURCE
 for id in requested:
  if id=='golem':stone_guardian(SOURCES[id])
  elif id=='dragon':
-  for name,color in PALETTES[id].items():texture(id+'_'+name,color,'stone' if id=='golem' else 'scale')
+  import subprocess
+  subprocess.run([bpy.app.binary_path,'-b','-t','2','--python',str(ROOT/'tools/build_wingarm_dragon.py')],check=True)
  else:refine(id,SOURCES[id])
 manifest={}
 for id,rel in SOURCES.items():
- native=id=='dragon'
- path=VENDOR/rel if native else OUT/(id+'.glb')
- manifest[id]={'source':rel,'runtime_model':str(path.relative_to(ROOT)),'geometry':'Original native rig/mesh; material overrides only' if native else ('Original stone-guardian derivative of licensed humanoid base' if id=='golem' else ('Original avian anatomy/wing layer on licensed quadruped' if id=='griffin' else 'Refined licensed animal geometry and painted materials')),'sha256':hashlib.sha256(path.read_bytes()).hexdigest()}
+ native=False
+ path=OUT/('dragon_wingarm.glb' if id=='dragon' else id+'.glb')
+ manifest[id]={'source':rel,'runtime_model':str(path.relative_to(ROOT)),'geometry':'Four-limbed wing-arm derivative; see DRAGON_WINGARM_SOURCE.json' if id=='dragon' else ('Original stone-guardian derivative of licensed humanoid base' if id=='golem' else ('Original avian anatomy/wing layer on licensed quadruped' if id=='griffin' else 'Refined licensed animal geometry and painted materials')),'sha256':hashlib.sha256(path.read_bytes()).hexdigest()}
 
 (OUT/'DERIVATIVES.json').write_text(json.dumps(manifest,indent=2)+'\n')

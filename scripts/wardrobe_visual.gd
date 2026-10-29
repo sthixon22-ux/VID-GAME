@@ -1,6 +1,12 @@
 class_name WardrobeVisual
 extends RefCounted
 const CHESTS={
+ "Knight’s Harness":{"outfit":"ranger","color":"9aaebc","style":"plate"},
+ "Runewoven Robe":{"outfit":"traveler","color":"6ca2b8","style":"robe"},
+ "Shadowstalker Leathers":{"outfit":"ranger","color":"75638c","style":"leather"},
+ "Wildheart Mantle":{"outfit":"ranger","color":"6f936a","style":"coat"},
+ "Sunpriest Vestments":{"outfit":"traveler","color":"d0b76c","style":"robe"},
+ "Wayfarer’s Wraps":{"outfit":"traveler","color":"a48770","style":"cloth"},
  "None":{"outfit":"traveler","color":"ffffff","style":"none"},
  "Traveler's Clothing":{"outfit":"traveler","color":"d5bc8e","style":"cloth"},
  "Leather Vest":{"outfit":"ranger","color":"bc8b5c","style":"leather"},
@@ -10,7 +16,10 @@ const CHESTS={
  "Sluicekeeper Robe":{"outfit":"traveler","color":"92b8c9","style":"robe"}}
 static func profile(chest:String)->Dictionary:
  var aliases={"Sunveil Coat":"Reedcoat","Forgeguard Coat":"Steel Cuirass"}
- return CHESTS.get(aliases.get(chest,chest),CHESTS["None"])
+ var gear:Dictionary=State.equipment_data.get(chest,{})
+ var result:Dictionary=CHESTS.get(gear.get("armor_profile",aliases.get(chest,chest)),CHESTS["None"]).duplicate()
+ if gear.has("theme"):result.color=gear.color
+ return result
 static func apply(hero:HeroVisual,chest:String):
  var definition=profile(chest)
  hero.set_meta("wardrobe_style",definition.style)
@@ -22,12 +31,22 @@ static func apply(hero:HeroVisual,chest:String):
      var variant:StandardMaterial3D=material.duplicate()
      variant.albedo_color*=Color(definition.color)
      variant.roughness=.8
+     var gear=State.equipment_data.get(chest,{})
+     if gear.has("theme"):
+      var texture_path="res://assets/textures/equipment/%s_%s.webp" % [gear.id,hero.sex.to_lower()]
+      if ResourceLoader.exists(texture_path):variant.albedo_texture=load(texture_path);variant.albedo_color=Color.WHITE
      if definition.style=="plate" and (mesh.name.contains("Body") or mesh.name.contains("Pauldron")):
       variant.albedo_texture=null
       variant.albedo_color=Color("7b91a2")
       variant.metallic=.78
       variant.roughness=.32
      mesh.set_surface_override_material(i,variant)
+ if State.equipment_data.get(chest,{}).has("theme"):
+  var themed=State.equipment_data[chest]
+  hero.set_meta("armor_theme",themed.theme)
+  var clasp=Node3D.new();clasp.name="ArmorMotif_"+str(themed.theme);hero.socket("Chest").add_child(clasp)
+  clasp.position=Vector3(0,.03,.13);clasp.scale=Vector3.ONE*.18
+  EquipmentStyle.decorate(clasp,{"theme":themed.theme,"color":themed.color})
  if definition.style=="plate":plate(hero)
  if definition.style in ["robe","coat"]:skirt(hero,Color(definition.color),definition.style=="robe")
 static func plate(hero:HeroVisual):
@@ -51,6 +70,10 @@ static func plate(hero:HeroVisual):
  var steel=StandardMaterial3D.new()
  steel.albedo_color=Color("93a9b8")
  steel.metallic=.8;steel.roughness=.3
+ if State.equipment_data.get(hero.gear.get("Chest",""),{}).has("theme"):
+  var path="res://assets/textures/equipment/%s_%s.webp" % [State.equipment_data[hero.gear.Chest].id,hero.sex.to_lower()]
+  steel.albedo_color=Color(State.equipment_data[hero.gear.Chest].color)
+  steel.albedo_texture=null
  shell.material_override=steel
 static func skirt(hero:HeroVisual,color:Color,long:bool):
  # Original weighted garment extension; uses the same imported Skin/Skeleton.

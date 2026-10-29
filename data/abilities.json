@@ -124,7 +124,7 @@
     "mp": 5,
     "effect": "damage",
     "power": 14,
-    "description": "A deliberate heavy weapon strike.",
+    "description": "A deliberate heavy weapon strike. Requires sword, greatsword, spear, axe, mace.",
     "weapon_types": [
       "sword",
       "greatsword",
@@ -149,7 +149,7 @@
     "mp": 5,
     "effect": "rage",
     "power": 22,
-    "description": "Heavy damage; costs 6 HP as well as MP.",
+    "description": "Heavy damage; costs 6 HP as well as MP. Requires axe, greatsword, hammer.",
     "weapon_types": [
       "axe",
       "greatsword",
@@ -173,7 +173,8 @@
     "mp": 6,
     "effect": "magic",
     "power": 14,
-    "description": "Arcane damage scales with maximum MP and hero level."
+    "description": "Arcane damage scales with maximum MP and hero level.",
+    "damage_type": "arcane"
   },
   "aether_ward": {
     "name": "Aether Ward",
@@ -249,7 +250,7 @@
     "mp": 4,
     "effect": "poison",
     "power": 7,
-    "description": "A blade strike that poisons for 5 damage over three rounds.",
+    "description": "A blade strike that poisons for 5 damage over three rounds. Requires dagger, sword.",
     "weapon_types": [
       "dagger",
       "sword"
@@ -262,7 +263,7 @@
     "mp": 6,
     "effect": "execute",
     "power": 10,
-    "description": "Deals +12 damage against marked or poisoned targets.",
+    "description": "Deals +12 damage against marked or poisoned targets. Requires dagger, sword.",
     "weapon_types": [
       "dagger",
       "sword"
@@ -274,7 +275,7 @@
     "mp": 4,
     "effect": "poison",
     "power": 8,
-    "description": "Poisoned blade; 5 damage over three rounds.",
+    "description": "Poisoned blade; 5 damage over three rounds. Requires dagger, sword.",
     "weapon_types": [
       "dagger",
       "sword"
@@ -287,7 +288,7 @@
     "mp": 4,
     "effect": "pierce",
     "power": 10,
-    "description": "A palm technique that ignores half the enemy’s defense.",
+    "description": "A palm technique that ignores half the enemy’s defense. Requires unarmed, claws, staff.",
     "weapon_types": [
       "unarmed",
       "claws",
@@ -319,7 +320,8 @@
     "effect": "weaken",
     "power": 5,
     "description": "Enemy attack and defense -5 for three rounds.",
-    "duration": 3
+    "duration": 3,
+    "damage_type": "shadow"
   },
   "legendary_onslaught": {
     "name": "Legendary Onslaught",
@@ -338,7 +340,7 @@
     "mp": 9,
     "effect": "special",
     "power": 24,
-    "description": "Physical damage; base power +24. Enemy defense -4 for 3 rounds.",
+    "description": "Physical damage; base power +24. Enemy defense -4 for 3 rounds. Requires sword, greatsword, spear, axe, mace.",
     "weapon_types": [
       "sword",
       "greatsword",
@@ -355,7 +357,7 @@
     "mp": 14,
     "effect": "special",
     "power": 36,
-    "description": "Physical damage; base power +36. 2 strikes at 62% power each; defense applies per strike. Bonus damage +16 against armor-broken or weakened targets.",
+    "description": "Physical damage; base power +36. 2 strikes at 62% power each; defense applies per strike. Bonus damage +16 against armor-broken or weakened targets. Requires sword, greatsword, spear, axe, mace.",
     "weapon_types": [
       "sword",
       "greatsword",
@@ -382,18 +384,15 @@
   },
   "barbarian_adept": {
     "name": "Sundering Roar",
-    "kind": "technique",
+    "kind": "spell",
     "mp": 9,
     "effect": "special",
     "power": 24,
-    "description": "Physical damage; base power +24. Enemy defense -7 for 3 rounds.",
-    "weapon_types": [
-      "axe",
-      "greatsword",
-      "hammer"
-    ],
+    "description": "A weapon-independent roar: sonic power 24 + 1.5 per hero level. Enemy defense -7 for three rounds. Costs 9 MP; no HP cost.",
     "sunder": 7,
-    "duration": 3
+    "duration": 3,
+    "damage_type": "sonic",
+    "scaling": "voice"
   },
   "barbarian_master": {
     "name": "Titan Swing",
@@ -401,7 +400,7 @@
     "mp": 14,
     "effect": "special",
     "power": 36,
-    "description": "Physical damage; base power +36. Ignores 50% defense. Costs 8 HP (cannot self-KO).",
+    "description": "Physical damage; base power +36. Ignores 50% defense. Costs 8 HP (cannot self-KO). Requires axe, greatsword, hammer.",
     "weapon_types": [
       "axe",
       "greatsword",
@@ -534,7 +533,7 @@
     "mp": 9,
     "effect": "special",
     "power": 24,
-    "description": "Physical damage; base power +24. Cannot be dodged.",
+    "description": "Physical damage; base power +24. Cannot be dodged. Requires bow.",
     "weapon_types": [
       "bow"
     ],
@@ -547,7 +546,7 @@
     "mp": 14,
     "effect": "special",
     "power": 36,
-    "description": "Wind damage; base power +36. Deals 1.75x damage to flying enemies.",
+    "description": "Wind damage; base power +36. Deals 1.75x damage to flying enemies. Requires bow.",
     "weapon_types": [
       "bow"
     ],
@@ -574,7 +573,7 @@
     "mp": 9,
     "effect": "special",
     "power": 24,
-    "description": "Physical damage; base power +24. Bonus damage +22 against marked, poisoned, bleeding or burning targets.",
+    "description": "Physical damage; base power +24. Bonus damage +22 against marked, poisoned, bleeding or burning targets. Requires dagger, sword, bow.",
     "weapon_types": [
       "dagger",
       "sword",
@@ -589,7 +588,7 @@
     "mp": 14,
     "effect": "special",
     "power": 36,
-    "description": "Physical damage; base power +36. 3 strikes at 48% power each; defense applies per strike. Dexterity +8 for 2 rounds.",
+    "description": "Physical damage; base power +36. 3 strikes at 48% power each; defense applies per strike. Dexterity +8 for 2 rounds. Requires dagger, sword, bow.",
     "weapon_types": [
       "dagger",
       "sword",
@@ -618,7 +617,7 @@
     "mp": 9,
     "effect": "special",
     "power": 24,
-    "description": "Physical damage; base power +24. 1% instant KO on a landed hit. Bosses are immune; otherwise deals normal damage.",
+    "description": "Physical damage; base power +24. 1% instant KO on a landed hit. Bosses are immune; otherwise deals normal damage. Requires dagger, sword.",
     "weapon_types": [
       "dagger",
       "sword"
@@ -631,7 +630,7 @@
     "mp": 14,
     "effect": "special",
     "power": 36,
-    "description": "Physical damage; base power +36. Ignores 25% defense. Bonus damage +30 when enemy HP is below 35%.",
+    "description": "Physical damage; base power +36. Ignores 25% defense. Bonus damage +30 when enemy HP is below 35%. Requires dagger, sword.",
     "weapon_types": [
       "dagger",
       "sword"
@@ -658,7 +657,7 @@
     "mp": 9,
     "effect": "special",
     "power": 24,
-    "description": "Physical damage; base power +24. 65% chance to stun for one turn (bosses resist half).",
+    "description": "Physical damage; base power +24. 65% chance to stun for one turn (bosses resist half). Requires unarmed, claws, staff.",
     "weapon_types": [
       "unarmed",
       "claws",
@@ -672,7 +671,7 @@
     "mp": 14,
     "effect": "special",
     "power": 36,
-    "description": "Physical damage; base power +36. 5 strikes at 32% power each; defense applies per strike.",
+    "description": "Physical damage; base power +36. 5 strikes at 32% power each; defense applies per strike. Requires unarmed, claws, staff.",
     "weapon_types": [
       "unarmed",
       "claws",
@@ -740,7 +739,7 @@
     "mp": 3,
     "effect": "special",
     "power": 7,
-    "description": "Physical damage; base power +7. Enemy defense -3 for 2 rounds.",
+    "description": "Physical damage; base power +7. Enemy defense -3 for 2 rounds. Requires axe.",
     "weapon_types": [
       "axe"
     ],
@@ -753,7 +752,7 @@
     "mp": 3,
     "effect": "special",
     "power": 7,
-    "description": "Physical damage; base power +7. Bonus damage +10 when enemy HP is above 70%.",
+    "description": "Physical damage; base power +7. Bonus damage +10 when enemy HP is above 70%. Requires greatsword.",
     "weapon_types": [
       "greatsword"
     ],
@@ -766,7 +765,7 @@
     "mp": 3,
     "effect": "special",
     "power": 7,
-    "description": "Physical damage; base power +7. 25% chance to stun for one turn (bosses resist half).",
+    "description": "Physical damage; base power +7. 25% chance to stun for one turn (bosses resist half). Requires hammer.",
     "weapon_types": [
       "hammer"
     ],
@@ -778,7 +777,7 @@
     "mp": 3,
     "effect": "special",
     "power": 7,
-    "description": "Physical damage; base power +7. Ignores 50% defense.",
+    "description": "Physical damage; base power +7. Ignores 50% defense. Requires spear.",
     "weapon_types": [
       "spear"
     ],
@@ -790,7 +789,7 @@
     "mp": 3,
     "effect": "special",
     "power": 7,
-    "description": "Physical damage; base power +7. Cannot be dodged.",
+    "description": "Physical damage; base power +7. Cannot be dodged. Requires bow.",
     "weapon_types": [
       "bow"
     ],
@@ -802,7 +801,7 @@
     "mp": 3,
     "effect": "special",
     "power": 7,
-    "description": "Physical damage; base power +7. 2 strikes at 65% power each; defense applies per strike.",
+    "description": "Physical damage; base power +7. 2 strikes at 65% power each; defense applies per strike. Requires dagger.",
     "weapon_types": [
       "dagger"
     ],
@@ -815,7 +814,7 @@
     "mp": 3,
     "effect": "special",
     "power": 7,
-    "description": "Arcane damage; base power +7. Recover 2 MP on a hit.",
+    "description": "Arcane damage; base power +7. Recover 2 MP on a hit. Requires staff.",
     "weapon_types": [
       "staff"
     ],
@@ -828,7 +827,7 @@
     "mp": 3,
     "effect": "special",
     "power": 7,
-    "description": "Arcane damage; base power +7. Ignores 50% defense.",
+    "description": "Arcane damage; base power +7. Ignores 50% defense. Requires wand.",
     "weapon_types": [
       "wand"
     ],
@@ -841,7 +840,7 @@
     "mp": 3,
     "effect": "special",
     "power": 7,
-    "description": "Physical damage; base power +7. Restore 25% of damage dealt as HP.",
+    "description": "Physical damage; base power +7. Restore 25% of damage dealt as HP. Requires scythe.",
     "weapon_types": [
       "scythe"
     ],
@@ -853,7 +852,7 @@
     "mp": 3,
     "effect": "special",
     "power": 7,
-    "description": "Physical damage; base power +7. Bleed: 4 damage for 2 rounds.",
+    "description": "Physical damage; base power +7. Bleed: 4 damage for 2 rounds. Requires claws.",
     "weapon_types": [
       "claws"
     ],
@@ -866,7 +865,7 @@
     "mp": 3,
     "effect": "special",
     "power": 7,
-    "description": "Physical damage; base power +7. 3 strikes at 45% power each; defense applies per strike.",
+    "description": "Physical damage; base power +7. 3 strikes at 45% power each; defense applies per strike. Requires unarmed.",
     "weapon_types": [
       "unarmed"
     ],
@@ -889,7 +888,7 @@
     "mp": 8,
     "effect": "special",
     "power": 24,
-    "description": "Lightning damage; base power +24. 40% chance to stun for one turn (bosses resist half).",
+    "description": "Lightning damage; base power +24. 40% chance to stun for one turn (bosses resist half). Requires sword.",
     "weapon_node": {
       "family": "sword",
       "id": "technique"
@@ -923,7 +922,7 @@
     "mp": 8,
     "effect": "special",
     "power": 20,
-    "description": "Physical damage; base power +20. Enemy defense -9 for 3 rounds. Bleed: 5 damage for 3 rounds.",
+    "description": "Physical damage; base power +20. Enemy defense -9 for 3 rounds. Bleed: 5 damage for 3 rounds. Requires axe.",
     "weapon_node": {
       "family": "axe",
       "id": "technique"
@@ -942,7 +941,7 @@
     "mp": 8,
     "effect": "special",
     "power": 20,
-    "description": "Physical damage; base power +20. 2 strikes at 70% power each; defense applies per strike.",
+    "description": "Physical damage; base power +20. 2 strikes at 70% power each; defense applies per strike. Requires greatsword.",
     "weapon_node": {
       "family": "greatsword",
       "id": "technique"
@@ -960,7 +959,7 @@
     "mp": 8,
     "effect": "special",
     "power": 20,
-    "description": "Physical damage; base power +20. 75% chance to stun for one turn (bosses resist half).",
+    "description": "Physical damage; base power +20. 75% chance to stun for one turn (bosses resist half). Requires hammer.",
     "weapon_node": {
       "family": "hammer",
       "id": "technique"
@@ -977,7 +976,7 @@
     "mp": 8,
     "effect": "special",
     "power": 20,
-    "description": "Physical damage; base power +20. Deals 2x damage to draconic enemies.",
+    "description": "Physical damage; base power +20. Deals 2x damage to draconic enemies. Requires spear.",
     "weapon_node": {
       "family": "spear",
       "id": "technique"
@@ -995,7 +994,7 @@
     "mp": 8,
     "effect": "special",
     "power": 20,
-    "description": "Physical damage; base power +20. 3 strikes at 55% power each; defense applies per strike. Cannot be dodged.",
+    "description": "Physical damage; base power +20. 3 strikes at 55% power each; defense applies per strike. Cannot be dodged. Requires bow.",
     "weapon_node": {
       "family": "bow",
       "id": "technique"
@@ -1014,7 +1013,7 @@
     "mp": 8,
     "effect": "special",
     "power": 20,
-    "description": "Physical damage; base power +20. 2 strikes at 70% power each; defense applies per strike. Bonus damage +8 against marked, poisoned, bleeding or burning targets.",
+    "description": "Physical damage; base power +20. 2 strikes at 70% power each; defense applies per strike. Bonus damage +8 against marked, poisoned, bleeding or burning targets. Requires dagger.",
     "weapon_node": {
       "family": "dagger",
       "id": "technique"
@@ -1034,7 +1033,7 @@
     "mp": 8,
     "effect": "special",
     "power": 20,
-    "description": "Arcane damage; base power +20. Recover 6 MP on a hit.",
+    "description": "Arcane damage; base power +20. Recover 6 MP on a hit. Requires staff.",
     "weapon_node": {
       "family": "staff",
       "id": "technique"
@@ -1052,7 +1051,7 @@
     "mp": 8,
     "effect": "special",
     "power": 20,
-    "description": "Holy damage; base power +20. Ignores 100% defense.",
+    "description": "Holy damage; base power +20. Ignores 100% defense. Requires wand.",
     "weapon_node": {
       "family": "wand",
       "id": "technique"
@@ -1070,7 +1069,7 @@
     "mp": 8,
     "effect": "special",
     "power": 20,
-    "description": "Shadow damage; base power +20. Restore 60% of damage dealt as HP.",
+    "description": "Shadow damage; base power +20. Restore 60% of damage dealt as HP. Requires scythe.",
     "weapon_node": {
       "family": "scythe",
       "id": "technique"
@@ -1088,7 +1087,7 @@
     "mp": 8,
     "effect": "special",
     "power": 20,
-    "description": "Physical damage; base power +20. 3 strikes at 55% power each; defense applies per strike. Bleed: 7 damage for 3 rounds.",
+    "description": "Physical damage; base power +20. 3 strikes at 55% power each; defense applies per strike. Bleed: 7 damage for 3 rounds. Requires claws.",
     "weapon_node": {
       "family": "claws",
       "id": "technique"
@@ -1108,7 +1107,7 @@
     "mp": 8,
     "effect": "special",
     "power": 20,
-    "description": "Physical damage; base power +20. Ignores 75% defense. 50% chance to stun for one turn (bosses resist half).",
+    "description": "Physical damage; base power +20. Ignores 75% defense. 50% chance to stun for one turn (bosses resist half). Requires unarmed.",
     "weapon_node": {
       "family": "unarmed",
       "id": "technique"
@@ -1137,5 +1136,64 @@
     "slayer_multiplier": 2.0,
     "damage_type": "physical",
     "description": "Sword strike: attack +9 physical power. Double damage against draconic enemies. Requires a sword."
+  },
+  "battle_ether": {
+    "name": "Moon Ether",
+    "kind": "item",
+    "mp": 0,
+    "effect": "mana_item",
+    "item": "ether",
+    "power": 20,
+    "description": "Restore 20 MP. Consumes one Moon Ether."
+  },
+  "battle_elixir": {
+    "name": "Royal Elixir",
+    "kind": "item",
+    "mp": 0,
+    "effect": "elixir_item",
+    "item": "elixir",
+    "power": 0,
+    "description": "Restore all hero HP and MP. Consumes one Royal Elixir."
+  },
+  "battle_ration": {
+    "name": "Companion Ration",
+    "kind": "item",
+    "mp": 0,
+    "effect": "ration_item",
+    "item": "treat",
+    "power": 35,
+    "description": "Restore 35 companion HP. Consumes one Companion Ration."
+  },
+  "mace_technique": {
+    "name": "Dazing Smite",
+    "kind": "weapon",
+    "mp": 4,
+    "effect": "special",
+    "power": 8,
+    "weapon_types": [
+      "mace"
+    ],
+    "stun_chance": 0.25,
+    "damage_type": "holy",
+    "description": "Holy mace strike, attack +8 power. 25% stun chance (bosses resist half). Requires a mace."
+  },
+  "mace_master_technique": {
+    "name": "Consecrated Blow",
+    "kind": "weapon",
+    "mp": 8,
+    "effect": "special",
+    "power": 20,
+    "weapon_types": [
+      "mace"
+    ],
+    "weapon_node": {
+      "family": "mace",
+      "id": "technique"
+    },
+    "ignore_defense": 0.5,
+    "slayer": "undead",
+    "slayer_multiplier": 1.8,
+    "damage_type": "holy",
+    "description": "Holy mace strike, attack +20 power; ignores half defense and deals 1.8x against undead. Requires a mace."
   }
 }
